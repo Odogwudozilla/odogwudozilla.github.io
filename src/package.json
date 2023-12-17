@@ -1,0 +1,13 @@
+{
+  "name": "src",
+  "description": "The source code for creating the styles.css file",
+  "scripts": {
+    "scss": "sass styles.scss ../docs/css/styles.css"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.0"
+  },
+  "devDependencies": {
+    "sass": "1.32.13"
+  }
+}

@@ -1,0 +1,45 @@
+/*--------------------------------------------------------------
+# Home (hero) Section
+--------------------------------------------------------------*/
+
+/* On mobile, the home section will be placed underneath the navigation bar. When clicking on the link home,
+   you will not scroll up high enough. So we add another diff which is slightly higher. */
+#home {
+  margin-top: -3.375rem;
+  height: 3.375rem;
+}
+
+#home-section {
+  width: 100%;
+  max-width: 100% !important;
+  height: 100vh;
+  background: url("../assets/img/hero-bg.png") top right no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#home-section div {
+  max-width: 75rem;
+}
+
+#home-section:before {
+  content: "";
+  background: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#home-section .social-links a {
+  font-size: 24px;
+  display: inline-block;
+}
+
+@include media-breakpoint-down(lg) {
+  #home-section {
+    text-align: center;
+    height: calc(100vh - 3.375rem);
+  }
+}
