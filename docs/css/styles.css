@@ -1,23 +1,30 @@
 /* Modern Portfolio CSS - Modular System Reference */
 
 /*
- * This file serves as a reference for the modular CSS architecture.
- * All styles are now organized in focused, maintainable modules:
+ * ⚠️ IMPORTANT: This file is now a REFERENCE ONLY!
  *
- * 1. base.css - Global styles, variables, typography, animations
- * 2. navigation.css - Complete sidebar navigation styling
- * 3. sections.css - All content section layouts and components
- * 4. components.css - Reusable UI components (cards, buttons, forms)
- * 5. responsive.css - Mobile, tablet, and print adaptations
+ * All actual CSS styles have been moved to modular files:
  *
- * Each file is loaded directly in the HTML for better browser compatibility
- * and easier maintenance. To edit styles:
+ * 1. base.css - Contains: Global styles, variables, typography, animations
+ * 2. navigation.css - Contains: Complete sidebar navigation styling
+ * 3. sections.css - Contains: All content section layouts and components
+ * 4. components.css - Contains: Reusable UI components (cards, buttons, forms)
+ * 5. responsive.css - Contains: Mobile, tablet, and print adaptations
  *
- * - Navigation changes: Edit navigation.css
- * - Content sections: Edit sections.css
- * - UI components: Edit components.css
- * - Mobile/responsive: Edit responsive.css
- * - Global variables/typography: Edit base.css
+ * ✅ Each modular file contains ACTUAL CSS RULES - not empty!
+ * ✅ All files are loaded directly in index.html for browser compatibility
+ * ✅ This modular approach improves maintainability and organization
  *
- * See modular-structure-guide.md for complete documentation.
+ * 🔍 To find specific styles:
+ * - Navigation changes: Edit navigation.css (contains sidebar, mobile nav, etc.)
+ * - Content sections: Edit sections.css (contains hero, about, portfolio, etc.)
+ * - UI components: Edit components.css (contains cards, buttons, forms, etc.)
+ * - Mobile/responsive: Edit responsive.css (contains breakpoints, mobile styles)
+ * - Global variables/typography: Edit base.css (contains root variables, fonts)
+ *
+ * 📚 See modular-structure-guide.md for complete documentation.
+ *
+ * ⚠️ DO NOT add styles here - use the appropriate modular file!
  */
+
+/* This file intentionally contains only references - actual styles are in modular files */
