@@ -1,0 +1,479 @@
+/* Sections CSS - Styles for content sections (hero, experience, skills, etc.) */
+
+/* Section Spacing */
+.resume-section {
+  padding: 3rem 3rem;
+  position: relative;
+  min-height: auto;
+}
+
+.resume-section:first-child {
+  padding-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .resume-section {
+    padding: 3rem 4rem;
+  }
+
+  .resume-section:first-child {
+    padding-top: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .resume-section {
+    padding: 3rem 5rem;
+  }
+
+  .resume-section:first-child {
+    padding-top: 2rem;
+  }
+}
+
+.resume-section.bg-light {
+  background: var(--surface-secondary);
+}
+
+/* Hero Section */
+.hero-content {
+  max-width: 900px;
+}
+
+.hero-description {
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .hero-description {
+    margin: 2rem 0;
+  }
+}
+
+.highlight-box {
+  background: var(--gradient-subtle);
+  border-left: 4px solid var(--primary-green);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  margin: 1.25rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .highlight-box {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+}
+
+.contact-link {
+  color: var(--primary-green) !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+.contact-link:hover {
+  color: var(--primary-dark) !important;
+  transform: translateY(-1px);
+}
+
+/* Social Icons */
+.social-icons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .social-icons {
+    margin-top: 2rem;
+  }
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 768px) {
+  .social-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.social-icon:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: var(--shadow-xl);
+  color: white;
+}
+
+/* Timeline Design */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gradient-primary);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -2rem;
+  top: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background: var(--primary-green);
+  border-radius: 50%;
+  border: 3px solid var(--surface-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.timeline-content {
+  background: var(--surface-primary);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
+}
+
+.timeline-content:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.position-title {
+  color: var(--primary-green);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.company-name {
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.position-summary {
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.achievement-category {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--primary-green);
+}
+
+.achievement-list {
+  list-style: none;
+  padding: 0;
+}
+
+.achievement-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.achievement-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+  font-weight: bold;
+}
+
+.timeline-date {
+  font-weight: 600;
+  color: var(--primary-green);
+  margin-top: 1rem;
+}
+
+/* Skills Section */
+.skills-container {
+  max-width: 1000px;
+}
+
+.skills-category-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.skill-item {
+  background: var(--surface-primary);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
+}
+
+.skill-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.skill-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.skill-level {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.skill-level.expert {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.skill-level.advanced {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.skill-level.proficient {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.skill-level.intermediate {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.skill-level.learning {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.skill-level.familiar {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.skill-progress {
+  height: 8px;
+  background: var(--surface-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.skill-progress-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 4px;
+  transition: width 1s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-progress-bar.learning {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+}
+
+.skill-progress-bar.familiar {
+  background: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+}
+
+.skill-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.skill-progress-bar.animate {
+  animation: skillBarFill 1.5s ease-out;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes skillBarFill {
+  from {
+    width: 0;
+  }
+}
+
+.skill-description {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Tools Section */
+.tools-section {
+  margin-top: 3rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.tool-category {
+  background: var(--surface-primary);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+}
+
+.tool-category h4 {
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.tool-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tool-list li {
+  padding: 0.5rem 0;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-list i {
+  color: var(--primary-green);
+}
+
+/* Education Timeline */
+.education-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.education-timeline::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gradient-primary);
+}
+
+.education-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+}
+
+.education-marker {
+  position: absolute;
+  left: -2rem;
+  top: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background: var(--primary-green);
+  border-radius: 50%;
+  border: 3px solid var(--surface-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.education-content {
+  background: var(--surface-primary);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+}
+
+.degree-title {
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.institution-name {
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.degree-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.education-date {
+  font-weight: 600;
+  color: var(--primary-green);
+}

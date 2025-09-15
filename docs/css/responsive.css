@@ -1,0 +1,222 @@
+/* Responsive CSS - Mobile and tablet-specific styles */
+
+/* Responsive Navigation */
+@media (max-width: 992px) {
+  #sideNav {
+    width: 100% !important;
+    position: relative !important;
+    height: auto !important;
+  }
+
+  .container-fluid {
+    margin-left: 0;
+  }
+
+  /* Mobile Profile Section */
+  .profile-section {
+    flex-direction: row;
+    padding: 1.5rem !important;
+    text-align: left;
+  }
+
+  .profile-image-container {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+
+  .profile-image {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+  }
+
+  .profile-info {
+    text-align: left;
+    flex: 1;
+  }
+
+  .profile-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .profile-title {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-location {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    align-self: flex-start;
+  }
+
+  /* Mobile Navigation Links */
+  .navbar-nav {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  .navbar-nav .nav-item {
+    width: auto;
+    margin: 0.25rem 0.5rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.8rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .nav-text {
+    text-align: center;
+  }
+
+  .nav-icon {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .subheading {
+    font-size: 1.125rem;
+  }
+
+  .resume-section {
+    padding: 2rem 0;
+  }
+
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  .timeline-item {
+    padding-left: 1.5rem;
+  }
+
+  .education-timeline {
+    padding-left: 1rem;
+  }
+
+  .education-item {
+    padding-left: 1.5rem;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 576px) {
+  .resume-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .opportunities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Very small screens - stack profile vertically again */
+  .profile-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-image-container {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 577px) and (max-width: 992px) {
+  .container-fluid {
+    padding: 0 2rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .resume-section {
+    padding: 1rem 0;
+    break-inside: avoid;
+  }
+
+  .portfolio-card,
+  .contact-item,
+  .timeline-content {
+    box-shadow: none;
+    border: 1px solid var(--border-light);
+  }
+
+  .social-icons,
+  .download-btn {
+    display: none;
+  }
+
+  #sideNav {
+    display: none;
+  }
+
+  .container-fluid {
+    margin-left: 0;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  h1 {
+    font-size: 24pt;
+  }
+
+  .section-heading {
+    font-size: 18pt;
+    page-break-after: avoid;
+  }
+
+  .timeline-item,
+  .skill-item,
+  .portfolio-card {
+    page-break-inside: avoid;
+  }
+}
