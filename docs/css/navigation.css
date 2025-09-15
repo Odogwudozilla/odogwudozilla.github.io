@@ -1,0 +1,283 @@
+/* Navigation CSS - Sidebar navigation styles */
+
+/* Fixed Navigation Sidebar */
+#sideNav {
+  width: 17rem !important;
+  background: linear-gradient(145deg, #1a202c 0%, #2d3748 50%, #1a202c 100%) !important;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-normal);
+  z-index: 1000;
+  padding: 0 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Profile Section */
+.profile-section {
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.profile-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
+}
+
+/* Profile Image Container with Modern Effects */
+.profile-image-container {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.profile-image {
+  width: 5rem !important;
+  height: 5rem !important;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  background: linear-gradient(145deg, #1a202c, #2d3748) padding-box,
+              linear-gradient(45deg, var(--accent-emerald), #06d6a0, var(--primary-green)) border-box;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.profile-image:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow:
+    0 20px 40px rgba(16, 185, 129, 0.3),
+    0 0 0 8px rgba(16, 185, 129, 0.1);
+}
+
+/* Animated Border Ring */
+.profile-image-overlay {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent-emerald),
+    #06d6a0,
+    var(--primary-green),
+    #0891b2,
+    var(--accent-emerald)
+  );
+  opacity: 0;
+  transition: all 0.4s ease;
+  animation: rotate 3s linear infinite;
+  z-index: 1;
+}
+
+.profile-image-container:hover .profile-image-overlay {
+  opacity: 0.7;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Status Dot */
+.profile-status-dot {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 1rem;
+  height: 1rem;
+  background: #10b981;
+  border: 3px solid #1a202c;
+  border-radius: 50%;
+  z-index: 3;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Profile Info Styling */
+.profile-info {
+  text-align: center;
+  width: 100%;
+}
+
+.profile-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  font-family: 'Saira Extra Condensed', sans-serif;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #ffffff, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.profile-name:hover {
+  background: linear-gradient(135deg, var(--accent-emerald), #06d6a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateY(-1px);
+}
+
+.profile-title {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.375rem 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.3s ease;
+}
+
+.profile-location:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px);
+}
+
+.location-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--accent-emerald);
+}
+
+/* Enhanced Navigation Items */
+.navbar-nav {
+  width: 100%;
+  padding: 1.5rem 1rem 2rem 1rem;
+  margin: 0;
+}
+
+.navbar-nav .nav-item {
+  width: 100%;
+  margin: 0.125rem 0;
+}
+
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all var(--transition-normal);
+  position: relative;
+  padding: 1rem 1.25rem !important;
+  border-radius: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  font-family: 'Saira Extra Condensed', sans-serif;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+/* Navigation link background pattern */
+.navbar-nav .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+/* Active and hover states */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg,
+    rgba(16, 185, 129, 0.2),
+    rgba(2, 114, 12, 0.15)
+  );
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateX(6px);
+  box-shadow:
+    0 8px 25px rgba(16, 185, 129, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+.navbar-nav .nav-link:hover::before,
+.navbar-nav .nav-link.active::before {
+  left: 100%;
+}
+
+/* Active state indicator */
+.navbar-nav .nav-link.active {
+  border-left: 3px solid var(--accent-emerald);
+  background: linear-gradient(135deg,
+    rgba(16, 185, 129, 0.25),
+    rgba(2, 114, 12, 0.2)
+  );
+}
+
+/* Navigation Icons and Text */
+.nav-text {
+  flex: 1;
+  text-align: left;
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  transition: all var(--transition-normal);
+}
+
+.navbar-nav .nav-link:hover .nav-icon,
+.navbar-nav .nav-link.active .nav-icon {
+  opacity: 1;
+  transform: scale(1.2);
+}
