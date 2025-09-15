@@ -4,58 +4,158 @@
  */
 document.addEventListener('DOMContentLoaded', function() {
 
-    /**
-     * Load HTML partial into a container
-     * @param {string} partialPath - Path to the HTML partial file
-     * @param {string} containerId - ID of the container element
-     */
-    async function loadComponent(partialPath, containerId) {
-        try {
-            const response = await fetch(partialPath);
-            if (!response.ok) {
-                throw new Error(`Failed to load ${partialPath}: ${response.status}`);
-            }
-            const html = await response.text();
-            const container = document.getElementById(containerId);
-            if (container) {
-                container.innerHTML = html;
-            } else {
-                console.warn(`Container ${containerId} not found`);
-            }
-        } catch (error) {
-            console.error(`Error loading component ${partialPath}:`, error);
-            // Fallback: show error message or load from backup
-        }
-    }
-
-    // Component loading configuration
+    // Define components to load
     const components = [
-        { partial: 'partials/navigation.html', container: 'navigation-container' },
-        { partial: 'partials/hero-section.html', container: 'hero-container' },
-        { partial: 'partials/experience-section.html', container: 'experience-container' },
-        { partial: 'partials/skills-section.html', container: 'skills-container' },
-        { partial: 'partials/portfolio-section.html', container: 'portfolio-container' },
-        { partial: 'partials/education-section.html', container: 'education-container' },
-        { partial: 'partials/contact-section.html', container: 'contact-container' }
+        {
+            container: '#navigation-container',
+            partial: 'partials/navigation.html'
+        },
+        {
+            container: '#hero-container',
+            partial: 'partials/hero-section.html'
+        },
+        {
+            container: '#experience-container',
+            partial: 'partials/experience-section.html'
+        },
+        {
+            container: '#skills-container',
+            partial: 'partials/skills-section.html'
+        },
+        {
+            container: '#portfolio-container',
+            partial: 'partials/portfolio-section.html'
+        },
+        {
+            container: '#education-container',
+            partial: 'partials/education-section.html'
+        },
+        {
+            container: '#contact-container',
+            partial: 'partials/contact-section.html'
+        }
     ];
 
-    // Load all components
-    Promise.all(
-        components.map(({ partial, container }) =>
-            loadComponent(partial, container)
-        )
-    ).then(() => {
-        console.log('All components loaded successfully');
+    // Load each component
+    components.forEach(component => {
+        loadComponent(component.container, component.partial);
+    });
 
-        // Re-initialize scripts that depend on the loaded content
-        if (typeof window.updateActiveNavLink === 'function') {
-            window.updateActiveNavLink();
+    // Function to load HTML partial into container
+    function loadComponent(containerSelector, partialPath) {
+        const container = document.querySelector(containerSelector);
+
+        if (!container) {
+            console.warn(`Container ${containerSelector} not found`);
+            return;
         }
 
-        // Trigger custom event for other scripts
-        const event = new CustomEvent('componentsLoaded');
-        document.dispatchEvent(event);
-    }).catch(error => {
-        console.error('Error loading components:', error);
+        fetch(partialPath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${partialPath}: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                container.innerHTML = html;
+
+                // Trigger custom event when component is loaded
+                const event = new CustomEvent('componentLoaded', {
+                    detail: { container: containerSelector, partial: partialPath }
+                });
+                document.dispatchEvent(event);
+            })
+            .catch(error => {
+                console.error(`Error loading component ${partialPath}:`, error);
+                container.innerHTML = `<div class="error">Failed to load ${partialPath}</div>`;
+            });
+    }
+
+    // Listen for all components loaded
+    let loadedComponents = 0;
+    document.addEventListener('componentLoaded', function() {
+        loadedComponents++;
+
+        // When all components are loaded, initialize navigation functionality
+        if (loadedComponents === components.length) {
+            setTimeout(() => {
+                initializeNavigation();
+            }, 100); // Small delay to ensure DOM is ready
+        }
     });
+
+    // Initialize navigation functionality after components are loaded
+    function initializeNavigation() {
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('#navbarResponsive');
+        const backdrop = document.querySelector('#navbarBackdrop');
+        const sideNav = document.querySelector('#sideNav');
+
+        if (!navbarToggler || !navbarCollapse || !sideNav) {
+            console.warn('Navigation elements not found');
+            return;
+        }
+
+        // Toggle mobile menu functionality
+        navbarToggler.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+                // Close menu
+                navbarCollapse.classList.remove('show');
+                sideNav.classList.remove('show');
+                if (backdrop) backdrop.classList.remove('show');
+                this.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            } else {
+                // Open menu
+                navbarCollapse.classList.add('show');
+                sideNav.classList.add('show');
+                if (backdrop) backdrop.classList.add('show');
+                this.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // Close menu when clicking backdrop
+        if (backdrop) {
+            backdrop.addEventListener('click', function() {
+                navbarCollapse.classList.remove('show');
+                sideNav.classList.remove('show');
+                backdrop.classList.remove('show');
+                navbarToggler.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Close menu on window resize if screen becomes large
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 992) {
+                navbarCollapse.classList.remove('show');
+                sideNav.classList.remove('show');
+                if (backdrop) backdrop.classList.remove('show');
+                navbarToggler.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking nav links
+        const navLinks = document.querySelectorAll('#sideNav .nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 992) {
+                    navbarCollapse.classList.remove('show');
+                    sideNav.classList.remove('show');
+                    if (backdrop) backdrop.classList.remove('show');
+                    navbarToggler.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        console.log('Navigation initialized successfully');
+    }
 });

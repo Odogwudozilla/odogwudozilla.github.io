@@ -455,3 +455,83 @@ For EVERY component creation/modification:
 7. **VALIDATE**: Run through modularity quality gates
 
 This protocol ensures every component contributes to a cohesive, reusable design system rather than creating one-off implementations.
+
+## Git Workflow Protocol (MANDATORY)
+
+### Protocol Triggers
+When user says any of these phrases, immediately execute the Git workflow protocol:
+- "start git protocol"
+- "begin git protocol"
+- "initiate git workflow"
+- "execute git protocol"
+- "run git workflow"
+- "git protocol"
+
+### Automated Git Workflow Execution
+When triggered, execute these steps in sequence:
+
+1. **Checkout Master Branch**
+   ```bash
+   git checkout master
+   ```
+
+2. **Fetch and Update Master**
+   ```bash
+   git fetch origin
+   git pull origin master
+   ```
+
+3. **Create Feature Branch**
+   ```bash
+   git checkout -b [auto-generated-branch-name]
+   ```
+   - Branch naming: `feature/brief-description-of-changes`
+   - Examples: `feature/navigation-mobile-fixes`, `feature/hero-section-improvements`
+
+4. **Stage Modified Files**
+   ```bash
+   git add [list-of-changed-files]
+   ```
+   - Only stage files that were actually modified in current session
+   - Check git status to identify changed files
+
+5. **Create Descriptive Commit**
+   ```bash
+   git commit -m "[type]: [concise description]
+
+   [detailed explanation]
+
+   - [specific change 1]
+   - [specific change 2]
+   - [specific change 3]"
+   ```
+
+### Commit Message Standards
+- **Types**: feat, fix, style, refactor, docs, perf, test, chore
+- **Format**: `[type]: [description under 50 chars]`
+- **Body**: Detailed explanation with bullet points of specific changes
+- **Examples**:
+  - `feat: implement mobile navigation with collapsible menu`
+  - `fix: resolve scroll highlighting and responsive issues`
+  - `style: improve hero section contrast and spacing`
+
+### Branch Naming Conventions
+- Feature: `feature/navigation-improvements`
+- Bug fix: `fix/mobile-menu-toggle`
+- Style: `style/hero-section-redesign`
+- Docs: `docs/readme-updates`
+
+### Error Handling
+- If any step fails, stop execution and report specific error
+- Provide clear guidance for manual resolution
+- Ensure no partial commits or corrupted state
+
+### Safety Checks
+- Verify correct repository location
+- Check for uncommitted changes that might be lost
+- Confirm remote connectivity
+- Validate branch naming conventions
+
+**Reference**: See `docs/git-workflow-protocol.md` for complete protocol documentation.
+
+## Communication Standards

@@ -1,72 +1,71 @@
-<!-- Navigation Sidebar -->
-<nav class="navbar navbar-expand-lg navbar-dark" id="sideNav">
-    <!-- Enhanced Profile Section -->
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <!-- Mobile toggle button -->
+    <button class="navbar-toggler" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Profile section -->
     <div class="profile-section">
         <div class="profile-image-container">
             <img class="profile-image"
                  src="assets/img/profile.jpg"
-                 alt="Chidozie Nnachor - Senior Software Engineer"/>
+                 alt="Chidozie Nnachor"/>
             <div class="profile-image-overlay"></div>
-            <div class="profile-status-dot"></div>
+            <div class="profile-status-dot" title="Available for opportunities"></div>
         </div>
-
         <div class="profile-info">
-            <h2 class="profile-name">Chidozie Nnachor</h2>
-            <p class="profile-title">Senior Software Engineer</p>
+            <h1 class="profile-name">Chidozie Nnachor</h1>
+            <div class="profile-title">Senior Software Engineer</div>
             <div class="profile-location">
-                <svg class="location-icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                </svg>
-                <span>Netherlands</span>
+                <i class="fas fa-map-marker-alt location-icon"></i>
+                <span>Lagos, Nigeria</span>
             </div>
         </div>
     </div>
 
-    <!-- Mobile Navigation Toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Navigation Links -->
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <!-- Navigation links -->
+    <div class="navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#home">
-                    <span class="nav-text">Home</span>
-                    <span class="nav-icon">🏠</span>
+                <a class="nav-link js-scroll-trigger" href="#about">
+                    <span class="nav-text">About</span>
+                    <i class="fas fa-user nav-icon"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="#experience">
                     <span class="nav-text">Experience</span>
-                    <span class="nav-icon">💼</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#skills">
-                    <span class="nav-text">Skills</span>
-                    <span class="nav-icon">⚡</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#portfolio">
-                    <span class="nav-text">Portfolio</span>
-                    <span class="nav-icon">🚀</span>
+                    <i class="fas fa-briefcase nav-icon"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="#education">
                     <span class="nav-text">Education</span>
-                    <span class="nav-icon">🎓</span>
+                    <i class="fas fa-graduation-cap nav-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#skills">
+                    <span class="nav-text">Skills</span>
+                    <i class="fas fa-code nav-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#portfolio">
+                    <span class="nav-text">Portfolio</span>
+                    <i class="fas fa-folder-open nav-icon"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="#contact">
                     <span class="nav-text">Contact</span>
-                    <span class="nav-icon">📧</span>
+                    <i class="fas fa-envelope nav-icon"></i>
                 </a>
             </li>
         </ul>
     </div>
 </nav>
+
+<!-- Mobile backdrop for closing menu when clicking outside -->
+<div class="navbar-backdrop" id="navbarBackdrop"></div>
