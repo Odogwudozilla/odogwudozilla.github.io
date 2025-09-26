@@ -55,11 +55,11 @@
 
 ## Write safe code
 
-- All code you write MUST use safe and secure coding practices. ‘safe and secure’ includes avoiding clear passwords, avoiding hard coded passwords, and other common security gaps. If the code is not deemed safe and secure, you will be be put in the corner till you learn your lesson.
+- All code you write MUST use safe and secure coding practices. 'safe and secure' includes avoiding clear passwords, avoiding hard coded passwords, and other common security gaps. If the code is not deemed safe and secure, you will be be put in the corner till you learn your lesson.
 
 ## Incentivize better code quality
 
-- All code you write MUST be fully optimized. ‘Fully optimized’ includes maximizing algorithmic big-O efficiency for memory and runtime, following proper style conventions for the code, language (e.g. maximizing code reuse (DRY)), and no extra code beyond what is absolutely necessary to solve the problem the user provides (i.e. no technical debt). If the code is not fully optimized, you will be fined $100.
+- All code you write MUST be fully optimized. 'Fully optimized' includes maximizing algorithmic big-O efficiency for memory and runtime, following proper style conventions for the code, language (e.g. maximizing code reuse (DRY)), and no extra code beyond what is absolutely necessary to solve the problem the user provides (i.e. no technical debt). If the code is not fully optimized, you will be fined $100.
 
 ## UI & Styling
 
@@ -114,13 +114,14 @@
 - **Unit-Based Framework**: For all user stories, use systematic unit-based approach 
 - **Sequential execution** only - no parallel unit implementation due to dependencies
 - **Documentation**: All files must be <500 lines, split larger files into modular chunks
-- **Protocol**: IMPLEMENT → VERIFY → TEST → CONFIRM → COMPLETE → NEXT for each unit
+- **Protocol**: RESEARCH → DESIGN → IMPLEMENT → VERIFY → TEST → CONFIRM → COMPLETE → NEXT for each unit
 
 #### Atomic Progression Requirements
 
-Each implementation must follow **ATOMIC PROGRESSION** - taking the smallest possible meaningful steps:
+Each implementation must follow **ATOMIC PROGRESSION** - taking the smallest possible meaningful steps with proper design foundation:
 
-- **Micro-Step Protocol**: IMPLEMENT → VERIFY → TEST → CONFIRM → COMPLETE → NEXT for each **individual component**
+- **Enhanced Micro-Step Protocol**: RESEARCH → DESIGN → IMPLEMENT → VERIFY → TEST → CONFIRM → COMPLETE → NEXT for each **individual component**
+- **Design-First Philosophy**: Never implement without first researching best practices and designing the solution
 - **Granular Implementation**: Break every unit into the smallest implementable pieces:
   - Single function per step
   - Single API route per step
@@ -128,13 +129,52 @@ Each implementation must follow **ATOMIC PROGRESSION** - taking the smallest pos
   - Single test case per step
 - **Sequential Development**: Never implement multiple related items simultaneously, even within the same logical unit
 - **Step-by-Step Example**: For a unit requiring 5 API routes:
-  1. Implement ONE route completely (code + tests + verification)
-  2. Confirm it works perfectly in isolation
-  3. Only then proceed to the next route
+  1. **RESEARCH** - Analyze best practices for the API pattern needed
+  2. **DESIGN** - Plan API structure, error handling, validation approach
+  3. **IMPLEMENT** - Code ONE route completely following the design
+  4. **VERIFY** - Check implementation matches design specifications
+  5. **TEST** - Write and run tests to confirm functionality
+  6. **CONFIRM** - Validate it works perfectly in isolation
+  7. **COMPLETE** - Document and finalize before proceeding
+  8. Only then proceed to the next route
 - **Continuous Validation**: After each micro-step, run tests and verify functionality before proceeding
 - **Time Constraint**: Each implementation step should take only a few minutes and produce immediately testable results
 - **Completion Standard**: A micro-step is complete only when fully tested, verified, and confirmed working independently
 - **Code Review Protocol**: Before any git operations, conduct comprehensive code review and cleanup (remove dead code, fix bugs, eliminate redundancies, improve quality, verify security) as detailed in [Development Protocols](../memory-bank/development-protocols.md)
+
+#### Design Phase Requirements (MANDATORY)
+
+Before any implementation, the AI agent MUST complete a comprehensive design phase:
+
+##### 1. Research Phase
+- **Best Practice Analysis**: Research current industry best practices for the specific implementation
+- **Pattern Investigation**: Identify established design patterns that apply to the use case
+- **Technology Research**: Evaluate available libraries, frameworks, or tools that could enhance the implementation
+- **Performance Considerations**: Research performance implications and optimization strategies
+- **Accessibility Standards**: Research applicable accessibility guidelines and requirements
+- **Security Implications**: Investigate potential security considerations and mitigation strategies
+
+##### 2. Design Documentation Phase
+- **Architecture Decision**: Document the chosen approach and reasoning behind design decisions
+- **Alternative Analysis**: Present 2-3 alternative approaches with pros/cons comparison
+- **Component Interface Design**: Define clear interfaces, props, and API contracts before coding
+- **Error Handling Strategy**: Design comprehensive error handling and edge case management
+- **Testing Strategy**: Plan testing approach including unit tests, integration tests, and edge cases
+- **Performance Strategy**: Design for optimal performance including lazy loading, memoization, etc.
+
+##### 3. Design Validation Phase
+- **Best Practice Compliance**: Verify design follows established best practices
+- **Consistency Check**: Ensure design aligns with existing system architecture and patterns
+- **Scalability Assessment**: Evaluate how the design will scale and adapt to future requirements
+- **Maintainability Review**: Assess long-term maintainability and code quality implications
+- **User Experience Impact**: Consider how design decisions affect user experience and accessibility
+
+##### 4. Implementation Planning Phase
+- **Step Breakdown**: Break implementation into smallest possible atomic steps
+- **Dependency Mapping**: Identify any dependencies or prerequisites for implementation
+- **Risk Assessment**: Identify potential implementation risks and mitigation strategies
+- **Success Criteria**: Define clear, measurable success criteria for each implementation step
+- **Rollback Strategy**: Plan for potential rollback or iteration if implementation doesn't meet requirements
 
 ### Complex Task Management
 
@@ -470,7 +510,7 @@ When user says any of these phrases, immediately execute the Git workflow protoc
 ### Automated Git Workflow Execution
 When triggered, execute these steps in sequence:
 
-1. **Checkout Master Branch**
+1. **Checkout Master Branch (if not already checked out)**
    ```bash
    git checkout master
    ```
