@@ -1,154 +1,154 @@
-/* Base CSS - Global styles, variables, and foundations */
+/* Base CSS - Match Gift Egwuenu's design */
 
-/* CSS Custom Properties */
 :root {
-  /* Brand Colors */
-  --primary-green: #02720c;
-  --primary-light: #0a9416;
-  --primary-dark: #015009;
-  --accent-emerald: #10b981;
+  /* Colors - Minimal palette */
+  --text: #000;
+  --text-secondary: #666;
+  --text-tertiary: #999;
+  --border: #ddd;
+  --bg: #fff;
+  --accent: #d4a574;
 
-  /* Surface Colors */
-  --surface-primary: #ffffff;
-  --surface-secondary: #f8fafc;
-  --surface-tertiary: #f1f5f9;
-  --surface-dark: #1e293b;
-
-  /* Text Colors */
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --text-inverse: #ffffff;
-
-  /* Border & Shadows */
-  --border-light: #e2e8f0;
-  --border-medium: #cbd5e1;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-emerald) 100%);
-  --gradient-subtle: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  /* Spacing - Tailwind-inspired scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
 
   /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  --transition: 0.2s ease;
 }
 
-/* Global Styles */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
-  color: var(--text-primary);
-  background: var(--surface-primary);
+html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
-/* Typography System */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--text-primary);
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  padding-top: 60px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography - Clean and readable */
 h1 {
-  font-size: 3rem;
-  line-height: 1.1;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  font-family: inherit;
+  letter-spacing: -0.01em;
 }
 
-@media (min-width: 768px) {
-  h1 {
-    font-size: 3.5rem;
-  }
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  font-family: inherit;
+  letter-spacing: -0.01em;
 }
 
-.section-heading {
-  font-size: 2rem;
-  margin-bottom: 2.5rem;
-  position: relative;
-  display: inline-block;
-  font-family: 'Saira Extra Condensed', sans-serif;
-}
-
-@media (min-width: 768px) {
-  .section-heading {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-  }
-}
-
-.section-heading::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background: var(--gradient-primary);
-  border-radius: 2px;
-}
-
-.subheading {
-  font-size: 1.125rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-@media (min-width: 768px) {
-  .subheading {
-    font-size: 1.25rem;
-  }
-}
-
-/* Utility Classes */
-.text-gradient {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.lead {
+h3 {
   font-size: 1.25rem;
-  font-weight: 400;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  font-family: inherit;
+}
+
+p {
+  margin-bottom: var(--space-md);
   color: var(--text-secondary);
   line-height: 1.7;
 }
 
-/* Animation Classes */
-.fade-in {
-  animation: fadeIn 0.6s ease-out;
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+a:hover {
+  color: #b8905f;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Sections - Consistent padding */
+section {
+  padding: var(--space-xl) var(--space-lg);
+}
+
+section > div {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: var(--space-xl) var(--space-md);
   }
 }
 
-/* Main Content Layout */
-.container-fluid {
-  margin-left: 17rem;
-  padding: 0;
-  min-height: 100vh;
+@media (max-width: 576px) {
+  section {
+    padding: var(--space-lg) var(--space-md);
+  }
 }
+
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-lg);
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 14px;
+  }
+
+  section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+}
+
