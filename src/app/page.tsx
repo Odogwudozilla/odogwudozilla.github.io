@@ -11,12 +11,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-[70vh] text-center space-y-6">
         <BaseTypography variant="h1" className="max-w-4xl">
-          Software Engineer Building Modern Web Applications
+          Senior Software Engineer Building Reliable Systems
         </BaseTypography>
 
         <BaseTypography variant="lead" className="max-w-2xl">
-          Specializing in enterprise software development, insurance technology,
-          and full-stack web applications with a focus on performance and user experience.
+          Mature Java systems, API modernisation, and insurance technology, supported by a background
+          in banking and personal projects in web applications and data analysis.
         </BaseTypography>
 
         <div className="flex gap-4 mt-8">
@@ -35,25 +35,26 @@ export default function HomePage() {
           <BaseCardHeader>
             <BaseCardTitle>Experience</BaseCardTitle>
             <BaseCardDescription>
-              Software Engineer at Keylane with expertise in enterprise applications
+              Enterprise insurance engineering at Keylane, spanning API modernisation,
+              backwards compatibility, testing, and peer review.
             </BaseCardDescription>
           </BaseCardHeader>
         </BaseCard>
 
         <BaseCard>
           <BaseCardHeader>
-            <BaseCardTitle>Specialization</BaseCardTitle>
+            <BaseCardTitle>Focus</BaseCardTitle>
             <BaseCardDescription>
-              Full-stack development with TypeScript, React, Next.js, and cloud technologies
+              Maintainable Java systems, clear business rules, and reliable service integrations.
             </BaseCardDescription>
           </BaseCardHeader>
         </BaseCard>
 
         <BaseCard>
           <BaseCardHeader>
-            <BaseCardTitle>Passion</BaseCardTitle>
+            <BaseCardTitle>Approach</BaseCardTitle>
             <BaseCardDescription>
-              Clean code, performance optimization, and collaborative development practices
+              Clear requirements, useful tests, and thoughtful collaboration with colleagues.
             </BaseCardDescription>
           </BaseCardHeader>
         </BaseCard>

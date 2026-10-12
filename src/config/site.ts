@@ -5,9 +5,9 @@ import type { NavigationItem } from '@/types/navigation'
  */
 export const siteConfig = {
   name: 'Chidozie Nnachor',
-  title: 'Chidozie Nnachor - Software Engineer',
-  description: 'Software Engineer specializing in enterprise applications and modern web technologies. Expert in TypeScript, React, Next.js, and cloud solutions.',
-  url: 'https://chidozie-nnachor.vercel.app',
+  title: 'Chidozie Nnachor - Senior Software Engineer',
+  description: 'Senior Software Engineer specialising in mature Java systems, API modernisation, and insurance technology. Explore my professional work and personal projects.',
+  url: 'https://odogwudozilla.com',
 
   // Main navigation items
   navigationItems: [
@@ -35,14 +35,14 @@ export const siteConfig = {
 
   // Social links for future use
   social: {
-    linkedin: 'https://linkedin.com/in/chidozie-nnachor',
-    github: 'https://github.com/odogwudozilla',
-    email: 'contact@chidozie-nnachor.dev',
+    linkedin: 'https://www.linkedin.com/in/chidoziennachor/',
+    github: 'https://github.com/Odogwudozilla',
+    email: 'odogwu.naija@gmail.com',
   },
 
   // Contact information
   contact: {
-    email: 'contact@chidozie-nnachor.dev',
+    email: 'odogwu.naija@gmail.com',
     location: 'Netherlands',
   },
 } as const

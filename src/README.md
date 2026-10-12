@@ -1,4 +1,10 @@
-# SCSS files
+# Historical SCSS source
+
+The static site now uses `docs/css/` and build-time HTML partials. See the
+root README for `build:static`, `preview:static`, and `check:static`.
+The SCSS instructions below describe the earlier Bootstrap site. The
+current package does not provide an `scss` script, and the redesigned
+entry points do not load `docs/css/styles.css`.
 This website contains a modified version of Bootstrap 5. To keep the code maintainable, we compile it from SCSS files.
 
 All the overridden variables of Bootstrap are contained in variables.scss. The other files are imported afterwards, which

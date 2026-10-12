@@ -5,6 +5,9 @@
   "description": "Modern portfolio website showcasing software engineering expertise",
   "author": "Chidozie Nnachor",
   "scripts": {
+    "build:static": "node scripts/build-static.mjs",
+    "preview:static": "node scripts/serve-static.mjs",
+    "check:static": "node scripts/build-static.mjs --check && node tests/static-site.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

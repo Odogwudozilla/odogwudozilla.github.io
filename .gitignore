@@ -56,3 +56,6 @@ coverage/
 
 # TypeScript
 *.tsbuildinfo
+
+# Local drafting context; never include in the published portfolio
+/keylane-portfolio-public-safe-context.md

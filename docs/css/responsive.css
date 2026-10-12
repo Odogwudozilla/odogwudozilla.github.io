@@ -1,152 +1,147 @@
-/* Responsive - Mobile and tablet optimizations */
-
-@media (max-width: 768px) {
-  body {
-    font-size: 15px;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: var(--space-md);
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-lg);
-  }
-
-  section {
-    padding: var(--space-xl) var(--space-md);
-  }
-
-  .timeline {
-    padding-left: 1.5rem;
-  }
-
-  .timeline::before {
-    left: 0.5rem;
-  }
-
-  .timeline-marker {
-    left: -0.875rem;
-  }
-
-  .timeline-item {
-    margin-bottom: var(--space-lg);
-  }
-
-  .education-timeline {
-    padding-left: 1.5rem;
-  }
-
-  .education-timeline::before {
-    left: 0.5rem;
-  }
-
-  .education-marker {
-    left: -0.875rem;
-  }
-
-  .education-item {
-    margin-bottom: var(--space-lg);
-  }
-
-  .achievements-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .skills-grid,
-  .tools-grid,
-  .portfolio-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-
-  .social-icons {
-    gap: var(--space-md);
-  }
+/* One breakpoint owner; core content remains available without JavaScript. */
+@media (max-width: 1000px) {
+  .intro-card, .feature-card { padding: 28px; }
+  .intro-card h1 { font-size: 2.8rem; }
+  .domain-card, .toolkit-card, .approach-card { padding: 20px; }
+  .approach-person { gap: 10px; }
+  .approach-person img { width: 44px; height: 44px; }
+  .domain-symbol { display: none; }
+  .enterprise-case { gap: 32px; padding: 30px; }
+  .about-grid { gap: 36px; }
+  .contact-grid { gap: 36px; }
+  .capability-card { padding: 24px; }
+  #primary-navigation { gap: 18px; }
+  .header-inner { gap: 16px; }
 }
 
-@media (max-width: 576px) {
-  body {
-    font-size: 14px;
-    padding-top: 55px;
-  }
+/* Keep the tablet hero readable instead of squeezing two large headlines. */
+@media (min-width: 761px) and (max-width: 850px) {
+  .hero-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .intro-card { grid-column: 1 / -1; }
+  .intro-card h1 { font-size: 3.4rem; }
+  .feature-card { grid-column: 1; grid-row: span 2; }
+  .domain-card, .toolkit-card { grid-column: 2; }
+  .approach-card { grid-column: 1 / -1; min-height: 100px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .approach-card > .eyebrow { gap: 16px; }
+  .approach-person { margin-top: 0; }
+}
 
-  #sideNav {
-    padding: 0 var(--space-sm);
-    height: 55px;
-  }
+@media (max-width: 760px) {
+  html { scroll-padding-top: 170px; }
+  .site-shell { width: calc(100% - 40px); }
+  .header-inner { min-height: 76px; flex-wrap: wrap; gap: 0; padding-block: 16px; }
+  .colour-switch { flex-basis: 100%; margin-top: 12px; justify-content: center; }
+  .colour-switch button { padding-inline: 18px; }
+  .brand { min-height: 44px; }
+  #primary-navigation { width: 100%; justify-content: space-between; gap: 12px; padding-top: 12px; }
+  #primary-navigation a { font-size: .75rem; }
+  #primary-navigation .nav-contact { border: 0; padding: 0; gap: 8px; }
+  .menu-toggle:not([hidden]) { display: inline-flex; }
+  .menu-enhanced #primary-navigation { display: none; }
+  .menu-enhanced #primary-navigation.is-open { display: flex; }
+  .hero { padding-top: 24px; }
+  .hero-topline .edition { display: none; }
+  .hero-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .intro-card, .feature-card { grid-column: 1 / -1; }
+  .intro-card h1 { font-size: clamp(2.65rem, 7.5vw, 4rem); }
+  .hero-lede, .hero-description { max-width: 440px; }
+  .hero-description, .case-intro > p, .project-content > p:not(.eyebrow):not(.tech-line),
+  .experience-description, .capability-card p, .about-content > p,
+  .contact-grid > div:first-child p, .details-body p, .engineering-themes p { font-size: 1rem; }
+  .intro-card { padding: 32px; }
+  .intro-footnote { margin-top: 24px; }
+  .feature-card { padding: 28px 32px; }
+  .feature-card h2 { font-size: 2.4rem; }
+  .system-diagram { max-height: 260px; }
+  .system-figure { margin-top: 16px; }
+  .domain-card, .toolkit-card { grid-column: span 1; }
+  .approach-card { grid-column: 1 / -1; min-height: auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .approach-card > .eyebrow { gap: 16px; }
+  .approach-person { margin-top: 0; }
+  .page-section { padding-top: 64px; }
+  .section-heading { display: block; margin-bottom: 24px; }
+  .section-heading > p { margin-top: 16px; }
+  .enterprise-case { grid-template-columns: 1fr; gap: 28px; }
+  .engineering-themes { grid-template-columns: 1fr; gap: 24px; }
+  .case-intro h3 br { display: none; }
+  .case-intro > p { max-width: none; }
+  .work-grid { grid-template-columns: 1fr; }
+  .project-visual { height: 280px; }
+  .club-browser, .energy-panel { max-width: 520px; margin-inline: auto; }
+  .tooling-card { grid-template-columns: 1fr; }
+  .tooling-visual { min-height: 280px; height: auto; gap: 24px; }
+  .experience-row { grid-template-columns: 1fr 1.8fr; gap: 20px; }
+  .experience-description { grid-column: 2; }
+  .capability-grid { grid-template-columns: 1fr; }
+  .capability-card { padding: 28px; }
+  .capability-number { margin-bottom: 16px; }
+  .capability-card .chip-list { margin-bottom: 12px; }
+  .learning-note { flex-wrap: wrap; gap: 8px 24px; }
+  .learning-note p { flex-basis: 100%; order: 3; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .portrait-card { max-width: 440px; width: 100%; }
+  .portrait { aspect-ratio: 1.15 / 1; }
+  .contact-section { margin-top: 64px; padding: 28px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .contact-topline > span:last-child { display: none; }
+  .site-footer { flex-wrap: wrap; padding-block: 26px; gap: 12px 24px; }
+  .site-footer p { order: 3; flex-basis: 100%; }
+  .site-footer > a:last-child { margin-left: auto; }
+}
 
-  section {
-    padding: var(--space-lg) var(--space-md);
-  }
-
-  h1 {
-    font-size: 1.75rem;
-    margin-bottom: var(--space-md);
-  }
-
-  h2 {
-    font-size: 1.25rem;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-md);
-  }
-
-  p {
-    margin-bottom: var(--space-md);
-  }
-
-  .profile-image {
-    width: 30px;
-    height: 30px;
-  }
-
-  .profile-name {
-    font-size: 0.8rem;
-  }
-
-  .nav-link {
-    padding: 0.5rem 1rem;
-    font-size: 0.7rem;
-  }
-
-  .navbar-collapse {
-    top: 55px;
-  }
-
-  .resume-section {
-    padding: var(--space-lg) var(--space-md);
-  }
-
-  .highlight-box {
-    padding: var(--space-md);
-  }
-
-  .social-icons {
-    gap: var(--space-md);
-  }
-
-  .skills-grid,
-  .tools-grid,
-  .portfolio-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-
-  .section-heading {
-    font-size: 1.25rem;
-  }
+@media (max-width: 420px) {
+  .site-shell { width: calc(100% - 28px); }
+  .brand { font-size: .75rem; gap: 9px; }
+  .monogram { width: 37px; height: 37px; font-size: 1.1rem; }
+  .menu-toggle { gap: 8px; padding-inline: 10px; }
+  .hero-topline { font-size: .58rem; }
+  .intro-card, .feature-card { padding: 26px 22px; }
+  .intro-card h1 { font-size: clamp(2.3rem, 9.3vw, 2.8rem); }
+  .hero-lede { font-size: .95rem; }
+  .button { padding-inline: 15px; gap: 16px; }
+  .feature-card h2 { font-size: 2.1rem; }
+  .card-topline { font-size: .57rem; gap: 8px; }
+  .domain-card, .toolkit-card { grid-column: 1 / -1; min-height: 145px; }
+  .domain-symbol { display: block; }
+  .domain-card p { margin-top: 14px; }
+  .toolkit-card .chip-list { margin-top: 14px; }
+  .toolkit-card .chip-list li { padding: 5px 9px; font-size: .7rem; }
+  .approach-card { display: block; }
+  .approach-person { margin-top: 16px; gap: 14px; }
+  .enterprise-case { padding: 25px 22px; }
+  .case-intro h3 { font-size: 1.8rem; }
+  .case-facts > div { grid-template-columns: 90px 1fr; gap: 10px; }
+  .project-content { padding: 25px 22px 16px; }
+  .project-visual { height: 255px; padding-inline: 18px; }
+  .club-browser img { height: 134px; }
+  .energy-panel { padding: 12px 14px; }
+  .energy-chart { height: 90px; }
+  .visual-caption { font-size: .56rem; letter-spacing: .04em; }
+  .tooling-visual { height: auto; }
+  .tooling-terminal { font-size: .68rem; padding: 18px; }
+  .experience-row { grid-template-columns: 1fr; gap: 18px; }
+  .experience-date { display: flex; justify-content: space-between; gap: 12px; }
+  .experience-date > span { margin: 0; }
+  .experience-description { grid-column: 1; }
+  .education-list > div { flex-wrap: wrap; gap: 4px; }
+  .contact-section { padding: 25px 22px; }
+  .contact-grid h2 { font-size: 2rem; }
+  .email-address { font-size: .88rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
 
+@media print {
+  .site-header { position: static; }
+  .menu-toggle, .copy-email, .system-figure { display: none !important; }
+  .page-section { padding-top: 32px; }
+  .card { break-inside: avoid; }
+  body { background: white; }
+  .feature-card, .contact-section { print-color-adjust: exact; }
+}

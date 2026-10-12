@@ -1,149 +1,100 @@
-/*!
-* Start Bootstrap - Resume v7.0.6 (https://startbootstrap.com/theme/resume)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
-*/
+/* Progressive enhancements. All content and case details work without JS. */
+(() => {
+  'use strict';
 
-// Scripts for smooth scrolling and navigation highlighting
-(function() {
-    'use strict';
+  const header = document.querySelector('.site-header');
+  const menuButton = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#primary-navigation');
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a.js-scroll-trigger[href*="#"]:not([href="#"])').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
+  if (header && menuButton && nav) {
+    const mobile = window.matchMedia('(max-width: 760px)');
 
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offsetTop = target.offsetTop - 74; // Account for fixed navbar
-
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-
-                // Close mobile menu after clicking a link
-                const navbarCollapse = document.querySelector('#navbarResponsive');
-                const navbarToggler = document.querySelector('.navbar-toggler');
-                const backdrop = document.querySelector('#navbarBackdrop');
-
-                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                    navbarCollapse.classList.remove('show');
-                    navbarToggler.setAttribute('aria-expanded', 'false');
-                    backdrop.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-            }
-        });
-    });
-
-    // Mobile navigation toggle functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const navbarToggler = document.querySelector('.navbar-toggler');
-        const navbarCollapse = document.querySelector('#navbarResponsive');
-        const backdrop = document.querySelector('#navbarBackdrop');
-        const sideNav = document.querySelector('#sideNav');
-
-        if (navbarToggler && navbarCollapse && backdrop) {
-            // Toggle mobile menu
-            navbarToggler.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-
-                if (isExpanded) {
-                    // Close menu
-                    navbarCollapse.classList.remove('show');
-                    sideNav.classList.remove('show');
-                    backdrop.classList.remove('show');
-                    this.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
-                } else {
-                    // Open menu
-                    navbarCollapse.classList.add('show');
-                    sideNav.classList.add('show');
-                    backdrop.classList.add('show');
-                    this.setAttribute('aria-expanded', 'true');
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-
-            // Close menu when clicking backdrop
-            backdrop.addEventListener('click', function() {
-                navbarCollapse.classList.remove('show');
-                sideNav.classList.remove('show');
-                backdrop.classList.remove('show');
-                navbarToggler.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            });
-
-            // Close menu on window resize if screen becomes large
-            window.addEventListener('resize', function() {
-                if (window.innerWidth >= 992) {
-                    navbarCollapse.classList.remove('show');
-                    sideNav.classList.remove('show');
-                    backdrop.classList.remove('show');
-                    navbarToggler.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-    });
-
-    // Activate Bootstrap scrollspy on the main nav element
-    const mainNav = document.body.querySelector('#sideNav');
-    if (mainNav) {
-        // Manual scrollspy implementation for better control
-        const navLinks = document.querySelectorAll('#sideNav .nav-link');
-        const sections = document.querySelectorAll('section[id]');
-
-        function updateActiveNav() {
-            let current = '';
-            const scrollPosition = window.pageYOffset + 100; // Offset for better triggering
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            // Update active states
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Update on scroll
-        window.addEventListener('scroll', updateActiveNav);
-
-        // Update on load
-        window.addEventListener('load', updateActiveNav);
-
-        // Update immediately
-        updateActiveNav();
+    /** Keep the disclosure state and its accessible label in sync. */
+    function setMenuOpen(open, restoreFocus = false) {
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.querySelector('.menu-label').textContent = open
+        ? 'Close' : 'Menu';
+      nav.classList.toggle('is-open', open);
+      if (restoreFocus) menuButton.focus();
     }
 
-    // Add smooth reveal animation on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    /** Desktop navigation stays visible; unenhanced mobile links do too. */
+    function syncMenu() {
+      menuButton.hidden = !mobile.matches;
+      if (!mobile.matches) setMenuOpen(false);
+    }
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-            }
-        });
-    }, observerOptions);
-
-    // Observe all sections for animation
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
+    header.classList.add('menu-enhanced');
+    syncMenu();
+    mobile.addEventListener('change', syncMenu);
+    menuButton.addEventListener('click', () => {
+      setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
+    });
+    nav.addEventListener('click', event => {
+      if (event.target.closest('a')) setMenuOpen(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape'
+        && menuButton.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false, true);
+      }
+    });
+    document.addEventListener('click', event => {
+      if (!header.contains(event.target)) setMenuOpen(false);
     });
 
+    const navLinks = [...nav.querySelectorAll('a[href^="#"]')];
+    const sections = navLinks.map(link =>
+      document.getElementById(link.hash.slice(1)),
+    ).filter(Boolean);
+    let scheduled = false;
+
+    /** Highlight the last navigation section above the sticky header. */
+    function updateActiveSection() {
+      const offset = header.getBoundingClientRect().height + 80;
+      let current = '';
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offset) {
+          current = `#${section.id}`;
+        }
+      }
+      // The final section can be too short to reach the header naturally.
+      if (window.scrollY > 0 && window.innerHeight + window.scrollY
+        >= document.documentElement.scrollHeight - 4) {
+        current = '#contact';
+      }
+      for (const link of navLinks) {
+        if (link.hash === current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+      scheduled = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!scheduled) {
+        scheduled = true;
+        window.requestAnimationFrame(updateActiveSection);
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+    window.addEventListener('hashchange', updateActiveSection);
+    updateActiveSection();
+  }
+
+  const copyButton = document.querySelector('.copy-email');
+  const copyStatus = document.querySelector('.copy-status');
+  if (copyButton && copyStatus && navigator.clipboard?.writeText) {
+    copyButton.hidden = false;
+    copyButton.addEventListener('click', async () => {
+      copyButton.disabled = true;
+      try {
+        await navigator.clipboard.writeText(copyButton.dataset.email);
+        copyStatus.textContent = 'Email address copied.';
+      } catch {
+        copyStatus.textContent = 'Could not copy. Select the address or use the email link.';
+      } finally {
+        copyButton.disabled = false;
+      }
+    });
+  }
 })();

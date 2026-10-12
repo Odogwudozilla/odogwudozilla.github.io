@@ -1,160 +1,101 @@
-# Chidozie Nnachor - Software Engineer Portfolio
+# Chidozie Nnachor — Software Engineer Portfolio
 
-> Modern portfolio website showcasing software engineering expertise, built with Next.js and deployed on Vercel.
+A static, project-led portfolio focused on enterprise Java, insurance
+technology, and a background in financial services.
 
-## 🚀 Live Site
-- **Production**: [https://chidozie-nnachor.vercel.app](https://chidozie-nnachor.vercel.app) *(coming soon)*
-- **Current**: [https://odogwudozilla.github.io](https://odogwudozilla.github.io) *(legacy site)*
+**Website:** [odogwudozilla.com](https://odogwudozilla.com/)
 
-## 📋 Project Overview
+## Run the static site
 
-This repository contains my professional portfolio website, currently undergoing a complete migration from a static HTML/Bootstrap site to a modern Next.js application. The portfolio serves as a showcase of my software engineering experience, technical skills, and professional projects.
+Requires Node.js 18 or newer. The static workflow has no package dependencies;
+you do not need `npm install` to build, preview, or check this site.
 
-### Current Status: **Migration in Progress**
-- **Phase**: Foundation & Infrastructure Setup
-- **Migration Goal**: Modern, performant, and maintainable portfolio with blog capabilities
-- **Timeline**: 9-week phased migration (see [roadmap](./docs/roadmap.md))
-
-## 🛠️ Technology Stack
-
-### Current (Legacy)
-- Static HTML/CSS with Bootstrap
-- GitHub Pages hosting
-- Basic responsive design
-
-### Target (New Architecture)
-- **Frontend**: Next.js 14+ with TypeScript
-- **Styling**: Tailwind CSS + ShadCN UI components
-- **Database**: Supabase (PostgreSQL)
-- **Authentication**: Supabase Auth
-- **Email**: Resend for transactional emails
-- **Deployment**: Vercel with preview environments
-- **CMS**: Custom admin interface for content management
-
-## 📁 Project Structure
-
-```
-├── docs/                     # Comprehensive project documentation
-│   ├── productContext.md     # Project goals and target audience
-│   ├── technicalArchitecture.md  # Technical stack and architecture
-│   ├── developmentGuide.md   # Development workflow and standards
-│   ├── roadmap.md           # Migration timeline and milestones
-│   └── contentStrategy.md   # Content and SEO strategy
-├── src/                     # Legacy source files (to be migrated)
-└── .github/                 # GitHub workflows and configurations
-    └── copilot-instructions.md  # AI assistant coding guidelines
+```sh
+npm run build:static
+npm run preview:static
 ```
 
-## 🎯 Key Features (Planned)
+Open [the local preview](http://127.0.0.1:4173/). It serves `docs/` on the
+loopback interface. Stop it with Ctrl+C. Set `PORT` to use another port.
+On Windows, use `npm.cmd` if PowerShell blocks `npm.ps1`.
 
-### Core Portfolio Features
-- ✅ Professional summary and experience timeline
-- ✅ Skills showcase with interactive elements
-- ✅ Project portfolio with detailed case studies
-- 🔄 Responsive, accessible design system
-- 🔄 Dark mode support
+## Edit and publish
 
-### Enhanced Features (Coming Soon)
-- 📝 Technical blog with MDX support
-- 📧 Contact forms with email integration
-- 📊 Newsletter subscription system
-- 🔍 Advanced search and filtering
-- 📱 Progressive Web App capabilities
+1. Edit content in `docs/partials/` and styles in `docs/css/`.
+2. Run `npm run build:static` to assemble the HTML.
+3. Run `npm run check:static` to check generated output, internal links,
+   asset references, document structure, and native case disclosures.
+4. Preview at desktop and phone widths.
+5. Commit the partials, styles, scripts, and generated HTML together.
 
-### Future Enhancements
-- 🤖 AI-powered content recommendations
-- 💬 Interactive chatbot for visitor engagement
-- 🔐 Authentication for premium content
-- 📈 Advanced analytics and performance monitoring
+GitHub Pages can serve the committed `docs/` folder directly. No browser-side
+HTML fetching, database, authentication, external font, or icon library is
+needed. Content and project disclosures remain usable without JavaScript.
 
-## 🚀 Getting Started
+`docs/index-modular.html` is generated from the same source to preserve the
+older entry point. Do not edit generated pages directly.
 
-### Prerequisites
-- Node.js 18+ and npm/yarn
-- Git for version control
-- Supabase CLI (for database management)
+The selected navy-and-orange design is now [the default preview](http://127.0.0.1:4173/).
+It uses colours sampled from [Keylane's public website](https://keylane.com/):
+navy `#274263`, dark blue `#253756`, orange `#FF8000`, pale blue `#CBE7EC`,
+and near-white `#F4FAFB`, loaded through `docs/css/keylane-theme.css`.
+Visitors can choose Navy or Teal in the header; their preference is remembered
+in browser storage and applied before the page renders. Navy is the default
+for new visitors. Switching still works if storage is unavailable.
+The previous `keylane.html` URL serves the selected design too. `original.html`
+starts with teal when no saved choice exists; saved preferences apply there too.
 
-### Local Development Setup
-```bash
-# Clone the repository
-git clone https://github.com/Odogwudozilla/odogwudozilla.github.io.git
-cd odogwudozilla
+## Structure
 
-# Install dependencies (once Next.js migration begins)
+```text
+static/site-template.html       Page shell and partial order
+scripts/build-static.mjs        Dependency-free HTML assembly
+scripts/serve-static.mjs        Local preview server
+tests/static-site.test.mjs      Published-page smoke checks
+docs/partials/                 Content source
+docs/css/base.css              Tokens, typography, document defaults
+docs/css/navigation.css        Header and menu
+docs/css/components.css        Cards, buttons, native disclosures
+docs/css/sections.css          Section layouts and CSS illustrations
+docs/css/portfolio.css         Curated projects and project-specific visuals
+docs/css/responsive.css        Breakpoints, reduced motion, print
+docs/css/keylane-theme.css     Selected navy/orange palette overrides
+docs/js/scripts.js             Menu, section highlighting, copy email
+docs/js/theme.js               Early colour preference and accessible switch
+docs/assets/                  Existing media assets
+docs/index.html                Generated GitHub Pages entry point
+docs/keylane.html              Compatible URL for the selected design
+docs/original.html             Generated cream/teal comparison
+src/                           Separate Next.js migration scaffold
+```
+
+The CSS/SVG project visuals are conceptual illustrations, not screenshots
+or claims about production architecture. Professional project descriptions
+stay at a high level and omit private source code and unverified metrics.
+Career dates are taken from the existing portfolio; update the partials
+when new employment information or a real CV is available.
+
+Read [the redesign decisions](docs/static-redesign.md) and
+[the static structure guide](docs/modular-structure-guide.md) for details.
+
+## Next.js migration
+
+The `src/app/` application is an early, separate migration scaffold.
+Its navigation and homepage are not the static production site.
+The Supabase, authentication, blog, newsletter, and payment features in the
+older planning documents are proposals, not implemented portfolio features.
+
+```sh
 npm install
-
-# Environment setup
-cp .env.example .env.local
-# Configure environment variables
-
-# Start development server
 npm run dev
 ```
 
-## 📖 Documentation
+The existing `build`, `lint`, and `type-check` commands apply to Next.js.
+Historical SCSS and compiled Bootstrap files are retained as migration
+references; the redesigned static entry points do not load them.
 
-Comprehensive documentation is available in the [`docs/`](./docs/) directory:
+## Professional links
 
-- **[Product Context](./docs/productContext.md)**: Project objectives, target audience, and success metrics
-- **[Technical Architecture](./docs/technicalArchitecture.md)**: Technology stack, database design, and security
-- **[Development Guide](./docs/developmentGuide.md)**: Coding standards, testing, and deployment workflow
-- **[Project Roadmap](./docs/roadmap.md)**: Migration timeline and feature development phases
-- **[Content Strategy](./docs/contentStrategy.md)**: Blog content planning and SEO optimization
-
-## 🔄 Migration Progress
-
-### ✅ Completed
-- [x] Project planning and documentation
-- [x] Technology stack selection
-- [x] Architecture design
-- [x] Development workflow establishment
-
-### 🔄 In Progress
-- [ ] Next.js project initialization
-- [ ] Component library development
-- [ ] Content migration
-
-### 📅 Upcoming
-- [ ] Blog functionality implementation
-- [ ] Contact forms and email integration
-- [ ] SEO optimization
-- [ ] Performance testing and optimization
-
-See the complete [migration roadmap](./docs/roadmap.md) for detailed timelines.
-
-## 🎨 Design Philosophy
-
-### Modular Architecture
-- **Atomic Design**: Components organized as atoms → molecules → organisms
-- **Reusability**: Every UI element designed for maximum reuse
-- **Type Safety**: Full TypeScript implementation with no 'any' types
-- **Accessibility**: WCAG 2.1 AA compliance from the ground up
-
-### Performance First
-- **Core Web Vitals**: Target Lighthouse scores > 95
-- **Bundle Optimization**: Sub-250KB initial bundle size
-- **Image Optimization**: WebP formats with responsive sizing
-- **Progressive Enhancement**: Works without JavaScript
-
-## 🤝 Development Approach
-
-This project is developed using AI-assisted development practices:
-
-- **GitHub Copilot**: Primary development assistant following [coding guidelines](./.github/copilot-instructions.md)
-- **Component-First**: Every feature built as reusable, documented components
-- **Test-Driven**: Comprehensive testing strategy with high coverage requirements
-- **Performance-Focused**: Continuous monitoring and optimization
-
-## 🔗 Professional Links
-
-- **LinkedIn**: [Chidozie Nnachor](https://www.linkedin.com/in/chidoziennachor/)
-- **GitHub**: [Odogwudozilla](https://github.com/Odogwudozilla)
-- **Current Portfolio**: [odogwudozilla.github.io](https://odogwudozilla.github.io)
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-**About Me**: Software Engineer at Keylane with expertise in enterprise software development, insurance technology, and full-stack web applications. Passionate about clean code, performance optimization, and collaborative development practices.
+- [LinkedIn](https://www.linkedin.com/in/chidoziennachor/)
+- [GitHub](https://github.com/Odogwudozilla)
+- [Email](mailto:odogwu.naija@gmail.com)

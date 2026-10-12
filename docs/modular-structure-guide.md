@@ -1,110 +1,68 @@
-# Modular File Structure Documentation
+# Static site structure
 
-## Overview
-The portfolio files have been broken down into manageable, modular chunks for easier editing and maintenance. This structure follows best practices for web development and makes future updates much simpler.
+The site is modular at build time. Visitors receive complete HTML rather
+than waiting for JavaScript to fetch each section.
 
-## HTML Modularization
+## Content source
 
-### Main Files
-- `index.html` - Original monolithic file (kept as backup)
-- `index-modular.html` - New modular version that loads components dynamically
+`static/site-template.html` provides the page shell, main landmark, footer,
+and section order. Each `{{name}}` slot maps to `docs/partials/name.html`.
 
-### HTML Components (in `/partials/`)
-1. **`head.html`** - Meta tags, fonts, and stylesheet references
-2. **`navigation.html`** - Sidebar navigation with profile image
-3. **`hero-section.html`** - Home/landing section with intro content
-4. **`experience-section.html`** - Professional experience timeline
-5. **`skills-section.html`** - Technical skills and tools display
-6. **`portfolio-section.html`** - Project showcase cards
-7. **`education-section.html`** - Educational background timeline
-8. **`contact-section.html`** - Contact information and opportunities
+The current order is head, navigation, hero, work, experience, capabilities,
+about/education, and contact. Stable section IDs preserve internal links:
+`home`, `portfolio`, `experience`, `skills`, `about`, `education`, `contact`.
 
-### JavaScript Components
-- **`components-loader.js`** - Dynamically loads HTML partials into containers
-- **`scripts.js`** - Main functionality (navigation scroll spy, smooth scrolling)
+Run `npm run build:static` after changing a partial or template. The build
+fails on missing/empty partials and unresolved placeholders. It writes
+`docs/index.html`, the older `docs/index-modular.html` entry point, and
+`docs/keylane.html`, a compatible URL for the selected navy-and-orange design.
+`docs/original.html` preserves the cream-and-teal comparison.
+Commit those outputs with their source. There is no production build server
+requirement and no need to install packages for the static workflow.
 
-## CSS Modularization
+## Styles
 
-### CSS Modules (in `/css/`)
-1. **`base.css`** (120 lines) - Global styles, variables, typography, animations
-   - CSS custom properties (color palette, shadows, transitions)
-   - Global reset and body styles
-   - Typography system (headings, text styles)
-   - Utility classes and animations
+- `base.css`: colour/spacing/type tokens, reset, global typography, skip link.
+- `navigation.css`: sticky masthead and navigation presentation.
+- `components.css`: shared card/action/chip/disclosure styles.
+- `sections.css`: hero bento, experience, capabilities, and personal sections.
+- `portfolio.css`: selected repositories, project imagery, and work layouts.
+- `responsive.css`: tablet/phone rules, reduced motion, and print.
+- `keylane-theme.css`: navy/orange palette, loaded on all entry points for switching.
 
-2. **`navigation.css`** (180 lines) - Complete sidebar navigation styles
-   - Fixed sidebar positioning and layout
-   - Profile image styling and hover effects
-   - Navigation link styles and active states
-   - Emoji icons and smooth transitions
+The styles are linked locally. Existing SCSS and `styles.css` files are
+historical references and are not loaded by the generated site.
 
-3. **`sections.css`** (320 lines) - Content section layouts and components
-   - Section spacing and responsive padding
-   - Hero section and social icons
-   - Timeline components (experience/education)
-   - Skills grid and progress bars
-   - Tools and methodology sections
+## Progressive enhancement
 
-4. **`components.css`** (240 lines) - Reusable UI components
-   - Portfolio cards and project showcase
-   - Contact items and opportunity grid
-   - Download buttons and call-to-action elements
-   - Tags and interactive elements
+`docs/js/theme.js` runs in the head to apply a saved Navy/Teal preference
+before rendering. It then enables the header's labelled button group,
+updates pressed states and the browser theme colour, and remembers choices
+in local storage. Storage failures allow switching for the current page.
+Without JavaScript, the default page retains navy and the controls stay hidden.
 
-5. **`responsive.css`** (120 lines) - Mobile and tablet adaptations
-   - Mobile navigation adjustments
-   - Responsive typography scaling
-   - Tablet-specific layout modifications
-   - Print styles for PDF generation
+`docs/js/scripts.js` runs with `defer`, after the HTML exists. It enhances
+the mobile menu, active navigation, and email copying. Unenhanced navigation
+remains visible on mobile. Project details use native `details`/`summary`
+elements. No article or contact method requires a script to render.
 
-### Benefits of Modular Structure
+The menu supports Escape, outside clicks, and closing after selecting a
+link. Copy email is only offered when the Clipboard API exists; failures
+are announced inline while the normal email link remains available.
 
-#### For Development
-- **Easier Editing**: Each file focuses on a specific aspect (navigation, sections, components)
-- **Better Organization**: Logical separation of concerns
-- **Faster Loading**: Can load only needed CSS modules
-- **Version Control**: Smaller diffs, easier to track changes
-- **Debugging**: Isolated styles make troubleshooting simpler
+## Validation
 
-#### For Maintenance
-- **Scalability**: Easy to add new sections or components
-- **Reusability**: Components can be reused across different pages
-- **Team Collaboration**: Multiple developers can work on different modules
-- **Performance**: Selective loading and better caching
+```sh
+npm run build:static
+npm run check:static
+npm run preview:static
+```
 
-## File Size Comparison
-- **Original styles.css**: 980+ lines (monolithic)
-- **New modular CSS**: 5 files averaging 150-200 lines each
-- **HTML partials**: 8 focused components vs. 1 large file
+`check:static` verifies generated files are current and runs structural
+checks against the actual published page: one h1, unique IDs, resolving
+anchors, existing local assets, native disclosures, and matching legacy
+output. The checks run in one Node process for restricted Windows hosts.
 
-## Usage Instructions
-
-### To Edit Navigation
-1. Modify `partials/navigation.html` for structure changes
-2. Update `css/navigation.css` for styling changes
-
-### To Edit Content Sections
-1. Modify individual section files in `partials/`
-2. Update `css/sections.css` for layout changes
-3. Update `css/components.css` for component styling
-
-### To Add New Sections
-1. Create new HTML partial in `partials/`
-2. Add loading logic to `js/components-loader.js`
-3. Add container div to `index-modular.html`
-4. Add styles to appropriate CSS module
-
-### To Modify Responsive Behavior
-1. Update `css/responsive.css` for mobile/tablet styles
-2. Test across different screen sizes
-
-## Migration Path
-1. **Current**: Use `index.html` (original monolithic file)
-2. **Testing**: Use `index-modular.html` to test modular approach
-3. **Production**: Replace `index.html` with modular version when ready
-
-## Future Enhancements
-- **Component Library**: Create reusable UI components
-- **Build Process**: Add CSS preprocessing and minification
-- **Performance**: Implement lazy loading for sections
-- **Accessibility**: Enhanced ARIA labels and keyboard navigation
+Browser QA should include desktop, tablet, 390px and 320px phone widths,
+menu open/close, keyboard focus, all disclosures, and clipboard feedback.
+Check that content and navigation remain usable without JavaScript.
