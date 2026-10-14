@@ -1,94 +1,23 @@
-/* Selected portfolio palette. Sampled from keylane.com, 13 Oct 2026.
-   Original portfolio content and identity are shared; no company assets used. */
+/* Approved navy/orange palette. Company branding assets are not used. */
 :root.theme-keylane {
   --paper: #ffffff;
   --surface: #ffffff;
+  --section-soft: #f0f5f8;
   --ink: #253756;
-  --muted: #526477;
+  --muted: #43536a;
   --teal: #274263;
   --teal-light: #cbe7ec;
   --lime: #ff8000;
-  --line: #cbe7ec;
+  --line: #a0b0c0;
   --on-dark: #ffffff;
   --muted-dark: #cbe7ec;
-  --keylane-blue: #336d94;
-  --keylane-pale: #f4fafb;
-  --keylane-orange-ink: #482304;
-  --keylane-orange-hover: #ff982f;
+  --action: #274263;
+  --action-ink: #ffffff;
+  --action-hover: #172e49;
+  --accent: #ff8000;
+  --hover-bg: #274263;
+  --hover-ink: #ffffff;
 }
-
 .theme-keylane ::selection { background: #ff8000; color: #482304; }
-.theme-keylane :focus-visible { outline-color: #336d94; }
-.theme-keylane .feature-card :focus-visible,
-.theme-keylane .contact-section :focus-visible { outline-color: #ff8000; }
-.theme-keylane h2 { color: var(--teal); }
-.theme-keylane .feature-card h2,
-.theme-keylane .contact-grid h2 { color: var(--on-dark); }
-.theme-keylane .site-header { background: rgb(255 255 255 / .96); }
-.theme-keylane .monogram { background: var(--teal); }
-.theme-keylane #primary-navigation .nav-contact {
-  background: var(--lime); color: var(--keylane-orange-ink); border-color: var(--lime);
-}
-.theme-keylane #primary-navigation .nav-contact:hover { background: var(--keylane-orange-hover); }
-.theme-keylane .button-primary,
-.theme-keylane .button-light { background: var(--lime); color: var(--keylane-orange-ink); }
-.theme-keylane .button-primary:hover,
-.theme-keylane .button-light:hover { background: var(--keylane-orange-hover); }
-.theme-keylane .button-outline:hover { background: var(--keylane-pale); }
-.theme-keylane .intro-card { background: var(--keylane-pale); }
-.theme-keylane .intro-card h1::after {
-  content: ''; display: block; width: 64px; height: 5px; margin-top: 24px; background: var(--lime);
-}
-.theme-keylane .status-dot { background: var(--keylane-blue); }
-.theme-keylane .feature-card::before { border-color: #4590b0; }
-.theme-keylane .feature-card {
-  background: linear-gradient(145deg, #274263, #253756);
-}
-.theme-keylane .system-diagram { color: #cbe7ec; }
-.theme-keylane .diagram-node rect { fill: #2a5379; stroke: #4590b0; }
-.theme-keylane .feature-footer { border-color: #4590b0; }
-.theme-keylane .circle-link { border-color: #4590b0; }
-.theme-keylane .circle-link:hover { color: var(--keylane-orange-ink); }
-.theme-keylane .domain-card { background: var(--teal-light); border-color: var(--line); }
-.theme-keylane .domain-symbol { color: var(--keylane-blue); }
-.theme-keylane .approach-card:hover { background: var(--keylane-pale); border-color: #4590b0; }
-.theme-keylane .work-index a:hover { background: var(--keylane-pale); border-color: #4590b0; }
-.theme-keylane .enterprise-case { background: var(--keylane-pale); border-color: var(--line); }
-.theme-keylane .case-intro h3 { color: var(--teal); }
-.theme-keylane .case-facts > div,
-.theme-keylane .engineering-themes { border-color: var(--line); }
-.theme-keylane .engineering-themes h4 { color: var(--teal); }
-.theme-keylane .case-details summary:hover { color: var(--keylane-blue); }
-.theme-keylane .public-status { background: var(--keylane-pale); border-color: var(--line); }
-.theme-keylane .club-visual { background: #cbe7ec; color: var(--teal); }
-.theme-keylane .club-browser { border-color: #4590b0; box-shadow: 8px 9px 0 #b1d9e3; }
-.theme-keylane .browser-bar { color: var(--keylane-blue); border-color: var(--line); }
-.theme-keylane .energy-visual { background: #253756; }
-.theme-keylane .energy-panel { background: #274263; border-color: #4590b0; }
-.theme-keylane .chart-grid { stroke: #4590b0; }
-.theme-keylane .chart-area { fill: #ff8000; opacity: .14; }
-.theme-keylane .tooling-visual { background: #cbe7ec; color: var(--teal); }
-.theme-keylane .tooling-terminal {
-  background: var(--keylane-pale); border-color: #b1d9e3; box-shadow: 8px 9px 0 #b1d9e3;
-}
-.theme-keylane .terminal-prompt { color: var(--muted); border-color: var(--line); }
-.theme-keylane .tooling-terminal > div { color: var(--teal); }
-.theme-keylane .tooling-terminal div > span,
-.theme-keylane .tooling-terminal p > span { color: var(--keylane-blue); }
-.theme-keylane .tooling-terminal p { color: var(--muted); }
-.theme-keylane .keylane-experience { background: var(--keylane-pale); }
-.theme-keylane .experience-description li::marker,
-.theme-keylane .capability-number { color: var(--keylane-blue); }
-.theme-keylane .portrait-card { background: var(--keylane-pale); }
-.theme-keylane .contact-topline,
-.theme-keylane .social-link { border-color: #4590b0; }
-.theme-keylane .copy-email { border-color: #4590b0; }
-.theme-keylane .contact-grid h2 em { color: var(--on-dark); }
-.theme-keylane .contact-grid h2::after {
-  content: ''; display: block; width: 64px; height: 5px; margin-top: 24px; background: var(--lime);
-}
-.theme-keylane .social-link:hover { color: var(--on-dark); text-decoration: underline; text-underline-offset: 4px; }
-
-@media (max-width: 760px) {
-  .theme-keylane #primary-navigation .nav-contact { padding-inline: 12px; }
-}
+.theme-keylane .portfolio-label { border-color: #ff8000; }
+.theme-keylane .hero-portrait { border-color: #274263; }

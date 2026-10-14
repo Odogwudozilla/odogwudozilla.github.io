@@ -20,10 +20,11 @@ test('the published HTML is complete before JavaScript runs', () => {
   ]) {
     assert.ok(ids.includes(id), `Missing section: ${id}`);
   }
-  assert.match(html, /Reliable software/);
+  assert.match(html, /<h1 id="hero-title">Chidozie Nnachor<\/h1>/);
+  assert.match(html, /Software engineering portfolio/);
   assert.match(html, /Fusion Almere FC/);
   assert.match(html, /HomeWizard Energy Intelligence/);
-  assert.match(html, /Advent of Code, with a toolkit/);
+  assert.match(html, /Advent of Code/);
   assert.match(html, /mailto:odogwu.naija@gmail.com/);
   assert.doesNotMatch(html, /\{\{|components-loader|container"><\/div>/);
   assert.doesNotMatch(html, /onclick=|alert\(|coming soon|style="width:/i);
@@ -48,11 +49,31 @@ test('local assets exist within the public folder', async () => {
 
 test('case studies use native disclosures with descriptive summaries', () => {
   const details = [...html.matchAll(/<details\b[\s\S]*?<\/details>/g)];
-  assert.equal(details.length, 4);
+  assert.equal(details.length, 7);
   for (const [markup] of details) {
-    assert.match(markup, /<summary>Explore [\s\S]+?<\/summary>/);
-    assert.match(markup, /<h4>The challenge<\/h4>/);
-    assert.match(markup, /<h4>My part<\/h4>/);
+    assert.doesNotMatch(markup.match(/<details\b[^>]*>/)?.[0] || '', /\bopen(?:\s|=|>)/,
+      'Details must start folded');
+    const label = markup.match(/<summary>([\s\S]+?)<\/summary>/)?.[1]
+      .replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    assert.ok(label && label.length > 15, 'Disclosure needs a descriptive label');
+    if (markup.includes('class="case-details')) {
+      assert.ok((markup.match(/<h4>[^<]+<\/h4>/g) || []).length >= 2,
+        'Project details need headings that describe the work');
+    } else {
+      assert.match(markup, /class="experience-details"/);
+      assert.match(markup, /<ul>[\s\S]*?<li>/);
+    }
+  }
+});
+
+test('project previews keep images, technologies, and links inside the disclosure', () => {
+  const cards = [...html.matchAll(/<article class="project-card[^\"]*"[\s\S]*?<\/article>/g)];
+  assert.equal(cards.length, 4);
+  for (const [card] of cards) {
+    const preview = card.split('<details')[0];
+    assert.match(preview, /<h3>[^<]+<\/h3>/);
+    assert.match(preview, /<p>[\s\S]+?<\/p>/);
+    assert.doesNotMatch(preview, /<figure|<ul|project-code-link/);
   }
 });
 
@@ -63,7 +84,7 @@ test('curated projects have valid anchors and public-facing access labels', () =
   assert.doesNotMatch(html, /href="https:\/\/github.com\/Odogwudozilla\/(homewizard|fusion-almere-fc)"/);
   assert.match(html, /href="https:\/\/github.com\/Odogwudozilla\/adventOfCode"/);
   assert.match(html, /Public test site · MVP in development/);
-  assert.match(html, /Illustrative view · no household data/);
+  assert.match(html, /<ol class="energy-flow"[\s\S]*?Save readings in SQLite[\s\S]*?Upload to Supabase[\s\S]*?<\/ol>/);
   assert.doesNotMatch(html, /id="portfolio"[\s\S]*?Field data, brought together/);
 });
 

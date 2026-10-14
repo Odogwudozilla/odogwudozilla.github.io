@@ -1,7 +1,7 @@
 # Chidozie Nnachor — Software Engineer Portfolio
 
-A static, project-led portfolio focused on enterprise Java, insurance
-technology, and a background in financial services.
+A personal software engineering portfolio with professional experience,
+Java and insurance work, and selected personal projects.
 
 **Website:** [odogwudozilla.com](https://odogwudozilla.com/)
 
@@ -56,7 +56,7 @@ docs/partials/                 Content source
 docs/css/base.css              Tokens, typography, document defaults
 docs/css/navigation.css        Header and menu
 docs/css/components.css        Cards, buttons, native disclosures
-docs/css/sections.css          Section layouts and CSS illustrations
+docs/css/sections.css          Section layouts and typography
 docs/css/portfolio.css         Curated projects and project-specific visuals
 docs/css/responsive.css        Breakpoints, reduced motion, print
 docs/css/keylane-theme.css     Selected navy/orange palette overrides
@@ -66,11 +66,11 @@ docs/assets/                  Existing media assets
 docs/index.html                Generated GitHub Pages entry point
 docs/keylane.html              Compatible URL for the selected design
 docs/original.html             Generated cream/teal comparison
-src/                           Separate Next.js migration scaffold
+src/                           Legacy Next.js scaffold; independent Angular planned
 ```
 
-The CSS/SVG project visuals are conceptual illustrations, not screenshots
-or claims about production architecture. Professional project descriptions
+The club preview is a screenshot of its public test site. Energy and Java
+workflow illustrations contain no household or company data. Professional project descriptions
 stay at a high level and omit private source code and unverified metrics.
 Career dates are taken from the existing portfolio; update the partials
 when new employment information or a real CV is available.
@@ -78,19 +78,24 @@ when new employment information or a real CV is available.
 Read [the redesign decisions](docs/static-redesign.md) and
 [the static structure guide](docs/modular-structure-guide.md) for details.
 
-## Next.js migration
+## Dynamic Angular design
 
-The `src/app/` application is an early, separate migration scaffold.
+An independent Angular site with public prerendering and a private editor is
+planned. Its technical design remains under review; the static site is the
+production reference and fallback.
+
+The `src/app/` application is a legacy Next.js scaffold, not the Angular target.
 Its navigation and homepage are not the static production site.
 The Supabase, authentication, blog, newsletter, and payment features in the
 older planning documents are proposals, not implemented portfolio features.
 
-```sh
-npm install
-npm run dev
-```
+The unused Next.js dependencies were removed from the active manifest on
+14 October 2026 to resolve dependency alerts. Its source remains as a dormant
+reference; it is not runnable through the root scripts. The prior manifest is
+recoverable from Git history. Angular implementation still requires acceptance.
 
-The existing `build`, `lint`, and `type-check` commands apply to Next.js.
+Root `dev` builds and previews the static site; `build`, `start`, and `test`
+also refer to the static workflow. See [the dependency cleanup](docs/dependency-cleanup.md).
 Historical SCSS and compiled Bootstrap files are retained as migration
 references; the redesigned static entry points do not load them.
 

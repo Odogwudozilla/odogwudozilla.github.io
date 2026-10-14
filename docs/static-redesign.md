@@ -1,111 +1,106 @@
-# Static portfolio redesign
+# Static portfolio design
 
-## Scope and direction
+Updated on 14 October 2026 following the owner's review of the first version
+on desktop and mobile. The static site remains in docs/ with build-time
+partials and complete HTML on arrival.
 
-Refresh the GitHub Pages site in `docs/`. The Next.js application remains
-a separate migration scaffold. Use an original editorial bento layout:
-strong type, an illustrative systems diagram, and purposeful cards. The
-selected palette is navy and orange, with pale blue and white surfaces.
-The earlier warm-paper and dark-teal design remains as a comparison.
+## Current direction
 
-Make mature Java systems, API modernisation, and insurance experience the
-central story. The author's supplied professional context confirms a
-current Senior Software Engineer role at Keylane. Retain supported dates
-and avoid unverified metrics, private company details, and completed
-features that only exist in a roadmap.
+Open with “Software engineering portfolio”, Chidozie Nnachor's name, role,
+portrait, and a direct description of his work. Show the person before the
+professional and personal project examples.
 
-## Architecture decision
+The previous slogan-led hero, featured-experience tile, rounded bento collage,
+decorative diagram and repeated numbered cards are superseded. Use a linear
+portfolio with restrained borders, project rows and factual headings instead.
+Preserve the chosen navy/orange palette, teal alternative and saved preference.
 
-| Approach | Benefit | Tradeoff |
-| --- | --- | --- |
-| Hand-maintained single HTML file | No build or runtime dependencies | Repeated markup becomes harder to edit |
-| Build-time HTML partials (chosen) | Modular source; complete HTML on arrival | Run a small Node build after content edits |
-| Complete Next.js migration | React components and future application features | Larger scope and new deployment requirements |
+## Typography and layout
 
-Keep the existing HTML partials as the content source. A dependency-free
-Node script assembles them with a page template into `docs/index.html`.
-The old `index-modular.html` URL receives the same generated page.
-Commit generated HTML so GitHub Pages can serve the existing folder.
-CSS files own tokens/base, navigation, components, sections, project cards,
-and responsive rules respectively. JavaScript only enhances the mobile menu, active
-navigation, and email copying. No content depends on JavaScript.
+Body text is 16px; introductory paragraphs are 17px on desktop and 16px on
+phones. The main heading ranges from 32px to 44px; section headings range
+from 24px to 30px. Supporting labels are generally 13–15px rather than
+the previous miniature captions. Case-study paragraphs use the same body scale.
 
-## Page and interaction contracts
+Primary cards and portraits use 10px corners; controls use 6px corners.
+Shared content grids use a 24px gutter. Section descriptions sit immediately
+below their headings instead of being pushed to the opposite edge. No floating
+card animation, gradients or rotated mock browser windows are used. The
+portrait appears beside the identity on phones, keeping it near the top.
+Project previews show a title, short description and native expansion control.
+All four start folded, at about 210px high on desktop, following the owner's
+compact Keylane reference. Content wraps naturally on phones. Images, status,
+technology lists, detailed explanations and project links appear only after
+expansion. Expanded project content uses image/text columns on desktop and
+stacks on phones.
 
-- Header: name/home link, Work, Experience, About, Contact; a mobile menu
-  enhanced with a button only when JavaScript runs.
-- Hero: short introduction, Work and Contact links, featured enterprise
-  project, a clearly labelled conceptual workflow.
-- Work: Keylane engineering themes lead, followed by Fusion Almere FC,
-  HomeWizard Energy Intelligence, and Advent of Code. Native `details`
-  reveal further context without scripts.
-- Experience: dated roles and concrete responsibilities.
-- Capabilities: categories and context instead of numerical self-ratings.
-- About: banking-to-engineering background, portrait, compact education.
-- Contact: readable email and real email/social links. No placeholder CV.
+Sections share the same background and content alignment. Space and full-width
+dividing rules mark their boundaries. Every page section has a 4px top rule,
+orange in the navy palette and dark olive (#526b26) in the teal palette. Section separation does not depend on
+different background colours.
 
-## Accessibility and failure behaviour
+Technology lists are plain text separated by dots, with no background, border,
+rounded container or hover treatment. The Keylane list keeps 28px of space
+before its engineering headings.
 
-Use one h1, sequential headings, a skip link, visible focus, sufficiently
-contrasting colours, meaningful link labels, and generous touch targets.
-Provide reduced-motion styles and preserve readable content without JS.
-Mobile navigation supports Escape, outside click, and closing after a link
-selection. Clipboard failure leaves the selectable address and mail link
-available and reports the failure inline. Native case-study disclosures
-support keyboard interaction and do not require a modal or focus trap.
+## Page structure
 
-## Verification and delivery
+- Introduction: portfolio label, name, role, photograph, work/contact links,
+  professional profiles and concise role/background facts.
+- Work: compact Keylane overview with its technologies and engineering themes inside a native
+  disclosure, then Fusion Almere FC, HomeWizard Energy Intelligence and Advent of Code.
+- Experience: dates, employers and short role summaries remain visible;
+  each responsibility list has a separate native disclosure, closed initially.
+- Skills: technology categories and first-person descriptions without self-ratings.
+- About: banking-to-software background and education, without a second portrait.
+- Contact: email/social links and progressive clipboard support.
 
-1. Establish the template and complete head/navigation source.
-2. Implement and inspect each content partial in page order.
-3. Add the visual system and progressive enhancements.
-4. Generate the static entry points; verify idempotence and local links.
-5. Inspect desktop, tablet, and narrow phone layouts in the browser.
-6. Verify menu, disclosures, anchors, keyboard focus, and console output.
-7. Confirm the page remains complete when JavaScript is disabled.
+Project status and source visibility remain explicit. The public club test
+site supplies its screenshot. The energy project shows its collection workflow
+instead of a chart with invented readings. Company contributions remain
+public-safe and general, without a privacy disclaimer in the visitor-facing copy.
 
-Keep visuals in CSS/SVG and use the existing portrait. No external fonts,
-icon scripts, or animation libraries are needed. Preserve existing assets
-and the migration source so the redesign is reversible through Git.
+Copy describes the actual work: APIs, compatibility, defect investigation,
+registration, local storage, and puzzle tooling. Remove stock case-study labels,
+repeated summaries and drafting commentary. Keep development status, dates and
+source availability because these help a reader assess each project.
 
-## References
+## Interaction and accessibility
 
-- [Bento hierarchy](https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/068-bento-portfolio.html)
-- [Swiss typography/grid](https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/003-swiss-poster-machine.html)
-- [Native disclosures](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)
-- [Reduced motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
+Hover and keyboard focus use the same clear action styling: navy or teal
+background with light text on disclosures and work navigation.
+Buttons, menu controls, palette controls and email copying share that treatment.
+All underlined links, including internal links, keep their text colour and
+background on hover and keyboard focus. Only their underline takes the section
+accent: orange in navy, or dark olive in teal. Buttons and disclosure controls
+keep their navy/teal treatment. The pale lime used for selection highlighting
+does not supply section rules or link underlines.
+Project articles have no hover animation; their expansion controls are interactive.
 
-## Verification completed
+Preserve one h1, heading hierarchy, a skip link, visible focus, reduced motion,
+44px or larger principal controls, native details/summary, and readable
+content without JavaScript. Mobile navigation supports Escape with focus
+return and closes after selection. Email copying has honest failure feedback.
 
-- Generated HTML and all nine published-page checks pass.
-- Reviewed 1280px desktop, 900px intermediate, 768px tablet, and 390px/320px
-  phone layouts. No horizontal overflow was observed.
-- Verified native project disclosures, menu selection, Escape focus return,
-  active navigation, skip-link focus, and successful clipboard feedback.
-- Loaded a temporary page with all script tags removed: content, navigation,
-  and native disclosures remained usable. The fixture was removed afterward.
-- Browser console showed no warnings or errors during the checks.
-- Body text and secondary text tokens were checked for contrast. No full
-  Lighthouse audit or external social-profile validation was performed.
-- The professional-content refresh was inspected at 1280px, 768px, and
-  320px, including keyboard disclosure and mobile menu behaviour.
-  The local drafting context is excluded from version control and publishing.
+## Build and dependencies
 
-## Selected navy-and-orange version
+Edit docs/partials/ and docs/css/, then run npm run build:static and
+npm run check:static. Commit generated entry points with their sources.
+All entry points share content; navy is the default and original.html
+starts in teal if no saved preference exists.
 
-The default page uses `css/keylane-theme.css` over the shared layout. Its palette
-was sampled from [Keylane's public homepage](https://keylane.com/) on
-13 October 2026: navy, dark blue, orange, pale blue, and near-white.
-It uses the portfolio's own assets and identity. The user selected this design
-as the default. `keylane.html` and `index-modular.html` also serve it;
-`original.html` preserves the cream-and-teal version for comparison.
+The active package manifest is now dependency-free. Unused Next.js tooling
+was removed to eliminate the reported vulnerabilities; scaffold source is
+retained as a dormant reference. This does not start the Angular migration.
+See [dependency cleanup](dependency-cleanup.md).
 
-The header includes Navy/Teal buttons with accessible pressed states and
-44px touch targets. A small local head script restores saved colour choices
-before rendering; navy remains the default for new visitors. The control
-works without storage, and saved choices apply across all entry points.
+## Verification
 
-The variant was reviewed at 1280px, 768px, and 320px, with no horizontal
-overflow or browser warnings/errors observed. Navigation and native
-disclosures work. Principal text and button colour pairs exceed 4.5:1
-contrast. No full accessibility audit was performed.
+The generated output and ten published-page checks pass. The revised layout
+was reviewed at 1280px, 768px, 390px and 320px, with no horizontal overflow.
+Mobile menu/Escape focus return, native disclosure, strong action contrast
+and saved palette switching were checked in the browser. Final checks also
+cover console errors and unenhanced reading/navigation.
+
+The static revision is available for owner review. This records requested
+changes and observed checks, not automatic acceptance of the whole dynamic design.

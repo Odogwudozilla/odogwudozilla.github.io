@@ -1,54 +1,34 @@
-/* Reusable cards, actions, labels, and native disclosure components. */
-.card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
-.button-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  min-height: 48px;
-  padding: 12px 20px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  font-size: .8rem;
-  font-weight: 600;
-  transition: background .18s, transform .18s;
-}
-.button:hover { transform: translateY(-2px); }
-.button span[aria-hidden] { font-size: 1.1rem; }
-.button-primary { background: var(--teal); color: var(--on-dark); }
-.button-primary:hover { background: #23564b; }
-.button-outline { border-color: var(--line); color: var(--teal); }
-.button-outline:hover { background: var(--teal-light); }
-.button-light { background: var(--lime); color: var(--teal); }
-.button-light:hover { background: #e4f4c3; }
-.text-link { display: inline-flex; align-items: center; gap: 20px; min-height: 44px; font-size: .78rem; font-weight: 600; color: var(--teal); }
-.text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-.status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 9px; border-radius: 50%; background: #54714b; }
-.chip-list { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; margin: 0; }
-.chip-list li { border: 1px solid var(--line); border-radius: 5px; padding: 5px 10px; font-size: .7rem; line-height: 1.4; color: var(--teal); }
-.circle-link { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #739c80; border-radius: 50%; color: var(--lime); font-size: 1.5rem; transition: background .18s, color .18s; }
-.circle-link:hover { background: var(--lime); color: var(--teal); }
-.case-details { border-top: 1px solid var(--line); margin-top: 24px; }
-.case-details summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 54px;
-  padding: 14px 0;
-  color: var(--teal);
-  font-size: .78rem;
-  font-weight: 600;
-  cursor: pointer;
-  list-style: none;
-}
-.case-details summary::-webkit-details-marker { display: none; }
-.case-details summary:hover { color: #417452; }
-.disclosure-icon { font-size: 1.4rem; font-weight: 400; transition: transform .18s; }
-.case-details[open] .disclosure-icon { transform: rotate(45deg); }
-.details-body { padding: 5px 0 16px; }
+/* Surface borders and explicit action states; no floating-card effects. */
+.card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.button-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; padding: 10px 18px; border: 1px solid var(--action); border-radius: var(--control-radius); background: var(--surface); color: var(--action); font-size: .9375rem; font-weight: 650; transition: background .15s, color .15s; }
+.button:hover, .button:focus-visible { background: var(--action); color: var(--action-ink); }
+.text-link { display: inline-flex; align-items: center; gap: 18px; min-height: 44px; font-size: .9375rem; font-weight: 650; color: var(--teal); text-decoration: underline; text-underline-offset: 4px; }
+.chip-list { display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; padding: 0; margin: 0; }
+.chip-list li { position: relative; font-size: .875rem; line-height: 1.6; color: var(--muted); }
+.chip-list li:not(:last-child)::after { content: "·"; position: absolute; right: -12px; color: var(--muted); }
+.case-details { border-top: 1px solid var(--line); margin-top: 22px; }
+.case-details summary, .experience-details summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; padding: 12px; color: var(--teal); font-size: .9375rem; font-weight: 650; cursor: pointer; list-style: none; transition: background .15s, color .15s; }
+.case-details summary::-webkit-details-marker, .experience-details summary::-webkit-details-marker { display: none; }
+.case-details summary:hover, .case-details summary:focus-visible,
+.experience-details summary:hover, .experience-details summary:focus-visible { background: var(--hover-bg); color: var(--hover-ink); }
+.disclosure-icon { font-size: 1.25rem; font-weight: 400; transition: transform .15s; }
+.case-details[open] .disclosure-icon, .experience-details[open] .disclosure-icon { transform: rotate(45deg); }
+.details-body { padding: 0 12px 18px; }
 .details-body h4 { margin: 20px 0 8px; }
-.details-body p { font-size: .86rem; }
-.details-body .case-note { font-size: .75rem; padding-top: 20px; }
-.project-code-link { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 12px; width: 100%; justify-content: space-between; }
+.details-body p { font-size: 1rem; }
+.project-code-link { border-top: 1px solid var(--line); margin-top: 18px; padding: 12px; width: 100%; justify-content: space-between; }
+.experience-details { margin-top: 10px; }
+.experience-details summary { min-height: 44px; padding: 8px 10px; font-size: .875rem; border-radius: var(--control-radius); }
+.experience-details ul { padding-right: 8px; }
+.case-details summary { border-radius: var(--control-radius); }
+/* All link underlines share the accent without changing text or backgrounds. */
+a[href]:is(:hover, :focus-visible) {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+a[href^="https://"]:hover, a[href^="https://"]:focus-visible,
+a[href^="http://"]:hover, a[href^="http://"]:focus-visible {
+  text-decoration-line: underline;
+}

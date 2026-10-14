@@ -35,7 +35,7 @@ try {
     .replace('<meta name="theme-color" content="#153f38">', '<meta name="theme-color" content="#274263">');
   const originalComparison = originalHtml
     .replace('</head>', '<meta name="robots" content="noindex">\n</head>')
-    .replace('Built with care. Kept simple.', '<a href="index.html">Return to the selected design <span aria-hidden="true">↗</span></a>');
+    .replace('<p>Software engineering portfolio</p>', '<p><a href="index.html">Return to the default palette</a></p>');
   for (const [name, content] of [
     ['index.html', html], ['index-modular.html', html], ['keylane.html', html],
     ['original.html', originalComparison],

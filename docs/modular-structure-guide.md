@@ -25,7 +25,7 @@ requirement and no need to install packages for the static workflow.
 - `base.css`: colour/spacing/type tokens, reset, global typography, skip link.
 - `navigation.css`: sticky masthead and navigation presentation.
 - `components.css`: shared card/action/chip/disclosure styles.
-- `sections.css`: hero bento, experience, capabilities, and personal sections.
+- `sections.css`: personal introduction, experience, skills, about, and contact sections.
 - `portfolio.css`: selected repositories, project imagery, and work layouts.
 - `responsive.css`: tablet/phone rules, reduced motion, and print.
 - `keylane-theme.css`: navy/orange palette, loaded on all entry points for switching.
@@ -43,7 +43,7 @@ Without JavaScript, the default page retains navy and the controls stay hidden.
 
 `docs/js/scripts.js` runs with `defer`, after the HTML exists. It enhances
 the mobile menu, active navigation, and email copying. Unenhanced navigation
-remains visible on mobile. Project details use native `details`/`summary`
+remains visible on mobile. Project and career details use native `details`/`summary`
 elements. No article or contact method requires a script to render.
 
 The menu supports Escape, outside clicks, and closing after selecting a
