@@ -27,6 +27,9 @@ Shared content grids use a 24px gutter. Section descriptions sit immediately
 below their headings instead of being pushed to the opposite edge. No floating
 card animation, gradients or rotated mock browser windows are used. The
 portrait appears beside the identity on phones, keeping it near the top.
+Its location caption remains visible on phones rather than being hidden by
+the responsive stylesheet. Skills use one column through 600px to avoid narrow
+text columns on larger phones; tablet and desktop layouts retain two columns.
 Project previews show a title, short description and native expansion control.
 All four start folded, at about 210px high on desktop, following the owner's
 compact Keylane reference. Content wraps naturally on phones. Images, status,
@@ -81,6 +84,7 @@ Preserve one h1, heading hierarchy, a skip link, visible focus, reduced motion,
 44px or larger principal controls, native details/summary, and readable
 content without JavaScript. Mobile navigation supports Escape with focus
 return and closes after selection. Email copying has honest failure feedback.
+The email address and footer home link also provide at least 44px of tap height.
 
 ## Build and dependencies
 
@@ -101,6 +105,12 @@ was reviewed at 1280px, 768px, 390px and 320px, with no horizontal overflow.
 Mobile menu/Escape focus return, native disclosure, strong action contrast
 and saved palette switching were checked in the browser. Final checks also
 cover console errors and unenhanced reading/navigation.
+
+The follow-up mobile audit checked 320px, 390px, 430px, 600px and 768px. The
+location caption is visible at every width, no non-disclosure body text is
+hidden, and visible links and controls have at least 44px of height on phones.
+The mobile menu closes after selection, Escape returns focus to its control,
+and expanded club and energy projects remain within the viewport.
 
 The static revision is available for owner review. This records requested
 changes and observed checks, not automatic acceptance of the whole dynamic design.

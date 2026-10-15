@@ -24,7 +24,7 @@
   .hero-description { font-size: 1rem; }
   .hero-portrait { grid-column: 2; grid-row: 1; width: 104px; }
   .hero-portrait img { aspect-ratio: 1; }
-  .hero-portrait figcaption { display: none; }
+  .hero-portrait figcaption { padding: 8px 0; line-height: 1.45; }
   .hero-facts { grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
   .hero-facts > div { display: grid; grid-template-columns: 104px 1fr; gap: 14px; }
   .hero-facts dt { margin: 0; }
@@ -49,6 +49,9 @@
   .site-footer p { order: 3; flex-basis: 100%; }
   .site-footer > a:last-child { margin-left: auto; }
 }
+@media (max-width: 600px) {
+  .capability-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 420px) {
   .site-shell { width: calc(100% - 32px); }
   .brand { font-size: .875rem; gap: 8px; }
@@ -65,7 +68,6 @@
   .work-index a { width: 100%; }
   .experience-date { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .experience-date > span { margin: 0; }
-  .capability-grid { grid-template-columns: 1fr; }
   .learning-note { align-items: start; }
   .learning-note p { flex-basis: 100%; }
 }

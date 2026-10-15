@@ -53,13 +53,13 @@
 .contact-links { align-self: end; }
 .contact-links > .eyebrow { margin-bottom: 12px; }
 .email-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-.email-address { font-size: 1rem; overflow-wrap: anywhere; }
+.email-address { display: inline-flex; align-items: center; min-height: 44px; font-size: 1rem; overflow-wrap: anywhere; }
 .email-address:hover, .email-address:focus-visible { text-decoration-line: underline; }
 .copy-email { color: var(--action); background: var(--surface); border: 1px solid var(--action); border-radius: var(--control-radius); font-size: .875rem; min-height: 44px; padding: 8px 13px; }
 .copy-email:hover, .copy-email:focus-visible { background: var(--action); color: var(--action-ink); }
 .contact-links .copy-status { min-height: 24px; font-size: .8125rem; margin-top: 6px; }
 .social-link { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); min-height: 52px; padding: 4px 8px; font-size: .9375rem; }
 .site-footer { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 100px; font-size: .875rem; }
-.footer-name { font-weight: 650; }
+.footer-name { display: inline-flex; align-items: center; min-height: 44px; font-weight: 650; }
 .footer-name span { color: var(--muted); margin-left: 12px; }
 .site-footer > a:last-child { display: flex; gap: 16px; align-items: center; min-height: 44px; }
