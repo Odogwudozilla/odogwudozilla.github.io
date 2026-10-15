@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "status": "partially_accepted",
+  "reviewedOn": "2026-10-13",
+  "baselineCommit": "21c2a69",
+  "ownerAcceptance": null,
+  "implementationGate": "closed_pending_capacity_host_api_and_concrete_design_acceptance",
+  "scope": {
+    "confirmed": [
+      "public_portfolio",
+      "blog",
+      "contact_form",
+      "private_browser_editor",
+      "navy_default",
+      "teal_option",
+      "saved_colour_preference"
+    ],
+    "assumptionsRequiringAcceptance": [
+      "angular_browser_baseline",
+      "concrete_operating_limits"
+    ],
+    "deferred": [
+      "newsletter",
+      "visitor_accounts",
+      "comments",
+      "payments",
+      "public_chatbot",
+      "dark_mode"
+    ],
+    "ai": "optional_disabled_initially",
+    "paidServices": "separate_explicit_owner_approval"
+  },
+  "proposedStack": {
+    "runtime": "node_24_lts_compatible_patch_at_least_24_15_for_angular_22_0",
+    "packageManager": "npm_clean_task_local_configuration",
+    "framework": "angular_22_supported_compatible_patch_pending",
+    "language": "strict_typescript_and_templates",
+    "browserState": "signals_local_rxjs_async_no_full_store_initially",
+    "styling": "tailwind_4_semantic_tokens",
+    "primitives": "selected_angular_cdk_material_pending_review",
+    "contentProvider": "supabase_selected_destination_free_capacity_still_blocked",
+    "editor": "tiptap_framework_neutral_core_restricted_json",
+    "validation": "zod",
+    "email": "resend_candidate_quota_verification_pending",
+    "rendering": "accepted_angular_static_public_output_lazy_private_editor",
+    "backendRuntime": "proposed_node_24_vercel_functions",
+    "hosting": "proposed_vercel_hobby_static_plus_node_api",
+    "sessionTransport": "proposed_admin_only_browser_supabase_auth_explicit_bearer_api",
+    "optionalAi": "cloudflare_workers_ai_server_adapter_disabled",
+    "tests": [
+      "angular_cli_vitest",
+      "angular_testbed",
+      "playwright",
+      "direct_sql_policy_tests"
+    ],
+    "exactVersions": null,
+    "publicationPipeline": "proposed_trusted_github_actions_pinned_release_build_verify_promote_reconcile"
+  },
+  "dependencyPolicy": {
+    "candidateDirectFamilies": [
+      "@angular/*",
+      "rxjs",
+      "typescript",
+      "tailwindcss",
+      "@tailwindcss/*",
+      "@supabase/supabase-js",
+      "@tiptap/core",
+      "@tiptap/starter-kit",
+      "@tiptap/extension-*",
+      "zod",
+      "resend",
+      "eslint",
+      "angular-eslint",
+      "@angular-eslint/*",
+      "@typescript-eslint/*",
+      "prettier",
+      "vitest",
+      "@vitest/*",
+      "@playwright/test",
+      "axe-core",
+      "@axe-core/*",
+      "@types/*"
+    ],
+    "resolvedExactAllowlist": null,
+    "excludedFromRelease": [
+      "prisma",
+      "@prisma/client",
+      "@trpc/*",
+      "@clerk/*",
+      "stripe",
+      "redux",
+      "@reduxjs/toolkit",
+      "langchain",
+      "@langchain/*",
+      "next",
+      "react",
+      "react-dom",
+      "@radix-ui/*",
+      "@tiptap/react",
+      "@nx/*",
+      "nx",
+      "@ngrx/*"
+    ],
+    "newMajorOrProvider": "accepted_adr_required",
+    "patchOrMinor": "reviewed_lockfile_and_verification_required",
+    "installCommandInCi": "npm ci",
+    "experimentalProductionFeatures": "accepted_exception_required",
+    "registryOrigins": [
+      "https://registry.npmjs.org/"
+    ],
+    "externalLocalDependencies": false,
+    "inheritedCompanyConfiguration": false,
+    "runtimeSpecificDependencies": "node_sharp_candidate_pending_host_acceptance_and_bounded_media_tests"
+  },
+  "boundaries": {
+    "publicData": "immutable_approved_release_snapshot_consistent_with_verified_deployment",
+    "privateData": "verified_owner_and_aal2",
+    "publicSignup": false,
+    "cmsDefaultClient": "authenticated_owner_session",
+    "privilegedClient": "isolated_contact_and_operations_adapter",
+    "contentExecution": "escaped_angular_component_renderer_no_cms_html_templates_or_mdx",
+    "editorInPublicBundle": false,
+    "privateResponses": "no_store",
+    "previewProductionAccess": false,
+    "mutationConvention": "typed_http_api_verified_identity_and_mfa_plus_authorised_database_rpcs",
+    "schemaAuthority": "supabase_sql_migrations_proposed_pending_concrete_design",
+    "sessionTransport": "proposed_browser_bearer_not_http_only"
+  },
+  "visuals": {
+    "reference": "approved_static_portfolio",
+    "defaultPalette": "navy",
+    "alternatePalette": "teal",
+    "preferenceStorageKey": "portfolio-colour-theme",
+    "tokenSourceToCreate": "src/styles/tokens.css",
+    "rawComponentColours": "reviewed_asset_exceptions_only",
+    "professionalWorkFirst": true,
+    "accessibilityTarget": "wcag_2_2_aa",
+    "minimumTouchTargetPx": 44,
+    "reviewWidthsPx": [
+      320,
+      390,
+      768,
+      1024,
+      1280
+    ],
+    "browserBaseline": "pending_chosen_angular_baseline_and_styling_compatibility"
+  },
+  "requiredFutureChecks": [
+    "architecture-policy",
+    "design-change-approval",
+    "content-contract",
+    "db-policy",
+    "quality",
+    "public-and-admin-e2e",
+    "accessibility-and-visual",
+    "security-and-budget"
+  ],
+  "enforcement": {
+    "current": "documentation_and_harness_instructions_only",
+    "ciPolicySource": "trusted_target_branch",
+    "approvalMustBindToReviewedRevision": true,
+    "selfEditedApprovalFieldsAreEvidence": false,
+    "requiredChecksConfigured": false,
+    "remoteMergeRulesConfigured": false
+  },
+  "acceptedRequirements": {
+    "framework": "angular",
+    "companyIndependence": true,
+    "purpose": "personal_portfolio_and_blog_only",
+    "editorAccounts": 1,
+    "authentication": [
+      "password",
+      "authenticator_app_mfa"
+    ],
+    "publicSignup": false,
+    "cmsDatabaseAndStorageRegion": "eu",
+    "freeTierInterruptions": "accepted_with_backups_tested_restore_and_static_fallback",
+    "cachedPublicAndStricterPrivatePolicy": "accepted_in_principle_angular_mechanisms_pending",
+    "changeControl": "owner_accepted_shared_instructions_decisions_required_ci_and_explicit_changes",
+    "humanEvidence": "design/decisions.md acceptance evidence; user replies 2026-10-13",
+    "fullTechnicalAcceptance": false,
+    "rendering": "prerender_public_pages_dynamic_private_editor",
+    "publication": "build_and_deployment_required_healthy_target_five_minutes_outage_delays_possible",
+    "cmsDestination": "owner_selected_existing_personal_supabase_organisation_private_identifier_not_in_public_contract"
+  },
+  "providerFeasibility": {
+    "checkedOn": "2026-10-13",
+    "supabaseFreeCapacity": "blocked_authenticated_new_project_recheck_after_paused_project_deletions",
+    "unusedActiveProject": "none_clearly_identified",
+    "olderProjects": "owner_reports_deleted_two_previously_paused_projects",
+    "nextAction": "owner_choice_resolve_active_capacity_or_accept_alternate_backend_or_paid_arrangement",
+    "accountIdentifiersStored": false,
+    "serviceChangesMadeByAssistant": false,
+    "currentDashboardAccess": "authenticated",
+    "pausedProjectsCountAgainstActiveLimit": false,
+    "newProjectCreated": false
+  }
+}

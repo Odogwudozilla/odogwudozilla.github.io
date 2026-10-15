@@ -1,5 +1,9 @@
 # Technical Architecture - Portfolio Migration
 
+> Historical 2025 planning snapshot. The current review and proposed contract
+> are in [design/README.md](../design/README.md). Do not use the open alternatives,
+> schema examples or version targets below as implementation authority.
+
 *Last Updated: September 13, 2025*
 
 ## Architecture Overview

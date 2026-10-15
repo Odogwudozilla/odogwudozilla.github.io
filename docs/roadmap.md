@@ -1,5 +1,9 @@
 # Project Roadmap - Portfolio Migration & Enhancement
 
+> Historical 2025 roadmap. Use [the current implementation gates](../design/implementation-plan.md)
+> for the proposed sequence. The timelines, expanded features and service
+> promises below are not current commitments or implementation authorisation.
+
 *Last Updated: September 13, 2025*
 
 ## Migration Overview

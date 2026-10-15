@@ -1,5 +1,9 @@
 # Development Guide - Portfolio Project
 
+> Historical 2025 guide. Read [AGENTS.md](../AGENTS.md) and
+> [the current design review](../design/README.md) first. Dependency, content,
+> security, tooling and deployment examples below are not the current contract.
+
 *Last Updated: September 13, 2025*
 
 ## Development Workflow

@@ -1,5 +1,10 @@
 # Content Strategy - Portfolio & Blog
 
+> Historical editorial background. Current scope, public-safe boundaries and
+> publishing rules are in [the design review](../design/README.md) and
+> [content contracts](../design/content-and-security.md). Deferred features
+> below are not permission to implement them.
+
 *Last Updated: September 13, 2025*
 
 ## Content Objectives

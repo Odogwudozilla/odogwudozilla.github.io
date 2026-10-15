@@ -1,0 +1,11 @@
+---
+description: Canonical portfolio design choices and implementation gate
+alwaysApply: true
+---
+
+Read root AGENTS.md and its referenced design documents before work.
+Angular, company independence and prerendered public pages with a dynamic
+editor are accepted; remaining technical choices
+await human acceptance. Do not implement,
+self-approve or silently change the stack, providers, formats or visual system.
+Keep canonical rules in AGENTS.md and design/, not duplicated in this bridge.

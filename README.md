@@ -80,9 +80,13 @@ Read [the redesign decisions](docs/static-redesign.md) and
 
 ## Dynamic Angular design
 
-An independent Angular site with public prerendering and a private editor is
-planned. Its technical design remains under review; the static site is the
-production reference and fallback.
+Angular, company independence and public prerendering are chosen; API/hosting
+and dedicated backend capacity remain under review. Start with
+[the design review](design/README.md) and [repository instructions](AGENTS.md).
+The partially accepted requirements, proposed security contracts and implementation
+gates replace the older plans as the review baseline. Technical proposals
+still require owner acceptance; no dynamic implementation or cloud cutover
+has been authorised by this design review.
 
 The `src/app/` application is a legacy Next.js scaffold, not the Angular target.
 Its navigation and homepage are not the static production site.

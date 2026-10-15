@@ -1,5 +1,9 @@
 # Product Context - Chidozie Nnachor Portfolio
 
+> Historical 2025 planning snapshot. For the current dynamic design proposal,
+> read [design/README.md](../design/README.md). The scope and service lists
+> below are background, not permission to implement or activate services.
+
 *Last Updated: September 13, 2025*
 
 ## Project Overview
