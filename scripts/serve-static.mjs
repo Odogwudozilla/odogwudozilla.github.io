@@ -39,7 +39,17 @@ const server = http.createServer(async (request, response) => {
     });
     response.end(request.method === 'HEAD' ? undefined : content);
   } catch (error) {
-    response.writeHead(error.code === 'ENOENT' ? 404 : 400).end('Not found');
+    if (error.code === 'ENOENT') {
+      const content = await readFile(path.join(root, '404.html')).catch(() => null);
+      response.writeHead(404, {
+        'Content-Type': content ? 'text/html; charset=utf-8' : 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-store',
+        'X-Content-Type-Options': 'nosniff',
+      });
+      response.end(request.method === 'HEAD' ? undefined : content || 'Not found');
+      return;
+    }
+    response.writeHead(400).end('Bad request');
   }
 });
 
@@ -48,5 +58,5 @@ server.on('error', error => {
   process.exitCode = 1;
 });
 server.listen(port, '127.0.0.1', () => {
-  console.log(`Static portfolio: http://127.0.0.1:${port}`);
+  console.log(`Static portfolio: http://127.0.0.1:${server.address().port}`);
 });

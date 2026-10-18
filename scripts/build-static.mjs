@@ -3,12 +3,10 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const template = await readFile(
-  path.join(root, 'static/site-template.html'), 'utf8',
-);
 
 /** Assemble trusted local partials before serving, never in the browser. */
-async function renderPage() {
+async function renderPage(templateName = 'site-template.html') {
+  const template = await readFile(path.join(root, 'static', templateName), 'utf8');
   let html = template;
   const names = new Set(
     [...template.matchAll(/\{\{([a-z-]+)\}\}/g)].map(match => match[1]),
@@ -16,7 +14,10 @@ async function renderPage() {
 
   for (const name of names) {
     const partialPath = path.join(root, 'docs/partials', `${name}.html`);
-    const partial = (await readFile(partialPath, 'utf8')).trim();
+    let partial = (await readFile(partialPath, 'utf8')).trim();
+    if (templateName === 'not-found-template.html' && name === 'navigation') {
+      partial = partial.replaceAll('href="#', 'href="/#');
+    }
     if (!partial) throw new Error(`Empty partial: ${name}`);
     html = html.replaceAll(`{{${name}}}`, () => partial);
   }
@@ -36,9 +37,12 @@ try {
   const originalComparison = originalHtml
     .replace('</head>', '<meta name="robots" content="noindex">\n</head>')
     .replace('<p>Software engineering portfolio</p>', '<p><a href="index.html">Return to the default palette</a></p>');
+  const notFoundHtml = (await renderPage('not-found-template.html'))
+    .replace('<html lang="en">', '<html lang="en" class="theme-keylane">');
   for (const [name, content] of [
     ['index.html', html], ['index-modular.html', html], ['keylane.html', html],
     ['original.html', originalComparison],
+    ['404.html', notFoundHtml],
   ]) {
     const output = path.join(root, 'docs', name);
     if (process.argv.includes('--check')) {
