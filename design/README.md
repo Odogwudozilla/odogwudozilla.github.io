@@ -71,8 +71,8 @@ and the API/session/hosting design are proposals, not accepted implementations.
   evidence; context files were subsequently versioned in commit 86775c0.
 - [Static delivery and recovery](static-recovery.md): observed Pages source,
   deployment identity, local reconstruction rehearsal and remaining limits.
-- [Static PR verification](static-verification.md): locally validated workflow,
-  action pins and separately gated remote activation.
+- [Static PR verification](static-verification.md): validated workflow and first
+  passing GitHub PR run, action pins and separately gated merge enforcement.
 
 ## Readiness
 

@@ -1,9 +1,12 @@
 # Static pull-request verification
 
-Status, 18 October 2026: **prepared and validated locally; not active on GitHub**.
+Status, 18 October 2026: **local validation and first GitHub PR run passed;
+required merge gate inactive**.
 The owner explicitly approved preparing the proposed workflow and local
-passing/failing validation. Commit, push, PR creation, remote activation and
-merge remain separate decisions. Existing recovery documentation is preserved.
+passing/failing validation, then explicitly said “proceed” to commit/push and
+a real PR trial. [Draft PR #7](https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/7)
+contains the implementation and existing recovery documentation. Merge and
+required-check activation remain separate owner decisions.
 This work covers the bounded static assurance portion of F7/ST02 under ADR 015;
 it does not implement the deferred dynamic governance suite.
 
@@ -67,15 +70,29 @@ avoids floating tags; it does not establish universal action safety.
   exit **1** with `index.html is stale`. Rebuilding that copy restored a pass.
   The real generated files were not modified to perform this failure test.
 
-These results validate local workflow structure and relevant commands. The
-checkout/setup-node actions, GitHub runner, event delivery, permissions and
-merge blocking have **not** been exercised remotely. No remote check is marked
-successful or required by this record.
+These local results validate workflow structure and relevant commands;
+remote evidence is recorded separately below.
+
+## Actual GitHub trial
+
+The `pull_request` event on draft PR #7 ran **static-verification** successfully
+on GitHub-hosted `ubuntu-24.04`: [run 39130170166](https://github.com/Odogwudozilla/odogwudozilla.github.io/actions/runs/39130170166),
+[job 117683541497](https://github.com/Odogwudozilla/odogwudozilla.github.io/actions/runs/39130170166/job/117683541497).
+The observed head was `d56996c362cd22589459e420f837cfc03f9f8f0c`. Checkout,
+setup-node, Node/npm version assertions and the existing static-check step all
+completed successfully. This establishes a real passing event/action/runner
+path, not merely a local shell simulation.
+
+At that observation master remained 56a0f51 and unprotected; the PR was draft
+and unmerged. A remote stale-output failure and protected-branch blocking
+have not been demonstrated. Local stale-output rejection remains local
+evidence. No required check is claimed active. This run records evidence for
+its exact head; subsequent heads need their own passing result.
 
 ## Activation proposal and limits
 
-Following separately authorised commit/push/PR creation, observe the emitted
-`static-verification` check on a real PR. Demonstrate stale output fails and
+The first real passing PR check is now observed. Before activation, demonstrate
+stale output fails remotely and
 the corrected output passes without merging the failing change. Then obtain
 the applicable approval for a `master` rule requiring PRs, this check from
 GitHub Actions and an up-to-date base, including administrator enforcement.
@@ -93,8 +110,8 @@ independent policy enforcer or the future dynamic trusted-checker system.
 If a required check is renamed/deleted, review the rule together so it cannot
 quietly become irrelevant or leave all PRs permanently blocked.
 
-Rollback before activation is removal of only this slice's local workflow and
-documentation changes, preserving recovery work. After any later activation,
+Rollback before activation is a reviewed revert of only this slice's workflow
+and documentation changes, preserving recovery work. After any later activation,
 coordinate the required-check rule and workflow under explicit owner authority;
 never silently disable a gate to make a failing change merge. No automatic
 publication, infrastructure migration or paid service is introduced here.

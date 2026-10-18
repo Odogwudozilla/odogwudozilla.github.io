@@ -3,8 +3,8 @@
 Current scope is static retention under ADR 015. The change-control principles
 apply; the dynamic foundation checks below remain deferred plans. Static local
 checks and their limits are recorded in [static maintenance](static-maintenance.md).
-The [static PR workflow](static-verification.md) is prepared and validated
-locally; GitHub execution and required-check activation are still pending.
+The [static PR workflow](static-verification.md) passed local validation and
+its first GitHub PR run; required-check activation is still pending.
 
 Status: The owner accepted the change-control process on 13 October 2026.
 Concrete enforcement remains proposed. Instructions and bridges are present;

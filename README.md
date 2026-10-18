@@ -43,8 +43,8 @@ needed. Content and project disclosures remain usable without JavaScript.
 older entry point. Do not edit generated pages directly.
 
 A [static PR workflow](design/static-verification.md) is prepared to run
-the same check before merges to `master`. Local validation passed; GitHub
-execution and required branch-check activation remain pending. Continue
+the same check before merges to `master`. Local validation and the first GitHub
+PR run passed; required branch-check activation remains pending. Continue
 running the manual checks until remote enforcement is verified.
 
 The selected navy-and-orange design is now [the default preview](http://127.0.0.1:4173/).

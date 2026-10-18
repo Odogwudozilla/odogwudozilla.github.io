@@ -35,7 +35,7 @@
       "productionRestorePerformed": false,
       "accountDomainProviderRecoveryVerified": false
     },
-    "enforcement": "local_manual_checks_pr_workflow_prepared_remote_gate_inactive",
+    "enforcement": "local_and_pr_checks_remote_merge_gate_inactive",
     "staticVerification": {
       "workflow": ".github/workflows/static-check.yml",
       "checkName": "static-verification",
@@ -43,7 +43,11 @@
       "authority": "owner approved local workflow preparation and passing_failing validation in target chat",
       "localActionlint": "1_7_12_passed",
       "localCommandCases": "valid_pass_stale_fail_regenerated_pass",
-      "githubRunnerExecutionVerified": false,
+      "githubRunnerExecutionVerified": true,
+      "observedSuccessfulRun": 39130170166,
+      "observedRunHead": "d56996c362cd22589459e420f837cfc03f9f8f0c",
+      "pullRequest": "https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/7",
+      "remoteStaleFailureVerified": false,
       "requiredCheckActivated": false,
       "record": "design/static-verification.md"
     },
