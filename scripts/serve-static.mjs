@@ -13,6 +13,7 @@ const types = {
   '.jpg': 'image/jpeg',
   '.png': 'image/png',
   '.webp': 'image/webp',
+  '.pdf': 'application/pdf',
   '.ico': 'image/x-icon',
 };
 
