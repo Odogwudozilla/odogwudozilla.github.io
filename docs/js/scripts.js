@@ -20,11 +20,21 @@
 
     /** Desktop navigation stays visible; unenhanced mobile links do too. */
     function syncMenu() {
-      menuButton.hidden = !mobile.matches;
-      if (!mobile.matches) setMenuOpen(false);
+      if (mobile.matches) {
+        menuButton.hidden = false;
+        // Move focus before adding the class that hides collapsed links.
+        if (nav.contains(document.activeElement)
+          && menuButton.getAttribute('aria-expanded') !== 'true') menuButton.focus();
+        header.classList.add('menu-enhanced');
+      } else {
+        header.classList.remove('menu-enhanced');
+        // The desktop links replace the mobile trigger in the tab order.
+        if (document.activeElement === menuButton) nav.querySelector('a[href]')?.focus();
+        menuButton.hidden = true;
+        setMenuOpen(false);
+      }
     }
 
-    header.classList.add('menu-enhanced');
     syncMenu();
     mobile.addEventListener('change', syncMenu);
     menuButton.addEventListener('click', () => {
