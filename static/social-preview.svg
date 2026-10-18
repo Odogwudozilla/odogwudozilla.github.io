@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Chidozie Nnachor software engineering portfolio</title>
+  <desc>Chidozie Nnachor, Senior Software Engineer. Java, APIs and insurance software.</desc>
+  <rect width="1200" height="630" fill="#274263"/>
+  <image href="../docs/assets/img/profile-professional.png" x="800" y="0"
+    width="400" height="630" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="794" width="6" height="630" fill="#ff8000"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="78" y="102" font-size="38" font-weight="700" fill="#ffffff">cn<tspan fill="#ff8000">.</tspan></text>
+    <text x="166" y="94" font-size="15" font-weight="600" letter-spacing="2" fill="#cbe7ec">SOFTWARE ENGINEERING PORTFOLIO</text>
+    <text x="76" y="250" font-size="80" font-weight="650" fill="#ffffff">Chidozie</text>
+    <text x="76" y="345" font-size="80" font-weight="650" fill="#ffffff">Nnachor</text>
+    <text x="80" y="412" font-size="30" font-weight="600" fill="#ffffff">Senior Software Engineer</text>
+    <text x="80" y="456" font-size="24" fill="#cbe7ec">Java · APIs · insurance software</text>
+    <text x="80" y="556" font-size="23" fill="#ffffff">odogwudozilla.com</text>
+  </g>
+</svg>
