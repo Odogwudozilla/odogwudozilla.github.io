@@ -14,6 +14,21 @@ const refs = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)]
   .map(match => match[1]);
 const enhancements = await readFile(path.join(root, 'js/scripts.js'), 'utf8');
 
+test('discovery metadata advertises the canonical homepage and allows crawler access', async () => {
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
+  assert.ok(canonical, 'Missing canonical homepage');
+  const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
+  const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+  assert.match(robots, /^User-agent: \*$/m);
+  assert.match(robots, /^Allow: \/$/m);
+  assert.doesNotMatch(robots, /^Disallow:\s*\//m, 'Crawlers need access to read canonical and noindex tags');
+  assert.equal(robots.match(/^Sitemap: (.+)$/m)?.[1], new URL('sitemap.xml', canonical).href);
+  assert.match(sitemap, /<urlset xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9">/);
+  assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]), [canonical]);
+  assert.doesNotMatch(sitemap, /<lastmod>|<changefreq>|<priority>/,
+    'Do not invent modification dates or scheduling hints');
+});
+
 test('missing pages offer working recovery links without becoming successful responses', async () => {
   const missing = await readFile(path.join(root, '404.html'), 'utf8');
   assert.match(missing, /name="robots" content="noindex"/);
@@ -52,6 +67,12 @@ test('missing pages offer working recovery links without becoming successful res
     assert.equal(await head.text(), '');
     assert.equal((await fetch(address + '/old-page', { method: 'POST' })).status, 405);
     assert.equal((await fetch(address + '/')).status, 200);
+    for (const [file, type] of [['robots.txt', 'text/plain'], ['sitemap.xml', 'application/xml']]) {
+      const response = await fetch(address + '/' + file);
+      assert.equal(response.status, 200);
+      assert.ok(response.headers.get('content-type').startsWith(type));
+      assert.equal(await response.text(), await readFile(path.join(root, file), 'utf8'));
+    }
   } finally {
     preview.kill();
   }
