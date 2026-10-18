@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 import { spawn } from 'node:child_process';
 import './navigation-focus.test.mjs';
+import './project-sharing.test.mjs';
 
 const root = fileURLToPath(new URL('../docs/', import.meta.url));
 const html = await readFile(path.join(root, 'index.html'), 'utf8');

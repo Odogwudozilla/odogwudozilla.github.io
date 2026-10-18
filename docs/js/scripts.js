@@ -124,6 +124,36 @@
   });
   revealLinkedProject();
 
+  // Copy the public canonical URL, even from a preview or a legacy alias.
+  const portfolio = document.querySelector('#portfolio');
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (portfolio && canonical && navigator.clipboard?.writeText) {
+    for (const project of portfolio.querySelectorAll('.project-card')) {
+      const button = project.querySelector('.copy-project-link');
+      const status = project.querySelector('.project-share-status');
+      if (!button || !status) continue;
+      const link = new URL(canonical.href);
+      link.hash = project.id;
+      button.hidden = false;
+      let copying = false;
+      button.addEventListener('click', async () => {
+        if (copying) return;
+        copying = true;
+        button.setAttribute('aria-busy', 'true');
+        status.textContent = '';
+        try {
+          await navigator.clipboard.writeText(link.href);
+          status.textContent = 'Project link copied.';
+        } catch {
+          status.textContent = 'Could not copy. Use the direct link to copy the address.';
+        } finally {
+          copying = false;
+          button.removeAttribute('aria-busy');
+        }
+      });
+    }
+  }
+
   // Print every case study, then restore the reader's disclosure choices.
   let printClosedDetails;
   window.addEventListener('beforeprint', () => {
