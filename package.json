@@ -4,6 +4,7 @@
   "private": true,
   "description": "Chidozie Nnachor's static software engineering portfolio",
   "author": "Chidozie Nnachor",
+  "packageManager": "npm@11.19.1",
   "scripts": {
     "build:static": "node scripts/build-static.mjs",
     "preview:static": "node scripts/serve-static.mjs",
@@ -14,6 +15,7 @@
     "test": "npm run check:static"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=24.22.0 <25",
+    "npm": "11.19.1"
   }
 }
