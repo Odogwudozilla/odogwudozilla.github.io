@@ -39,10 +39,21 @@ try {
     .replace('<p>Software engineering portfolio</p>', '<p><a href="index.html">Return to the default palette</a></p>');
   const notFoundHtml = (await renderPage('not-found-template.html'))
     .replace('<html lang="en">', '<html lang="en" class="theme-keylane">');
+  // Keep discovery metadata aligned with the homepage's existing canonical URL.
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
+  if (!canonical) throw new Error('Missing canonical homepage URL');
+  const homepage = new URL(canonical);
+  if (homepage.protocol !== 'https:' || homepage.pathname !== '/'
+    || homepage.search || homepage.hash || homepage.username || homepage.password) {
+    throw new Error('Discovery metadata requires a canonical HTTPS homepage');
+  }
+  const robots = `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap.xml', homepage).href}\n`;
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${homepage.href}</loc>\n  </url>\n</urlset>\n`;
   for (const [name, content] of [
     ['index.html', html], ['index-modular.html', html], ['keylane.html', html],
     ['original.html', originalComparison],
     ['404.html', notFoundHtml],
+    ['robots.txt', robots], ['sitemap.xml', sitemap],
   ]) {
     const output = path.join(root, 'docs', name);
     if (process.argv.includes('--check')) {
@@ -54,8 +65,8 @@ try {
     }
   }
   console.log(process.argv.includes('--check')
-    ? 'Static HTML is up to date.'
-    : 'Built the selected navy/orange site, compatible entry points, and original comparison.');
+    ? 'Static HTML and discovery metadata are up to date.'
+    : 'Built the site, compatible entry points, comparison, and discovery metadata.');
 } catch (error) {
   console.error(`Static build failed: ${error.message}`);
   process.exitCode = 1;
