@@ -1,4 +1,7 @@
 /* A personal introduction, followed by a readable professional record. */
+.not-found { min-height: 60vh; padding-block: 48px; max-width: 68ch; }
+.not-found h1 { margin-bottom: 20px; }
+.not-found .button-group { margin-block: 24px; }
 .hero { padding-top: 44px; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 620px) 256px; gap: 16px var(--column-gap); align-items: start; justify-content: start; }
 .portfolio-label { color: var(--teal); border-left: 3px solid var(--teal); padding-left: 12px; margin-bottom: 16px; }

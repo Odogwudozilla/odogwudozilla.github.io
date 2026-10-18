@@ -4,6 +4,7 @@ import { test } from 'node:test';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
+import { spawn } from 'node:child_process';
 
 const root = fileURLToPath(new URL('../docs/', import.meta.url));
 const html = await readFile(path.join(root, 'index.html'), 'utf8');
@@ -11,6 +12,49 @@ const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 const refs = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)]
   .map(match => match[1]);
 const enhancements = await readFile(path.join(root, 'js/scripts.js'), 'utf8');
+
+test('missing pages offer working recovery links without becoming successful responses', async () => {
+  const missing = await readFile(path.join(root, '404.html'), 'utf8');
+  assert.match(missing, /name="robots" content="noindex"/);
+  assert.match(missing, /<h1\b/);
+  for (const [, ref] of missing.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+    if (ref.startsWith('#')) {
+      assert.ok(missing.includes(`id="${ref.slice(1)}"`));
+    } else if (ref.startsWith('/#')) {
+      assert.ok(ids.includes(ref.slice(2)), `Broken recovery link: ${ref}`);
+    } else if (ref !== '/') {
+      assert.ok(ref.startsWith('/'), `Nested URLs need root-relative assets: ${ref}`);
+      await access(path.join(root, ref.slice(1)));
+    }
+  }
+  const preview = spawn(process.execPath, [fileURLToPath(new URL('../scripts/serve-static.mjs', import.meta.url))], {
+    env: { ...process.env, PORT: '0' }, stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  try {
+    const address = await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('Preview startup timed out')), 5000);
+      preview.once('error', error => { clearTimeout(timeout); reject(error); });
+      preview.stdout.once('data', chunk => {
+        clearTimeout(timeout);
+        const url = chunk.toString().match(/http:\/\/127\.0\.0\.1:\d+/)?.[0];
+        if (url) resolve(url);
+        else reject(new Error('Missing preview address'));
+      });
+    });
+    for (const route of ['/old-page', '/old/nested/page', '/missing-image.png']) {
+      const response = await fetch(address + route);
+      assert.equal(response.status, 404);
+      assert.equal(await response.text(), missing);
+    }
+    const head = await fetch(address + '/old/nested/page', { method: 'HEAD' });
+    assert.equal(head.status, 404);
+    assert.equal(await head.text(), '');
+    assert.equal((await fetch(address + '/old-page', { method: 'POST' })).status, 405);
+    assert.equal((await fetch(address + '/')).status, 200);
+  } finally {
+    preview.kill();
+  }
+});
 
 test('printing reveals folded details and restores choices after print or cancellation', () => {
   const details = [{ open: false }, { open: true }, { open: false }];
