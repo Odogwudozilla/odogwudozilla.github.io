@@ -76,10 +76,40 @@
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 @media print {
-  .site-header { position: static; }
-  .menu-toggle, .copy-email, .colour-switch { display: none !important; }
-  .page-section { padding-top: 28px; }
-  .card, .experience-row { break-inside: avoid; }
-  body { background: white; }
-  .contact-section { print-color-adjust: exact; }
+  @page { margin: 16mm; }
+  html { scroll-behavior: auto; }
+  body { background: white; font-size: 10pt; }
+  .site-shell { width: 100%; }
+  .site-header, .skip-link, .work-index, .hero .button-group,
+  .copy-email, .copy-status, .disclosure-icon, .site-footer > a:last-child {
+    display: none !important;
+  }
+  .hero { padding-top: 0; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) 100px; }
+  .hero-portrait { width: 100px; }
+  .hero-portrait img { aspect-ratio: 1; }
+  .hero-facts { margin-top: 16px; }
+  .page-section { margin-top: 24px; padding-top: 16px; border-top-width: 1px; }
+  .work-grid, .project-card, .project-expanded, .engineering-themes,
+  .experience-list, .experience-row, .capability-grid, .about-grid,
+  .contact-grid { display: block; }
+  .card, .experience-row { overflow: visible; break-inside: auto; }
+  .project-card, .experience-row { margin-bottom: 16px; padding: 12px; }
+  .project-content { border-left: 0; padding: 16px 0 0; }
+  .engineering-themes > div, .capability-card, .education-list > div,
+  .project-visual, .hero-facts { break-inside: avoid; }
+  .project-visual { max-width: 90mm; }
+  .project-visual img { max-height: 50mm; width: auto; }
+  h1, h2, h3, h4, summary { break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .contact-links { margin-top: 16px; }
+  a[href^="https://"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+  .hero-links a, .project-code-link, .social-link { display: block; }
+  /* CSS-only fallback for browsers exposing native disclosure content. */
+  details::details-content { display: block; content-visibility: visible; }
 }

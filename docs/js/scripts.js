@@ -31,7 +31,16 @@
       setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
     });
     nav.addEventListener('click', event => {
-      if (event.target.closest('a')) setMenuOpen(false);
+      const link = event.target.closest('a[href^="#"]');
+      if (!link || event.defaultPrevented || event.button !== 0
+        || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const destination = document.getElementById(link.hash.slice(1));
+      if (mobile.matches && destination) {
+        // Keep keyboard focus out of the navigation that is about to close.
+        destination.setAttribute('tabindex', '-1');
+        destination.focus({ preventScroll: true });
+      }
+      setMenuOpen(false);
     });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape'
@@ -80,6 +89,43 @@
     window.addEventListener('hashchange', updateActiveSection);
     updateActiveSection();
   }
+
+  /** A project URL should reveal its case study, including on a fresh visit. */
+  function revealLinkedProject(fragment = window.location.hash) {
+    let id;
+    try {
+      id = decodeURIComponent(fragment.slice(1));
+    } catch {
+      return;
+    }
+    const project = document.getElementById(id);
+    if (!project?.matches('.project-card')) return;
+    const details = project.querySelector('details.case-details');
+    if (details) details.open = true;
+  }
+
+  window.addEventListener('hashchange', () => revealLinkedProject());
+  // Clicking the same fragment again does not dispatch hashchange.
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (link && !event.defaultPrevented
+      && event.button === 0 && !event.metaKey && !event.ctrlKey
+      && !event.shiftKey && !event.altKey) revealLinkedProject(link.hash);
+  });
+  revealLinkedProject();
+
+  // Print every case study, then restore the reader's disclosure choices.
+  let printClosedDetails;
+  window.addEventListener('beforeprint', () => {
+    if (printClosedDetails) return;
+    printClosedDetails = [...document.querySelectorAll('details:not([open])')];
+    for (const details of printClosedDetails) details.open = true;
+  });
+  window.addEventListener('afterprint', () => {
+    if (!printClosedDetails) return;
+    for (const details of printClosedDetails) details.open = false;
+    printClosedDetails = undefined;
+  });
 
   const copyButton = document.querySelector('.copy-email');
   const copyStatus = document.querySelector('.copy-status');
