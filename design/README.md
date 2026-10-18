@@ -69,6 +69,10 @@ and the API/session/hosting design are proposals, not accepted implementations.
 - [Repository findings](review.md): legacy scaffold problems and migration scope.
 - [Assessment follow-up](assessment-follow-up.md): historical first-pass
   evidence; context files were subsequently versioned in commit 86775c0.
+- [Static delivery and recovery](static-recovery.md): observed Pages source,
+  deployment identity, local reconstruction rehearsal and remaining limits.
+- [Static PR verification](static-verification.md): locally validated workflow,
+  action pins and separately gated remote activation.
 
 ## Readiness
 

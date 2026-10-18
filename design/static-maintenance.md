@@ -1,5 +1,10 @@
 # Static maintenance — 18 October 2026
 
+Subsequent separately approved continuation: [delivery audit and recovery
+rehearsal](static-recovery.md). It establishes current Pages/deployed-file
+evidence and a bounded local reconstruction; earlier unknown/open statements
+below describe this first maintenance slice and are retained as dated history.
+
 Current authority: [ADR 015](decisions.md). The owner approved the target
 proposal to clarify static scope, pin supported tooling and collect local
 verification evidence. Coverage: ST03/ST01 and bounded ST02 from assessment

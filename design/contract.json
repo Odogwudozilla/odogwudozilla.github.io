@@ -14,8 +14,39 @@
     "reentry": "new_explicit_owner_scope_request_current_evidence_and_relevant_technical_acceptance",
     "staticRuntime": "node_24_22_0",
     "packageManager": "npm_11_19_1_bundled_with_node_24_22_0",
-    "remoteState": "unverified",
-    "enforcement": "local_manual_checks_no_new_ci_or_remote_rules",
+    "remoteState": "audited_2026_10_18_pages_master_docs_custom_domain_https",
+    "observedDeployment": {
+      "commit": "56a0f510561f9740addc3319d25319cada58cfd8",
+      "run": 38800315678,
+      "requiredPublicFilesCompared": 16,
+      "allComparedBytesMatch": true,
+      "masterProtected": false,
+      "repositoryRulesetsObserved": 0,
+      "staticCheckInObservedDeploymentSteps": false,
+      "retainedRunArtifacts": 0
+    },
+    "recoveryEvidence": {
+      "scope": "local_reconstruction_rehearsal_2026_10_18",
+      "sourceExport": "git_archive_one_command_core_autocrlf_false",
+      "runtime": "node_24_22_0_npm_11_19_1",
+      "docsFilesReconstructedAndCompared": 49,
+      "structuralTestsPassed": 10,
+      "procedure": "design/static-recovery.md",
+      "productionRestorePerformed": false,
+      "accountDomainProviderRecoveryVerified": false
+    },
+    "enforcement": "local_manual_checks_pr_workflow_prepared_remote_gate_inactive",
+    "staticVerification": {
+      "workflow": ".github/workflows/static-check.yml",
+      "checkName": "static-verification",
+      "trigger": "pull_request_with_base_master",
+      "authority": "owner approved local workflow preparation and passing_failing validation in target chat",
+      "localActionlint": "1_7_12_passed",
+      "localCommandCases": "valid_pass_stale_fail_regenerated_pass",
+      "githubRunnerExecutionVerified": false,
+      "requiredCheckActivated": false,
+      "record": "design/static-verification.md"
+    },
     "legacyFieldsBelow": "deferred_dynamic_design_and_history_with_shared_preservation_requirements",
     "operationsAuthority": "no_commit_push_publication_account_or_production_restore"
   },

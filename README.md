@@ -42,6 +42,11 @@ needed. Content and project disclosures remain usable without JavaScript.
 `docs/index-modular.html` is generated from the same source to preserve the
 older entry point. Do not edit generated pages directly.
 
+A [static PR workflow](design/static-verification.md) is prepared to run
+the same check before merges to `master`. Local validation passed; GitHub
+execution and required branch-check activation remain pending. Continue
+running the manual checks until remote enforcement is verified.
+
 The selected navy-and-orange design is now [the default preview](http://127.0.0.1:4173/).
 It uses colours sampled from [Keylane's public website](https://keylane.com/):
 navy `#274263`, dark blue `#253756`, orange `#FF8000`, pale blue `#CBE7EC`,
