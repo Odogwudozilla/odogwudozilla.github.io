@@ -82,7 +82,7 @@
   body { background: white; font-size: 10pt; }
   .site-shell { width: 100%; }
   .site-header, .skip-link, .work-index, .hero .button-group,
-  .copy-email, .copy-status, .disclosure-icon, .site-footer > a:last-child {
+  .copy-email, .copy-status, .project-share, .disclosure-icon, .site-footer > a:last-child {
     display: none !important;
   }
   .hero { padding-top: 0; }
