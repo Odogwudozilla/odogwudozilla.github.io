@@ -3,12 +3,43 @@ import { readFile, access } from 'node:fs/promises';
 import { test } from 'node:test';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 
 const root = fileURLToPath(new URL('../docs/', import.meta.url));
 const html = await readFile(path.join(root, 'index.html'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 const refs = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)]
   .map(match => match[1]);
+const enhancements = await readFile(path.join(root, 'js/scripts.js'), 'utf8');
+
+test('printing reveals folded details and restores choices after print or cancellation', () => {
+  const details = [{ open: false }, { open: true }, { open: false }];
+  const handlers = new Map();
+  runInNewContext(enhancements, {
+    window: {
+      location: { hash: '' },
+      addEventListener: (name, callback) => handlers.set(name, callback),
+    },
+    document: {
+      querySelector: () => null,
+      getElementById: () => null,
+      querySelectorAll: () => details.filter(item => !item.open),
+      addEventListener: () => {},
+    },
+  });
+  const before = handlers.get('beforeprint');
+  const after = handlers.get('afterprint');
+  after(); // An unmatched completion must leave reading state intact.
+  before();
+  assert.deepEqual(details.map(item => item.open), [true, true, true]);
+  before(); // Repeated browser notifications must not replace the snapshot.
+  after();
+  assert.deepEqual(details.map(item => item.open), [false, true, false]);
+  details[0].open = true;
+  before();
+  after();
+  assert.deepEqual(details.map(item => item.open), [true, true, false]);
+});
 
 test('the published HTML is complete before JavaScript runs', () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
