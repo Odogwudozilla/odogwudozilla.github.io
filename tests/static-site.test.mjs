@@ -14,6 +14,40 @@ const refs = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)]
   .map(match => match[1]);
 const enhancements = await readFile(path.join(root, 'js/scripts.js'), 'utf8');
 
+test('sharing metadata uses one reachable landscape JPEG with matching dimensions', async () => {
+  const meta = new Map([...html.matchAll(/<meta (?:property|name)="([^"]+)" content="([^"]*)">/g)]
+    .map(match => [match[1], match[2]]));
+  const image = new URL(meta.get('og:image'));
+  assert.equal(image.origin, new URL(meta.get('og:url')).origin);
+  assert.equal(image.protocol, 'https:');
+  assert.equal(meta.get('twitter:card'), 'summary_large_image');
+  assert.equal(meta.get('twitter:image'), image.href);
+  assert.equal(meta.get('twitter:image:alt'), meta.get('og:image:alt'));
+  assert.ok(meta.get('og:image:alt').length > 30, 'Describe the image, not just the name');
+  assert.equal(meta.get('og:image:type'), 'image/jpeg');
+  const relative = decodeURIComponent(image.pathname).slice(1);
+  const file = path.resolve(root, relative);
+  assert.ok(!path.relative(root, file).startsWith('..'));
+  const bytes = await readFile(file);
+  assert.equal(bytes.readUInt16BE(0), 0xffd8, 'Expected a JPEG image');
+  assert.ok(bytes.length < 150_000, 'Keep the preview image below 150 KB');
+  let dimensions;
+  for (let offset = 2; offset + 9 < bytes.length;) {
+    assert.equal(bytes[offset], 0xff, 'Invalid JPEG segment');
+    const marker = bytes[offset + 1];
+    if ([0xc0, 0xc1, 0xc2, 0xc3].includes(marker)) {
+      dimensions = [bytes.readUInt16BE(offset + 7), bytes.readUInt16BE(offset + 5)];
+      break;
+    }
+    if (marker === 0xda || marker === 0xd9) break;
+    const length = bytes.readUInt16BE(offset + 2);
+    assert.ok(length >= 2, 'Invalid JPEG segment length');
+    offset += length + 2;
+  }
+  assert.deepEqual(dimensions, [Number(meta.get('og:image:width')), Number(meta.get('og:image:height'))]);
+  assert.deepEqual(dimensions, [1200, 630]);
+});
+
 test('discovery metadata advertises the canonical homepage and allows crawler access', async () => {
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
   assert.ok(canonical, 'Missing canonical homepage');
