@@ -5,7 +5,7 @@
   .hero-grid { gap: 16px var(--column-gap); grid-template-columns: minmax(0, 1fr) 220px; }
 }
 @media (max-width: 760px) {
-  html { scroll-padding-top: 160px; }
+  html { scroll-padding-top: max(160px, 10rem); }
   .site-shell { width: calc(100% - 40px); }
   .header-inner { min-height: 72px; flex-wrap: wrap; gap: 0; padding-block: 12px; }
   .brand { min-height: 44px; }
@@ -17,12 +17,13 @@
   .menu-enhanced #primary-navigation { display: none; }
   .menu-enhanced #primary-navigation.is-open { display: flex; }
   .hero { padding-top: 28px; }
-  .hero-grid { grid-template-columns: minmax(0, 1fr) 104px; gap: 20px; }
+  .hero-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+  .hero-identity { flex: 1 1 10rem; min-width: 0; }
   .hero-identity h1 { font-size: 2rem; }
-  .hero-copy { grid-column: 1 / -1; }
+  .hero-copy { order: 1; flex: 1 1 100%; min-width: 0; }
   .hero-role { font-size: 1.125rem; }
   .hero-description { font-size: 1rem; }
-  .hero-portrait { grid-column: 2; grid-row: 1; width: 104px; }
+  .hero-portrait { flex: 0 0 6.5rem; width: 6.5rem; }
   .hero-portrait img { aspect-ratio: 1; }
   .hero-portrait figcaption { padding: 8px 0; line-height: 1.45; }
   .hero-facts { grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
@@ -55,11 +56,11 @@
 @media (max-width: 420px) {
   .site-shell { width: calc(100% - 32px); }
   .brand { font-size: .875rem; gap: 8px; }
-  .monogram { width: 32px; height: 32px; font-size: 1rem; }
+  .monogram { width: 2rem; height: 2rem; font-size: 1rem; }
   .menu-toggle { padding-inline: 10px; }
   #primary-navigation { flex-wrap: wrap; gap: 4px 16px; justify-content: start; }
-  .hero-grid { grid-template-columns: minmax(0, 1fr) 88px; gap: 20px 16px; }
-  .hero-portrait { width: 88px; }
+  .hero-grid { gap: 20px 16px; }
+  .hero-portrait { flex-basis: 5.5rem; width: 5.5rem; }
   .hero-identity h1 { font-size: 2rem; }
   .hero-links { gap: 20px; }
   .hero-facts > div { grid-template-columns: 92px 1fr; gap: 12px; }
@@ -85,7 +86,8 @@
     display: none !important;
   }
   .hero { padding-top: 0; }
-  .hero-grid { grid-template-columns: minmax(0, 1fr) 100px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 100px; }
+  .hero-copy { order: 0; }
   .hero-portrait { width: 100px; }
   .hero-portrait img { aspect-ratio: 1; }
   .hero-facts { margin-top: 16px; }
