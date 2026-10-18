@@ -1,5 +1,9 @@
 # Dynamic implementation gates
 
+Deferred under ADR 015. This plan is retained history for a future explicit
+scope reopening; it is not the current static-maintenance backlog. See
+[static maintenance](static-maintenance.md). No dynamic gate is opened.
+
 Status: Proposed. Begin application work only after the owner accepts the
 relevant technical decisions. Use coherent increments with testable outcomes.
 

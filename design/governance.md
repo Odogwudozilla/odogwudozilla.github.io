@@ -1,5 +1,9 @@
 # Design consistency and change control
 
+Current scope is static retention under ADR 015. The change-control principles
+apply; the dynamic foundation checks below remain deferred plans. Static local
+checks and their limits are recorded in [static maintenance](static-maintenance.md).
+
 Status: The owner accepted the change-control process on 13 October 2026.
 Concrete enforcement remains proposed. Instructions and bridges are present;
 dynamic CI and remote repository protections are not active yet.

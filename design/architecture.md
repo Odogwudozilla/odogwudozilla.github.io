@@ -1,5 +1,10 @@
 # Dynamic Angular application architecture
 
+Deferred under ADR 015; this document retains the earlier dynamic design.
+Current architecture is the existing static workflow described in
+[static maintenance](static-maintenance.md). Reopening dynamic scope requires
+a new explicit owner request and affected revalidation; no dynamic gate is opened.
+
 Status: **Partially accepted requirements; technical design under review**.
 The owner chose Angular and complete independence from company infrastructure.
 Public prerendering and the dynamic private editor are accepted. API runtime,

@@ -1,5 +1,10 @@
 # Assessment follow-up
 
+Historical first-pass record: its versioning-open statements describe the
+pre-commit state. Commit 86775c0 subsequently preserved the context baseline
+and F1/F4 corrections. The 18 October revision-2 assessment selects static
+retention; current scope/tooling/results are in [static maintenance](static-maintenance.md).
+
 Source: approved existing-project assessment and handoff revision 1,
 `assessment-odogwudozilla-002`, dated 15 October 2026. The owner requested
 continuation in this repository using that assessment. This pass prepares

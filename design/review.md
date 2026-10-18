@@ -1,5 +1,10 @@
 # Current dynamic design findings
 
+Current rehabilitation retains static under ADR 015; dynamic findings below
+are deferred and unresolved. The dated dispositions preserve the earlier
+review state. F1/F4 were resolved at commit 86775c0; subsequent static tooling
+and verification evidence is in [static maintenance](static-maintenance.md).
+
 This review covers the 2025 planning documents, the legacy Next.js scaffold,
 the approved static portfolio, and the repository's development instructions.
 Priorities identify work needed before the dynamic foundation can be accepted.

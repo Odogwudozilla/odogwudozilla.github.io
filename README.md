@@ -7,8 +7,15 @@ Java and insurance work, and selected personal projects.
 
 ## Run the static site
 
-Requires Node.js 18 or newer. The static workflow has no package dependencies;
+Use Node.js **24.22.0**, pinned in `.node-version`, with bundled **npm 11.19.1**
+as recorded in `package.json`. Select that runtime with your preferred
+version manager or an isolated official archive; do not change global tooling
+merely to build this project. Confirm `node --version` and `npm --version`.
+The static workflow has no package dependencies;
 you do not need `npm install` to build, preview, or check this site.
+The engines range allows reviewed patches within Node 24; `.node-version`
+records the exact verified baseline. These declarations are metadata, not an
+automatic runtime installer or an enforced remote publication gate.
 
 ```sh
 npm run build:static
@@ -66,7 +73,7 @@ docs/assets/                  Existing media assets
 docs/index.html                Generated GitHub Pages entry point
 docs/keylane.html              Compatible URL for the selected design
 docs/original.html             Generated cream/teal comparison
-src/                           Legacy Next.js scaffold; independent Angular planned
+src/                           Dormant Next.js scaffold; dynamic ambitions deferred
 ```
 
 The club preview is a screenshot of its public test site. Energy and Java
@@ -78,10 +85,21 @@ when new employment information or a real CV is available.
 Read [the redesign decisions](docs/static-redesign.md) and
 [the static structure guide](docs/modular-structure-guide.md) for details.
 
-## Dynamic Angular design
+## Current direction and deferred design
+
+The owner selected **retain static** on 18 October 2026. Content remains
+repository-owned and the existing static site is the primary product.
+See [ADR 015](design/decisions.md) and [static maintenance](design/static-maintenance.md)
+for the bounded supported-tooling and local verification work. No hosting
+migration, CMS, backend, auth or new contact service is part of this scope.
+
+Angular/blog/CMS/private-editor ambitions are deferred without permanent
+cancellation or a restart date. A new explicit owner request and current
+technical review are required to reopen them. The following records retain
+their earlier acceptance evidence; the dynamic implementation gate remains closed.
 
 Angular, company independence and public prerendering are chosen; API/hosting
-and dedicated backend capacity remain under review. Start with
+and dedicated backend capacity remain unresolved in that deferred design. See
 [the design review](design/README.md) and [repository instructions](AGENTS.md).
 The partially accepted requirements, proposed security contracts and implementation
 gates replace the older plans as the review baseline. Technical proposals

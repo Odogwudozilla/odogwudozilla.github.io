@@ -1,4 +1,18 @@
-# Dynamic portfolio design review
+# Portfolio direction and design history
+
+Current scope, 18 October 2026: **retain static** under ADR 015. The owner
+approved a bounded scope/tooling/verification slice in this repository.
+See [static maintenance](static-maintenance.md) for the plan, runtime and
+verification evidence. The template/partials → Node assembly → generated HTML
+workflow remains primary. Angular/blog/CMS/private-editor/services are deferred
+without permanent cancellation or a restart date; Next remains dormant.
+Re-entry requires a new explicit owner request and affected revalidation.
+
+The sections below retain the earlier dynamic design and its acceptance
+limits. Its unresolved provider/session/publication decisions are deferred
+requirements, not prerequisites for static maintenance. No dynamic gate is opened.
+
+## Deferred dynamic design
 
 Status: **Partially accepted; implementation gate closed**. Updated on
 13 October 2026 against static baseline 21c2a69 and current official sources.
@@ -53,8 +67,8 @@ and the API/session/hosting design are proposals, not accepted implementations.
 - [Governance](governance.md): harness guidance and planned independent checks.
 - [Machine-readable contract](contract.json): partial acceptance and open choices.
 - [Repository findings](review.md): legacy scaffold problems and migration scope.
-- [Assessment follow-up](assessment-follow-up.md): revalidated baseline,
-  finding dispositions and context files awaiting versioning.
+- [Assessment follow-up](assessment-follow-up.md): historical first-pass
+  evidence; context files were subsequently versioned in commit 86775c0.
 
 ## Readiness
 

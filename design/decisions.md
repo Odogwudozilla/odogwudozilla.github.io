@@ -1,5 +1,44 @@
 # Dynamic portfolio decision register
 
+Current rehabilitation scope is static retention under ADR 015 below. ADRs
+001–014 preserve earlier decisions and proposals; dynamic ambitions are
+deferred without permanent cancellation. Their original acceptance evidence
+and remaining technical gates are retained.
+
+## ADR 015 — Retain static and reproduce static maintenance
+
+Accepted scope: the owner selected “Retain static” on 18 October 2026
+(assessment-odogwudozilla-005). Assessment revision 2/schema 2/methodology 4/
+package 1 was approved for handoff under assessment-odogwudozilla-007.
+Those decisions are recorded in the companion package's approved provenance.
+
+Implementation evidence: in this target chat the owner replied “approved”
+to the concrete proposal to reconcile current scope, pin Node 24.22.0 and
+its bundled npm, use an isolated official runtime download, run the existing
+static build/check/preview commands, exercise stale-output detection in a
+disposable copy and review bounded local browser behaviour. This approval
+does not cover commits, pushes, publication, accounts or production recovery.
+
+Retain repository-owned template/partials, generated HTML, local CSS/assets,
+progressive enhancement and mailto. Preserve URLs/fragments, Navy/Teal saved
+preference, public-safe claims and private/company-source exclusions. Keep
+Next dormant. Angular/blog/CMS/private-editor/services are deferred without
+a restart date or permanent cancellation; reopening them requires a new
+explicit scope request, affected revalidation and technical acceptance.
+
+Alternatives: continue the gated dynamic proposals, restore Next, or leave
+the broad Node >=18 policy unchanged. None serves this approved maintenance
+outcome. Static retention avoids new runtime services and dependencies;
+it postpones the earlier editor/learning ambition rather than delivering it.
+The runtime pin needs deliberate future patch review. No provider, host,
+auth, schema, palette, content, recurring cost or security boundary changes.
+
+Migration: clarify current/deferred context and align static tooling metadata;
+no content/data migration. Verification: existing checks, disposable drift
+failure/rebuild, unchanged generated output and bounded browser review.
+Rollback: restore only this slice's files from the reviewed baseline, preserving
+unrelated work; no automatic deployment. Plan/results: [static maintenance](static-maintenance.md).
+
 Updated 13 October 2026. Human acceptance applies only to the exact requirement
 or choice answered in this conversation. It does not accept future technical
 details automatically. Full design acceptance remains absent.

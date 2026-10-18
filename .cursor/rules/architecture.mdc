@@ -4,8 +4,7 @@ alwaysApply: true
 ---
 
 Read root AGENTS.md and its referenced design documents before work.
-Angular, company independence and prerendered public pages with a dynamic
-editor are accepted; remaining technical choices
-await human acceptance. Do not implement,
-self-approve or silently change the stack, providers, formats or visual system.
+Current scope is static retention (ADR 015); Angular/CMS/blog/editor work is
+deferred, not cancelled. Preserve company independence and the closed dynamic
+gate. Do not self-approve or silently change stack, providers, formats or visuals.
 Keep canonical rules in AGENTS.md and design/, not duplicated in this bridge.

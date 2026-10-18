@@ -3,9 +3,9 @@
 Read and follow [AGENTS.md](../AGENTS.md) before making changes.
 It is the canonical, tool-neutral instruction source for this repository.
 
-Angular, company independence and public prerendering with a dynamic editor
-are accepted; hosting/API and concrete design remain pending. The implementation
-gate stays closed. Review
+Current scope is static retention under ADR 015. Angular/CMS/blog/editor work
+is deferred without permanent cancellation. Company independence and the closed
+dynamic implementation gate remain. Review
 [design/README.md](../design/README.md), the decision register and contract.
 Do not begin dynamic implementation or silently substitute frameworks,
 providers, authentication, content formats, scope or visual choices.
