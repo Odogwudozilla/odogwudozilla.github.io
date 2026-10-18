@@ -72,7 +72,7 @@ and the API/session/hosting design are proposals, not accepted implementations.
 - [Static delivery and recovery](static-recovery.md): observed Pages source,
   deployment identity, local reconstruction rehearsal and remaining limits.
 - [Static PR verification](static-verification.md): validated workflow and first
-  passing GitHub PR run, action pins and separately gated merge enforcement.
+  passing/failing GitHub runs, action pins and verified required merge check.
 
 ## Readiness
 

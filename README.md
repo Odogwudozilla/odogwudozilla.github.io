@@ -42,10 +42,11 @@ needed. Content and project disclosures remain usable without JavaScript.
 `docs/index-modular.html` is generated from the same source to preserve the
 older entry point. Do not edit generated pages directly.
 
-A [static PR workflow](design/static-verification.md) is prepared to run
-the same check before merges to `master`. Local validation and the first GitHub
-PR run passed; required branch-check activation remains pending. Continue
-running the manual checks until remote enforcement is verified.
+A [static PR workflow](design/static-verification.md) runs the same check
+before merges to `master`. Branch protection requires `static-verification`
+from GitHub Actions and an up-to-date PR, including for administrators.
+Remote stale-output rejection and merge blocking were verified. Run the local
+checks before opening a PR as well; CI checks structure, not full browser QA.
 
 The selected navy-and-orange design is now [the default preview](http://127.0.0.1:4173/).
 It uses colours sampled from [Keylane's public website](https://keylane.com/):

@@ -5,6 +5,38 @@ Current rehabilitation scope is static retention under ADR 015 below. ADRs
 deferred without permanent cancellation. Their original acceptance evidence
 and remaining technical gates are retained.
 
+## ADR 016 — Require static verification on the publication branch
+
+Accepted bounded continuation, 18 October 2026. Human evidence in the target
+chat: the owner approved the concrete local workflow proposal, then said
+“proceed” to commit/push and a real PR trial, followed by “proceed with the next
+and the next. Don't stop unless you need my input. approval is granted”.
+The announced sequence was remote failure/recovery, required-check activation,
+merge-blocking verification and a reviewed passing PR release. The owner
+completed GitHub's sudo authentication when the rule save required it.
+These are actual human references, not acceptance inferred from edited fields.
+
+Use the existing static suite in a SHA-pinned, read-only GitHub Actions PR
+workflow with Node 24.22.0/npm 11.19.1, no install/cache/deploy privilege and no
+build before the freshness check. Require PRs to master with an up-to-date
+base and `static-verification` from GitHub Actions (app 15368), including for
+administrators. Keep force pushes/deletion disabled. Do not require a second
+reviewer or the unavailable local signing key. Preserve branch-based Pages
+publication from master/docs, public bytes, privacy and the tested fallback.
+
+Alternatives: manual-only checks permit accidental omissions; post-push checks
+can race branch-based Pages; replacing the deployment pipeline adds scope.
+The selected gate reduces accidental drift without a new service/dependency.
+It does not make PR-supplied checker code immutable or prevent an owner from
+deliberately changing rules. Workflow/checker edits still need owner review.
+
+Migration: add workflow, observe actual passing/failing runs, save/read back
+protection, verify a failing non-draft PR cannot merge, restore the source and
+require a passing final head before reviewed merge. Rollback coordinates the
+required-check rule and workflow under owner authority; never disable checks
+to merge a failing change. No billing, DNS, production restore or dynamic
+feature work is included. Evidence: [static verification](static-verification.md).
+
 ## ADR 015 — Retain static and reproduce static maintenance
 
 Accepted scope: the owner selected “Retain static” on 18 October 2026

@@ -35,7 +35,7 @@
       "productionRestorePerformed": false,
       "accountDomainProviderRecoveryVerified": false
     },
-    "enforcement": "local_and_pr_checks_remote_merge_gate_inactive",
+    "enforcement": "static_pr_check_required_on_master_including_administrators",
     "staticVerification": {
       "workflow": ".github/workflows/static-check.yml",
       "checkName": "static-verification",
@@ -47,12 +47,31 @@
       "observedSuccessfulRun": 39130170166,
       "observedRunHead": "d56996c362cd22589459e420f837cfc03f9f8f0c",
       "pullRequest": "https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/7",
-      "remoteStaleFailureVerified": false,
-      "requiredCheckActivated": false,
+      "remoteStaleFailureVerified": true,
+      "remoteFailureRun": 39131052185,
+      "remoteRecoveryRun": 39131220575,
+      "remoteRecoveryHead": "11a807dc7a0600d643e5f46436c9619f2d3bdeb8",
+      "requiredCheckActivationBlocker": null,
+      "requiredCheckActivated": true,
+      "protection": {
+        "branch": "master",
+        "type": "classic_branch_protection",
+        "pullRequestRequired": true,
+        "strictUpToDate": true,
+        "checkSourceAppId": 15368,
+        "enforceAdministrators": true,
+        "forcePushAllowed": false,
+        "deletionAllowed": false,
+        "secondReviewerRequired": false,
+        "signedCommitsRequired": false,
+        "failingNonDraftMergeBlocked": true,
+        "blockedHead": "6e23a6e94045f47dab0273b74c1905431befe2d4",
+        "blockedRun": 39131457426
+      },
       "record": "design/static-verification.md"
     },
     "legacyFieldsBelow": "deferred_dynamic_design_and_history_with_shared_preservation_requirements",
-    "operationsAuthority": "no_commit_push_publication_account_or_production_restore"
+    "operationsAuthority": "owner_approved_static_gate_and_reviewed_release_sequence_2026_10_18_adr_016_no_billing_dns_production_restore_or_dynamic_scope"
   },
   "status": "partially_accepted",
   "reviewedOn": "2026-10-13",
