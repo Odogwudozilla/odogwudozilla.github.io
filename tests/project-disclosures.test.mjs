@@ -12,10 +12,11 @@ function fixture(hash = '') {
   const cases = [false, false, false, false].map(makeDetails);
   const experience = makeDetails(false);
   const status = { textContent: '' };
-  const buttons = ['expand', 'collapse'].map(caseAction => ({
-    dataset: { caseAction }, addEventListener(_, handler) { this.click = handler; },
-  }));
-  const controls = { hidden: true, querySelector: () => status, querySelectorAll: () => buttons };
+  const attributes = new Map();
+  const button = { textContent: '', setAttribute: (name, value) => attributes.set(name, value),
+    addEventListener(_, handler) { this.click = handler; } };
+  const controls = { hidden: true, querySelector: selector =>
+    selector === '[data-case-toggle]' ? button : status };
   const portfolio = { querySelectorAll: () => cases };
   const project = { matches: () => true, querySelector: () => cases[0] };
   const location = { hash };
@@ -28,16 +29,18 @@ function fixture(hash = '') {
       querySelectorAll: () => [...cases, experience].filter(details => !details.open),
     },
   });
-  return { cases, experience, status, buttons, controls, events, location };
+  return { cases, experience, status, button, attributes, controls, events, location };
 }
 
 test('bulk project controls are progressive enhancements with a labelled target and live count', () => {
   assert.match(html, /class="case-controls" hidden role="group" aria-label="Project case studies"/);
-  assert.equal([...html.matchAll(/aria-controls="project-cases"/g)].length, 2);
+  assert.equal([...html.matchAll(/aria-controls="project-cases"/g)].length, 1);
   assert.match(html, /class="work-grid" id="project-cases"/);
   assert.match(html, /class="case-controls-status" role="status" aria-live="polite" aria-atomic="true"/);
   const f = fixture();
   assert.equal(f.controls.hidden, false);
+  assert.equal(f.button.textContent, 'Expand All');
+  assert.equal(f.attributes.get('aria-expanded'), 'false');
   assert.equal(f.status.textContent, '0 of 4 case studies expanded.');
 });
 
@@ -46,12 +49,14 @@ test('expand and collapse affect only projects, including a mixed manual state',
   f.cases[0].open = true;
   f.cases[0].toggle();
   assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
-  f.buttons[0].click();
+  f.button.click();
   assert.ok(f.cases.every(details => details.open));
   assert.equal(f.experience.open, false);
   assert.equal(f.status.textContent, '4 of 4 case studies expanded.');
+  assert.equal(f.button.textContent, 'Collapse All');
+  assert.equal(f.attributes.get('aria-expanded'), 'true');
   f.experience.open = true;
-  f.buttons[1].click();
+  f.button.click();
   assert.ok(f.cases.every(details => !details.open));
   assert.equal(f.experience.open, true);
   assert.equal(f.status.textContent, '0 of 4 case studies expanded.');
@@ -60,7 +65,8 @@ test('expand and collapse affect only projects, including a mixed manual state',
 test('fresh and subsequent project deep links remain reflected in the count', () => {
   const f = fixture('#insurance-case');
   assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
-  f.buttons[1].click();
+  f.button.click();
+  f.button.click();
   f.events.get('hashchange')();
   f.cases[0].toggle();
   assert.equal(f.cases[0].open, true);
@@ -76,4 +82,20 @@ test('printing preserves mixed choices without announcing temporary expansion', 
   for (const details of f.cases) details.toggle();
   assert.deepEqual(f.cases.map(details => details.open), [true, false, false, false]);
   assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
+});
+
+test('the single action follows manual changes and repeated activation', () => {
+  const f = fixture();
+  f.button.click();
+  f.cases[2].open = false;
+  f.cases[2].toggle();
+  assert.equal(f.button.textContent, 'Expand All');
+  assert.equal(f.attributes.get('aria-expanded'), 'false');
+  f.button.click();
+  assert.ok(f.cases.every(details => details.open));
+  assert.equal(f.button.textContent, 'Collapse All');
+  f.button.click();
+  assert.ok(f.cases.every(details => !details.open));
+  assert.equal(f.button.textContent, 'Expand All');
+  assert.equal(f.attributes.get('aria-expanded'), 'false');
 });
