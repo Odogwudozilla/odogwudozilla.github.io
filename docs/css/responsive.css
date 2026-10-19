@@ -78,11 +78,12 @@
 }
 @media print {
   @page { margin: 16mm; }
-  html { scroll-behavior: auto; }
-  body { background: white; font-size: 10pt; }
+  html { scroll-behavior: auto; font-size: 10.5pt; }
+  body { background: white; font-size: 1rem; line-height: 1.5; }
   .site-shell { width: 100%; }
   .site-header, .skip-link, .work-index, .hero .button-group,
-  .copy-email, .copy-status, .project-share, .case-controls, .disclosure-icon, .footer-top {
+  .copy-email, .copy-status, .project-share, .case-controls, .disclosure-icon, .footer-top,
+  .hero-links a[href^="#"], .capability-card a[href^="#"], .contact-section .button-group {
     display: none !important;
   }
   .hero { padding-top: 0; }
@@ -91,6 +92,10 @@
   .footer-inner { min-height: 0; padding-block: 12px; }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 100px; }
   .hero-copy { order: 0; }
+  .hero-identity h1 { font-size: 24pt; }
+  .hero-role { font-size: 12pt; }
+  .hero-links { display: block; margin-top: 12px; }
+  .hero-links a { min-height: 0; margin-block: 4px; }
   .hero-portrait { width: 100px; }
   .hero-portrait img { aspect-ratio: 1; }
   .hero-facts { margin-top: 16px; }
@@ -101,6 +106,8 @@
   .card, .experience-row { overflow: visible; break-inside: auto; }
   .project-card, .experience-row { margin-bottom: 16px; padding: 12px; }
   .project-content { border-left: 0; padding: 16px 0 0; }
+  .case-intro { break-inside: avoid; break-after: avoid; }
+  .case-details summary, .experience-details summary { min-height: 0; padding-block: 6px; }
   .engineering-themes > div, .capability-card, .education-list > div,
   .project-visual, .hero-facts { break-inside: avoid; }
   .project-visual { max-width: 90mm; }
