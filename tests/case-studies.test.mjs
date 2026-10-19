@@ -6,6 +6,7 @@ import { caseStudies } from '../scripts/case-studies.mjs';
 const root = new URL('../docs/', import.meta.url);
 const homepage = await readFile(new URL('index.html', root), 'utf8');
 const sitemap = await readFile(new URL('sitemap.xml', root), 'utf8');
+const narratives = await readFile(new URL('partials/project-case-studies.html', root), 'utf8');
 
 test('project enquiries address the public contact with an encoded project-specific subject', async () => {
   const recipient = homepage.match(/class="email-address" href="mailto:([^"]+)"/)[1];
@@ -67,13 +68,16 @@ test('four case-study pages have unique canonical identities and sharing preview
 test('case studies retain reviewed content and expose it without JavaScript or disclosures', async () => {
   for (const project of caseStudies) {
     const html = await readFile(new URL(project.file, root), 'utf8');
-    const source = homepage.match(new RegExp(`<article[^>]*id="${project.id}"[\\s\\S]*?</article>`))[0];
+    const source = narratives.match(new RegExp(`<article[^>]*id="${project.id}"[\\s\\S]*?</article>`))[0];
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
     assert.doesNotMatch(html, /<details|project-share|copy-project-link|<h[34]\b/);
     for (const [, heading] of source.matchAll(/<h4>([^<]+)<\/h4>/g)) assert.ok(html.includes(`<h2>${heading}</h2>`));
     assert.ok(html.includes(`href="/#${project.id}"`));
-    assert.ok(source.includes(`href="${project.file}"`));
-    assert.ok(source.includes(`data-project-url="${project.file}"`));
+    const normalized = html.replace(/\s+/g, ' ');
+    for (const [, paragraph] of source.matchAll(/<p>([\s\S]*?)<\/p>/g)) {
+      assert.ok(normalized.includes(paragraph.replace(/\s+/g, ' ')), 'Retain the full narrative, not just its headings');
+    }
+    assert.ok(homepage.includes(`href="${project.file}" aria-label="Read case study: `));
   }
 });
 

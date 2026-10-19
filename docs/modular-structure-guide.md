@@ -8,9 +8,17 @@ than waiting for JavaScript to fetch each section.
 `static/site-template.html` provides the page shell, main landmark, footer,
 and section order. Each `{{name}}` slot maps to `docs/partials/name.html`.
 
-The current order is head, navigation, hero, work, experience, capabilities,
-about/education, and contact. Stable section IDs preserve internal links:
+The current order is head, navigation, hero, work, Engineering Lab, experience,
+about/education, and contact. Skills are evidenced in the project overview;
+the former `skills` fragment is an alias at Work & Projects. Stable IDs preserve links:
 `home`, `portfolio`, `experience`, `skills`, `about`, `education`, `contact`.
+
+`docs/partials/portfolio-section.html` owns the concise homepage cards and
+shared engineering toolkit. `docs/partials/project-case-studies.html` owns
+the full reviewed narratives, images and project links used by the four
+dedicated case-study pages. `scripts/case-studies.mjs` generates those pages
+with the shared head, navigation and footer. Keep detail in that narrative
+partial; shortening a homepage card must not discard the full case study.
 
 Run `npm run build:static` after changing a partial or template. The build
 fails on missing/empty partials and unresolved placeholders. It writes

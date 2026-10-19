@@ -1,0 +1,187 @@
+<!-- Full reviewed project narratives; used only by the dedicated case-study build. -->
+<article class="project-card enterprise-case card" id="insurance-case">
+      <div class="case-intro">
+        <h3>Keylane — insurance software</h3>
+        <p>I develop and maintain policy-management software, with most of my
+          work centred on Java services, APIs, and integrations.</p>
+        <ul class="chip-list" aria-label="Technologies used at Keylane">
+          <li>Java</li><li>REST APIs</li><li>SOAP</li><li>OpenAPI</li><li>SQL</li>
+        </ul>
+      </div>
+
+        <div class="details-body">
+          <div class="engineering-themes">
+            <div>
+              <h4>Policy-management APIs</h4>
+              <p>I help replace SOAP interfaces with REST APIs. This includes
+                checking existing behaviour, defining request and response models,
+                and documenting endpoints in OpenAPI. Authentication, authorisation,
+                HTTP errors, and API versioning are part of that work.</p>
+            </div>
+            <div>
+              <h4>Compatibility and frontend changes</h4>
+              <p>I compare API behaviour with its contract and documentation,
+                investigate mismatches, and plan changes for existing consumers.
+                I also help retire older frontend paths while preserving the
+                routes, permissions, and workflows still in use.</p>
+            </div>
+            <div>
+              <h4>Defect investigation and testing</h4>
+              <p>I reproduce reported problems, trace their causes through code,
+                data, and APIs, and add tests for the affected behaviour.
+                My work includes integration and regression tests, browser
+                tests with Playwright, and release checks.</p>
+              <p>This also includes backend features, business-rule changes and investigations into existing application data.</p>
+            </div>
+            <div>
+              <h4>Technical analysis and delivery</h4>
+              <p>I turn business requests into requirements and acceptance criteria,
+                refine stories with colleagues, review changes, and write
+                technical notes and release documentation. I also explore
+                AI-assisted tools for triage and technical analysis.</p>
+            </div>
+          </div>
+
+        </div>
+
+    </article>
+
+<article class="project-card card" id="fusion-project">
+      <div class="case-intro">
+        <h3>Fusion Almere FC</h3>
+        <p>I’m building a football club platform for player registration, profiles, and member administration.</p>
+        <ul class="chip-list" aria-label="Club platform technologies">
+          <li>Java 21</li><li>Spring Boot</li><li>Angular</li><li>Supabase</li>
+        </ul>
+        <div class="project-meta"><p class="eyebrow">Personal project</p> <span class="project-status">Private repository</span></div>
+      </div>
+
+        <div class="details-body">
+          <div class="project-expanded">
+            <figure class="project-visual club-visual">
+              <div class="visual-caption">Fusion Almere FC <span>Club administration</span></div>
+              <div class="club-browser">
+                <picture>
+                  <source type="image/webp" srcset="assets/img/fusion-platform-preview.webp">
+                  <img src="assets/img/fusion-platform-preview.png" loading="lazy"
+                    width="1265" height="712" alt="The Fusion Almere FC test website,
+                    showing its club introduction and mission.">
+                </picture>
+              </div>
+              <figcaption>Public test site · MVP in development</figcaption>
+            </figure>
+            <div class="project-content">
+              <ul class="project-highlights">
+                <li>Player registration and profile editing</li>
+                <li>Member search and role-based administration</li>
+                <li>Spring Boot API with Supabase authentication and PostgreSQL</li>
+              </ul>
+              <h4>Registration and administration</h4>
+              <p>I’m developing the Angular front end and Spring Boot REST API.
+                Players can register and edit their profiles; administrators
+                can search member records and manage teams.</p>
+              <h4>Registration checks and email</h4>
+              <p>Registration checks for duplicate accounts and records an audit
+                trail. Notification emails are sent after the database transaction
+                commits, so a rolled-back registration does not trigger an email.</p>
+              <h4>Development status</h4>
+              <p>The MVP has a public test deployment on Vercel and Render.
+                Membership features and payment-import workflows are still
+                under development.</p>
+              <a class="project-code-link text-link" href="https://fusion-almere-fc-topaz.vercel.app/"
+                target="_blank" rel="noopener noreferrer">Open the test site <span aria-hidden="true">↗</span>
+                <span class="sr-only">(opens in a new tab)</span></a>
+            </div>
+          </div>
+
+        </div>
+
+    </article>
+
+<article class="project-card card" id="energy-project">
+      <div class="case-intro">
+        <h3>HomeWizard Energy Intelligence</h3>
+        <p>I’m building an application to collect smart-meter readings, review energy history, and compare load-shifting scenarios.</p>
+        <ul class="chip-list" aria-label="Energy application technologies">
+          <li>Java</li><li>React</li><li>SQLite</li><li>Supabase</li>
+        </ul>
+        <div class="project-meta"><p class="eyebrow">Personal project</p> <span class="project-status">Private repository</span></div>
+      </div>
+
+        <div class="details-body">
+          <div class="project-expanded">
+            <figure class="project-visual energy-visual">
+              <div class="visual-caption">HomeWizard Energy <span>Data collection</span></div>
+              <ol class="energy-flow" aria-label="Energy collection workflow">
+                <li>Read the HomeWizard API</li>
+                <li>Save readings in SQLite</li>
+                <li>Upload to Supabase</li>
+              </ol>
+              <figcaption>Readings are saved locally before upload.</figcaption>
+            </figure>
+            <div class="project-content">
+              <ul class="project-highlights">
+                <li>Local storage, upload retries, and replay</li>
+                <li>Historical imports and data-coverage checks</li>
+                <li>Recorded readings kept separate from estimates</li>
+              </ul>
+              <h4>Collection and recovery</h4>
+              <p>The Java collector reads the HomeWizard API and saves readings
+                in SQLite before uploading them. Failed uploads can be replayed,
+                and ingestion prevents duplicate records.</p>
+              <h4>Energy history</h4>
+              <p>The authenticated React and TypeScript interface uses Supabase
+                data. It shows reading history, coverage, and freshness so
+                missing data is visible when reviewing energy use.</p>
+              <h4>Development status</h4>
+              <p>The private hosted application supports historical exploration
+                and load-shifting scenarios. Tariff, solar, battery, and cost
+                comparisons are still being developed.</p>
+              <a class="project-code-link text-link" href="#contact">Ask about this project
+                <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+        </div>
+
+    </article>
+
+<article class="project-card card" id="aoc-project">
+      <div class="case-intro">
+        <h3>Advent of Code</h3>
+        <p>My Java puzzle solutions, with tools for selecting puzzles, testing results, and tracking progress.</p>
+        <ul class="chip-list" aria-label="Puzzle toolkit technologies">
+          <li>Java</li><li>Gradle</li><li>JUnit</li><li>Playwright</li>
+        </ul>
+        <div class="project-meta"><p class="eyebrow">Personal project</p> <span class="project-status public-status">Public source</span></div>
+      </div>
+
+        <div class="details-body">
+          <div class="project-expanded">
+            <figure class="project-visual tooling-visual">
+              <div class="visual-caption">Advent of Code <span>Java puzzle tools</span></div>
+              <div class="tooling-terminal" aria-hidden="true">
+                <span class="terminal-prompt">~/adventOfCode</span>
+                <div><span>$</span> ./gradlew randomPuzzle</div>
+                <div><span>$</span> ./gradlew test</div>
+              </div>
+              <figcaption>Gradle tasks for puzzle selection and tests.</figcaption>
+            </figure>
+            <div class="project-content">
+
+              <h4>Puzzle selection and testing</h4>
+              <p>I use Gradle tasks and reusable test utilities to select unsolved
+                puzzles and check solutions across several puzzle years.</p>
+              <h4>Progress and automation</h4>
+              <p>The repository includes performance tracking, caching, an HTML
+                progress dashboard, and Playwright automation. I also experiment
+                with GitHub Copilot as part of the puzzle-solving workflow.</p>
+              <a class="project-code-link text-link" href="https://github.com/Odogwudozilla/adventOfCode"
+                target="_blank" rel="noopener noreferrer">View the repository <span aria-hidden="true">↗</span>
+                <span class="sr-only">(opens in a new tab)</span></a>
+            </div>
+          </div>
+
+        </div>
+
+    </article>

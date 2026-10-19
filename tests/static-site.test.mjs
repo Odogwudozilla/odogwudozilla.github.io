@@ -227,9 +227,9 @@ test('local assets exist within the public folder', async () => {
   }
 });
 
-test('case studies use native disclosures with descriptive summaries', () => {
+test('experience entries retain native disclosures with descriptive summaries', () => {
   const details = [...html.matchAll(/<details class="(?:case-details|experience-details)\b[\s\S]*?<\/details>/g)];
-  assert.equal(details.length, 7);
+  assert.equal(details.length, 3);
   for (const [markup] of details) {
     assert.doesNotMatch(markup.match(/<details\b[^>]*>/)?.[0] || '', /\bopen(?:\s|=|>)/,
       'Details must start folded');
@@ -246,7 +246,7 @@ test('case studies use native disclosures with descriptive summaries', () => {
   }
 });
 
-test('project previews expose each reviewed technology list once while details retain images and links', () => {
+test('concise project overviews expose technology evidence once and link to their case study', () => {
   const cards = [...html.matchAll(/<article class="project-card[^\"]*"[\s\S]*?<\/article>/g)];
   assert.equal(cards.length, 4);
   for (const [card] of cards) {
@@ -254,14 +254,16 @@ test('project previews expose each reviewed technology list once while details r
     assert.match(preview, /<h3>[^<]+<\/h3>/);
     assert.match(preview, /<p>[\s\S]+?<\/p>/);
     const technologies = preview.match(/<ul class="chip-list" aria-label="[^"]+">([\s\S]*?)<\/ul>/);
-    assert.ok(technologies, 'Collapsed preview needs a labelled technology list');
+    assert.ok(technologies, 'Overview needs a labelled technology list');
     assert.ok([...technologies[1].matchAll(/<li>[^<]+<\/li>/g)].length >= 4);
-    assert.equal([...card.matchAll(/class="chip-list"/g)].length, 1, 'Expansion must not duplicate technologies');
+    assert.equal([...card.matchAll(/class="chip-list"/g)].length, 1, 'Do not duplicate technologies');
+    assert.doesNotMatch(card, /<details|<figure|project-expanded/);
+    assert.match(card, /class="project-case-link text-link"/);
     assert.doesNotMatch(preview, /<figure|project-code-link/);
   }
 });
 
-test('curated projects have valid anchors and public-facing access labels', () => {
+test('curated projects have valid anchors and public-facing access labels', async () => {
   for (const [id, label] of [['fusion-project', 'Private repository'], ['energy-project', 'Private repository'], ['aoc-project', 'Public source']]) {
     const card = html.match(new RegExp(`<article[^>]*id="${id}"[\\s\\S]*?</article>`))[0];
     const preview = card.split('<details')[0];
@@ -275,9 +277,9 @@ test('curated projects have valid anchors and public-facing access labels', () =
     assert.ok(ids.includes(id), `Missing project anchor: ${id}`);
   }
   assert.doesNotMatch(html, /href="https:\/\/github.com\/Odogwudozilla\/(homewizard|fusion-almere-fc)"/);
-  assert.match(html, /href="https:\/\/github.com\/Odogwudozilla\/adventOfCode"/);
-  assert.match(html, /Public test site · MVP in development/);
-  assert.match(html, /<ol class="energy-flow"[\s\S]*?Save readings in SQLite[\s\S]*?Upload to Supabase[\s\S]*?<\/ol>/);
+  assert.match(await readFile(path.join(root, 'case-advent-of-code.html'), 'utf8'), /href="https:\/\/github.com\/Odogwudozilla\/adventOfCode"/);
+  assert.match(await readFile(path.join(root, 'case-fusion-almere-fc.html'), 'utf8'), /Public test site · MVP in development/);
+  assert.match(await readFile(path.join(root, 'case-homewizard-energy.html'), 'utf8'), /<ol class="energy-flow"[\s\S]*?Save readings in SQLite[\s\S]*?Upload to Supabase[\s\S]*?<\/ol>/);
   assert.doesNotMatch(html, /id="portfolio"[\s\S]*?Field data, brought together/);
 });
 
@@ -285,12 +287,15 @@ test('the legacy modular entry point renders the same complete site', async () =
   assert.equal(await readFile(path.join(root, 'index-modular.html'), 'utf8'), html);
 });
 
-test('Keylane descriptions stay at the level of professional responsibilities', () => {
+test('Keylane descriptions stay at the level of professional responsibilities', async () => {
   const keylane = html.match(/<article[^>]+id="insurance-case">([\s\S]*?)<\/article>/)?.[1];
   assert.ok(keylane, 'Missing Keylane overview');
   assert.doesNotMatch(keylane, /\bQSD-\d+|@keylane\.com|\\\\|href="https?:|\d+(?:\.\d+)?%/i);
-  assert.match(keylane, /requirements and acceptance criteria/);
-  assert.match(keylane, /Authentication, authorisation/);
+  const detail = (await readFile(path.join(root, 'case-keylane.html'), 'utf8')).match(/<article[^>]+id="insurance-case">([\s\S]*?)<\/article>/)[1];
+  assert.doesNotMatch(detail, /\bQSD-\d+|@keylane\.com|\\\\|href="https?:|\d+(?:\.\d+)?%/i);
+  assert.match(detail, /requirements and acceptance criteria/);
+  assert.match(detail, /Authentication, authorisation/);
+  assert.match(keylane, /authorisation/);
 });
 
 test('professional experience leads the portfolio and drafting context stays unpublished', () => {

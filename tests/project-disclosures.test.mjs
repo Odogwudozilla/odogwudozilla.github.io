@@ -1,40 +1,25 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
-import { runInNewContext } from 'node:vm';
-
-const source = await readFile(new URL('../docs/js/scripts.js', import.meta.url), 'utf8');
 const html = await readFile(new URL('../docs/index.html', import.meta.url), 'utf8');
-function fixture(hash = '') {
-  const events = new Map(), documentEvents = new Map(), details = { open: false };
-  const project = { matches: () => true, querySelector: () => details };
-  const location = { hash };
-  runInNewContext(source, {
-    window: { location, addEventListener: (name, callback) => events.set(name, callback) },
-    document: {
-      querySelector: () => null, querySelectorAll: () => [],
-      getElementById: id => id === 'fusion-project' ? project : null,
-      addEventListener: (name, callback) => documentEvents.set(name, callback),
-    },
-  });
-  return { details, events, documentEvents, location };
-}
-test('project shortcuts and bulk expansion are removed while native case disclosures remain', () => {
-  assert.doesNotMatch(html, /class="work-index"|class="case-controls"|data-case-toggle|explorer-results/);
-  assert.equal([...html.matchAll(/<details class="case-details/g)].length, 4);
+
+test('project overviews are concise native links rather than nested disclosures', () => {
+  assert.doesNotMatch(html, /class="work-index"|class="case-controls"|data-case-toggle|explorer-results|<details class="case-details/);
+  assert.equal([...html.matchAll(/class="project-case-link text-link"/g)].length, 4);
 });
-test('fresh and changed project fragments still reveal their native disclosure', () => {
-  assert.equal(fixture('#fusion-project').details.open, true);
-  const f = fixture();
-  f.location.hash = '#fusion-project'; f.events.get('hashchange')();
-  assert.equal(f.details.open, true);
-  f.location.hash = '#%ZZ'; f.events.get('hashchange')();
-  assert.equal(f.details.open, true);
+test('existing project and skills fragments remain reachable in server-rendered HTML', () => {
+  for (const id of ['insurance-case', 'fusion-project', 'energy-project', 'aoc-project']) {
+    assert.ok(html.includes(`id="${id}"`));
+  }
+  assert.match(html, /<span class="fragment-alias" id="skills" aria-hidden="true"><\/span>/);
+  assert.doesNotMatch(html, /id="skills-title"|Skills &amp; tools|capabilities-section/);
 });
-test('same-fragment clicks still reveal a case after a reader closes it', () => {
-  const f = fixture('#fusion-project');
-  f.details.open = false;
-  f.documentEvents.get('click')({ target: { closest: () => ({ hash: '#fusion-project' }) },
-    button: 0, defaultPrevented: false });
-  assert.equal(f.details.open, true);
+test('all former skill groups have visible evidence within Work and Projects', () => {
+  const work = html.match(/<section[^>]*id="portfolio"[\s\S]*?<\/section>/)[0];
+  for (const skill of ['Java', 'SQL', 'Spring Boot', 'REST APIs', 'SOAP', 'OpenAPI',
+    'Angular', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'Playwright', 'Git', 'IntelliJ IDEA', 'CI/CD']) {
+    assert.ok(work.includes(skill), `Lost skill: ${skill}`);
+  }
+  assert.match(work, /business-rule changes, authorisation, defect investigation and integration\/regression testing/);
+  assert.match(work, /Story refinement, code review, technical notes and release documentation/);
 });
