@@ -22,14 +22,14 @@
 .page-section { margin-top: 48px; padding: 28px 0 0; border-top: 4px solid var(--accent); }
 .section-heading { margin-bottom: 20px; }
 .section-heading > p { font-size: 1rem; max-width: 68ch; margin-top: 8px; }
-.experience-list { display: grid; gap: 12px; }
+.experience-list { display: grid; gap: 16px; }
 .experience-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px var(--column-gap); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; background: var(--surface); align-content: start; }
-.keylane-experience { border-color: var(--teal); }
+.keylane-experience { border-color: var(--teal); border-inline-start-width: 4px; background: var(--section-soft); }
 .experience-date, .experience-role { grid-column: 1; }
 .experience-date { font: .875rem/1.6 var(--font-mono); color: var(--ink); }
 .experience-date > span { display: inline; color: var(--muted); font: .875rem/1.6 var(--font-sans); margin-left: 12px; }
-.experience-role h3 { font-size: 1.125rem; }
-.experience-role p { color: var(--teal); margin-top: 4px; font-size: .9375rem; }
+.experience-role h3 { font-size: 1.25rem; }
+.experience-role p { color: var(--teal); margin-top: 6px; font-size: .9375rem; font-weight: 600; }
 .experience-description { grid-column: 2; grid-row: 1 / span 2; font-size: 1rem; }
 .experience-description ul { padding-left: 20px; margin: 12px 0 0; color: var(--muted); }
 .experience-description li { margin-top: 6px; }

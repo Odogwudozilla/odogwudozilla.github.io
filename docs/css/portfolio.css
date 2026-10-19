@@ -7,6 +7,8 @@
 .case-controls-status { font-size: .875rem; }
 .work-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
 .project-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 23px 24px; border-color: var(--teal); }
+.work-section .project-card { border-color: var(--line); }
+.work-section .enterprise-case { border-inline-start: 4px solid var(--teal); background: var(--section-soft); }
 .case-intro h3 { margin-bottom: 12px; }
 .case-intro > p { font-size: 1rem; max-width: 68ch; }
 .project-card .case-details { margin-top: 0; }
