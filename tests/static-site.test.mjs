@@ -11,6 +11,7 @@ import './project-sharing.test.mjs';
 import './palette-contrast.test.mjs';
 import './project-disclosures.test.mjs';
 import './email-copy.test.mjs';
+import './responsive-images.test.mjs';
 
 const root = fileURLToPath(new URL('../docs/', import.meta.url));
 const html = await readFile(path.join(root, 'index.html'), 'utf8');
