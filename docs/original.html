@@ -111,7 +111,12 @@
     <a href="#energy-project">HomeWizard Energy</a>
     <a href="#aoc-project">Advent of Code</a>
   </nav>
-  <div class="work-grid">
+  <div class="case-controls" hidden role="group" aria-label="Project case studies">
+    <button class="button" type="button" data-case-action="expand" aria-controls="project-cases">Expand all</button>
+    <button class="button" type="button" data-case-action="collapse" aria-controls="project-cases">Collapse all</button>
+    <p class="case-controls-status" role="status" aria-live="polite" aria-atomic="true"></p>
+  </div>
+  <div class="work-grid" id="project-cases">
     <article class="project-card enterprise-case card" id="insurance-case">
       <div class="case-intro">
         <h3>Keylane — insurance software</h3>

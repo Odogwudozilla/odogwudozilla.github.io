@@ -3,6 +3,8 @@
 .work-index a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; min-height: 44px; border: 1px solid var(--line); border-radius: var(--control-radius); font-size: .875rem; }
 .work-index a:hover, .work-index a:focus-visible { background: var(--hover-bg); color: var(--hover-ink); border-color: var(--hover-bg); }
 .work-index span { font: .8125rem var(--font-mono); }
+.case-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+.case-controls-status { font-size: .875rem; }
 .work-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
 .project-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 23px 24px; border-color: var(--teal); }
 .case-intro h3 { margin-bottom: 12px; }

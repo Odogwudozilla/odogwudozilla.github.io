@@ -167,6 +167,27 @@
     printClosedDetails = undefined;
   });
 
+  const caseControls = document.querySelector('.case-controls');
+  if (caseControls && portfolio) {
+    const cases = [...portfolio.querySelectorAll('details.case-details')];
+    const status = caseControls.querySelector('.case-controls-status');
+    function updateCaseCount() {
+      // Printing opens disclosures temporarily; do not announce that as a choice.
+      if (printClosedDetails) return;
+      const message = `${cases.filter(details => details.open).length} of ${cases.length} case studies expanded.`;
+      if (status.textContent !== message) status.textContent = message;
+    }
+    for (const button of caseControls.querySelectorAll('button[data-case-action]')) {
+      button.addEventListener('click', () => {
+        for (const details of cases) details.open = button.dataset.caseAction === 'expand';
+        updateCaseCount();
+      });
+    }
+    for (const details of cases) details.addEventListener('toggle', updateCaseCount);
+    updateCaseCount();
+    caseControls.hidden = false;
+  }
+
   const copyButton = document.querySelector('.copy-email');
   const copyStatus = document.querySelector('.copy-status');
   if (copyButton && copyStatus && navigator.clipboard?.writeText) {
