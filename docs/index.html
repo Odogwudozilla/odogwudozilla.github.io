@@ -48,8 +48,8 @@
 <link rel="stylesheet" href="css/portfolio.css?v=2ad6ff0e2fdd">
 <link rel="stylesheet" href="css/responsive.css?v=aac04abe95d4">
 <link rel="stylesheet" href="css/keylane-theme.css?v=1d2a004a202f">
-<link rel="stylesheet" href="css/interactive.css?v=d29593b97c8a">
-<link rel="stylesheet" href="css/playground.css?v=ab80ff702718">
+<link rel="stylesheet" href="css/interactive.css?v=c982523dbdd0">
+<link rel="stylesheet" href="css/playground.css?v=9ff11bb0976d">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
 </head>
 <body>
@@ -358,6 +358,13 @@
   </div>
   <div class="api-playground">
     <div class="flow-controls" hidden>
+      <label class="flow-scenario-picker">Scenario
+        <select aria-label="API request scenario">
+          <option value="valid">Valid request</option>
+          <option value="invalid">Invalid input</option>
+          <option value="unavailable">Temporary failure</option>
+        </select>
+      </label>
       <div class="flow-scenarios" role="group" aria-label="API request scenario">
         <button type="button" data-scenario="valid" aria-pressed="true">Valid request</button>
         <button type="button" data-scenario="invalid" aria-pressed="false">Invalid input</button>
@@ -370,14 +377,18 @@
       </div></div>
     <ol class="flow-diagram" aria-label="Request lifecycle">
       <li data-flow-stage="0" data-state="complete"><span class="flow-number" aria-hidden="true">01</span><strong>Request</strong><span class="flow-state">Sent</span></li>
-      <li data-flow-stage="1" data-state="complete"><span class="flow-number" aria-hidden="true">02</span><strong>Validation</strong><span class="flow-state">Passed</span></li>
+      <li data-flow-stage="1" data-state="complete"><span class="flow-number" aria-hidden="true">02</span><strong>Validate</strong><span class="flow-state">Passed</span></li>
       <li data-flow-stage="2" data-state="complete"><span class="flow-number" aria-hidden="true">03</span><strong>Service</strong><span class="flow-state">Created</span></li>
-      <li data-flow-stage="3" data-state="current" aria-current="step"><span class="flow-number" aria-hidden="true">04</span><strong>Response</strong><span class="flow-state">201 Created</span></li>
+      <li data-flow-stage="3" data-state="current" aria-current="step"><span class="flow-number" aria-hidden="true">04</span><strong>Reply</strong><span class="flow-state">201 Created</span></li>
     </ol>
     <div class="flow-narrative">
       <p class="flow-progress eyebrow" role="status" aria-live="polite" aria-atomic="true">Step 4 of 4 · 201 Created</p>
       <h3 class="flow-title">The task was created.</h3>
       <p class="flow-explanation">The input passed validation and the service created a task. The response includes its identifier and a location for the new resource.</p>
+    </div>
+    <div class="flow-payload-tabs" role="group" aria-label="JSON example to display" hidden>
+      <button type="button" data-payload="request" aria-pressed="true">Request JSON</button>
+      <button type="button" data-payload="response" aria-pressed="false">Response JSON</button>
     </div>
     <div class="flow-payloads">
       <div class="flow-payload"><p class="flow-payload-label">Request <span>JSON</span></p><pre><code class="flow-request">POST /demo/tasks
@@ -527,6 +538,6 @@ Content-Type: application/json
     </div></footer>
   <script src="js/scripts.js?v=c3622b8d7544" defer></script>
   <script src="js/interactive.js?v=26a72359cf7f" defer></script>
-  <script src="js/playground.js?v=a6ad57f2a08c" defer></script>
+  <script src="js/playground.js?v=36aff891a827" defer></script>
 </body>
 </html>
