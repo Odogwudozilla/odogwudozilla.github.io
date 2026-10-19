@@ -23,6 +23,7 @@
   .hero-copy { order: 1; flex: 1 1 100%; min-width: 0; }
   .hero-role { font-size: 1.125rem; }
   .hero-description { font-size: 1rem; }
+  .hero-copy .button-group { display: grid; grid-template-columns: minmax(0, 1fr); }
   .hero-portrait { flex: 0 0 6.5rem; width: 6.5rem; }
   .hero-portrait img { aspect-ratio: 1; }
   .hero-portrait figcaption { padding: 8px 0; line-height: 1.45; }
@@ -83,7 +84,7 @@
   html { scroll-behavior: auto; font-size: 10.5pt; }
   body { background: white; font-size: 1rem; line-height: 1.5; }
   .site-shell { width: 100%; }
-  .site-header, .skip-link, .work-index, .hero .button-group,
+  .site-header, .skip-link, .work-index, .hero .button-group, .hero-cv-links,
   .copy-email, .copy-status, .project-share, .case-controls, .disclosure-icon, .footer-top,
   .hero-links a[href^="#"], .capability-card a[href^="#"], .contact-section .button-group {
     display: none !important;
