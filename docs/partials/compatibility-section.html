@@ -1,0 +1,41 @@
+<section class="lab-panel compatibility-section" id="compatibility-lab" aria-labelledby="compatibility-title">
+  <div class="section-heading">
+    <h3 id="compatibility-title">Will this API change break a client?</h3>
+    <p>Keep the client fixed and change the API. See why valid JSON alone does not guarantee compatibility.</p>
+  </div>
+  <div class="compat-workspace card">
+    <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
+      to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
+      as strings, and ignores extra response fields.</p>
+    <label class="compat-controls" hidden>API change
+      <select aria-label="API compatibility scenario">
+        <option value="extra">Extra response field</option>
+        <option value="rename">Rename a response field</option>
+        <option value="type">Change a response type</option>
+        <option value="required">Require a new request field</option>
+      </select>
+    </label>
+    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Client decoding. Client reads task-42: Review API contract.</p>
+    <p class="compat-explanation">This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.</p>
+    <div class="compat-comparison">
+      <div><h4>Original API</h4><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
+  "id": "task-42",
+  "title": "Review API contract"
+}</code></pre></div>
+      <div><h4>Changed API</h4><p>Required request fields: <span class="compat-required">title</span></p><p class="compat-response-label compat-status">201 Created</p><pre tabindex="0" role="region" aria-label="Changed API response"><code class="compat-payload">{
+  "id": "task-42",
+  "title": "Review API contract",
+  "priority": "normal"
+}</code></pre></div>
+    </div>
+    <details class="compat-notes"><summary>What makes the other changes break?</summary>
+      <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
+        <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>
+        <li><strong>Require priority in the request:</strong> the old request omits it, so validation returns 400 before the client can read a task.</li></ul>
+      <p>These results apply to the client defined above. A stricter client could reject extra fields;
+        other clients may tolerate different changes. Review actual consumers before changing a real API.</p>
+    </details>
+    <p class="compat-footnote">Synthetic example · local simulation · no network requests or stored data.
+      <a class="text-link" href="case-keylane.html">Read about my API work <span aria-hidden="true">↗</span></a></p>
+  </div>
+</section>

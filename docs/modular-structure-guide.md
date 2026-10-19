@@ -60,6 +60,13 @@ The menu supports Escape, outside clicks, and closing after selecting a
 link. Copy email is only offered when the Clipboard API exists; failures
 are announced inline while the normal email link remains available.
 
+The Engineering Lab keeps one demo visible through `lab.js`; its three
+panels retain direct fragment links and are all readable without scripts.
+`compatibility-model.js` defines the fixed synthetic request and client
+expectations, then validates the selected API change. `compatibility.js`
+updates the verdict and JSON in place without network calls, storage or
+timers. The API case study links directly to `#compatibility-lab`.
+
 ## Validation
 
 ```sh

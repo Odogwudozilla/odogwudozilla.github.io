@@ -1,0 +1,32 @@
+.compat-workspace { padding: 20px; }
+.compat-contract { font-size: .9375rem; }
+.compat-contract code { overflow-wrap: anywhere; }
+.compat-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 16px; font-size: .875rem; font-weight: 600; }
+.compat-controls select { max-width: 100%; min-height: 36px; padding: 6px 10px; font: inherit; font-weight: 400; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--control-radius); }
+.compat-verdict { margin-top: 16px; border-inline-start: 4px solid var(--action); padding: 10px 12px; background: var(--section-soft); font-size: .9375rem; font-weight: 600; }
+.compat-verdict[data-compatible="false"] { border-inline-start-style: double; border-inline-start-width: 6px; }
+.compat-explanation { margin-top: 10px; font-size: .9375rem; }
+.compat-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
+.compat-comparison > div { min-width: 0; }
+.compat-comparison h4 { font-size: 1rem; margin-bottom: 6px; }
+.compat-comparison p { font-size: .8125rem; }
+.compat-response-label { margin-block: 10px 6px; font-family: var(--font-mono); color: var(--ink); }
+.compat-comparison pre { max-width: 100%; padding: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--control-radius); font: .8125rem/1.6 var(--font-mono); overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.compat-notes { margin-top: 16px; font-size: .875rem; }
+.compat-notes summary { cursor: pointer; padding-block: 8px; font-weight: 600; }
+.compat-notes ul { padding-left: 20px; margin-block: 8px; }
+.compat-notes li + li { margin-top: 6px; }
+.compat-footnote { margin-top: 16px; font-size: .8125rem; }
+.compat-footnote a { display: inline-block; margin-left: 8px; }
+@media (max-width: 760px) {
+  .compat-workspace { padding: 16px; }
+  .compat-comparison { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .compat-controls { align-items: start; flex-direction: column; }
+  .compat-controls select { width: 100%; }
+  .compat-footnote a { margin-left: 0; }
+}
+@media print {
+  .compat-controls { display: none !important; }
+  .compat-comparison { grid-template-columns: minmax(0, 1fr); }
+  .compat-comparison > div { break-inside: avoid; }
+}

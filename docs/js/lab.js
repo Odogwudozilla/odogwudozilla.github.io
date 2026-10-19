@@ -19,7 +19,9 @@
     let id;
     try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
     const target = document.getElementById(id);
-    choose(panels.find(panel => panel === target || panel.contains(target)));
+    const panel = panels.find(panel => panel === target || panel.contains(target));
+    choose(panel);
+    return panel ? target : null;
   }
   buttons.forEach(button => button.addEventListener('click', () => {
     const panel = panels.find(item => item.id === button.dataset.labSelect);
@@ -35,6 +37,11 @@
   window.addEventListener('beforeprint', () => panels.forEach(panel => { panel.hidden = false; }));
   window.addEventListener('afterprint', () => choose(selected));
   choose(selected);
-  fromHash();
+  const initialHash = window.location.hash;
+  const initialTarget = fromHash();
+  // Native fragment scrolling can precede the enhanced layout. Align once it settles.
+  if (initialTarget) window.addEventListener('load', () => {
+    if (window.location.hash === initialHash) initialTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }, { once: true });
   lab.querySelector('.lab-switch').hidden = false;
 })();
