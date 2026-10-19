@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import './navigation-focus.test.mjs';
 import './project-sharing.test.mjs';
 import './palette-contrast.test.mjs';
@@ -77,7 +78,7 @@ test('missing pages offer working recovery links without becoming successful res
       assert.ok(ids.includes(ref.slice(2)), `Broken recovery link: ${ref}`);
     } else if (ref !== '/') {
       assert.ok(ref.startsWith('/'), `Nested URLs need root-relative assets: ${ref}`);
-      await access(path.join(root, ref.slice(1)));
+      await access(path.join(root, ref.slice(1).split('?')[0]));
     }
   }
   const preview = spawn(process.execPath, [fileURLToPath(new URL('../scripts/serve-static.mjs', import.meta.url))], {
@@ -175,7 +176,7 @@ test('all internal anchors resolve and IDs are unique', () => {
 test('local assets exist within the public folder', async () => {
   const local = refs.filter(ref => !/^(#|https?:|mailto:)/.test(ref));
   for (const ref of local) {
-    const target = path.resolve(root, ref);
+    const target = path.resolve(root, ref.split('?')[0]);
     assert.ok(!path.relative(root, target).startsWith('..'));
     await access(target);
   }
@@ -256,6 +257,18 @@ test('the selected palette is default and the original comparison retains shared
   assert.equal(new Set(alternateIds).size, alternateIds.length);
   for (const [, ref] of alternate.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     if (ref.startsWith('#')) assert.ok(alternateIds.includes(ref.slice(1)), `Broken alternate anchor: ${ref}`);
-    else if (!/^(https?:|mailto:)/.test(ref)) await access(path.join(root, ref));
+    else if (!/^(https?:|mailto:)/.test(ref)) await access(path.join(root, ref.split('?')[0]));
+  }
+});
+
+test('generated pages reference script versions derived from LF-normalized content', async () => {
+  for (const name of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html']) {
+    const page = await readFile(path.join(root, name), 'utf8');
+    const scripts = [...page.matchAll(/<script src="(\/?js\/[^"?]+\.js)\?v=([a-f0-9]{12})"/g)];
+    assert.equal(scripts.length, 2, `${name} must version both browser scripts`);
+    for (const [, source, version] of scripts) {
+      const bytes = await readFile(path.join(root, source.replace(/^\//, '')));
+      assert.equal(version, createHash('sha256').update(bytes.toString('utf8').replaceAll('\r\n', '\n')).digest('hex').slice(0, 12));
+    }
   }
 });
