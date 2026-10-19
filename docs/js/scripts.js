@@ -169,31 +169,6 @@
     printClosedDetails = undefined;
   });
 
-  const caseControls = document.querySelector('.case-controls');
-  if (caseControls && portfolio) {
-    const cases = [...portfolio.querySelectorAll('details.case-details')];
-    const status = caseControls.querySelector('.case-controls-status');
-    const button = caseControls.querySelector('[data-case-toggle]');
-    function updateCaseControls() {
-      // Printing opens disclosures temporarily; do not announce that as a choice.
-      if (printClosedDetails) return;
-      const expanded = cases.filter(details => details.open).length;
-      const allExpanded = expanded === cases.length;
-      button.textContent = allExpanded ? 'Collapse All' : 'Expand All';
-      button.setAttribute('aria-expanded', String(allExpanded));
-      const message = `${expanded} of ${cases.length} case studies expanded.`;
-      if (status.textContent !== message) status.textContent = message;
-    }
-    button.addEventListener('click', () => {
-      const expand = cases.some(details => !details.open);
-      for (const details of cases) details.open = expand;
-      updateCaseControls();
-    });
-    for (const details of cases) details.addEventListener('toggle', updateCaseControls);
-    updateCaseControls();
-    caseControls.hidden = false;
-  }
-
   const copyButton = document.querySelector('.copy-email');
   const copyStatus = document.querySelector('.copy-status');
   if (copyButton && copyStatus && navigator.clipboard?.writeText) {

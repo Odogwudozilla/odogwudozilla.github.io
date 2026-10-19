@@ -5,97 +5,36 @@ import { runInNewContext } from 'node:vm';
 
 const source = await readFile(new URL('../docs/js/scripts.js', import.meta.url), 'utf8');
 const html = await readFile(new URL('../docs/index.html', import.meta.url), 'utf8');
-
 function fixture(hash = '') {
-  const events = new Map();
-  const makeDetails = open => ({ open, addEventListener(_, handler) { this.toggle = handler; } });
-  const cases = [false, false, false, false].map(makeDetails);
-  const experience = makeDetails(false);
-  const status = { textContent: '' };
-  const attributes = new Map();
-  const button = { textContent: '', setAttribute: (name, value) => attributes.set(name, value),
-    addEventListener(_, handler) { this.click = handler; } };
-  const controls = { hidden: true, querySelector: selector =>
-    selector === '[data-case-toggle]' ? button : status };
-  const portfolio = { querySelectorAll: () => cases };
-  const project = { matches: () => true, querySelector: () => cases[0] };
+  const events = new Map(), documentEvents = new Map(), details = { open: false };
+  const project = { matches: () => true, querySelector: () => details };
   const location = { hash };
   runInNewContext(source, {
-    window: { location, addEventListener: (event, handler) => events.set(event, handler) },
+    window: { location, addEventListener: (name, callback) => events.set(name, callback) },
     document: {
-      querySelector: selector => ({ '#portfolio': portfolio, '.case-controls': controls })[selector] || null,
-      getElementById: id => id === 'insurance-case' ? project : null,
-      addEventListener() {},
-      querySelectorAll: () => [...cases, experience].filter(details => !details.open),
+      querySelector: () => null, querySelectorAll: () => [],
+      getElementById: id => id === 'fusion-project' ? project : null,
+      addEventListener: (name, callback) => documentEvents.set(name, callback),
     },
   });
-  return { cases, experience, status, button, attributes, controls, events, location };
+  return { details, events, documentEvents, location };
 }
-
-test('bulk project controls are progressive enhancements with a labelled target and live count', () => {
-  assert.match(html, /class="case-controls" hidden role="group" aria-label="Project case studies"/);
-  assert.equal([...html.matchAll(/aria-controls="project-cases"/g)].length, 1);
-  assert.match(html, /class="work-grid" id="project-cases"/);
-  assert.match(html, /class="case-controls-status" role="status" aria-live="polite" aria-atomic="true"/);
+test('project shortcuts and bulk expansion are removed while native case disclosures remain', () => {
+  assert.doesNotMatch(html, /class="work-index"|class="case-controls"|data-case-toggle|explorer-results/);
+  assert.equal([...html.matchAll(/<details class="case-details/g)].length, 4);
+});
+test('fresh and changed project fragments still reveal their native disclosure', () => {
+  assert.equal(fixture('#fusion-project').details.open, true);
   const f = fixture();
-  assert.equal(f.controls.hidden, false);
-  assert.equal(f.button.textContent, 'Expand All');
-  assert.equal(f.attributes.get('aria-expanded'), 'false');
-  assert.equal(f.status.textContent, '0 of 4 case studies expanded.');
+  f.location.hash = '#fusion-project'; f.events.get('hashchange')();
+  assert.equal(f.details.open, true);
+  f.location.hash = '#%ZZ'; f.events.get('hashchange')();
+  assert.equal(f.details.open, true);
 });
-
-test('expand and collapse affect only projects, including a mixed manual state', () => {
-  const f = fixture();
-  f.cases[0].open = true;
-  f.cases[0].toggle();
-  assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
-  f.button.click();
-  assert.ok(f.cases.every(details => details.open));
-  assert.equal(f.experience.open, false);
-  assert.equal(f.status.textContent, '4 of 4 case studies expanded.');
-  assert.equal(f.button.textContent, 'Collapse All');
-  assert.equal(f.attributes.get('aria-expanded'), 'true');
-  f.experience.open = true;
-  f.button.click();
-  assert.ok(f.cases.every(details => !details.open));
-  assert.equal(f.experience.open, true);
-  assert.equal(f.status.textContent, '0 of 4 case studies expanded.');
-});
-
-test('fresh and subsequent project deep links remain reflected in the count', () => {
-  const f = fixture('#insurance-case');
-  assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
-  f.button.click();
-  f.button.click();
-  f.events.get('hashchange')();
-  f.cases[0].toggle();
-  assert.equal(f.cases[0].open, true);
-  assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
-});
-
-test('printing preserves mixed choices without announcing temporary expansion', () => {
-  const f = fixture('#insurance-case');
-  f.events.get('beforeprint')();
-  for (const details of f.cases) details.toggle();
-  assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
-  f.events.get('afterprint')();
-  for (const details of f.cases) details.toggle();
-  assert.deepEqual(f.cases.map(details => details.open), [true, false, false, false]);
-  assert.equal(f.status.textContent, '1 of 4 case studies expanded.');
-});
-
-test('the single action follows manual changes and repeated activation', () => {
-  const f = fixture();
-  f.button.click();
-  f.cases[2].open = false;
-  f.cases[2].toggle();
-  assert.equal(f.button.textContent, 'Expand All');
-  assert.equal(f.attributes.get('aria-expanded'), 'false');
-  f.button.click();
-  assert.ok(f.cases.every(details => details.open));
-  assert.equal(f.button.textContent, 'Collapse All');
-  f.button.click();
-  assert.ok(f.cases.every(details => !details.open));
-  assert.equal(f.button.textContent, 'Expand All');
-  assert.equal(f.attributes.get('aria-expanded'), 'false');
+test('same-fragment clicks still reveal a case after a reader closes it', () => {
+  const f = fixture('#fusion-project');
+  f.details.open = false;
+  f.documentEvents.get('click')({ target: { closest: () => ({ hash: '#fusion-project' }) },
+    button: 0, defaultPrevented: false });
+  assert.equal(f.details.open, true);
 });

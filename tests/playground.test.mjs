@@ -30,6 +30,7 @@ function fixture(mobile = false) {
     querySelector: selector => selector === '.site-header' ? { getBoundingClientRect: () => ({ height: 72 }) } : root,
     addEventListener: (name, handler) => events.set(name, handler) };
   runInNewContext(source, { document, window: { scrollY: 0, scrollTo(options) { root.scrolls++; root.scrollTop = options.top; },
+    addEventListener: (name, callback) => events.set(name, callback),
     matchMedia: query => ({ matches: query.includes('max-width') && mobile }) },
     setTimeout(callback) { timers.set(++id, callback); return id; },
     clearTimeout(key) { timers.delete(key); } });
@@ -120,6 +121,8 @@ test('playback pauses, resets and switches scenarios without stale callbacks or 
   run.click(); f.tick(); f.tick(); f.tick();
   assert.equal(f.timers.size, 0);
   assert.match(f.response(), /400 Bad Request/);
+  run.click(); f.events.get('beforeprint')();
+  assert.equal(f.timers.size, 0);
 });
 
 test('no-script content explains all three outcomes and contains a complete success example', () => {

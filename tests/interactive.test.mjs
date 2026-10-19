@@ -46,17 +46,13 @@ test('project focus highlights evidence without hiding projects or changing disc
   assert.equal(f.explorer.hidden, false);
   f.buttons[3].click();
   assert.deepEqual(f.projects.map(item => item.matched), [false, true, true, false]);
-  assert.deepEqual(f.results.children.map(item => item.href), ['#fusion-project', '#energy-project']);
   assert.match(f.status.textContent, /^2 projects/);
-  assert.equal(f.index.hidden, true, 'Matching shortcuts replace the general project index');
   assert.equal(f.buttons.filter(item => item.pressed === 'true').length, 1);
   f.buttons[3].click();
-  assert.equal(f.results.children.length, 2, 'Repeated selection must not duplicate results');
+  assert.equal(f.projects.filter(item => item.matched).length, 2);
   f.buttons[1].click();
-  assert.equal(f.results.children.length, 4);
+  assert.equal(f.projects.filter(item => item.matched).length, 4);
   f.buttons[0].click();
-  assert.equal(f.results.hidden, true);
-  assert.equal(f.index.hidden, false);
   assert.ok(f.projects.every(item => !item.matched && item.intro.children[0].hidden));
   assert.equal(f.status.textContent, 'All four projects are shown.');
 });
@@ -80,5 +76,5 @@ test('unsupported time-zone formatting leaves clock hidden while explorer still 
   assert.equal(f.clock.hidden, true);
   assert.equal(f.explorer.hidden, false);
   f.buttons[2].click();
-  assert.equal(f.results.children.length, 3);
+  assert.equal(f.projects.filter(item => item.matched).length, 3);
 });
