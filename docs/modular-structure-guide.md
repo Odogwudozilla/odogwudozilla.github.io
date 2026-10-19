@@ -51,8 +51,10 @@ Without JavaScript, the default page retains navy and the controls stay hidden.
 
 `docs/js/scripts.js` runs with `defer`, after the HTML exists. It enhances
 the mobile menu, active navigation, and email copying. Unenhanced navigation
-remains visible on mobile. Project and career details use native `details`/`summary`
-elements. No article or contact method requires a script to render.
+remains visible on mobile. Career details use native `details`/`summary`
+elements. Project overviews link to full case studies, each opening with a
+Purpose / Approach / Status definition list. No article or contact method
+requires a script to render.
 
 The menu supports Escape, outside clicks, and closing after selecting a
 link. Copy email is only offered when the Clipboard API exists; failures
