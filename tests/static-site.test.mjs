@@ -105,6 +105,12 @@ test('missing pages offer working recovery links without becoming successful res
     assert.equal(await head.text(), '');
     assert.equal((await fetch(address + '/old-page', { method: 'POST' })).status, 405);
     assert.equal((await fetch(address + '/')).status, 200);
+    for (const [, stylesheet] of html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)) {
+      const response = await fetch(address + '/' + stylesheet);
+      assert.equal(response.status, 200);
+      assert.ok(response.headers.get('content-type').startsWith('text/css'));
+      assert.equal(await response.text(), await readFile(path.join(root, stylesheet.split('?')[0]), 'utf8'));
+    }
     for (const [file, type] of [['robots.txt', 'text/plain'], ['sitemap.xml', 'application/xml']]) {
       const response = await fetch(address + '/' + file);
       assert.equal(response.status, 200);
@@ -245,12 +251,12 @@ test('professional experience leads the portfolio and drafting context stays unp
 
 test('the selected palette is default and the original comparison retains shared content', async () => {
   assert.match(html, /class="theme-keylane"/);
-  assert.match(html, /href="css\/keylane-theme.css"/);
+  assert.match(html, /href="css\/keylane-theme.css\?v=[a-f0-9]{12}"/);
   assert.doesNotMatch(html, /name="robots" content="noindex"|Colour study/);
   assert.equal(await readFile(path.join(root, 'keylane.html'), 'utf8'), html);
   const alternate = await readFile(path.join(root, 'original.html'), 'utf8');
   assert.doesNotMatch(alternate, /class="theme-keylane"/);
-  assert.match(alternate, /href="css\/keylane-theme.css"/);
+  assert.match(alternate, /href="css\/keylane-theme.css\?v=[a-f0-9]{12}"/);
   assert.match(alternate, /name="robots" content="noindex"/);
   assert.equal(alternate.match(/<main[\s\S]*?<\/main>/)?.[0], html.match(/<main[\s\S]*?<\/main>/)?.[0]);
   const alternateIds = [...alternate.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
@@ -269,6 +275,19 @@ test('generated pages reference script versions derived from LF-normalized conte
     for (const [, source, version] of scripts) {
       const bytes = await readFile(path.join(root, source.replace(/^\//, '')));
       assert.equal(version, createHash('sha256').update(bytes.toString('utf8').replaceAll('\r\n', '\n')).digest('hex').slice(0, 12));
+    }
+  }
+});
+
+test('every generated stylesheet URL matches its content version', async () => {
+  for (const name of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html']) {
+    const page = await readFile(path.join(root, name), 'utf8');
+    const styles = [...page.matchAll(/<link rel="stylesheet" href="(\/?css\/[^"?]+\.css)\?v=([a-f0-9]{12})"/g)];
+    assert.equal(styles.length, 7, `${name} must version every stylesheet`);
+    for (const [, source, version] of styles) {
+      const css = await readFile(path.join(root, source.replace(/^\//, '')), 'utf8');
+      assert.equal(version, createHash('sha256').update(css.replaceAll('\r\n', '\n')).digest('hex').slice(0, 12));
+      assert.equal(source.startsWith('/'), name === '404.html', 'Preserve nested recovery-page asset paths');
     }
   }
 });

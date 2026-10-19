@@ -26,12 +26,12 @@ async function renderPage(templateName = 'site-template.html') {
   if (/\{\{.*?\}\}/.test(html)) {
     throw new Error('Unresolved template placeholder');
   }
-  // A changed script must not reuse a previous deployment's browser-cache URL.
-  for (const [, source] of [...html.matchAll(/\bsrc="(\/?js\/[^"?]+\.js)"/g)]) {
+  // Changed scripts and styles must receive fresh browser-cache URLs.
+  for (const [, attribute, source] of [...html.matchAll(/\b(src|href)="(\/?(?:js\/[^"?]+\.js|css\/[^"?]+\.css))"/g)]) {
     const bytes = await readFile(path.join(root, 'docs', source.replace(/^\//, '')));
-    // Git publishes LF; Windows checkouts can use CRLF for the same script.
+    // Git publishes LF; Windows checkouts can use CRLF for the same content.
     const version = createHash('sha256').update(bytes.toString('utf8').replaceAll('\r\n', '\n')).digest('hex').slice(0, 12);
-    html = html.replaceAll(`src="${source}"`, `src="${source}?v=${version}"`);
+    html = html.replaceAll(`${attribute}="${source}"`, `${attribute}="${source}?v=${version}"`);
   }
   // Compact whitespace between closing block tags; keep source partials readable.
   return html.replace(/(<\/(?:div|article|section|nav|figure|svg|g|ul|dl|details)>)[\r\n]+[ \t]*(?=<\/)/g, '$1');
