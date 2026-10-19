@@ -91,6 +91,9 @@
   document.addEventListener('visibilitychange', () => {
     if (document.hidden && playing) { stop(); render(); }
   });
+  root.closest?.('.lab-panel')?.addEventListener('lab:hidden', () => {
+    if (playing) { stop(); render(); }
+  });
   window.addEventListener('beforeprint', () => { if (playing) { stop(); render(); } });
   reset();
   grid.hidden = false;

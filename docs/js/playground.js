@@ -141,6 +141,12 @@
   document.addEventListener('visibilitychange', () => {
     if (document.hidden && playing) { stop(); render(); }
   });
+  root.closest?.('.lab-panel')?.addEventListener('lab:hidden', () => {
+    if (playing) { stop(); render(); }
+  });
+  window.addEventListener('beforeprint', () => {
+    if (playing) { stop(); render(); }
+  });
   render();
   root.classList.add('flow-enhanced');
   showPayload('request');

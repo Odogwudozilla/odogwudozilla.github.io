@@ -70,13 +70,10 @@
   }).filter(Boolean);
   const buttons = [...explorer.querySelectorAll('[data-focus]')];
   const status = explorer.querySelector('.explorer-status');
-  const results = explorer.querySelector('.explorer-results');
-  const index = document.querySelector('.work-index');
   buttons.forEach(button => button.addEventListener('click', () => {
     const focus = button.dataset.focus;
     if (button.getAttribute('aria-pressed') === 'true') return;
     buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-    results.replaceChildren();
     let count = 0;
     for (const project of projects) {
       const match = focus !== 'all' && Boolean(project.skills[focus]);
@@ -85,14 +82,8 @@
       project.note.textContent = match ? `${button.textContent}: ${project.skills[focus]}` : '';
       if (match) {
         count++;
-        const link = document.createElement('a');
-        link.href = `#${project.id}`;
-        link.textContent = `${project.title} →`;
-        results.append(link);
       }
     }
-    results.hidden = focus === 'all';
-    if (index) index.hidden = focus !== 'all';
     status.textContent = focus === 'all' ? 'All four projects are shown.'
       : `${count} projects connect to ${button.textContent}. All projects remain available below.`;
   }));

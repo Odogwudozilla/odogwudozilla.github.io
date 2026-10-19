@@ -10,8 +10,19 @@
   <main id="main" class="site-shell" tabindex="-1">
     {{hero-section}}
     {{portfolio-section}}
-    {{playground-section}}
-    {{search-section}}
+    <section class="page-section engineering-lab" id="engineering-lab" aria-labelledby="lab-title">
+      <div class="section-heading">
+        <p class="eyebrow">Explore how things work</p>
+        <h2 id="lab-title">Engineering Lab</h2>
+        <p>Two small, browser-only demonstrations. Choose one to explore.</p>
+      </div>
+      <div class="lab-switch" role="group" aria-label="Choose an Engineering Lab demo" hidden>
+        <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API flow</button>
+        <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
+      </div>
+      {{playground-section}}
+      {{search-section}}
+    </section>
     {{experience-section}}
     {{skills-section}}
     {{education-section}}
@@ -28,5 +39,6 @@
   <script src="js/playground.js" defer></script>
   <script src="js/search-model.js" defer></script>
   <script src="js/search.js" defer></script>
+  <script src="js/lab.js" defer></script>
 </body>
 </html>

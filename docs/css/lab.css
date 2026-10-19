@@ -1,0 +1,25 @@
+.engineering-lab > .section-heading > .eyebrow { color: var(--teal); margin-bottom: 8px; }
+.lab-switch { display: flex; gap: 6px; margin-bottom: 20px; }
+.lab-switch button { min-height: 36px; padding: 6px 14px; border: 1px solid var(--action); border-radius: var(--control-radius); background: var(--surface); color: var(--action); font: inherit; font-size: .875rem; }
+.lab-switch button[aria-pressed="true"] { background: var(--action); color: var(--action-ink); text-decoration: underline; text-underline-offset: 4px; }
+.lab-panel + .lab-panel { margin-top: 28px; }
+.lab-panel[hidden] + .lab-panel { margin-top: 0; }
+.lab-panel > .section-heading { margin-bottom: 16px; }
+.lab-panel > .section-heading h3 { font-size: 1.25rem; }
+.lab-panel > .section-heading > p { font-size: .9375rem; }
+/* The explorer is a quiet tool row, rather than another competing card. */
+.project-explorer { padding: 0 0 16px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; margin-bottom: 20px; }
+.explorer-heading { display: block; margin-bottom: 10px; color: var(--muted); }
+.explorer-status:empty { display: none; }
+@media (max-width: 760px) {
+  .lab-switch { margin-bottom: 16px; }
+  .lab-switch button { font-size: .8125rem; padding-inline: 12px; }
+}
+@media (forced-colors: active) {
+  .lab-switch button[aria-pressed="true"] { border: 3px double ButtonText; padding: 4px 12px; }
+}
+@media print {
+  .lab-switch { display: none !important; }
+  .engineering-lab .lab-panel[hidden] { display: block !important; }
+  .lab-panel + .lab-panel { margin-top: 24px; }
+}
