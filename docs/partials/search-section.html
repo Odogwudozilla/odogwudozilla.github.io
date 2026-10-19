@@ -1,0 +1,55 @@
+<section class="page-section search-section" id="search-lab" aria-labelledby="search-title">
+  <div class="section-heading">
+    <p class="eyebrow">Algorithms, one step at a time</p>
+    <h2 id="search-title">Find a route</h2>
+    <p>Same grid, different search strategy. Compare breadth-first search (BFS)
+      with depth-first search (DFS).</p>
+  </div>
+  <div class="search-lab">
+    <div class="search-controls" hidden>
+      <div class="search-selectors">
+        <label>Algorithm<select class="search-algorithm"><option value="bfs">BFS (queue)</option><option value="dfs">DFS (stack)</option></select></label>
+        <label>Example<select class="search-example"><option value="routes">Two routes</option><option value="open">Open grid</option><option value="blocked">Blocked goal</option></select></label>
+      </div>
+      <div class="search-actions" role="group" aria-label="Search playback">
+        <button class="button search-run" type="button">Run search</button>
+        <button class="button search-next" type="button">Next step</button>
+        <button class="button search-reset" type="button">Reset</button>
+      </div>
+    </div>
+    <div class="search-workspace">
+      <div class="search-board">
+        <pre class="search-map" aria-label="Seven by seven example grid: S is the start, G is the goal and hash symbols are walls.">.......
+.#####.
+.#####.
+S..#..G
+.#...#.
+.#####.
+.......</pre>
+        <div class="search-grid" role="img" aria-label="Search grid" hidden></div>
+        <p class="search-legend"><span>S Start</span><span>G Goal</span><span># Wall</span><span>· Visited</span><span>○ Pending</span><span>@ Current</span><span>+ Route</span></p>
+      </div>
+      <div class="search-feedback">
+        <p class="search-status" role="status" aria-live="polite" aria-atomic="true">BFS explores in layers; DFS follows a branch before backtracking.</p>
+        <dl class="search-metrics" hidden>
+          <div><dt>Explored</dt><dd class="search-explored">0</dd></div>
+          <div><dt>Pending</dt><dd class="search-pending">1</dd></div>
+          <div><dt>Route moves</dt><dd class="search-distance">—</dd></div>
+        </dl>
+        <p class="search-strategy">BFS uses a queue. With equally weighted moves, its first route to the goal is a shortest route. DFS uses a stack and can find a longer route.</p>
+        <p class="search-rules">Moves have equal cost: up, right, down or left. Walls cannot be crossed. This deterministic example runs entirely in your browser.</p>
+      </div>
+    </div>
+    <details class="search-notes">
+      <summary>Read the search trace and comparison</summary>
+      <p>BFS takes the oldest pending cell; DFS takes the newest. Neighbours are considered up, right, down, left. The choice changes both the route and how much of the board is explored. Neither algorithm is always faster on every board.</p>
+      <table class="search-comparison">
+        <caption>Same board · completed searches</caption>
+        <thead><tr><th scope="col">Search</th><th scope="col">Moves</th><th scope="col">Explored</th></tr></thead>
+        <tbody><tr><th scope="row">BFS</th><td class="search-bfs-moves">8</td><td class="search-bfs-count">24</td></tr>
+        <tr><th scope="row">DFS</th><td class="search-dfs-moves">12</td><td class="search-dfs-count">13</td></tr></tbody>
+      </table>
+      <pre class="search-trace">In the two-route example, the shortest route takes 8 moves through the lower passage. Following the upper branch takes 12 moves. A blocked goal has no route.</pre>
+    </details>
+  </div>
+</section>
