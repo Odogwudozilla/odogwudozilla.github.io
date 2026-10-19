@@ -78,6 +78,14 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+/* Keep state recognisable when the user's palette replaces author colours. */
+@media (forced-colors: active) {
+  #primary-navigation a[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .25em; }
+  .colour-switch button { border: 1px solid ButtonText; }
+  .colour-switch button[aria-pressed="true"] { border: 3px double ButtonText; padding: 4px 7px; }
+  .colour-switch button:hover, .colour-switch button:focus-visible { border-color: ButtonText; }
+  .colour-swatch, .menu-glyph { display: none; }
+}
 @media print {
   @page { margin: 16mm; }
   html { scroll-behavior: auto; font-size: 10.5pt; }
