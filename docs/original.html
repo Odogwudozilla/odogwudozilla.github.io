@@ -52,7 +52,7 @@
 <link rel="stylesheet" href="css/playground.css?v=9ff11bb0976d">
 <link rel="stylesheet" href="css/search.css?v=5cc84eb8b813">
 <link rel="stylesheet" href="css/lab.css?v=cb06fa998172">
-<link rel="stylesheet" href="css/compatibility.css?v=2fde72f3d337">
+<link rel="stylesheet" href="css/compatibility.css?v=b9e78ef814c9">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
 <meta name="robots" content="noindex">
 </head>
@@ -350,6 +350,7 @@ S..#..G
   "title": "Review API contract",
   "priority": "normal"
 }</code></pre></div></div>
+    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for consumers; check stricter clients separately.</span></p>
     <details class="compat-notes"><summary>What makes the other changes break?</summary>
       <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
         <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>
@@ -447,7 +448,7 @@ S..#..G
   <script src="js/search-model.js?v=4b3693d3b3d6" defer></script>
   <script src="js/search.js?v=7af8f53936ac" defer></script>
   <script src="js/lab.js?v=c35ca2f3fda5" defer></script>
-  <script src="js/compatibility-model.js?v=6376d1023ea8" defer></script>
-  <script src="js/compatibility.js?v=41b5623a65e6" defer></script>
+  <script src="js/compatibility-model.js?v=a29c679cf68e" defer></script>
+  <script src="js/compatibility.js?v=a321ff34c184" defer></script>
 </body>
 </html>

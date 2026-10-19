@@ -13,6 +13,7 @@
 .compat-response-label { margin-block: 10px 6px; font-family: var(--font-mono); color: var(--ink); }
 .compat-comparison pre { max-width: 100%; padding: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--control-radius); font: .8125rem/1.6 var(--font-mono); overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
 .compat-notes { margin-top: 16px; font-size: .875rem; }
+.compat-migration { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: .875rem; }
 .compat-notes summary { cursor: pointer; padding-block: 8px; font-weight: 600; }
 .compat-notes ul { padding-left: 20px; margin-block: 8px; }
 .compat-notes li + li { margin-top: 6px; }

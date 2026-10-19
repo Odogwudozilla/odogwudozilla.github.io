@@ -30,7 +30,7 @@ test('compatibility is checked against the old request and the exact fields the 
 
 test('scenario selection updates the visible verdict and payload without moving focus or starting playback', () => {
   let onChange;
-  const elements = Object.fromEntries(['.compat-controls', '.compat-verdict', '.compat-explanation', '.compat-status', '.compat-payload', '.compat-required']
+  const elements = Object.fromEntries(['.compat-controls', '.compat-verdict', '.compat-explanation', '.compat-status', '.compat-payload', '.compat-required', '.compat-migration span']
     .map(key => [key, { textContent: '', hidden: true, dataset: {} }]));
   const picker = { value: 'extra', addEventListener(name, fn) { assert.equal(name, 'change'); onChange = fn; } };
   const panel = { querySelector(selector) { return selector === 'select' ? picker : elements[selector]; } };
@@ -43,6 +43,7 @@ test('scenario selection updates the visible verdict and payload without moving 
     assert.equal(elements['.compat-status'].textContent, expected.status);
     assert.equal(elements['.compat-payload'].textContent, JSON.stringify(expected.payload, null, 2));
     assert.ok(elements['.compat-verdict'].textContent.includes(expected.message));
+    assert.equal(elements['.compat-migration span'].textContent, model.scenarios[key].migration);
   }
   picker.value = 'unknown'; onChange(); // Ignore an unrecognised value without corrupting the current result.
   assert.equal(elements['.compat-status'].textContent, '201 Created');

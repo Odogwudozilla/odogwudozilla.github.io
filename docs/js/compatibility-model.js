@@ -5,12 +5,16 @@
   const original = { id: 'task-42', title: request.title };
   const scenarios = {
     extra: { title: 'Extra response field', required: ['title'], response: { ...original, priority: 'normal' },
+      migration: 'Keep the added field optional for consumers; check stricter clients separately.',
       explanation: 'This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.' },
     rename: { title: 'Rename a response field', required: ['title'], response: { id: original.id, name: original.title },
+      migration: 'Keep title alongside name while existing clients migrate.',
       explanation: 'The existing client still reads title. Renaming it to name removes a field the client needs.' },
     type: { title: 'Change a response type', required: ['title'], response: { ...original, id: 42 },
+      migration: 'Keep id as a string in this contract; use a new version if a numeric contract is needed.',
       explanation: 'This client expects a string identifier. A numeric id fails that expectation even though the JSON is valid.' },
     required: { title: 'Require a new request field', required: ['title', 'priority'], response: original,
+      migration: 'Accept missing priority with a documented default while existing clients migrate.',
       explanation: 'The existing client sends only title. Making priority required rejects a request that previously worked.' },
   };
   function check({ required, response }, input = request) {

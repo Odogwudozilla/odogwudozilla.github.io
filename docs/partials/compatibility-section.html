@@ -28,6 +28,7 @@
   "priority": "normal"
 }</code></pre></div>
     </div>
+    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for consumers; check stricter clients separately.</span></p>
     <details class="compat-notes"><summary>What makes the other changes break?</summary>
       <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
         <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>

@@ -13,6 +13,7 @@
     verdict.textContent = `${result.compatible ? 'Compatible with this client' : 'Breaks this client'} · ${result.stage}. ${result.message}`;
     verdict.dataset.compatible = String(result.compatible);
     panel.querySelector('.compat-explanation').textContent = scenario.explanation;
+    panel.querySelector('.compat-migration span').textContent = scenario.migration;
     panel.querySelector('.compat-status').textContent = result.status;
     panel.querySelector('.compat-payload').textContent = JSON.stringify(result.payload, null, 2);
     panel.querySelector('.compat-required').textContent = scenario.required.join(', ');
