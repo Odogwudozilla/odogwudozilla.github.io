@@ -16,6 +16,8 @@ export function renderCaseStudies(homepage, canonical) {
   const footer = homepage.match(/<footer\b[\s\S]*?<\/footer>/)[0]
     .replace('href="#home"', 'href="/#home"').replace('href="#home"', 'href="#main"');
   const scripts = homepage.match(/<script src="js\/scripts\.js[^" ]*" defer><\/script>/)[0];
+  const email = homepage.match(/class="email-address" href="(mailto:[^"]+)"/)?.[1];
+  if (!email) throw new Error('Missing public contact email for case studies');
   return caseStudies.map((project, index) => {
     const adjacentLink = (item, direction) => item
       ? `<a class="case-adjacent-link case-${direction}" href="${item.file}" rel="${direction}"><span>${direction === 'prev' ? '← Previous project' : 'Next project →'}</span><strong>${escapeHtml(item.lines[0])}</strong></a>`
@@ -24,6 +26,7 @@ export function renderCaseStudies(homepage, canonical) {
     const article = homepage.match(new RegExp(`<article[^>]*id="${project.id}"[\\s\\S]*?</article>`))?.[0];
     if (!article) throw new Error(`Missing case-study source: ${project.id}`);
     const title = article.match(/<h3>([\s\S]*?)<\/h3>/)[1];
+    const discussion = `${email}?subject=${encodeURIComponent(`Portfolio enquiry: ${project.lines[0]}`)}`;
     const description = article.match(/<p>([\s\S]*?)<\/p>/)[1].replace(/\s+/g, ' ').trim();
     const url = new URL(project.file, canonical).href;
     const image = new URL('assets/img/' + project.image, canonical).href;
@@ -56,7 +59,7 @@ export function renderCaseStudies(homepage, canonical) {
     <nav aria-label="Breadcrumb" class="case-breadcrumb"><a class="text-link" href="/#portfolio">Work &amp; projects</a><span aria-hidden="true"> / </span><span aria-current="page">${title}</span></nav>
     ${content}
     <nav aria-label="More case studies" class="case-pagination">${adjacent}</nav>
-    <div class="case-page-actions"><a class="text-link" href="/#${project.id}">Back to project overview</a><a class="text-link" href="/#contact">Discuss this project</a></div>
+    <div class="case-page-actions"><a class="text-link" href="/#${project.id}">Back to project overview</a><a class="text-link" href="${discussion}">Discuss this project by email</a></div>
   </main>
   ${footer}
   ${scripts}

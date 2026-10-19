@@ -7,6 +7,24 @@ const root = new URL('../docs/', import.meta.url);
 const homepage = await readFile(new URL('index.html', root), 'utf8');
 const sitemap = await readFile(new URL('sitemap.xml', root), 'utf8');
 
+test('project enquiries address the public contact with an encoded project-specific subject', async () => {
+  const recipient = homepage.match(/class="email-address" href="mailto:([^"]+)"/)[1];
+  const subjects = new Set();
+  for (const project of caseStudies) {
+    const html = await readFile(new URL(project.file, root), 'utf8');
+    const href = html.match(/href="([^"]+)">Discuss this project by email<\/a>/)?.[1];
+    assert.ok(href, `${project.file} needs a native email link`);
+    assert.doesNotMatch(href, /[\s\r\n]/);
+    const url = new URL(href);
+    assert.equal(url.protocol, 'mailto:');
+    assert.equal(url.pathname, recipient);
+    assert.deepEqual([...url.searchParams.keys()], ['subject']);
+    assert.equal(url.searchParams.get('subject'), `Portfolio enquiry: ${project.lines[0]}`);
+    subjects.add(url.searchParams.get('subject'));
+  }
+  assert.equal(subjects.size, 4);
+});
+
 test('case-study navigation follows portfolio order and stops at the first and last project', async () => {
   for (const [index, project] of caseStudies.entries()) {
     const html = await readFile(new URL(project.file, root), 'utf8');
