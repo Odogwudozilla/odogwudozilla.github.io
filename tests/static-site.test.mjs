@@ -20,6 +20,27 @@ const refs = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)]
   .map(match => match[1]);
 const enhancements = await readFile(path.join(root, 'js/scripts.js'), 'utf8');
 
+test('Person structured data matches visible identity and public profile links', async () => {
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  assert.equal(blocks.length, 1);
+  const person = JSON.parse(blocks[0][1]);
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)[1];
+  assert.equal(person['@context'], 'https://schema.org');
+  assert.equal(person['@type'], 'Person');
+  assert.equal(person.url, canonical);
+  assert.equal(person['@id'], canonical + '#person');
+  assert.equal(person.name, html.match(/<h1 id="hero-title">([^<]+)<\/h1>/)[1]);
+  assert.equal(person.jobTitle, html.match(/<p class="hero-role">([^<]+)<\/p>/)[1]);
+  assert.deepEqual(person.sameAs, [
+    'https://www.linkedin.com/in/chidoziennachor/', 'https://github.com/Odogwudozilla',
+  ]);
+  for (const profile of person.sameAs) assert.ok(refs.includes(profile));
+  assert.deepEqual(Object.keys(person).sort(),
+    ['@context', '@type', '@id', 'name', 'jobTitle', 'url', 'sameAs'].sort());
+  const missing = await readFile(path.join(root, '404.html'), 'utf8');
+  assert.doesNotMatch(missing, /application\/ld\+json/);
+});
+
 test('sharing metadata uses one reachable landscape JPEG with matching dimensions', async () => {
   const meta = new Map([...html.matchAll(/<meta (?:property|name)="([^"]+)" content="([^"]*)">/g)]
     .map(match => [match[1], match[2]]));
