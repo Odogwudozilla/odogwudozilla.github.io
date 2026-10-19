@@ -7,7 +7,7 @@
 #primary-navigation { display: flex; align-items: center; gap: 24px; }
 #primary-navigation a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; color: var(--ink); border-bottom: 2px solid transparent; }
 #primary-navigation a[aria-current] { border-bottom-color: var(--teal); }
-#primary-navigation a:hover, #primary-navigation a:focus-visible { border-bottom-color: var(--accent); }
+#primary-navigation a:hover, #primary-navigation a:focus-visible { border-bottom-color: var(--teal); }
 #primary-navigation .nav-contact { gap: 12px; }
 .menu-toggle { align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--action); border-radius: var(--control-radius); background: var(--surface); color: var(--action); font-size: .875rem; }
 .menu-toggle:hover, .menu-toggle:focus-visible { background: var(--action); color: var(--action-ink); }
@@ -15,7 +15,7 @@
 .menu-glyph i { height: 1px; background: currentColor; transition: transform .15s; }
 .menu-toggle[aria-expanded="true"] .menu-glyph i:first-child { transform: translateY(3px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"] .menu-glyph i:last-child { transform: translateY(-3px) rotate(-45deg); }
-.colour-switch { display: inline-flex; flex-shrink: 0; gap: 3px; }
+.colour-switch { display: inline-flex; flex-shrink: 0; gap: 8px; }
 .colour-switch button { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 6px 9px; background: transparent; border: 1px solid transparent; border-radius: var(--control-radius); color: var(--muted); font-size: .8125rem; }
 .colour-switch button[aria-pressed="true"] { border-color: var(--teal); color: var(--teal); font-weight: 650; }
 .colour-switch button:hover, .colour-switch button:focus-visible { background: var(--action); border-color: var(--action); color: var(--action-ink); }

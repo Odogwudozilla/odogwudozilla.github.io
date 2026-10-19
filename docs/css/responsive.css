@@ -46,9 +46,9 @@
   .education-list { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; }
   .contact-grid { grid-template-columns: 1fr; gap: 24px; }
   .contact-grid h2 { font-size: 1.5rem; }
-  .site-footer { flex-wrap: wrap; padding-block: 24px; gap: 12px 24px; }
+  .footer-inner { flex-wrap: wrap; gap: 12px 24px; }
   .site-footer p { order: 3; flex-basis: 100%; }
-  .site-footer > a:last-child { margin-left: auto; }
+  .footer-top { margin-left: auto; }
 }
 @media (max-width: 600px) {
   .capability-grid { grid-template-columns: 1fr; }
@@ -82,10 +82,13 @@
   body { background: white; font-size: 10pt; }
   .site-shell { width: 100%; }
   .site-header, .skip-link, .work-index, .hero .button-group,
-  .copy-email, .copy-status, .project-share, .disclosure-icon, .site-footer > a:last-child {
+  .copy-email, .copy-status, .project-share, .disclosure-icon, .footer-top {
     display: none !important;
   }
   .hero { padding-top: 0; }
+  .site-footer { margin-top: 24px; background: white; color: black; border-top: 1px solid black; }
+  .site-footer p, .footer-name span { color: black; }
+  .footer-inner { min-height: 0; padding-block: 12px; }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 100px; }
   .hero-copy { order: 0; }
   .hero-portrait { width: 100px; }
