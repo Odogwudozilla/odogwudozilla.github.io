@@ -256,6 +256,15 @@ test('project previews expose each reviewed technology list once while details r
 });
 
 test('curated projects have valid anchors and public-facing access labels', () => {
+  for (const [id, label] of [['fusion-project', 'Private repository'], ['energy-project', 'Private repository'], ['aoc-project', 'Public source']]) {
+    const card = html.match(new RegExp(`<article[^>]*id="${id}"[\\s\\S]*?</article>`))[0];
+    const preview = card.split('<details')[0];
+    assert.ok(preview.includes(label), `${id} access label must be visible before expansion`);
+    assert.equal(card.split(label).length - 1, 1, 'Expansion must not duplicate access labels');
+    assert.match(preview, /Personal project/);
+  }
+  const professional = html.match(/<article[^>]*id="insurance-case"[\s\S]*?<\/article>/)[0];
+  assert.doesNotMatch(professional, /Private repository|Public source/, 'Do not invent company repository access');
   for (const id of ['fusion-project', 'energy-project', 'aoc-project']) {
     assert.ok(ids.includes(id), `Missing project anchor: ${id}`);
   }

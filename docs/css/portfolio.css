@@ -33,6 +33,7 @@
 .project-content { padding-left: 24px; border-left: 1px solid var(--line); }
 .project-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .project-meta .eyebrow { color: var(--muted); }
+.case-intro .project-meta { margin: 12px 0 0; }
 .project-status { font-size: .8125rem; color: var(--muted); }
 .project-highlights { padding-left: 18px; margin: 0 0 18px; font-size: .9375rem; color: var(--muted); }
 .project-highlights li { margin-top: 5px; }
