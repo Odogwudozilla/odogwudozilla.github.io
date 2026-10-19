@@ -29,7 +29,8 @@ async function renderPage(templateName = 'site-template.html') {
   // A changed script must not reuse a previous deployment's browser-cache URL.
   for (const [, source] of [...html.matchAll(/\bsrc="(\/?js\/[^"?]+\.js)"/g)]) {
     const bytes = await readFile(path.join(root, 'docs', source.replace(/^\//, '')));
-    const version = createHash('sha256').update(bytes).digest('hex').slice(0, 12);
+    // Git publishes LF; Windows checkouts can use CRLF for the same script.
+    const version = createHash('sha256').update(bytes.toString('utf8').replaceAll('\r\n', '\n')).digest('hex').slice(0, 12);
     html = html.replaceAll(`src="${source}"`, `src="${source}?v=${version}"`);
   }
   // Compact whitespace between closing block tags; keep source partials readable.

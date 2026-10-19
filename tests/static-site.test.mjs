@@ -261,14 +261,14 @@ test('the selected palette is default and the original comparison retains shared
   }
 });
 
-test('generated pages reference script versions derived from their actual bytes', async () => {
+test('generated pages reference script versions derived from LF-normalized content', async () => {
   for (const name of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html']) {
     const page = await readFile(path.join(root, name), 'utf8');
     const scripts = [...page.matchAll(/<script src="(\/?js\/[^"?]+\.js)\?v=([a-f0-9]{12})"/g)];
     assert.equal(scripts.length, 2, `${name} must version both browser scripts`);
     for (const [, source, version] of scripts) {
       const bytes = await readFile(path.join(root, source.replace(/^\//, '')));
-      assert.equal(version, createHash('sha256').update(bytes).digest('hex').slice(0, 12));
+      assert.equal(version, createHash('sha256').update(bytes.toString('utf8').replaceAll('\r\n', '\n')).digest('hex').slice(0, 12));
     }
   }
 });
