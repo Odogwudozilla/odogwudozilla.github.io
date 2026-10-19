@@ -8,6 +8,7 @@ import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { caseStudies } from '../scripts/case-studies.mjs';
 import './case-studies.test.mjs';
+import './icons.test.mjs';
 import './navigation-focus.test.mjs';
 import './project-sharing.test.mjs';
 import './palette-contrast.test.mjs';
@@ -144,7 +145,7 @@ test('missing pages offer working recovery links without becoming successful res
       assert.ok(response.headers.get('content-type').startsWith('text/css'));
       assert.equal(await response.text(), await readFile(path.join(root, stylesheet.split('?')[0]), 'utf8'));
     }
-    for (const [file, type] of [['robots.txt', 'text/plain'], ['sitemap.xml', 'application/xml']]) {
+    for (const [file, type] of [['robots.txt', 'text/plain'], ['sitemap.xml', 'application/xml'], ['site.webmanifest', 'application/manifest+json']]) {
       const response = await fetch(address + '/' + file);
       assert.equal(response.status, 200);
       assert.ok(response.headers.get('content-type').startsWith(type));
@@ -215,7 +216,8 @@ test('all internal anchors resolve and IDs are unique', () => {
 test('local assets exist within the public folder', async () => {
   const local = refs.filter(ref => !/^(#|https?:|mailto:)/.test(ref));
   for (const ref of local) {
-    const target = path.resolve(root, ref.split('?')[0]);
+    assert.ok(!ref.startsWith('//'), 'Protocol-relative URLs are not local assets');
+    const target = path.resolve(root, ref.split('?')[0].replace(/^\//, ''));
     assert.ok(!path.relative(root, target).startsWith('..'));
     await access(target);
   }
