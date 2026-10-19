@@ -57,6 +57,7 @@ export function renderCaseStudies(homepage, canonical) {
   ${navigation}
   <main id="main" class="site-shell case-page" tabindex="-1">
     <nav aria-label="Breadcrumb" class="case-breadcrumb"><a class="text-link" href="/#portfolio">Work &amp; projects</a><span aria-hidden="true"> / </span><span aria-current="page">${title}</span></nav>
+    <p class="case-print-context">Chidozie Nnachor · ${escapeHtml(email.slice(7))}<br>${url}</p>
     ${content}
     <nav aria-label="More case studies" class="case-pagination">${adjacent}</nav>
     <div class="case-page-actions"><a class="text-link" href="/#${project.id}">Back to project overview</a><a class="text-link" href="${discussion}">Discuss this project by email</a></div>

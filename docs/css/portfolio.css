@@ -39,6 +39,7 @@
 .tooling-terminal > div { margin-block: 8px; }
 .work-colophon { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding-top: 18px; }
 .case-page { padding-top: 28px; }
+.case-print-context { display: none; }
 .case-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px; color: var(--muted); font-size: .9375rem; }
 .case-page .case-intro h1 { margin-bottom: 16px; }
 .case-page h2 { font-size: 1.125rem; letter-spacing: normal; margin: 20px 0 8px; }
