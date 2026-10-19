@@ -1,0 +1,59 @@
+<section class="page-section playground-section" id="playground" aria-labelledby="playground-title">
+  <div class="section-heading">
+    <p class="eyebrow">Engineering, made visible</p>
+    <h2 id="playground-title">Follow a request</h2>
+    <p>What happens between sending a request and getting a response?
+      Explore validation, processing and failure handling in a small task API.</p>
+  </div>
+  <div class="api-playground">
+    <div class="flow-controls" hidden>
+      <div class="flow-scenarios" role="group" aria-label="API request scenario">
+        <button type="button" data-scenario="valid" aria-pressed="true">Valid request</button>
+        <button type="button" data-scenario="invalid" aria-pressed="false">Invalid input</button>
+        <button type="button" data-scenario="unavailable" aria-pressed="false">Temporary failure</button>
+      </div>
+      <div class="flow-actions" role="group" aria-label="Request playback">
+        <button class="button flow-run" type="button">Run flow <span aria-hidden="true">▶</span></button>
+        <button class="button flow-next" type="button">Next step</button>
+        <button class="flow-reset text-link" type="button">Reset</button>
+      </div>
+    </div>
+    <ol class="flow-diagram" aria-label="Request lifecycle">
+      <li data-flow-stage="0" data-state="complete"><span class="flow-number" aria-hidden="true">01</span><strong>Request</strong><span class="flow-state">Sent</span></li>
+      <li data-flow-stage="1" data-state="complete"><span class="flow-number" aria-hidden="true">02</span><strong>Validation</strong><span class="flow-state">Passed</span></li>
+      <li data-flow-stage="2" data-state="complete"><span class="flow-number" aria-hidden="true">03</span><strong>Service</strong><span class="flow-state">Created</span></li>
+      <li data-flow-stage="3" data-state="current" aria-current="step"><span class="flow-number" aria-hidden="true">04</span><strong>Response</strong><span class="flow-state">201 Created</span></li>
+    </ol>
+    <div class="flow-narrative">
+      <p class="flow-progress eyebrow" role="status" aria-live="polite" aria-atomic="true">Step 4 of 4 · 201 Created</p>
+      <h3 class="flow-title">The task was created.</h3>
+      <p class="flow-explanation">The input passed validation and the service created a task. The response includes its identifier and a location for the new resource.</p>
+    </div>
+    <div class="flow-payloads">
+      <div class="flow-payload"><p class="flow-payload-label">Request <span>JSON</span></p><pre><code class="flow-request">POST /demo/tasks
+Content-Type: application/json
+
+{
+  "title": "Review API contract"
+}</code></pre></div>
+      <div class="flow-payload"><p class="flow-payload-label">Response <span class="flow-response-label">201 Created</span></p><pre><code class="flow-response">HTTP/1.1 201 Created
+Location: /demo/tasks/demo-1042
+Content-Type: application/json
+
+{
+  "id": "demo-1042",
+  "title": "Review API contract"
+}</code></pre></div>
+    </div>
+    <p class="flow-disclaimer">Illustrative simulation · synthetic data · runs entirely in your browser.
+      No requests are sent and no tasks are stored.</p>
+    <details class="flow-notes">
+      <summary>Why these responses?</summary>
+      <dl>
+        <div><dt>201 · Created</dt><dd>A valid request creates a resource. Its identifier and location are returned.</dd></div>
+        <div><dt>400 · Bad Request</dt><dd>In this example, a blank title fails validation. Processing is skipped and a field-level error is returned.</dd></div>
+        <div><dt>503 · Service Unavailable</dt><dd>A temporary service failure creates nothing. A Retry-After header suggests waiting 30 seconds. A real client should consider idempotency before retrying a POST.</dd></div>
+      </dl>
+    </details>
+  </div>
+</section>
