@@ -18,6 +18,8 @@
   --accent: #526b26;
   --hover-bg: #153f38;
   --hover-ink: #fffef9;
+  --focus-ring: var(--teal);
+  --focus-gap: var(--surface);
   --radius: 10px;
   --control-radius: 6px;
   --column-gap: 24px;
@@ -41,7 +43,11 @@ img, svg { display: block; max-width: 100%; }
 img { height: auto; }
 [hidden] { display: none !important; }
 ::selection { background: var(--lime); color: var(--ink); }
-:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; box-shadow: 0 0 0 3px var(--focus-gap); }
+/* Keep native high-contrast colours when the operating system supplies them. */
+@media (forced-colors: active) {
+  :focus-visible { outline-color: Highlight; box-shadow: none; }
+}
 .site-shell { width: min(1080px, calc(100% - 64px)); margin-inline: auto; }
 .eyebrow { font: .8125rem/1.5 var(--font-mono); letter-spacing: .035em; }
 .tech-line { font: .875rem/1.6 var(--font-mono); color: var(--muted); }

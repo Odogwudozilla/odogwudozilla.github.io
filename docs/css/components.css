@@ -22,9 +22,9 @@
 .experience-details summary { min-height: 44px; padding: 8px 10px; font-size: .875rem; border-radius: var(--control-radius); }
 .experience-details ul { padding-right: 8px; }
 .case-details summary { border-radius: var(--control-radius); }
-/* All link underlines share the accent without changing text or backgrounds. */
+/* Underlines retain text contrast on both light and filled action surfaces. */
 a[href]:is(:hover, :focus-visible) {
-  text-decoration-color: var(--accent);
+  text-decoration-color: currentColor;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
