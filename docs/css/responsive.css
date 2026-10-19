@@ -103,7 +103,7 @@
   .case-print-context { display: block; margin-bottom: 16px; font-size: 9pt; overflow-wrap: anywhere; }
   .case-page .project-card { border: 0; border-radius: 0; padding: 0; background: white; }
   .case-page h1 { font-size: 24pt; }
-  .case-page .engineering-themes > div + div { margin-top: 16px; }
+  .engineering-themes > div + div { margin-top: 16px; }
   .site-footer { margin-top: 24px; background: white; color: black; border-top: 1px solid black; }
   .site-footer p, .footer-name span { color: black; }
   .footer-inner { min-height: 0; padding-block: 12px; }
