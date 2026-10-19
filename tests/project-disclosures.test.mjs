@@ -8,7 +8,7 @@ test('project overviews are concise native links rather than nested disclosures'
   assert.equal([...html.matchAll(/class="project-case-link text-link"/g)].length, 4);
 });
 test('existing project and skills fragments remain reachable in server-rendered HTML', () => {
-  for (const id of ['insurance-case', 'fusion-project', 'energy-project', 'aoc-project']) {
+  for (const id of ['insurance-case', 'fusion-project', 'energy-project', 'product-watch-project']) {
     assert.ok(html.includes(`id="${id}"`));
   }
   assert.match(html, /<span class="fragment-alias" id="skills" aria-hidden="true"><\/span>/);

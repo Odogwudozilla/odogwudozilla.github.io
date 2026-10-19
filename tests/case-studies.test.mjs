@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile, access } from 'node:fs/promises';
+import { readFile, access, readdir } from 'node:fs/promises';
 import { test } from 'node:test';
 import { caseStudies } from '../scripts/case-studies.mjs';
 
@@ -7,6 +7,18 @@ const root = new URL('../docs/', import.meta.url);
 const homepage = await readFile(new URL('index.html', root), 'utf8');
 const sitemap = await readFile(new URL('sitemap.xml', root), 'utf8');
 const narratives = await readFile(new URL('partials/project-case-studies.html', root), 'utf8');
+
+test('retired project mentions and its case page are absent from public artifacts', async () => {
+  const files = await readdir(root, { recursive: true });
+  for (const file of files) {
+    assert.doesNotMatch(file, /advent|aoc-project/i);
+    if (/\.(html|md|js|css|svg|xml|json|webmanifest)$/i.test(file)) {
+      assert.doesNotMatch(await readFile(new URL(file.replaceAll('\\', '/'), root), 'utf8'),
+        /Advent of Code|adventOfCode|aoc-project|Java puzzles|Java puzzle tools/i, file);
+    }
+  }
+  assert.equal(caseStudies[0].id, 'product-watch-project');
+});
 
 test('project enquiries address the public contact with an encoded project-specific subject', async () => {
   const recipient = homepage.match(/class="email-address" href="mailto:([^"]+)"/)[1];

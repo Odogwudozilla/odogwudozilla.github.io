@@ -50,11 +50,11 @@ before its engineering headings.
 
 - Introduction: portfolio label, name, role, photograph, work/contact links,
   professional profiles and concise role/background facts.
-- Work: compact Keylane overview with its technologies and engineering themes inside a native
-  disclosure, then Fusion Almere FC, HomeWizard Energy Intelligence and Advent of Code.
+- Work: concise cards for Personal Product Watch, Keylane, Fusion Almere FC and
+  HomeWizard Energy Intelligence, in that order. Dedicated case studies retain the detail.
 - Experience: dates, employers and short role summaries remain visible;
   each responsibility list has a separate native disclosure, closed initially.
-- Skills: technology categories and first-person descriptions without self-ratings.
+- Skills: evidenced within Work & Projects, with a shared toolkit note; no separate section.
 - About: banking-to-software background and education, without a second portrait.
 - Contact: email/social links and progressive clipboard support.
 
@@ -64,7 +64,7 @@ instead of a chart with invented readings. Company contributions remain
 public-safe and general, without a privacy disclaimer in the visitor-facing copy.
 
 Copy describes the actual work: APIs, compatibility, defect investigation,
-registration, local storage, and puzzle tooling. Remove stock case-study labels,
+registration, local storage, and criteria-driven product monitoring. Remove stock case-study labels,
 repeated summaries and drafting commentary. Keep development status, dates and
 source availability because these help a reader assess each project.
 

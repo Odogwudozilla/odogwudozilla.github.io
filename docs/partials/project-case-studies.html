@@ -1,4 +1,40 @@
 <!-- Full reviewed project narratives; used only by the dedicated case-study build. -->
+<article class="project-card card" id="product-watch-project">
+  <div class="case-intro">
+    <h3>Personal Product Watch</h3>
+    <dl class="case-brief">
+      <div><dt>Purpose</dt><dd><p>I’m building a product watcher that checks offers against product requirements and preferred and maximum unit prices.</p></dd></div>
+      <div><dt>Approach</dt><dd><p>TypeScript on Cloudflare Workers and D1, with separate checking and email-delivery workflows.</p></dd></div>
+      <div><dt>Status</dt><dd><p>Personal project · Owner-only live workspace and an open fictional demo. Private repository.</p></dd></div>
+    </dl>
+    <ul class="chip-list" aria-label="Product Watch technologies">
+      <li>TypeScript</li><li>Cloudflare Workers</li><li>D1</li><li>SQLite</li><li>GitHub Actions</li>
+    </ul>
+  </div>
+  <div class="details-body">
+    <div class="project-expanded">
+      <figure class="project-visual">
+        <div class="visual-caption">Product Watch <span>Criteria to offer</span></div>
+        <ol class="energy-flow" aria-label="Product watch workflow">
+          <li>Define product requirements and unit-price limits</li>
+          <li>Check offers and explain the match</li>
+          <li>Preview or receive a qualifying-offer email</li>
+        </ol>
+        <figcaption>The public demo uses fictional products and simulated results.</figcaption>
+      </figure>
+      <div class="project-content">
+        <h4>Criteria and fair comparison</h4>
+        <p>A watch describes a product need rather than a single listing URL. The first slice compares detergent prices per wash, so different pack sizes can be assessed against the same limits. Product variants and missing evidence affect whether an offer qualifies.</p>
+        <h4>Checking and alerting</h4>
+        <p>The private application stores watch criteria, supports manual and scheduled checks, and prepares email alerts for qualifying offers. The TypeScript application runs on Cloudflare Workers with D1 storage; GitHub Actions runs the checking workflows.</p>
+        <h4>A public demo with clear boundaries</h4>
+        <p>Visitors can adjust sample limits, compare fictional offers and preview an alert without signing in. The demo does not search retailers, make purchases or send email. The live workspace is limited to the owner.</p>
+        <a class="project-code-link text-link" href="https://personal-product-watch.odogwu-naija.workers.dev/demo" target="_blank" rel="noopener noreferrer">Try the public demo <span aria-hidden="true">↗</span><span class="sr-only">(opens in a new tab)</span></a>
+      </div>
+    </div>
+  </div>
+</article>
+
 <article class="project-card enterprise-case card" id="insurance-case">
       <div class="case-intro">
         <h3>Keylane — insurance software</h3>
@@ -149,49 +185,6 @@
                 comparisons are still being developed.</p>
               <a class="project-code-link text-link" href="#contact">Ask about this project
                 <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-
-        </div>
-
-    </article>
-
-<article class="project-card card" id="aoc-project">
-      <div class="case-intro">
-        <h3>Advent of Code</h3>
-        <dl class="case-brief">
-          <div><dt>Purpose</dt><dd><p>My Java puzzle solutions, with tools for selecting puzzles, testing results, and tracking progress.</p></dd></div>
-          <div><dt>Approach</dt><dd><p>Reusable Gradle tasks and test utilities, with a progress dashboard and browser automation.</p></dd></div>
-          <div><dt>Status</dt><dd><p>Personal project · Public source repository with Java solutions and puzzle tooling.</p></dd></div>
-        </dl>
-        <ul class="chip-list" aria-label="Puzzle toolkit technologies">
-          <li>Java</li><li>Gradle</li><li>JUnit</li><li>Playwright</li>
-        </ul>
-      </div>
-
-        <div class="details-body">
-          <div class="project-expanded">
-            <figure class="project-visual tooling-visual">
-              <div class="visual-caption">Advent of Code <span>Java puzzle tools</span></div>
-              <div class="tooling-terminal" aria-hidden="true">
-                <span class="terminal-prompt">~/adventOfCode</span>
-                <div><span>$</span> ./gradlew randomPuzzle</div>
-                <div><span>$</span> ./gradlew test</div>
-              </div>
-              <figcaption>Gradle tasks for puzzle selection and tests.</figcaption>
-            </figure>
-            <div class="project-content">
-
-              <h4>Puzzle selection and testing</h4>
-              <p>I use Gradle tasks and reusable test utilities to select unsolved
-                puzzles and check solutions across several puzzle years.</p>
-              <h4>Progress and automation</h4>
-              <p>The repository includes performance tracking, caching, an HTML
-                progress dashboard, and Playwright automation. I also experiment
-                with GitHub Copilot as part of the puzzle-solving workflow.</p>
-              <a class="project-code-link text-link" href="https://github.com/Odogwudozilla/adventOfCode"
-                target="_blank" rel="noopener noreferrer">View the repository <span aria-hidden="true">↗</span>
-                <span class="sr-only">(opens in a new tab)</span></a>
             </div>
           </div>
 

@@ -9,7 +9,7 @@ const html = await readFile(new URL('../docs/index.html', import.meta.url), 'utf
 function fixture(instant = '2026-10-19T12:26:00Z', intl = Intl) {
   const makeNode = () => ({ hidden: true, textContent: '', children: [],
     append(node) { this.children.push(node); }, replaceChildren() { this.children = []; } });
-  const projects = ['insurance-case', 'fusion-project', 'energy-project', 'aoc-project'].map(id => {
+  const projects = ['product-watch-project', 'insurance-case', 'fusion-project', 'energy-project'].map(id => {
     const intro = makeNode();
     return { id, intro, matched: false,
       classList: { toggle(_, value) { projects.find(item => item.id === id).matched = value; } },
@@ -45,13 +45,13 @@ test('project focus highlights evidence without hiding projects or changing disc
   const f = fixture();
   assert.equal(f.explorer.hidden, false);
   f.buttons[3].click();
-  assert.deepEqual(f.projects.map(item => item.matched), [false, true, true, false]);
-  assert.match(f.status.textContent, /^2 projects/);
+  assert.deepEqual(f.projects.map(item => item.matched), [true, false, true, true]);
+  assert.match(f.status.textContent, /^3 projects/);
   assert.equal(f.buttons.filter(item => item.pressed === 'true').length, 1);
   f.buttons[3].click();
-  assert.equal(f.projects.filter(item => item.matched).length, 2);
+  assert.equal(f.projects.filter(item => item.matched).length, 3);
   f.buttons[1].click();
-  assert.equal(f.projects.filter(item => item.matched).length, 4);
+  assert.equal(f.projects.filter(item => item.matched).length, 3);
   f.buttons[0].click();
   assert.ok(f.projects.every(item => !item.matched && item.intro.children[0].hidden));
   assert.equal(f.status.textContent, 'All four projects are shown.');
@@ -76,5 +76,5 @@ test('unsupported time-zone formatting leaves clock hidden while explorer still 
   assert.equal(f.clock.hidden, true);
   assert.equal(f.explorer.hidden, false);
   f.buttons[2].click();
-  assert.equal(f.projects.filter(item => item.matched).length, 3);
+  assert.equal(f.projects.filter(item => item.matched).length, 4);
 });

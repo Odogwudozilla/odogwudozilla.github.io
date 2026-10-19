@@ -7,15 +7,15 @@ repository documentation, and the available local project source.
 
 | Project | Why it belongs | Public presentation |
 | --- | --- | --- |
+| Personal Product Watch | Criteria-driven offer checking, unit-price comparison and alerts | First project, public fictional demo, private-source label |
 | Fusion Almere FC | A practical full-stack club application with a Java backend and Angular frontend | MVP summary, public test-site preview/link, private-source label |
 | HomeWizard Energy Intelligence | Data collection, recovery, authenticated ingestion, and historical exploration | Technical summary and illustrative chart; private-source label |
-| Advent of Code | Java algorithms plus reusable validation and automation tools | Learning/tooling summary and public repository link |
 
 The field-trials project was removed from Selected Work at the user's
 request. Its historical employment entry remains in Experience. The
 portfolio itself is now a small source-code link rather than a featured
-project. Enterprise insurance work leads Selected Work as the main
-professional case study, followed by the three personal projects.
+project. Personal Product Watch leads Work & Projects, followed by Keylane,
+Fusion Almere FC and HomeWizard Energy Intelligence.
 
 ## Evidence used
 
@@ -43,20 +43,19 @@ professional case study, followed by the three personal projects.
   presentation. Financial valuation remains in progress.
 - The portfolio illustration contains no actual meter or household values.
 
-### Advent of Code
+### Personal Product Watch
 
-- Repository README: puzzle selection, validation, caching, dashboard,
-  Gradle execution, Playwright automation, and Copilot-assisted workflow.
-- Source tree: multi-year solutions, automation, core utilities, dashboard,
-  tests, and a puzzle randomizer.
-- `PuzzlePerformanceMonitor.java`: timing and runtime memory measurements.
+- Local README, TypeScript application structure and public landing page reviewed on 19 October 2026.
+- Public demo offers fictional watches, editable criteria, simulated matches and email previews without login or real integrations.
+- Presentation covers unit-price comparison, criteria, checking and alerts; it makes no claim of complete retailer coverage or production reliability.
+- The repository and owner workspace remain private. No operational identifiers, credentials or private watch data are published.
 
 ## Boundaries
 
 Descriptions reflect inspected code and documented state; no project-wide
 test pass counts, usage statistics, or commercial outcomes are claimed.
 Private repository links are not presented as public source-code actions.
-Only the public club test site and public Advent of Code code are linked.
+Only public demo and test-site actions are linked.
 
 After a project changes, update its HTML partial and this evidence note,
 then regenerate and run the static checks. Portfolio QA covers layout,
