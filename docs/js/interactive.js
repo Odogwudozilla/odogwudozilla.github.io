@@ -38,6 +38,11 @@
   const explorer = document.querySelector('.project-explorer');
   if (!explorer) return;
   const evidence = {
+    'product-watch-project': {
+      apis: 'Offer-checking workflows and email alerts in a TypeScript application.',
+      frontend: 'A public interactive demo with fictional watches and email previews.',
+      data: 'D1 storage for watch criteria, observations and checking state.',
+    },
     'insurance-case': {
       java: 'Java services for insurance policy management.',
       apis: 'SOAP-to-REST changes, OpenAPI contracts and integration compatibility.',
@@ -54,9 +59,6 @@
       apis: 'HomeWizard API collection with upload retries and replay.',
       frontend: 'A React and TypeScript interface for energy history.',
       data: 'SQLite storage, Supabase uploads and data-coverage checks.',
-    },
-    'aoc-project': {
-      java: 'Java puzzle solutions with Gradle and reusable test utilities.',
     },
   };
   const projects = Object.entries(evidence).map(([id, skills]) => {

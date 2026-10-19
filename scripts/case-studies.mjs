@@ -1,9 +1,9 @@
 /** Dedicated pages retain full narratives independently of the short homepage. */
 export const caseStudies = [
+  { id: 'product-watch-project', file: 'case-personal-product-watch.html', image: 'case-personal-product-watch.jpg', lines: ['Personal Product Watch', 'Criteria-driven offers'], focus: 'TypeScript · Workers · D1' },
   { id: 'insurance-case', file: 'case-keylane.html', image: 'case-keylane.jpg', lines: ['Keylane', 'Insurance software'], focus: 'Java · REST APIs · SOAP · SQL' },
   { id: 'fusion-project', file: 'case-fusion-almere-fc.html', image: 'case-fusion-almere-fc.jpg', lines: ['Fusion Almere FC', 'Club platform'], focus: 'Angular · Spring Boot · Supabase' },
   { id: 'energy-project', file: 'case-homewizard-energy.html', image: 'case-homewizard-energy.jpg', lines: ['HomeWizard Energy', 'Intelligence'], focus: 'Collection · Recovery · Energy history' },
-  { id: 'aoc-project', file: 'case-advent-of-code.html', image: 'case-advent-of-code.jpg', lines: ['Advent of Code', 'Java puzzle toolkit'], focus: 'Java · Gradle · Testing' },
 ];
 
 function escapeHtml(value) {

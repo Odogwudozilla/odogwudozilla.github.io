@@ -204,7 +204,7 @@ test('the published HTML is complete before JavaScript runs', () => {
   assert.match(html, /Software engineering portfolio/);
   assert.match(html, /Fusion Almere FC/);
   assert.match(html, /HomeWizard Energy Intelligence/);
-  assert.match(html, /Advent of Code/);
+  assert.match(html, /Personal Product Watch/);
   assert.match(html, /mailto:odogwu.naija@gmail.com/);
   assert.doesNotMatch(html, /\{\{|components-loader|container"><\/div>/);
   assert.doesNotMatch(html, /onclick=|alert\(|coming soon|style="width:/i);
@@ -265,7 +265,7 @@ test('concise project overviews expose technology evidence once and link to thei
 });
 
 test('curated projects have valid anchors and public-facing access labels', async () => {
-  for (const [id, label] of [['fusion-project', 'Private repository'], ['energy-project', 'Private repository'], ['aoc-project', 'Public source']]) {
+  for (const [id, label] of [['fusion-project', 'Private repository'], ['energy-project', 'Private repository'], ['product-watch-project', 'Private repository']]) {
     const card = html.match(new RegExp(`<article[^>]*id="${id}"[\\s\\S]*?</article>`))[0];
     const preview = card.split('<details')[0];
     assert.ok(preview.includes(label), `${id} access label must be visible before expansion`);
@@ -274,11 +274,11 @@ test('curated projects have valid anchors and public-facing access labels', asyn
   }
   const professional = html.match(/<article[^>]*id="insurance-case"[\s\S]*?<\/article>/)[0];
   assert.doesNotMatch(professional, /Private repository|Public source/, 'Do not invent company repository access');
-  for (const id of ['fusion-project', 'energy-project', 'aoc-project']) {
+  for (const id of ['fusion-project', 'energy-project', 'product-watch-project']) {
     assert.ok(ids.includes(id), `Missing project anchor: ${id}`);
   }
   assert.doesNotMatch(html, /href="https:\/\/github.com\/Odogwudozilla\/(homewizard|fusion-almere-fc)"/);
-  assert.match(await readFile(path.join(root, 'case-advent-of-code.html'), 'utf8'), /href="https:\/\/github.com\/Odogwudozilla\/adventOfCode"/);
+  assert.match(await readFile(path.join(root, 'case-personal-product-watch.html'), 'utf8'), /href="https:\/\/personal-product-watch\.odogwu-naija\.workers\.dev\/demo"/);
   assert.match(await readFile(path.join(root, 'case-fusion-almere-fc.html'), 'utf8'), /Public test site · MVP in development/);
   assert.match(await readFile(path.join(root, 'case-homewizard-energy.html'), 'utf8'), /<ol class="energy-flow"[\s\S]*?Save readings in SQLite[\s\S]*?Upload to Supabase[\s\S]*?<\/ol>/);
   assert.doesNotMatch(html, /id="portfolio"[\s\S]*?Field data, brought together/);
@@ -299,10 +299,12 @@ test('Keylane descriptions stay at the level of professional responsibilities', 
   assert.match(keylane, /authorisation/);
 });
 
-test('professional experience leads the portfolio and drafting context stays unpublished', () => {
+test('Product Watch leads the portfolio and professional context stays public-safe', () => {
   const work = html.match(/<div class="work-grid"[^>]*>([\s\S]*?)<div class="work-colophon">/)?.[1];
   assert.ok(work);
-  assert.match(work, /^\s*<article[^>]+id="insurance-case">/);
+  assert.match(work, /^\s*<article[^>]+id="product-watch-project">/);
+  assert.deepEqual([...work.matchAll(/<article[^>]+id="([^"]+)"/g)].map(match => match[1]),
+    caseStudies.map(project => project.id));
   assert.match(html, /Sep 2019 — Present/);
   assert.doesNotMatch(html, /keylane-portfolio-public-safe-context\.md/);
 });
