@@ -103,60 +103,7 @@
     updateActiveSection();
   }
 
-  /** A project URL should reveal its case study, including on a fresh visit. */
-  function revealLinkedProject(fragment = window.location.hash) {
-    let id;
-    try {
-      id = decodeURIComponent(fragment.slice(1));
-    } catch {
-      return;
-    }
-    const project = document.getElementById(id);
-    if (!project?.matches('.project-card')) return;
-    const details = project.querySelector('details.case-details');
-    if (details) details.open = true;
-  }
-
-  window.addEventListener('hashchange', () => revealLinkedProject());
-  // Clicking the same fragment again does not dispatch hashchange.
-  document.addEventListener('click', event => {
-    const link = event.target.closest('a[href^="#"]');
-    if (link && !event.defaultPrevented
-      && event.button === 0 && !event.metaKey && !event.ctrlKey
-      && !event.shiftKey && !event.altKey) revealLinkedProject(link.hash);
-  });
-  revealLinkedProject();
-
-  // Copy the public canonical URL, even from a preview or a legacy alias.
-  const portfolio = document.querySelector('#portfolio');
-  const canonical = document.querySelector('link[rel="canonical"]');
-  if (portfolio && canonical && navigator.clipboard?.writeText) {
-    for (const project of portfolio.querySelectorAll('.project-card')) {
-      const button = project.querySelector('.copy-project-link');
-      const status = project.querySelector('.project-share-status');
-      if (!button || !status) continue;
-      const link = new URL(button.dataset.projectUrl || `#${project.id}`, canonical.href);
-      button.hidden = false;
-      let copying = false;
-      button.addEventListener('click', async () => {
-        if (copying) return;
-        copying = true;
-        button.setAttribute('aria-busy', 'true');
-        status.textContent = '';
-        try {
-          await navigator.clipboard.writeText(link.href);
-          status.textContent = 'Project link copied.';
-        } catch {
-          status.textContent = 'Could not copy. Open the case study and copy its address.';
-        } finally {
-          copying = false;
-          button.removeAttribute('aria-busy');
-        }
-      });
-    }
-  }
-
-  // Print every case study, then restore the reader's disclosure choices.
+  // Print folded reading notes, then restore the reader's disclosure choices.
   let printClosedDetails;
   window.addEventListener('beforeprint', () => {
     if (printClosedDetails) return;

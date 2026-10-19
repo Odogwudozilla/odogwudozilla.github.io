@@ -1,4 +1,4 @@
-/* Work is presented as case notes and project rows, not a tile collage. */
+/* Concise project overviews lead to full case notes on dedicated pages. */
 .work-index { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .work-index a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; min-height: 44px; border: 1px solid var(--line); border-radius: var(--control-radius); font-size: .875rem; }
 .work-index a:hover, .work-index a:focus-visible { background: var(--hover-bg); color: var(--hover-ink); border-color: var(--hover-bg); }
@@ -8,6 +8,20 @@
 .work-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
 .project-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 23px 24px; border-color: var(--teal); }
 .work-section .project-card { border-color: var(--line); }
+.work-section .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+.work-section .project-card { display: flex; flex-direction: column; padding: 20px; }
+.work-section .case-intro .chip-list { margin-top: 10px; }
+.work-section .case-intro .project-meta { margin-top: 8px; }
+.project-case-link { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); min-height: 40px; font-size: .875rem; }
+.work-practice { padding: 16px 0 0; font-size: .875rem; }
+.work-practice p + p { margin-top: 4px; }
+.work-practice strong { color: var(--ink); font-weight: 600; }
+.fragment-alias { display: block; height: 0; scroll-margin-top: max(100px, 5rem); }
+@media (max-width: 760px) {
+  .work-section .work-grid { grid-template-columns: minmax(0, 1fr); }
+  .work-section .project-card { padding: 16px; }
+  .fragment-alias { scroll-margin-top: max(160px, 10rem); }
+}
 .work-section .enterprise-case { border-inline-start: 4px solid var(--teal); background: var(--section-soft); }
 .case-intro h3 { margin-bottom: 12px; }
 .case-intro > p { font-size: 1rem; max-width: 68ch; }

@@ -57,7 +57,8 @@ try {
     throw new Error('Discovery metadata requires a canonical HTTPS homepage');
   }
   const robots = `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap.xml', homepage).href}\n`;
-  const casePages = renderCaseStudies(html, homepage);
+  const narratives = await readFile(path.join(root, 'docs/partials/project-case-studies.html'), 'utf8');
+  const casePages = renderCaseStudies(html, homepage, narratives);
   const locations = [homepage.href, ...casePages.map(([name]) => new URL(name, homepage).href)];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${locations.map(url => `  <url>\n    <loc>${url}</loc>\n  </url>`).join('\n')}\n</urlset>\n`;
   for (const [name, content] of [
