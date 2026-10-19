@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="css/navigation.css?v=62cc13981d8f">
 <link rel="stylesheet" href="css/components.css?v=95fc71650afd">
 <link rel="stylesheet" href="css/sections.css?v=c668c65cb800">
-<link rel="stylesheet" href="css/portfolio.css?v=2c2d1f38164e">
+<link rel="stylesheet" href="css/portfolio.css?v=76308720cbe7">
 <link rel="stylesheet" href="css/responsive.css?v=b46a5760c7c3">
 <link rel="stylesheet" href="css/keylane-theme.css?v=1d2a004a202f">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
@@ -76,7 +76,9 @@
       <div class="case-intro">
         <h1>Advent of Code</h1>
         <p>My Java puzzle solutions, with tools for selecting puzzles, testing results, and tracking progress.</p>
-      </div>
+        <ul class="chip-list" aria-label="Puzzle toolkit technologies">
+          <li>Java</li><li>Gradle</li><li>JUnit</li><li>Playwright</li>
+        </ul></div>
       
         <div class="details-body">
           <div class="project-expanded">
@@ -91,10 +93,7 @@
             <div class="project-content">
               <div class="project-meta"><p class="eyebrow">Personal project</p>
                 <span class="project-status public-status">Public source</span></div>
-
-              <ul class="chip-list" aria-label="Puzzle toolkit technologies">
-                <li>Java</li><li>Gradle</li><li>JUnit</li><li>Playwright</li>
-              </ul>
+              
               <h2>Puzzle selection and testing</h2>
               <p>I use Gradle tasks and reusable test utilities to select unsolved
                 puzzles and check solutions across several puzzle years.</p>

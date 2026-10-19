@@ -240,14 +240,18 @@ test('case studies use native disclosures with descriptive summaries', () => {
   }
 });
 
-test('project previews keep images, technologies, and links inside the disclosure', () => {
+test('project previews expose each reviewed technology list once while details retain images and links', () => {
   const cards = [...html.matchAll(/<article class="project-card[^\"]*"[\s\S]*?<\/article>/g)];
   assert.equal(cards.length, 4);
   for (const [card] of cards) {
     const preview = card.split('<details')[0];
     assert.match(preview, /<h3>[^<]+<\/h3>/);
     assert.match(preview, /<p>[\s\S]+?<\/p>/);
-    assert.doesNotMatch(preview, /<figure|<ul|project-code-link/);
+    const technologies = preview.match(/<ul class="chip-list" aria-label="[^"]+">([\s\S]*?)<\/ul>/);
+    assert.ok(technologies, 'Collapsed preview needs a labelled technology list');
+    assert.ok([...technologies[1].matchAll(/<li>[^<]+<\/li>/g)].length >= 4);
+    assert.equal([...card.matchAll(/class="chip-list"/g)].length, 1, 'Expansion must not duplicate technologies');
+    assert.doesNotMatch(preview, /<figure|project-code-link/);
   }
 });
 
