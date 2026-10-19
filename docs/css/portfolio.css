@@ -59,6 +59,14 @@
 .case-print-context { display: none; }
 .case-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px; color: var(--muted); font-size: .9375rem; }
 .case-page .case-intro h1 { margin-bottom: 16px; }
+.case-brief { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 0; padding-block: 16px; border-block: 1px solid var(--line); }
+.case-brief > div { min-width: 0; }
+.case-brief dt { color: var(--ink); font-size: .8125rem; font-weight: 650; margin-bottom: 6px; }
+.case-brief dd { margin: 0; }
+.case-brief p { font-size: .9375rem; }
+@media (max-width: 760px) {
+  .case-brief { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
 .case-page h2 { font-size: 1.125rem; letter-spacing: normal; margin: 20px 0 8px; }
 .case-page .engineering-themes h2 { margin-top: 0; }
 .case-page .details-body { padding-inline: 0; }
