@@ -5,12 +5,15 @@
   const header = document.querySelector('.site-header');
   const menuButton = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#primary-navigation');
+  const colourSwitch = document.querySelector('#colour-scheme-controls');
 
   if (header && menuButton && nav) {
     const mobile = window.matchMedia('(max-width: 760px)');
 
     /** Keep the disclosure state and its accessible label in sync. */
     function setMenuOpen(open, restoreFocus = false) {
+      if (!open && mobile.matches && (nav.contains(document.activeElement)
+        || colourSwitch?.contains(document.activeElement))) restoreFocus = true;
       menuButton.setAttribute('aria-expanded', String(open));
       menuButton.querySelector('.menu-label').textContent = open
         ? 'Close' : 'Menu';
@@ -23,7 +26,7 @@
       if (mobile.matches) {
         menuButton.hidden = false;
         // Move focus before adding the class that hides collapsed links.
-        if (nav.contains(document.activeElement)
+        if ((nav.contains(document.activeElement) || colourSwitch?.contains(document.activeElement))
           && menuButton.getAttribute('aria-expanded') !== 'true') menuButton.focus();
         header.classList.add('menu-enhanced');
       } else {
