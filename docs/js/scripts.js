@@ -171,20 +171,24 @@
   if (caseControls && portfolio) {
     const cases = [...portfolio.querySelectorAll('details.case-details')];
     const status = caseControls.querySelector('.case-controls-status');
-    function updateCaseCount() {
+    const button = caseControls.querySelector('[data-case-toggle]');
+    function updateCaseControls() {
       // Printing opens disclosures temporarily; do not announce that as a choice.
       if (printClosedDetails) return;
-      const message = `${cases.filter(details => details.open).length} of ${cases.length} case studies expanded.`;
+      const expanded = cases.filter(details => details.open).length;
+      const allExpanded = expanded === cases.length;
+      button.textContent = allExpanded ? 'Collapse All' : 'Expand All';
+      button.setAttribute('aria-expanded', String(allExpanded));
+      const message = `${expanded} of ${cases.length} case studies expanded.`;
       if (status.textContent !== message) status.textContent = message;
     }
-    for (const button of caseControls.querySelectorAll('button[data-case-action]')) {
-      button.addEventListener('click', () => {
-        for (const details of cases) details.open = button.dataset.caseAction === 'expand';
-        updateCaseCount();
-      });
-    }
-    for (const details of cases) details.addEventListener('toggle', updateCaseCount);
-    updateCaseCount();
+    button.addEventListener('click', () => {
+      const expand = cases.some(details => !details.open);
+      for (const details of cases) details.open = expand;
+      updateCaseControls();
+    });
+    for (const details of cases) details.addEventListener('toggle', updateCaseControls);
+    updateCaseControls();
     caseControls.hidden = false;
   }
 
