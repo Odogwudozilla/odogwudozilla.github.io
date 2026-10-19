@@ -7,6 +7,21 @@ const root = new URL('../docs/', import.meta.url);
 const homepage = await readFile(new URL('index.html', root), 'utf8');
 const sitemap = await readFile(new URL('sitemap.xml', root), 'utf8');
 
+test('case-study navigation follows portfolio order and stops at the first and last project', async () => {
+  for (const [index, project] of caseStudies.entries()) {
+    const html = await readFile(new URL(project.file, root), 'utf8');
+    const navigation = html.match(/<nav aria-label="More case studies"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(navigation, `${project.file} needs labelled project navigation`);
+    const links = [...navigation.matchAll(/href="([^"]+)" rel="(prev|next)"[^>]*><span>([^<]+)<\/span><strong>([^<]+)<\/strong>/g)];
+    const expected = [
+      ...(index > 0 ? [[caseStudies[index - 1].file, 'prev', '← Previous project', caseStudies[index - 1].lines[0]]] : []),
+      ...(index < caseStudies.length - 1 ? [[caseStudies[index + 1].file, 'next', 'Next project →', caseStudies[index + 1].lines[0]]] : []),
+    ];
+    assert.deepEqual(links.map(match => match.slice(1)), expected);
+    assert.ok(links.every(match => match[1] !== project.file), 'Never link back to the current case');
+  }
+});
+
 test('four case-study pages have unique canonical identities and sharing previews', async () => {
   assert.equal(caseStudies.length, 4);
   const images = new Set();
