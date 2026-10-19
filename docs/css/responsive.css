@@ -16,6 +16,7 @@
   #primary-navigation a { font-size: .875rem; }
   .menu-enhanced #primary-navigation { display: none; }
   .menu-enhanced #primary-navigation.is-open { display: flex; }
+  .menu-enhanced .menu-toggle[aria-expanded="false"] ~ .colour-switch { display: none; }
   .hero { padding-top: 28px; }
   .hero-grid { display: flex; flex-wrap: wrap; gap: 20px; }
   .hero-identity { flex: 1 1 10rem; min-width: 0; }
