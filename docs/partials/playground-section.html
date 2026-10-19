@@ -7,6 +7,13 @@
   </div>
   <div class="api-playground">
     <div class="flow-controls" hidden>
+      <label class="flow-scenario-picker">Scenario
+        <select aria-label="API request scenario">
+          <option value="valid">Valid request</option>
+          <option value="invalid">Invalid input</option>
+          <option value="unavailable">Temporary failure</option>
+        </select>
+      </label>
       <div class="flow-scenarios" role="group" aria-label="API request scenario">
         <button type="button" data-scenario="valid" aria-pressed="true">Valid request</button>
         <button type="button" data-scenario="invalid" aria-pressed="false">Invalid input</button>
@@ -20,14 +27,18 @@
     </div>
     <ol class="flow-diagram" aria-label="Request lifecycle">
       <li data-flow-stage="0" data-state="complete"><span class="flow-number" aria-hidden="true">01</span><strong>Request</strong><span class="flow-state">Sent</span></li>
-      <li data-flow-stage="1" data-state="complete"><span class="flow-number" aria-hidden="true">02</span><strong>Validation</strong><span class="flow-state">Passed</span></li>
+      <li data-flow-stage="1" data-state="complete"><span class="flow-number" aria-hidden="true">02</span><strong>Validate</strong><span class="flow-state">Passed</span></li>
       <li data-flow-stage="2" data-state="complete"><span class="flow-number" aria-hidden="true">03</span><strong>Service</strong><span class="flow-state">Created</span></li>
-      <li data-flow-stage="3" data-state="current" aria-current="step"><span class="flow-number" aria-hidden="true">04</span><strong>Response</strong><span class="flow-state">201 Created</span></li>
+      <li data-flow-stage="3" data-state="current" aria-current="step"><span class="flow-number" aria-hidden="true">04</span><strong>Reply</strong><span class="flow-state">201 Created</span></li>
     </ol>
     <div class="flow-narrative">
       <p class="flow-progress eyebrow" role="status" aria-live="polite" aria-atomic="true">Step 4 of 4 · 201 Created</p>
       <h3 class="flow-title">The task was created.</h3>
       <p class="flow-explanation">The input passed validation and the service created a task. The response includes its identifier and a location for the new resource.</p>
+    </div>
+    <div class="flow-payload-tabs" role="group" aria-label="JSON example to display" hidden>
+      <button type="button" data-payload="request" aria-pressed="true">Request JSON</button>
+      <button type="button" data-payload="response" aria-pressed="false">Response JSON</button>
     </div>
     <div class="flow-payloads">
       <div class="flow-payload"><p class="flow-payload-label">Request <span>JSON</span></p><pre><code class="flow-request">POST /demo/tasks

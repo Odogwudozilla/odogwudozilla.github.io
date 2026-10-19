@@ -8,6 +8,22 @@
   const buttons = [...root.querySelectorAll('[data-scenario]')];
   const stages = [...root.querySelectorAll('[data-flow-stage]')];
   const run = find('.flow-run'), next = find('.flow-next'), reset = find('.flow-reset');
+  const picker = find('.flow-scenario-picker select');
+  const payloadButtons = [...root.querySelectorAll('[data-payload]')];
+  const mobile = window.matchMedia('(max-width: 760px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function showPayload(payload) {
+    root.dataset.payload = payload;
+    payloadButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.payload === payload)));
+  }
+  function showPlayback() {
+    if (!mobile.matches) return;
+    const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 72;
+    window.scrollTo({
+      top: Math.max(0, window.scrollY + root.getBoundingClientRect().top - headerHeight - 12),
+      behavior: reducedMotion.matches ? 'instant' : 'smooth',
+    });
+  }
   const request = 'POST /demo/tasks\nContent-Type: application/json\n\n';
   const validBody = JSON.stringify({ title: 'Review API contract' }, null, 2);
   const examples = {
@@ -61,6 +77,7 @@
 
   function render() {
     const example = examples[scenario];
+    picker.value = scenario;
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.scenario === scenario)));
     stages.forEach((stage, index) => {
       let state = index < step ? 'complete' : index === step ? 'current' : 'waiting';
@@ -80,7 +97,7 @@
     find('.flow-response').textContent = step === 3 ? example.response
       : '// No response yet.\n// Follow the request to the final step.';
     run.textContent = playing ? 'Pause flow' : step === 3 ? 'Run again' : 'Run flow ▶';
-    next.textContent = step === 3 ? 'Back to start' : 'Next step';
+    next.textContent = step === 3 ? 'Restart' : 'Next step';
   }
 
   function schedule() {
@@ -93,29 +110,45 @@
     }, 1800);
   }
 
-  buttons.forEach(button => button.addEventListener('click', () => {
-    if (!examples[button.dataset.scenario] || button.dataset.scenario === scenario) return;
+  function chooseScenario(value) {
+    if (!examples[value] || value === scenario) return;
     stop();
-    scenario = button.dataset.scenario;
+    scenario = value;
     step = 0;
+    showPayload('request');
     render();
-  }));
+  }
+  buttons.forEach(button => button.addEventListener('click', () => chooseScenario(button.dataset.scenario)));
+  picker.addEventListener('change', () => chooseScenario(picker.value));
+  payloadButtons.forEach(button => button.addEventListener('click', () => showPayload(button.dataset.payload)));
   next.addEventListener('click', () => {
     stop();
     step = (step + 1) % 4;
+    showPayload(step === 0 ? 'request' : 'response');
     render();
+    showPlayback();
   });
-  reset.addEventListener('click', () => { stop(); step = 0; render(); });
+  reset.addEventListener('click', () => { stop(); step = 0; showPayload('request'); render(); });
   run.addEventListener('click', () => {
     if (playing) { stop(); render(); return; }
     if (step === 3) step = 0;
     playing = true;
+    showPayload('response');
     render();
+    showPlayback();
     schedule();
   });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden && playing) { stop(); render(); }
   });
   render();
+  root.classList.add('flow-enhanced');
+  showPayload('request');
+  root.querySelectorAll('.flow-payload pre').forEach(pre => {
+    pre.tabIndex = 0;
+    pre.setAttribute('role', 'region');
+    pre.setAttribute('aria-label', pre.querySelector('.flow-request') ? 'Request JSON example' : 'Response JSON example');
+  });
+  find('.flow-payload-tabs').hidden = false;
   controls.hidden = false;
 })();
