@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
+import { caseStudies } from '../scripts/case-studies.mjs';
 
 const publicRoot = fileURLToPath(new URL('../docs/', import.meta.url));
 
@@ -31,10 +32,10 @@ async function checkResponsiveImages(html, root, page) {
 }
 
 test('all generated pages contain reachable responsive image candidates', async () => {
-  for (const page of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html']) {
+  for (const page of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html', ...caseStudies.map(project => project.file)]) {
     const html = await readFile(path.join(publicRoot, page), 'utf8');
     const checked = await checkResponsiveImages(html, publicRoot, page);
-    if (page !== '404.html') assert.ok(checked > 0, `${page}: expected responsive images`);
+    if (['index.html','index-modular.html','keylane.html','original.html','case-fusion-almere-fc.html'].includes(page)) assert.ok(checked > 0, `${page}: expected responsive images`);
   }
 });
 

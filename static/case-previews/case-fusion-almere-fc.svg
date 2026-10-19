@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<title>Fusion Almere FC — Club platform — Chidozie Nnachor</title>
+<rect width="1200" height="630" fill="#274263"/>
+<rect x="76" y="178" width="8" height="228" fill="#ff8000"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="78" y="104" font-size="24" letter-spacing="2" fill="#cbe7ec">WORK &amp; PROJECTS</text>
+<text x="116" y="264" font-size="66" font-weight="700" fill="#ffffff">Fusion Almere FC</text>
+<text x="116" y="354" font-size="60" font-weight="600" fill="#ffffff">Club platform</text>
+<text x="116" y="430" font-size="30" fill="#cbe7ec">Angular · Spring Boot · Supabase</text>
+<text x="78" y="544" font-size="28" font-weight="600" fill="#ffffff">Chidozie Nnachor</text>
+<text x="78" y="583" font-size="23" fill="#cbe7ec">odogwudozilla.com</text>
+</g></svg>
