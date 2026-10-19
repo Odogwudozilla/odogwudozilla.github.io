@@ -75,7 +75,7 @@ test('case studies retain reviewed content and expose it without JavaScript or d
     assert.ok(html.includes(`href="/#${project.id}"`));
     const normalized = html.replace(/\s+/g, ' ');
     for (const [, paragraph] of source.matchAll(/<p>([\s\S]*?)<\/p>/g)) {
-      assert.ok(normalized.includes(paragraph.replace(/\s+/g, ' ')), 'Retain the full narrative, not just its headings');
+      assert.ok(normalized.includes(paragraph.replace(/\s+/g, ' ').replaceAll('href="#', 'href="/#')), 'Retain the full narrative, not just its headings');
     }
     assert.ok(homepage.includes(`href="${project.file}" aria-label="Read case study: `));
   }

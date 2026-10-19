@@ -5,7 +5,8 @@ import { runInNewContext } from 'node:vm';
 const source = await readFile(new URL('../docs/js/lab.js', import.meta.url), 'utf8');
 function fixture(hash = '') {
   const events = new Map(), documentEvents = new Map(), history = [];
-  const panels = ['playground', 'search-lab'].map(id => ({ id, hidden: false, paused: 0,
+  const panels = ['playground', 'search-lab', 'compatibility-lab'].map(id => ({ id, hidden: false, paused: 0, aligned: 0,
+    scrollIntoView() { this.aligned++; },
     contains(target) { return target?.panelId === id; }, dispatchEvent() { this.paused++; } }));
   const buttons = panels.map(panel => ({ dataset: { labSelect: panel.id },
     setAttribute(_, value) { this.pressed = value; }, addEventListener(_, callback) { this.click = callback; } }));
@@ -23,33 +24,50 @@ function fixture(hash = '') {
 }
 test('the Lab shows one demo and respects existing direct and nested fragments', () => {
   const f = fixture();
-  assert.deepEqual(f.panels.map(panel => panel.hidden), [false, true]);
+  assert.deepEqual(f.panels.map(panel => panel.hidden), [false, true, true]);
   assert.equal(f.switcher.hidden, false);
   for (const hash of ['#search-lab', '#search-title']) {
-    assert.deepEqual(fixture(hash).panels.map(panel => panel.hidden), [true, false]);
+    assert.deepEqual(fixture(hash).panels.map(panel => panel.hidden), [true, false, true]);
   }
+  assert.deepEqual(fixture('#compatibility-lab').panels.map(panel => panel.hidden), [true, true, false]);
+});
+
+test('direct demo links align after initial layout without overriding a later navigation', () => {
+  const f = fixture('#compatibility-lab');
+  f.events.get('load')();
+  assert.equal(f.panels[2].aligned, 1);
+  const moved = fixture('#compatibility-lab');
+  moved.location.hash = '#portfolio';
+  moved.events.get('load')();
+  assert.equal(moved.panels[2].aligned, 0);
+  assert.equal(fixture().events.has('load'), false);
 });
 test('switching pauses hidden demos, keeps one selection and updates links without forcing a scroll', () => {
   const f = fixture();
   f.buttons[1].click();
-  assert.deepEqual(f.panels.map(panel => panel.hidden), [true, false]);
+  assert.deepEqual(f.panels.map(panel => panel.hidden), [true, false, true]);
   assert.equal(f.panels[0].paused, 1);
-  assert.deepEqual(f.buttons.map(button => button.pressed), ['false', 'true']);
+  assert.deepEqual(f.buttons.map(button => button.pressed), ['false', 'true', 'false']);
   assert.deepEqual(f.history, ['#search-lab']);
   f.location.hash = '#playground'; f.events.get('hashchange')();
-  assert.deepEqual(f.panels.map(panel => panel.hidden), [false, true]);
+  assert.deepEqual(f.panels.map(panel => panel.hidden), [false, true, true]);
   f.documentEvents.get('click')({ button: 0, target: { closest: () => ({ hash: '#search-lab' }) } });
-  assert.deepEqual(f.panels.map(panel => panel.hidden), [true, false]);
+  assert.deepEqual(f.panels.map(panel => panel.hidden), [true, false, true]);
+  const previousPauses = f.panels[1].paused;
+  f.buttons[2].click();
+  assert.deepEqual(f.panels.map(panel => panel.hidden), [true, true, false]);
+  assert.equal(f.panels[1].paused, previousPauses + 1);
 });
-test('printing reveals both demos and restores selection; static HTML contains both', async () => {
+test('printing reveals all demos and restores selection; static HTML contains all three', async () => {
   const f = fixture('#search-lab');
   f.events.get('beforeprint')();
   assert.ok(f.panels.every(panel => !panel.hidden));
   f.events.get('afterprint')();
-  assert.deepEqual(f.panels.map(panel => panel.hidden), [true, false]);
+  assert.deepEqual(f.panels.map(panel => panel.hidden), [true, false, true]);
   const html = await readFile(new URL('../docs/index.html', import.meta.url), 'utf8');
   assert.match(html, /<section class="lab-panel playground-section" id="playground"/);
   assert.match(html, /<section class="lab-panel search-section" id="search-lab"/);
+  assert.match(html, /<section class="lab-panel compatibility-section" id="compatibility-lab"/);
   assert.equal([...html.matchAll(/download="Chidozie-Nnachor-CV.pdf"/g)].length, 1);
   assert.doesNotMatch(html, /hero-facts|View CV \(PDF\)/);
 });

@@ -51,7 +51,8 @@
 <link rel="stylesheet" href="css/interactive.css?v=c982523dbdd0">
 <link rel="stylesheet" href="css/playground.css?v=9ff11bb0976d">
 <link rel="stylesheet" href="css/search.css?v=5cc84eb8b813">
-<link rel="stylesheet" href="css/lab.css?v=d89984310b7e">
+<link rel="stylesheet" href="css/lab.css?v=cb06fa998172">
+<link rel="stylesheet" href="css/compatibility.css?v=b9e78ef814c9">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
 </head>
 <body>
@@ -200,11 +201,12 @@
       <div class="section-heading">
         <p class="eyebrow">Explore how things work</p>
         <h2 id="lab-title">Engineering Lab</h2>
-        <p>Two small, browser-only demonstrations. Choose one to explore.</p>
+        <p>Small, browser-only demonstrations of APIs and algorithms. Choose one to explore.</p>
       </div>
       <div class="lab-switch" role="group" aria-label="Choose an Engineering Lab demo" hidden>
         <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API flow</button>
         <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
+        <button type="button" data-lab-select="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">API changes</button>
       </div>
       <section class="lab-panel playground-section" id="playground" aria-labelledby="playground-title">
   <div class="section-heading">
@@ -317,7 +319,47 @@ S..#..G
         <tr><th scope="row">DFS</th><td class="search-dfs-moves">12</td><td class="search-dfs-count">13</td></tr></tbody>
       </table>
       <pre class="search-trace">In the two-route example, the shortest route takes 8 moves through the lower passage. Following the upper branch takes 12 moves. A blocked goal has no route.</pre>
-    </details></div></section></section>
+    </details></div></section>
+      <section class="lab-panel compatibility-section" id="compatibility-lab" aria-labelledby="compatibility-title">
+  <div class="section-heading">
+    <h3 id="compatibility-title">Will this API change break a client?</h3>
+    <p>Keep the client fixed and change the API. See why valid JSON alone does not guarantee compatibility.</p>
+  </div>
+  <div class="compat-workspace card">
+    <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
+      to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
+      as strings, and ignores extra response fields.</p>
+    <label class="compat-controls" hidden>API change
+      <select aria-label="API compatibility scenario">
+        <option value="extra">Extra response field</option>
+        <option value="rename">Rename a response field</option>
+        <option value="type">Change a response type</option>
+        <option value="required">Require a new request field</option>
+      </select>
+    </label>
+    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Client decoding. Client reads task-42: Review API contract.</p>
+    <p class="compat-explanation">This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.</p>
+    <div class="compat-comparison">
+      <div><h4>Original API</h4><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
+  "id": "task-42",
+  "title": "Review API contract"
+}</code></pre></div>
+      <div><h4>Changed API</h4><p>Required request fields: <span class="compat-required">title</span></p><p class="compat-response-label compat-status">201 Created</p><pre tabindex="0" role="region" aria-label="Changed API response"><code class="compat-payload">{
+  "id": "task-42",
+  "title": "Review API contract",
+  "priority": "normal"
+}</code></pre></div></div>
+    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for consumers; check stricter clients separately.</span></p>
+    <details class="compat-notes"><summary>What makes the other changes break?</summary>
+      <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
+        <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>
+        <li><strong>Require priority in the request:</strong> the old request omits it, so validation returns 400 before the client can read a task.</li></ul>
+      <p>These results apply to the client defined above. A stricter client could reject extra fields;
+        other clients may tolerate different changes. Review actual consumers before changing a real API.</p>
+    </details>
+    <p class="compat-footnote">Synthetic example · local simulation · no network requests or stored data.
+      <a class="text-link" href="case-keylane.html">Read about my API work <span aria-hidden="true">↗</span></a></p>
+  </div></section></section>
     <section class="page-section experience-section" id="experience" aria-labelledby="experience-title">
   <div class="section-heading">
     <h2 id="experience-title">Professional experience</h2>
@@ -404,6 +446,8 @@ S..#..G
   <script src="js/playground.js?v=77af87abae69" defer></script>
   <script src="js/search-model.js?v=4b3693d3b3d6" defer></script>
   <script src="js/search.js?v=7af8f53936ac" defer></script>
-  <script src="js/lab.js?v=4b5cac7d192e" defer></script>
+  <script src="js/lab.js?v=c35ca2f3fda5" defer></script>
+  <script src="js/compatibility-model.js?v=a29c679cf68e" defer></script>
+  <script src="js/compatibility.js?v=a321ff34c184" defer></script>
 </body>
 </html>

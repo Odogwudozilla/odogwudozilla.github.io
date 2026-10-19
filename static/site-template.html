@@ -14,14 +14,16 @@
       <div class="section-heading">
         <p class="eyebrow">Explore how things work</p>
         <h2 id="lab-title">Engineering Lab</h2>
-        <p>Two small, browser-only demonstrations. Choose one to explore.</p>
+        <p>Small, browser-only demonstrations of APIs and algorithms. Choose one to explore.</p>
       </div>
       <div class="lab-switch" role="group" aria-label="Choose an Engineering Lab demo" hidden>
         <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API flow</button>
         <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
+        <button type="button" data-lab-select="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">API changes</button>
       </div>
       {{playground-section}}
       {{search-section}}
+      {{compatibility-section}}
     </section>
     {{experience-section}}
     {{education-section}}
@@ -39,5 +41,7 @@
   <script src="js/search-model.js" defer></script>
   <script src="js/search.js" defer></script>
   <script src="js/lab.js" defer></script>
+  <script src="js/compatibility-model.js" defer></script>
+  <script src="js/compatibility.js" defer></script>
 </body>
 </html>
