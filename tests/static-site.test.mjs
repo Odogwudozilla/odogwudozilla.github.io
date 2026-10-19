@@ -8,6 +8,7 @@ import { spawn } from 'node:child_process';
 import './navigation-focus.test.mjs';
 import './project-sharing.test.mjs';
 import './palette-contrast.test.mjs';
+import './project-disclosures.test.mjs';
 
 const root = fileURLToPath(new URL('../docs/', import.meta.url));
 const html = await readFile(path.join(root, 'index.html'), 'utf8');
@@ -234,7 +235,7 @@ test('Keylane descriptions stay at the level of professional responsibilities', 
 });
 
 test('professional experience leads the portfolio and drafting context stays unpublished', () => {
-  const work = html.match(/<div class="work-grid">([\s\S]*?)<div class="work-colophon">/)?.[1];
+  const work = html.match(/<div class="work-grid"[^>]*>([\s\S]*?)<div class="work-colophon">/)?.[1];
   assert.ok(work);
   assert.match(work, /^\s*<article[^>]+id="insurance-case">/);
   assert.match(html, /Sep 2019 — Present/);
