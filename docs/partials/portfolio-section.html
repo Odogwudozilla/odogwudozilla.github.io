@@ -3,6 +3,18 @@
     <h2 id="work-title">Work &amp; projects</h2>
     <p>My engineering work at Keylane and three personal projects.</p>
   </div>
+  <div class="project-explorer" hidden>
+    <div class="explorer-heading"><p class="eyebrow">Follow the engineering</p><p>Choose a focus to see where it appears in my work.</p></div>
+    <div class="explorer-options" role="group" aria-label="Explore projects by engineering focus">
+      <button type="button" data-focus="all" aria-pressed="true">All projects</button>
+      <button type="button" data-focus="java" aria-pressed="false">Java</button>
+      <button type="button" data-focus="apis" aria-pressed="false">APIs &amp; integration</button>
+      <button type="button" data-focus="frontend" aria-pressed="false">Frontend</button>
+      <button type="button" data-focus="data" aria-pressed="false">Data</button>
+    </div>
+    <p class="explorer-status" role="status" aria-live="polite" aria-atomic="true">All four projects are shown.</p>
+    <nav class="explorer-results" aria-label="Projects matching your focus" hidden></nav>
+  </div>
   <nav class="work-index" aria-label="Selected projects">
     <a href="#insurance-case">Keylane</a>
     <a href="#fusion-project">Fusion Almere FC</a>

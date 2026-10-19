@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="css/portfolio.css?v=2ad6ff0e2fdd">
 <link rel="stylesheet" href="css/responsive.css?v=aac04abe95d4">
 <link rel="stylesheet" href="css/keylane-theme.css?v=1d2a004a202f">
+<link rel="stylesheet" href="css/interactive.css?v=d29593b97c8a">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
 <meta name="robots" content="noindex">
 </head>
@@ -105,6 +106,7 @@
           rel="noopener noreferrer">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
         <li><a href="#experience">Experience</a></li>
       </ul></div>
+    <aside class="hero-aside" aria-label="Portrait and local time">
     <figure class="hero-portrait">
       <picture>
         <source type="image/webp"
@@ -118,7 +120,17 @@
           width="1210" height="1300" fetchpriority="high">
       </picture>
       <figcaption>Based in the Netherlands</figcaption>
-    </figure></div>
+    </figure>
+    <div class="local-clock" hidden>
+      <svg class="clock-face" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor"/>
+        <path d="M32 7v4m25 21h-4M32 57v-4M7 32h4" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path class="clock-hour" d="M32 32V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path class="clock-minute" d="M32 32V11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="32" cy="32" r="3" fill="currentColor"/>
+      </svg>
+      <div><p class="eyebrow">My local time</p><time class="clock-time"></time><p class="clock-zone">Netherlands · Europe/Amsterdam</p></div></div></aside>
+  </div>
   <dl class="hero-facts">
     <div><dt>Current role</dt><dd>Keylane · since 2019</dd></div>
     <div><dt>Main work</dt><dd>Java, APIs &amp; insurance systems</dd></div>
@@ -128,6 +140,17 @@
     <h2 id="work-title">Work &amp; projects</h2>
     <p>My engineering work at Keylane and three personal projects.</p>
   </div>
+  <div class="project-explorer" hidden>
+    <div class="explorer-heading"><p class="eyebrow">Follow the engineering</p><p>Choose a focus to see where it appears in my work.</p></div>
+    <div class="explorer-options" role="group" aria-label="Explore projects by engineering focus">
+      <button type="button" data-focus="all" aria-pressed="true">All projects</button>
+      <button type="button" data-focus="java" aria-pressed="false">Java</button>
+      <button type="button" data-focus="apis" aria-pressed="false">APIs &amp; integration</button>
+      <button type="button" data-focus="frontend" aria-pressed="false">Frontend</button>
+      <button type="button" data-focus="data" aria-pressed="false">Data</button>
+    </div>
+    <p class="explorer-status" role="status" aria-live="polite" aria-atomic="true">All four projects are shown.</p>
+    <nav class="explorer-results" aria-label="Projects matching your focus" hidden></nav></div>
   <nav class="work-index" aria-label="Selected projects">
     <a href="#insurance-case">Keylane</a>
     <a href="#fusion-project">Fusion Almere FC</a>
@@ -449,5 +472,6 @@
     <p><a href="index.html">Return to the default palette</a></p><a class="footer-top" href="#home">Back to top <span aria-hidden="true">↑</span></a>
     </div></footer>
   <script src="js/scripts.js?v=c3622b8d7544" defer></script>
+  <script src="js/interactive.js?v=26a72359cf7f" defer></script>
 </body>
 </html>

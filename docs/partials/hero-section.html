@@ -29,6 +29,7 @@
         <li><a href="#experience">Experience</a></li>
       </ul>
     </div>
+    <aside class="hero-aside" aria-label="Portrait and local time">
     <figure class="hero-portrait">
       <picture>
         <source type="image/webp"
@@ -43,6 +44,17 @@
       </picture>
       <figcaption>Based in the Netherlands</figcaption>
     </figure>
+    <div class="local-clock" hidden>
+      <svg class="clock-face" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor"/>
+        <path d="M32 7v4m25 21h-4M32 57v-4M7 32h4" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path class="clock-hour" d="M32 32V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path class="clock-minute" d="M32 32V11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="32" cy="32" r="3" fill="currentColor"/>
+      </svg>
+      <div><p class="eyebrow">My local time</p><time class="clock-time"></time><p class="clock-zone">Netherlands · Europe/Amsterdam</p></div>
+    </div>
+    </aside>
   </div>
   <dl class="hero-facts">
     <div><dt>Current role</dt><dd>Keylane · since 2019</dd></div>
