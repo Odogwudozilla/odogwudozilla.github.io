@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
@@ -24,6 +25,12 @@ async function renderPage(templateName = 'site-template.html') {
 
   if (/\{\{.*?\}\}/.test(html)) {
     throw new Error('Unresolved template placeholder');
+  }
+  // A changed script must not reuse a previous deployment's browser-cache URL.
+  for (const [, source] of [...html.matchAll(/\bsrc="(\/?js\/[^"?]+\.js)"/g)]) {
+    const bytes = await readFile(path.join(root, 'docs', source.replace(/^\//, '')));
+    const version = createHash('sha256').update(bytes).digest('hex').slice(0, 12);
+    html = html.replaceAll(`src="${source}"`, `src="${source}?v=${version}"`);
   }
   // Compact whitespace between closing block tags; keep source partials readable.
   return html.replace(/(<\/(?:div|article|section|nav|figure|svg|g|ul|dl|details)>)[\r\n]+[ \t]*(?=<\/)/g, '$1');
