@@ -44,6 +44,7 @@
 .case-page h2 { font-size: 1.125rem; letter-spacing: normal; margin: 20px 0 8px; }
 .case-page .engineering-themes h2 { margin-top: 0; }
 .case-page .details-body { padding-inline: 0; }
+.case-page .details-body > .chip-list { margin-bottom: 24px; }
 .case-page-actions { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 24px; }
 .case-pagination { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
 .case-adjacent-link { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 88px; padding: 16px; border: 1px solid var(--line); border-radius: var(--control-radius); }
