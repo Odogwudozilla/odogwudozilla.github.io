@@ -196,15 +196,20 @@
   const copyStatus = document.querySelector('.copy-status');
   if (copyButton && copyStatus && navigator.clipboard?.writeText) {
     copyButton.hidden = false;
+    let copying = false;
     copyButton.addEventListener('click', async () => {
-      copyButton.disabled = true;
+      if (copying) return;
+      copying = true;
+      copyButton.setAttribute('aria-busy', 'true');
+      copyStatus.textContent = '';
       try {
         await navigator.clipboard.writeText(copyButton.dataset.email);
         copyStatus.textContent = 'Email address copied.';
       } catch {
         copyStatus.textContent = 'Could not copy. Select the address or use the email link.';
       } finally {
-        copyButton.disabled = false;
+        copying = false;
+        copyButton.removeAttribute('aria-busy');
       }
     });
   }
