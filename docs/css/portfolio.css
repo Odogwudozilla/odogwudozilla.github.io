@@ -45,3 +45,13 @@
 .case-page .engineering-themes h2 { margin-top: 0; }
 .case-page .details-body { padding-inline: 0; }
 .case-page-actions { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 24px; }
+.case-pagination { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.case-adjacent-link { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 88px; padding: 16px; border: 1px solid var(--line); border-radius: var(--control-radius); }
+.case-adjacent-link span { color: var(--muted); font-size: .875rem; }
+.case-adjacent-link strong { overflow-wrap: anywhere; }
+.case-next { grid-column: 2; text-align: right; }
+.case-adjacent-link:hover { background: var(--paper); border-color: var(--teal); }
+@media (max-width: 560px) {
+  .case-pagination { grid-template-columns: minmax(0, 1fr); }
+  .case-next { grid-column: 1; }
+}

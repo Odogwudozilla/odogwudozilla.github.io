@@ -16,7 +16,11 @@ export function renderCaseStudies(homepage, canonical) {
   const footer = homepage.match(/<footer\b[\s\S]*?<\/footer>/)[0]
     .replace('href="#home"', 'href="/#home"').replace('href="#home"', 'href="#main"');
   const scripts = homepage.match(/<script src="js\/scripts\.js[^" ]*" defer><\/script>/)[0];
-  return caseStudies.map(project => {
+  return caseStudies.map((project, index) => {
+    const adjacentLink = (item, direction) => item
+      ? `<a class="case-adjacent-link case-${direction}" href="${item.file}" rel="${direction}"><span>${direction === 'prev' ? '← Previous project' : 'Next project →'}</span><strong>${escapeHtml(item.lines[0])}</strong></a>`
+      : '';
+    const adjacent = adjacentLink(caseStudies[index - 1], 'prev') + adjacentLink(caseStudies[index + 1], 'next');
     const article = homepage.match(new RegExp(`<article[^>]*id="${project.id}"[\\s\\S]*?</article>`))?.[0];
     if (!article) throw new Error(`Missing case-study source: ${project.id}`);
     const title = article.match(/<h3>([\s\S]*?)<\/h3>/)[1];
@@ -51,6 +55,7 @@ export function renderCaseStudies(homepage, canonical) {
   <main id="main" class="site-shell case-page" tabindex="-1">
     <nav aria-label="Breadcrumb" class="case-breadcrumb"><a class="text-link" href="/#portfolio">Work &amp; projects</a><span aria-hidden="true"> / </span><span aria-current="page">${title}</span></nav>
     ${content}
+    <nav aria-label="More case studies" class="case-pagination">${adjacent}</nav>
     <div class="case-page-actions"><a class="text-link" href="/#${project.id}">Back to project overview</a><a class="text-link" href="/#contact">Discuss this project</a></div>
   </main>
   ${footer}
