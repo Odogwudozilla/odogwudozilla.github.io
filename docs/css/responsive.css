@@ -28,9 +28,9 @@
   .hero-portrait img { aspect-ratio: 1; }
   .hero-portrait figcaption { padding: 8px 0; line-height: 1.45; }
   .hero-facts { grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
-  .hero-facts > div { display: grid; grid-template-columns: 104px 1fr; gap: 14px; }
-  .hero-facts dt { margin: 0; }
-  .hero-facts dd { font-size: .875rem; }
+  .hero-facts > div { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .hero-facts dt { flex: 1 1 6rem; margin: 0; }
+  .hero-facts dd { flex: 2 1 10rem; min-width: 0; font-size: .875rem; }
   .page-section { margin-top: 40px; padding: 24px 0 0; }
   .section-heading { display: block; margin-bottom: 20px; }
   .section-heading > p { max-width: none; }
@@ -64,11 +64,10 @@
   .hero-portrait { flex-basis: 5.5rem; width: 5.5rem; }
   .hero-identity h1 { font-size: 2rem; }
   .hero-links { gap: 20px; }
-  .hero-facts > div { grid-template-columns: 92px 1fr; gap: 12px; }
   h3 { font-size: 1.25rem; }
   .project-card { padding: 16px; }
   .work-index a { width: 100%; }
-  .work-index { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .work-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); }
   .work-index a { min-height: 48px; line-height: 1.4; }
   .experience-date { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .experience-date > span { margin: 0; }
