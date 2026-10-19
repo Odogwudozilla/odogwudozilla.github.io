@@ -1,0 +1,59 @@
+import assert from 'node:assert/strict';
+import { readFile, access } from 'node:fs/promises';
+import { test } from 'node:test';
+import { caseStudies } from '../scripts/case-studies.mjs';
+
+const root = new URL('../docs/', import.meta.url);
+const homepage = await readFile(new URL('index.html', root), 'utf8');
+const sitemap = await readFile(new URL('sitemap.xml', root), 'utf8');
+
+test('four case-study pages have unique canonical identities and sharing previews', async () => {
+  assert.equal(caseStudies.length, 4);
+  const images = new Set();
+  for (const project of caseStudies) {
+    const html = await readFile(new URL(project.file, root), 'utf8');
+    const canonical = `https://odogwudozilla.com/${project.file}`;
+    assert.ok(html.includes(`<link rel="canonical" href="${canonical}">`));
+    assert.ok(html.includes(`<meta property="og:url" content="${canonical}">`));
+    assert.ok(sitemap.includes(`<loc>${canonical}</loc>`));
+    const title = html.match(/<title>([^<]+)<\/title>/)[1];
+    const heading = html.match(/<h1>([^<]+)<\/h1>/)[1];
+    assert.ok(title.startsWith(heading));
+    assert.ok(html.includes(`<meta property="og:title" content="${title}">`));
+    const image = html.match(/property="og:image" content="([^"]+)"/)[1];
+    assert.ok(html.includes(`<meta name="twitter:image" content="${image}">`));
+    const bytes = await readFile(new URL(new URL(image).pathname.slice(1), root));
+    assert.equal(bytes.readUInt16BE(0), 0xffd8);
+    assert.ok(bytes.length < 150_000);
+    images.add(image);
+    assert.doesNotMatch(html, /name="robots" content="noindex"/);
+  }
+  assert.equal(images.size, 4);
+});
+
+test('case studies retain reviewed content and expose it without JavaScript or disclosures', async () => {
+  for (const project of caseStudies) {
+    const html = await readFile(new URL(project.file, root), 'utf8');
+    const source = homepage.match(new RegExp(`<article[^>]*id="${project.id}"[\\s\\S]*?</article>`))[0];
+    assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
+    assert.doesNotMatch(html, /<details|project-share|copy-project-link|<h[34]\b/);
+    for (const [, heading] of source.matchAll(/<h4>([^<]+)<\/h4>/g)) assert.ok(html.includes(`<h2>${heading}</h2>`));
+    assert.ok(html.includes(`href="/#${project.id}"`));
+    assert.ok(source.includes(`href="${project.file}"`));
+    assert.ok(source.includes(`data-project-url="${project.file}"`));
+  }
+});
+
+test('case-study asset paths and return links resolve and all IDs are unique', async () => {
+  const homeIds = new Set([...homepage.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
+  for (const project of caseStudies) {
+    const html = await readFile(new URL(project.file, root), 'utf8');
+    const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(ids.length, new Set(ids).size);
+    for (const [, ref] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+      if (ref.startsWith('/#')) assert.ok(homeIds.has(ref.slice(2)));
+      else if (ref.startsWith('#')) assert.ok(ids.includes(ref.slice(1)));
+      else if (!/^(https?:|mailto:)/.test(ref)) await access(new URL(ref.replace(/^\//, ''), root));
+    }
+  }
+});

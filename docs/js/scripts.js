@@ -132,8 +132,7 @@
       const button = project.querySelector('.copy-project-link');
       const status = project.querySelector('.project-share-status');
       if (!button || !status) continue;
-      const link = new URL(canonical.href);
-      link.hash = project.id;
+      const link = new URL(button.dataset.projectUrl || `#${project.id}`, canonical.href);
       button.hidden = false;
       let copying = false;
       button.addEventListener('click', async () => {
@@ -145,7 +144,7 @@
           await navigator.clipboard.writeText(link.href);
           status.textContent = 'Project link copied.';
         } catch {
-          status.textContent = 'Could not copy. Use the direct link to copy the address.';
+          status.textContent = 'Could not copy. Open the case study and copy its address.';
         } finally {
           copying = false;
           button.removeAttribute('aria-busy');

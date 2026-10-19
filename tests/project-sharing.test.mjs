@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { runInNewContext } from 'node:vm';
+import { caseStudies } from '../scripts/case-studies.mjs';
 
 const source = await readFile(new URL('../docs/js/scripts.js', import.meta.url), 'utf8');
 const html = await readFile(new URL('../docs/index.html', import.meta.url), 'utf8');
@@ -10,7 +11,7 @@ const projects = ['insurance-case', 'fusion-project', 'energy-project', 'aoc-pro
 function fixture(writeText) {
   const controls = projects.map(id => {
     const attributes = new Map();
-    const button = { hidden: true, setAttribute: (k, v) => attributes.set(k, v),
+    const button = { hidden: true, dataset: { projectUrl: caseStudies.find(project => project.id === id).file }, setAttribute: (k, v) => attributes.set(k, v),
       removeAttribute: k => attributes.delete(k),
       addEventListener: (_, handler) => { button.click = handler; } };
     const status = { textContent: '' };
@@ -33,8 +34,8 @@ function fixture(writeText) {
 test('every project retains a native direct link and initially hidden copy control', () => {
   for (const id of projects) {
     const card = html.match(new RegExp(`<article[^>]*id="${id}"[\\s\\S]*?</article>`))?.[0];
-    assert.match(card, new RegExp(`class="text-link" href="#${id}" aria-label="Direct link to `));
-    assert.match(card, /class="button copy-project-link" type="button" hidden aria-label="Copy link to /);
+    assert.match(card, new RegExp(`class="text-link" href="${caseStudies.find(project => project.id === id).file}" aria-label="Read case study: `));
+    assert.match(card, /class="button copy-project-link" type="button" data-project-url="[^"]+" hidden aria-label="Copy link to /);
     assert.match(card, /class="project-share-status" role="status" aria-live="polite"/);
   }
   assert.ok(fixture().every(({ button }) => button.hidden));
@@ -49,14 +50,14 @@ test('copying uses each public canonical project URL and announces completion', 
     assert.equal(control.status.textContent, 'Project link copied.');
     assert.equal(control.attributes.has('aria-busy'), false);
   }
-  assert.deepEqual(copied, projects.map(id => `https://odogwudozilla.com/#${id}`));
+  assert.deepEqual(copied, caseStudies.map(project => `https://odogwudozilla.com/${project.file}`));
 });
 
 test('clipboard rejection gives a usable fallback and permits retry', async () => {
   let attempts = 0;
   const [control] = fixture(async () => { if (++attempts === 1) throw Error('Denied'); });
   await control.button.click();
-  assert.match(control.status.textContent, /Could not copy.*direct link/);
+  assert.match(control.status.textContent, /Could not copy.*case study/);
   await control.button.click();
   assert.equal(control.status.textContent, 'Project link copied.');
 });

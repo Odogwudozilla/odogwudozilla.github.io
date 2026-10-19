@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { caseStudies } from '../scripts/case-studies.mjs';
+import './case-studies.test.mjs';
 import './navigation-focus.test.mjs';
 import './project-sharing.test.mjs';
 import './palette-contrast.test.mjs';
@@ -85,7 +87,7 @@ test('discovery metadata advertises the canonical homepage and allows crawler ac
   assert.doesNotMatch(robots, /^Disallow:\s*\//m, 'Crawlers need access to read canonical and noindex tags');
   assert.equal(robots.match(/^Sitemap: (.+)$/m)?.[1], new URL('sitemap.xml', canonical).href);
   assert.match(sitemap, /<urlset xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9">/);
-  assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]), [canonical]);
+  assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]), [canonical, ...caseStudies.map(project => new URL(project.file, canonical).href)]);
   assert.doesNotMatch(sitemap, /<lastmod>|<changefreq>|<priority>/,
     'Do not invent modification dates or scheduling hints');
 });
@@ -128,6 +130,14 @@ test('missing pages offer working recovery links without becoming successful res
     assert.equal(await head.text(), '');
     assert.equal((await fetch(address + '/old-page', { method: 'POST' })).status, 405);
     assert.equal((await fetch(address + '/')).status, 200);
+    for (const project of caseStudies) {
+      for (const [file, type] of [[project.file, 'text/html'], ['assets/img/' + project.image, 'image/jpeg']]) {
+        const response = await fetch(address + '/' + file);
+        assert.equal(response.status, 200);
+        assert.ok(response.headers.get('content-type').startsWith(type));
+        assert.deepEqual(Buffer.from(await response.arrayBuffer()), await readFile(path.join(root, file)));
+      }
+    }
     for (const [, stylesheet] of html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)) {
       const response = await fetch(address + '/' + stylesheet);
       assert.equal(response.status, 200);
@@ -291,7 +301,7 @@ test('the selected palette is default and the original comparison retains shared
 });
 
 test('generated pages reference script versions derived from LF-normalized content', async () => {
-  for (const name of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html']) {
+  for (const name of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html', ...caseStudies.map(project => project.file)]) {
     const page = await readFile(path.join(root, name), 'utf8');
     const scripts = [...page.matchAll(/<script src="(\/?js\/[^"?]+\.js)\?v=([a-f0-9]{12})"/g)];
     assert.equal(scripts.length, 2, `${name} must version both browser scripts`);
@@ -303,7 +313,7 @@ test('generated pages reference script versions derived from LF-normalized conte
 });
 
 test('every generated stylesheet URL matches its content version', async () => {
-  for (const name of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html']) {
+  for (const name of ['index.html', 'index-modular.html', 'keylane.html', 'original.html', '404.html', ...caseStudies.map(project => project.file)]) {
     const page = await readFile(path.join(root, name), 'utf8');
     const styles = [...page.matchAll(/<link rel="stylesheet" href="(\/?css\/[^"?]+\.css)\?v=([a-f0-9]{12})"/g)];
     assert.equal(styles.length, 7, `${name} must version every stylesheet`);

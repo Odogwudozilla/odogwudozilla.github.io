@@ -2,6 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { renderCaseStudies } from './case-studies.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
@@ -56,12 +57,15 @@ try {
     throw new Error('Discovery metadata requires a canonical HTTPS homepage');
   }
   const robots = `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap.xml', homepage).href}\n`;
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${homepage.href}</loc>\n  </url>\n</urlset>\n`;
+  const casePages = renderCaseStudies(html, homepage);
+  const locations = [homepage.href, ...casePages.map(([name]) => new URL(name, homepage).href)];
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${locations.map(url => `  <url>\n    <loc>${url}</loc>\n  </url>`).join('\n')}\n</urlset>\n`;
   for (const [name, content] of [
     ['index.html', html], ['index-modular.html', html], ['keylane.html', html],
     ['original.html', originalComparison],
     ['404.html', notFoundHtml],
     ['robots.txt', robots], ['sitemap.xml', sitemap],
+    ...casePages,
   ]) {
     const output = path.join(root, 'docs', name);
     if (process.argv.includes('--check')) {

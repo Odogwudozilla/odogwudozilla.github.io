@@ -38,3 +38,10 @@
 .terminal-prompt { display: block; color: var(--muted); font-size: .8125rem; border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 10px; }
 .tooling-terminal > div { margin-block: 8px; }
 .work-colophon { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding-top: 18px; }
+.case-page { padding-top: 28px; }
+.case-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px; color: var(--muted); font-size: .9375rem; }
+.case-page .case-intro h1 { margin-bottom: 16px; }
+.case-page h2 { font-size: 1.125rem; letter-spacing: normal; margin: 20px 0 8px; }
+.case-page .engineering-themes h2 { margin-top: 0; }
+.case-page .details-body { padding-inline: 0; }
+.case-page-actions { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 24px; }
