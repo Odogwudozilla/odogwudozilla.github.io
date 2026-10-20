@@ -65,7 +65,7 @@ function fixture(hash = '#playground') {
   const window = { PortfolioInvestigation: model, location: { hash }, scrollY: 0, scrollTo() {}, matchMedia: () => ({ matches: true }),
     history: { replaceState() {} }, addEventListener: (k, v) => events.set(k, v) };
   runInNewContext(controller, { window, document, setTimeout(fn) { timers.set(++nextId, fn); return nextId; }, clearTimeout(id) { timers.delete(id); } });
-  return { nodes, views, buttons, panel, events, documentEvents, document, timers,
+  return { location: window.location, nodes, views, buttons, panel, events, documentEvents, document, timers,
     tick() { const entry = timers.entries().next().value; if (entry) { timers.delete(entry[0]); entry[1](); } } };
 }
 test('trace controls step, inspect and reset deterministic state; hidden views stop playback', () => {
@@ -93,8 +93,7 @@ test('legacy contract links select the nested view, printing reveals both and re
   assert.deepEqual(f.views.map(view => view.hidden), [true, false, true]);
   f.events.get('beforeprint')(); assert.ok(f.views.every(view => !view.hidden));
   f.events.get('afterprint')(); assert.deepEqual(f.views.map(view => view.hidden), [true, false, true]);
-  f.documentEvents.get('click')({ button: 0, target: { closest: () => ({ hash: '#playground', dataset: { investigationScenario: 'slow' } }) } });
-  assert.equal(f.nodes['.trace-scenario'].value, 'slow');
+  f.location.hash = '#playground'; f.events.get('hashchange')();
   assert.deepEqual(f.views.map(view => view.hidden), [false, true, true]);
   assert.equal(f.timers.size, 0);
 });

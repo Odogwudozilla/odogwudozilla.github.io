@@ -99,6 +99,7 @@ test('case-study asset paths and return links resolve and all IDs are unique', a
     const html = await readFile(new URL(project.file, root), 'utf8');
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
     assert.equal(ids.length, new Set(ids).size);
+    assert.equal(html.match(/class="case-breadcrumb"><a class="text-link" href="([^"]+)"/)?.[1], `/#${project.id}`);
     for (const [, ref] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
       if (ref.startsWith('/#')) assert.ok(homeIds.has(ref.slice(2)));
       else if (ref.startsWith('#')) assert.ok(ids.includes(ref.slice(1)));

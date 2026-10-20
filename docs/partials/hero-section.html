@@ -26,7 +26,7 @@
         <li><a href="#engineering-lab">Engineering Lab <span aria-hidden="true">↗</span></a></li>
       </ul>
     </div>
-    <aside class="hero-aside" aria-label="Portrait and engineering decisions">
+    <aside class="hero-aside" aria-label="Portrait and software illustration">
     <figure class="hero-portrait">
       <picture>
         <source type="image/webp"
@@ -41,15 +41,20 @@
       </picture>
       <figcaption>Based in the Netherlands</figcaption>
     </figure>
-    <div class="engineering-decision">
-      <p class="eyebrow">Engineering decisions</p>
-      <label hidden>Explore a condition<select aria-label="Engineering decision example"><option value="duplicate">Lost reply</option><option value="slow">Timeout</option><option value="rename">Contract change</option></select></label>
-      <p class="decision-question">The reply never arrived.</p>
-      <div class="decision-route" aria-hidden="true"><span>Request</span><span>Retry</span><span>Store</span></div>
-      <p class="decision-outcome" role="status" aria-live="polite" aria-atomic="true">2 attempts. 1 saved record.</p>
-      <a class="text-link" href="#playground" data-investigation-scenario="duplicate" data-lab-open="true">Investigate why <span aria-hidden="true">↗</span></a>
-      <p class="decision-caption">Illustrative example</p>
-    </div>
+    <figure class="hero-system">
+      <svg viewBox="0 0 256 108" role="img" aria-label="A request passes through a software service to a database.">
+        <path class="system-grid" d="M0 12H256M0 36H256M0 60H256M0 84H256M8 0V108M32 0V108M56 0V108M80 0V108M104 0V108M128 0V108M152 0V108M176 0V108M200 0V108M224 0V108M248 0V108"/>
+        <path class="system-wire" d="M66 45H96M160 45H194"/><path class="system-arrow" d="m89 41 7 4-7 4m98-8 7 4-7 4"/>
+        <rect class="system-node" x="4" y="20" width="62" height="50" rx="6"/>
+        <path class="system-icon" d="m25 34-9 11 9 11m20-22 9 11-9 11m-6-26-9 30"/>
+        <rect class="system-node" x="96" y="20" width="64" height="50" rx="6"/>
+        <path class="system-icon" d="M110 34h36M110 45h36M110 56h36"/>
+        <circle class="system-port" cx="116" cy="34" r="2"/><circle class="system-port" cx="136" cy="45" r="2"/><circle class="system-port" cx="122" cy="56" r="2"/>
+        <path class="system-node" d="M194 29c0-11 58-11 58 0v32c0 11-58 11-58 0Z"/>
+        <ellipse class="system-icon" cx="223" cy="29" rx="29" ry="8"/><path class="system-icon" d="M194 45c0 11 58 11 58 0"/>
+        <text x="35" y="94">Request</text><text x="128" y="94">Service</text><text x="223" y="94">Data</text>
+      </svg>
+    </figure>
     </aside>
   </div>
 </section>

@@ -70,6 +70,8 @@
 .case-page .engineering-themes h2 { margin-top: 0; }
 .case-page .details-body { padding-inline: 0; }
 .case-page .case-intro .chip-list { margin-bottom: 12px; }
+.case-page .case-intro > .project-code-link { margin-top: 8px; padding-block: 10px; border-top: 0; width: fit-content; }
+.case-page .engineering-themes p + p { margin-top: 10px; }
 .case-page-actions { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 24px; }
 .case-pagination { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
 .case-adjacent-link { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 88px; padding: 16px; border: 1px solid var(--line); border-radius: var(--control-radius); }
@@ -80,4 +82,8 @@
 @media (max-width: 560px) {
   .case-pagination { grid-template-columns: minmax(0, 1fr); }
   .case-next { grid-column: 1; }
+}
+@media (max-width: 420px) {
+  .case-page .project-card { padding: 0; border: 0; border-radius: 0; background: transparent; }
+  .case-page h1 { font-size: 1.75rem; }
 }
