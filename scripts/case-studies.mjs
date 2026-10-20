@@ -11,7 +11,9 @@ function escapeHtml(value) {
 }
 
 export function renderCaseStudies(homepage, canonical, narratives) {
-  const originalHead = homepage.match(/<head>([\s\S]*?)<\/head>/)[1];
+  const originalHead = homepage.match(/<head>([\s\S]*?)<\/head>/)[1]
+    // Reading pages do not contain the homepage explorer or any Lab components.
+    .replace(/<link rel="stylesheet" href="css\/(?:interactive|investigation|search|lab|compatibility|access)\.css\?v=[a-f0-9]{12}">\s*/g, '');
   const navigation = homepage.match(/<header\b[\s\S]*?<\/header>/)[0].replaceAll('href="#', 'href="/#');
   const footer = homepage.match(/<footer\b[\s\S]*?<\/footer>/)[0]
     .replace('href="#home"', 'href="/#home"').replace('href="#home"', 'href="#main"');

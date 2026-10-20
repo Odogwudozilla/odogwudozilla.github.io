@@ -46,14 +46,14 @@
 }
 @media (max-width: 760px) {
   .hero { padding-top: 24px; }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 104px; padding: 22px; gap: 20px 16px; }
-  .hero-identity { grid-column: 1; grid-row: 1; align-self: center; }
+  .hero-grid { display: flex; flex-wrap: wrap; padding: 22px; gap: 20px 16px; }
+  .hero-identity { flex: 1 1 8rem; order: 0; align-self: center; }
   .hero-identity h1 { font-size: clamp(1.75rem, 5.5vw, 2.5rem); }
   .hero-role { font-size: .875rem; }
-  .hero-copy { grid-column: 1 / -1; grid-row: 2; }
+  .hero-copy { flex: 1 1 100%; order: 2; }
   .hero-aside { display: contents; }
-  .hero-system { grid-column: 1 / -1; grid-row: 3; margin-top: 0; padding-top: 12px; }
-  .hero-portrait { grid-column: 2; grid-row: 1; }
+  .hero-system { flex: 1 1 100%; order: 3; margin-top: 0; padding-top: 12px; }
+  .hero-portrait { flex: 0 0 104px; width: 104px; order: 1; }
   .hero-portrait img { aspect-ratio: 1; }
   .hero-portrait figcaption { font-size: .6875rem; padding: 8px 0 0; }
   .hero-facts { gap: 8px; }
@@ -65,7 +65,8 @@
   .explorer-heading { margin-bottom: 12px; }
 }
 @media (max-width: 420px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr) 76px; padding: 18px; gap: 18px 12px; }
+  .hero-grid { padding: 18px; gap: 18px 12px; }
+  .hero-portrait { flex-basis: 76px; width: 76px; }
   .hero-identity h1 { font-size: 1.75rem; }
   .hero-portrait figcaption { display: none; }
 }
@@ -74,7 +75,7 @@
 }
 @media print {
   .hero-system { display: none; }
-  .hero-grid { padding: 0; border: 0; border-radius: 0; background: white; grid-template-columns: minmax(0, 1fr) 100px; gap: 16px; }
+  .hero-grid { display: grid; padding: 0; border: 0; border-radius: 0; background: white; grid-template-columns: minmax(0, 1fr) 100px; gap: 16px; }
   .hero-aside { display: contents; }
   .hero-portrait { grid-column: 2; grid-row: 1 / span 2; width: 100px; }
   .hero-identity h1 { font-size: 24pt; }

@@ -351,7 +351,7 @@ test('every generated stylesheet URL matches its content version', async () => {
     const styles = [...page.matchAll(/<link rel="stylesheet" href="(\/?css\/[^"?]+\.css)\?v=([a-f0-9]{12})"/g)];
     assert.deepEqual(styles.map(([, source]) => source.replace(/^\//, '')).sort(),
       ['base', 'navigation', 'components', 'sections', 'portfolio', 'responsive', 'keylane-theme',
-        ...(name === '404.html' ? [] : ['interactive', 'investigation', 'search', 'lab', 'compatibility', 'access'])].map(file => `css/${file}.css`).sort(),
+        ...(['index.html', 'index-modular.html', 'keylane.html', 'original.html'].includes(name) ? ['interactive', 'investigation', 'search', 'lab', 'compatibility', 'access'] : [])].map(file => `css/${file}.css`).sort(),
       `${name} must version every intended stylesheet`);
     for (const [, source, version] of styles) {
       const css = await readFile(path.join(root, source.replace(/^\//, '')), 'utf8');
