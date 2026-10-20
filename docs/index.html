@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="css/interactive.css?v=78571cf9c575">
 <link rel="stylesheet" href="css/investigation.css?v=1b0b615def0e">
 <link rel="stylesheet" href="css/search.css?v=55b44c2fa831">
-<link rel="stylesheet" href="css/lab.css?v=412f79b21f7d">
+<link rel="stylesheet" href="css/lab.css?v=82a01ddc6a42">
 <link rel="stylesheet" href="css/compatibility.css?v=40dc2de390e8">
 <link rel="stylesheet" href="css/access.css?v=748734f1ffa8">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
@@ -235,7 +235,7 @@
         <div class="investigation-view" id="request-trace">
   <div class="trace-console card">
     <div class="trace-console-header"><span>POST /demo/tasks</span><span>Synthetic trace · isolated browser model</span></div>
-    <div class="demo-help" hidden><button type="button" aria-label="Trace help" aria-describedby="trace-help" aria-expanded="false"><span aria-hidden="true">?</span> Trace help</button><span class="demo-tooltip" id="trace-help" role="tooltip">Choose a condition, then run or step through the request. An idempotency key connects a retry to the same operation. Attempts count requests; records count saved effects. Simulated time is model time, not a measured benchmark. Select a timeline row to inspect its data.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About request traces" aria-describedby="trace-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="trace-help" role="tooltip">Choose a condition, then use Run trace to play the request or Next step to inspect one event at a time. Select a timeline event to view its data. Reuse an idempotency key to prevent a retry from saving a second record. Attempts counts requests; Records saved counts stored results.</span></div>
     <div class="trace-controls" hidden>
       <label>Condition<select class="trace-scenario" aria-label="Request investigation scenario">
         <option value="duplicate">Lost reply + retry</option><option value="valid">Healthy request</option>
@@ -275,7 +275,7 @@
     <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
       to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
       as strings, and ignores extra response fields.</p>
-    <div class="demo-help" hidden><button type="button" aria-label="Contract help" aria-describedby="contract-help" aria-expanded="false"><span aria-hidden="true">?</span> Contract help</button><span class="demo-tooltip" id="contract-help" role="tooltip">The client stays fixed while the API changes. PASS means its expectation still holds; FAIL means it breaks; NOT RUN means an earlier check stopped it. Apply compatible rollout to compare a migration that preserves this client. Highlighted JSON lines differ from the original response.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About contract checks" aria-describedby="contract-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="contract-help" role="tooltip">Choose an API change to see whether the existing client still works. Turn on Apply compatible rollout to compare a change that preserves the client. PASS means a check succeeds; FAIL identifies a breaking change. Highlighted response fields show what changed.</span></div>
     <div class="compat-controls" hidden><label>API change
       <select aria-label="API compatibility scenario">
         <option value="extra">Extra response field</option>
@@ -312,7 +312,7 @@
   <div class="card access-console">
     <div class="trace-console-header"><span>DECISION /demo/articles/draft-42</span><span>Fictional publishing workspace</span></div>
     <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Can this person act on this record? Change the context to inspect the decision.</p></div>
-    <div class="demo-help" hidden><button type="button" aria-label="Access help" aria-describedby="access-help" aria-expanded="false"><span aria-hidden="true">?</span> Access help</button><span class="demo-tooltip" id="access-help" role="tooltip">Change any selection to re-evaluate immediately. Workspace is the record’s location relative to the user’s assignment. Checks run in order: identity, workspace, permission, record state. STOP blocks the operation; NOT RUN marks later checks. Even an administrator is limited to the assigned workspace.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About access decisions" aria-describedby="access-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="access-help" role="tooltip">Choose a role, workspace, action and record state to see whether the action is allowed. Each change updates the result. STOP identifies the rule that blocks the action; NOT RUN means an earlier rule stopped the check. Administrators can only act in their assigned workspace.</span></div>
     <p class="access-verdict" role="status" aria-live="polite" aria-atomic="true">BLOCK · 403 Forbidden. Reviewer and editor roles cannot publish in this example.</p>
     <div class="access-controls" hidden>
       <label>Role<select data-access-context="role"><option value="anonymous">Not signed in</option><option value="reviewer">Reviewer</option><option value="editor" selected>Editor</option><option value="admin">Administrator</option></select></label>
@@ -336,7 +336,7 @@
     <p>Same grid, different search strategy. Compare breadth-first search (BFS)
       with depth-first search (DFS).</p>
   </div>
-    <div class="demo-help" hidden><button type="button" aria-label="Search help" aria-describedby="search-help" aria-expanded="false"><span aria-hidden="true">?</span> Search help</button><span class="demo-tooltip" id="search-help" role="tooltip">BFS explores in layers using a queue; DFS follows a branch using a stack. Explored counts visited cells. Pending counts discovered cells awaiting exploration. Route moves counts steps in the resulting route, not all visited cells. Run animates the search; Next step inspects one visited cell.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About route search" aria-describedby="search-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="search-help" role="tooltip">Choose an algorithm and an example grid. Use Run search to animate the route search or Next step to inspect one cell at a time. Explored counts visited cells; Pending counts cells waiting to be visited. Route moves shows the length of the route found. Reset starts the same search again.</span></div>
   <div class="search-lab">
     <div class="search-controls" hidden>
       <div class="search-selectors">
@@ -473,6 +473,6 @@ S..#..G
   <script src="js/access.js?v=b57040219075" defer></script>
   <script src="js/investigation.js?v=93d6cb5e6d03" defer></script>
   <script src="js/lab.js?v=a8dbac2ae049" defer></script>
-  <script src="js/demo-help.js?v=eeaff7d52401" defer></script>
+  <script src="js/demo-help.js?v=6e715322d6ed" defer></script>
 </body>
 </html>
