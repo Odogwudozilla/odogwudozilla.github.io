@@ -24,6 +24,7 @@
   function fromHash() {
     const hash = window.location.hash;
     if (hash === '#compatibility-lab' || hash === '#compatibility-title') chooseView('compatibility-lab');
+    else if (hash === '#access-lab' || hash === '#access-title') chooseView('access-lab');
     else if (['#playground', '#playground-title', '#request-trace'].includes(hash)) chooseView('request-trace');
   }
   function render() {
@@ -104,7 +105,7 @@
   document.addEventListener('click', event => {
     const link = event.target.closest('a[href^="#"]');
     if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (link.hash === '#compatibility-lab') chooseView('compatibility-lab');
+    if (['#compatibility-lab', '#access-lab'].includes(link.hash)) chooseView(link.hash.slice(1));
     if (link.dataset.investigationScenario) { picker.value = link.dataset.investigationScenario; protection.checked = true; reset(); chooseView('request-trace'); }
   });
   window.addEventListener('hashchange', fromHash);

@@ -21,13 +21,15 @@
         <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
       </div>
       <section class="lab-panel investigation-section" id="playground" aria-labelledby="playground-title">
-        <div class="section-heading"><h3 id="playground-title">Beyond the status code</h3><p>Inspect the request, the saved effect and the contract the client depends on.</p></div>
+        <div class="section-heading"><h3 id="playground-title">Beyond the status code</h3><p>Inspect the request, the saved effect, client compatibility and access decisions.</p></div>
         <div class="investigation-switch" role="group" aria-label="API investigation view" hidden>
           <button type="button" data-investigation-view="request-trace" aria-controls="request-trace" aria-pressed="true">Request trace</button>
           <button type="button" data-investigation-view="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">Contract checks</button>
+          <button type="button" data-investigation-view="access-lab" aria-controls="access-lab" aria-pressed="false">Access decisions</button>
         </div>
         {{investigation-section}}
         {{compatibility-section}}
+        {{access-section}}
       </section>
       {{search-section}}
     </section>
@@ -48,6 +50,8 @@
   <script src="js/search.js" defer></script>
   <script src="js/compatibility-model.js" defer></script>
   <script src="js/compatibility.js" defer></script>
+  <script src="js/access-model.js" defer></script>
+  <script src="js/access.js" defer></script>
   <script src="js/investigation.js" defer></script>
   <script src="js/engineering-decision.js" defer></script>
   <script src="js/lab.js" defer></script>

@@ -21,6 +21,7 @@ import './engineering-decision.test.mjs';
 import './search.test.mjs';
 import './lab.test.mjs';
 import './compatibility.test.mjs';
+import './access.test.mjs';
 
 const root = fileURLToPath(new URL('../docs/', import.meta.url));
 const html = await readFile(path.join(root, 'index.html'), 'utf8');
@@ -334,7 +335,7 @@ test('generated pages reference script versions derived from LF-normalized conte
     const scripts = [...page.matchAll(/<script src="(\/?js\/[^"?]+\.js)\?v=([a-f0-9]{12})"/g)];
     const homepage = ['index.html', 'index-modular.html', 'keylane.html', 'original.html'].includes(name);
     assert.deepEqual(scripts.map(([, source]) => source.replace(/^\//, '')).sort(),
-      (homepage ? ['js/theme.js', 'js/scripts.js', 'js/interactive.js', 'js/investigation-model.js', 'js/investigation.js', 'js/engineering-decision.js', 'js/search-model.js', 'js/search.js', 'js/lab.js', 'js/compatibility-model.js', 'js/compatibility.js'] : ['js/theme.js', 'js/scripts.js']).sort(),
+      (homepage ? ['js/theme.js', 'js/scripts.js', 'js/interactive.js', 'js/investigation-model.js', 'js/investigation.js', 'js/engineering-decision.js', 'js/search-model.js', 'js/search.js', 'js/lab.js', 'js/compatibility-model.js', 'js/compatibility.js', 'js/access-model.js', 'js/access.js'] : ['js/theme.js', 'js/scripts.js']).sort(),
       `${name} must version each intended browser script`);
     for (const [, source, version] of scripts) {
       const bytes = await readFile(path.join(root, source.replace(/^\//, '')));
@@ -349,7 +350,7 @@ test('every generated stylesheet URL matches its content version', async () => {
     const styles = [...page.matchAll(/<link rel="stylesheet" href="(\/?css\/[^"?]+\.css)\?v=([a-f0-9]{12})"/g)];
     assert.deepEqual(styles.map(([, source]) => source.replace(/^\//, '')).sort(),
       ['base', 'navigation', 'components', 'sections', 'portfolio', 'responsive', 'keylane-theme',
-        ...(name === '404.html' ? [] : ['interactive', 'investigation', 'search', 'lab', 'compatibility'])].map(file => `css/${file}.css`).sort(),
+        ...(name === '404.html' ? [] : ['interactive', 'investigation', 'search', 'lab', 'compatibility', 'access'])].map(file => `css/${file}.css`).sort(),
       `${name} must version every intended stylesheet`);
     for (const [, source, version] of styles) {
       const css = await readFile(path.join(root, source.replace(/^\//, '')), 'utf8');
