@@ -90,7 +90,7 @@ test('the Lab stays collapsed on loading or changing fragments and only explicit
   assert.equal(f.shell.open, true); assert.equal(f.content.hidden, false);
   f.gateway.click({ preventDefault() {} });
   const pauses = f.panels[0].paused;
-  f.documentEvents.get('click')({ button: 0, preventDefault() {}, target: { closest: () => ({ hash: '#playground', dataset: { labOpen: 'true' } }) } });
+  f.gateway.click({ preventDefault() {} });
   assert.equal(f.shell.open, true);
   f.gateway.click({ preventDefault() {} });
   assert.ok(f.panels[0].paused > pauses); assert.equal(f.content.hidden, true);

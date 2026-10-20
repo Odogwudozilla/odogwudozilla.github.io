@@ -59,7 +59,6 @@
     const link = event.target.closest('a[href^="#"]');
     if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
     const target = fromHash(link.hash);
-    if (link.dataset.labOpen === 'true') { expanded = true; applyExpansion(); }
     if (target && !expanded) {
       event.preventDefault();
       window.history.pushState(null, '', link.hash);

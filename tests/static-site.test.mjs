@@ -17,7 +17,6 @@ import './email-copy.test.mjs';
 import './responsive-images.test.mjs';
 import './interactive.test.mjs';
 import './investigation.test.mjs';
-import './engineering-decision.test.mjs';
 import './search.test.mjs';
 import './lab.test.mjs';
 import './compatibility.test.mjs';
@@ -309,6 +308,7 @@ test('Product Watch leads the portfolio and professional context stays public-sa
   assert.deepEqual([...work.matchAll(/<article[^>]+id="([^"]+)"/g)].map(match => match[1]),
     caseStudies.map(project => project.id));
   assert.match(html, /Sep 2019 — Present/);
+  assert.doesNotMatch(html, /engineering-decision|Engineering decisions/);
   assert.doesNotMatch(html, /keylane-portfolio-public-safe-context\.md/);
 });
 
@@ -336,7 +336,7 @@ test('generated pages reference script versions derived from LF-normalized conte
     const scripts = [...page.matchAll(/<script src="(\/?js\/[^"?]+\.js)\?v=([a-f0-9]{12})"/g)];
     const homepage = ['index.html', 'index-modular.html', 'keylane.html', 'original.html'].includes(name);
     assert.deepEqual(scripts.map(([, source]) => source.replace(/^\//, '')).sort(),
-      (homepage ? ['js/theme.js', 'js/scripts.js', 'js/interactive.js', 'js/investigation-model.js', 'js/investigation.js', 'js/engineering-decision.js', 'js/search-model.js', 'js/search.js', 'js/lab.js', 'js/compatibility-model.js', 'js/compatibility.js', 'js/access-model.js', 'js/access.js', 'js/demo-help.js'] : ['js/theme.js', 'js/scripts.js']).sort(),
+      (homepage ? ['js/theme.js', 'js/scripts.js', 'js/interactive.js', 'js/investigation-model.js', 'js/investigation.js', 'js/search-model.js', 'js/search.js', 'js/lab.js', 'js/compatibility-model.js', 'js/compatibility.js', 'js/access-model.js', 'js/access.js', 'js/demo-help.js'] : ['js/theme.js', 'js/scripts.js']).sort(),
       `${name} must version each intended browser script`);
     for (const [, source, version] of scripts) {
       const bytes = await readFile(path.join(root, source.replace(/^\//, '')));

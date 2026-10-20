@@ -60,10 +60,13 @@ The menu supports Escape, outside clicks, and closing after selecting a
 link. Copy email is only offered when the Clipboard API exists; failures
 are announced inline while the normal email link remains available.
 
-The Engineering Lab keeps one of two panels visible through `lab.js`:
-API investigation or grid search. The API panel contains request-trace and
-contract-check views; `#playground`, `#compatibility-lab` and `#search-lab`
-remain valid. Both API views and search remain readable without scripts.
+The Engineering Lab starts collapsed behind a native disclosure with a compact
+signal preview. `lab.js` opens it only through the section's manual toggle and
+keeps one of two panels visible: API investigation or grid search. The API panel
+contains request-trace, contract-check and access-decision views; existing public
+fragments remain valid. The reviewed examples remain readable without scripts.
+`demo-help.js` provides hover, keyboard-focus and tap explanations with Escape
+dismissal. Collapsing the Lab pauses playback; printing restores the prior state.
 
 `investigation-model.js` creates deterministic synthetic traces and derives
 attempts, committed records and client outcomes from each event prefix.
@@ -74,9 +77,10 @@ not real service measurements or playback duration.
 
 `compatibility-model.js` checks the old consumer against changed contracts
 and compatible rollout variants. `compatibility.js` shows per-expectation
-checks and highlights changed JSON lines. `engineering-decision.js` uses
-these same models for the small card beneath the portrait, replacing the
-retired clock. No demo makes network requests, stores data or executes Java.
+checks and highlights changed JSON lines. `access-model.js` and `access.js`
+explain a fictional publishing policy; they are not real security enforcement.
+The portrait is accompanied by a static request/service/data vector, with no
+widget or additional controls. No demo makes network requests, stores data or executes Java.
 All examples are separate from company implementations and private data.
 
 ## Validation

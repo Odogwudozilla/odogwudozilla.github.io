@@ -8,7 +8,7 @@
 .trace-console-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding: 12px 20px; background: var(--action); color: var(--action-ink); font: .8125rem/1.5 var(--font-mono); }
 .trace-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; padding: 16px 20px; border-bottom: 1px solid var(--line); scroll-margin-top: 90px; }
 .trace-controls label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: .8125rem; }
-.trace-controls select, .engineering-decision select { min-height: 34px; max-width: 100%; padding: 5px 8px; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--control-radius); }
+.trace-controls select { min-height: 34px; max-width: 100%; padding: 5px 8px; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--control-radius); }
 .trace-protection input { accent-color: var(--action); width: 16px; height: 16px; }
 .trace-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .trace-actions .button { min-height: 34px; padding: 5px 10px; font-size: .8125rem; }
@@ -53,16 +53,6 @@
 [data-visited="true"] .trace-bar { background: var(--action); }
 .trace-lesson { border-top: 1px solid var(--line); padding: 16px 20px 0; color: var(--ink); }
 .trace-footnote { padding: 10px 20px 18px; font-size: .75rem; }
-.engineering-decision { border-top: 1px solid var(--line); padding-top: 14px; }
-.engineering-decision > .eyebrow { color: var(--teal); font-size: .6875rem; }
-.engineering-decision label { display: grid; gap: 4px; margin-block: 10px; font-size: .6875rem; }
-.engineering-decision select { width: 100%; font-size: .8125rem; }
-.decision-question { margin-block: 12px 8px; font-size: .875rem; font-weight: 650; color: var(--ink); }
-.decision-route { display: flex; gap: 12px; align-items: center; font: .6875rem/1.5 var(--font-mono); color: var(--ink); }
-.decision-route span + span::before { content: '→'; margin-right: 12px; color: var(--teal); }
-.decision-outcome { margin-block: 10px; font: .8125rem/1.5 var(--font-mono); color: var(--ink); }
-.engineering-decision a { font-size: .8125rem; }
-.decision-caption { margin-top: 6px; font-size: .6875rem; }
 @media (prefers-reduced-motion: no-preference) {
   .trace-packet.is-moving { animation: trace-hop .6s ease-out; }
   @keyframes trace-hop { from { transform: translateX(var(--from)); } to { transform: translateX(var(--to)); } }
@@ -70,8 +60,6 @@
   @keyframes trace-arrive { from { transform: translateX(-36px); opacity: .25; } to { transform: none; opacity: 1; } }
 }
 @media (max-width: 760px) {
-  .engineering-decision { grid-column: 1 / -1; grid-row: 3; }
-  .engineering-decision label { max-width: 18rem; }
   .trace-controls, .trace-summary { padding: 12px; gap: 10px; }
   .trace-controls > label:first-child { width: 100%; justify-content: space-between; }
   .trace-controls select { flex: 1; min-width: 0; }
@@ -89,7 +77,7 @@
   .trace-event-label { font-size: .75rem; }
 }
 @media print {
-  .trace-controls, .investigation-switch, .engineering-decision label { display: none !important; }
+  .trace-controls, .investigation-switch { display: none !important; }
   .engineering-lab .investigation-view[hidden] { display: block !important; }
   .trace-workspace { grid-template-columns: minmax(0,1fr); }
   .trace-console-header { background: white; color: black; border-bottom: 1px solid black; }
