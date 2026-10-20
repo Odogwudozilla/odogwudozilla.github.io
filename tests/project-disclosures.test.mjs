@@ -20,6 +20,6 @@ test('all former skill groups have visible evidence within Work and Projects', (
     'Angular', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'Playwright', 'Git', 'IntelliJ IDEA', 'CI/CD']) {
     assert.ok(work.includes(skill), `Lost skill: ${skill}`);
   }
-  assert.match(work, /business-rule changes, authorisation, defect investigation and integration\/regression testing/);
+  assert.match(work, /authorisation, database migrations and automated testing/);
   assert.match(work, /Story refinement, code review, technical notes and release documentation/);
 });
