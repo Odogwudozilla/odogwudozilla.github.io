@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="css/interactive.css?v=7ce9fd33cbd7">
 <link rel="stylesheet" href="css/investigation.css?v=802e51ccb77e">
 <link rel="stylesheet" href="css/search.css?v=5cc84eb8b813">
-<link rel="stylesheet" href="css/lab.css?v=cb06fa998172">
+<link rel="stylesheet" href="css/lab.css?v=412f79b21f7d">
 <link rel="stylesheet" href="css/compatibility.css?v=40dc2de390e8">
 <link rel="stylesheet" href="css/access.css?v=5b0e3671a3d2">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
@@ -128,7 +128,7 @@
       <p class="decision-question">The reply never arrived.</p>
       <div class="decision-route" aria-hidden="true"><span>Request</span><span>Retry</span><span>Store</span></div>
       <p class="decision-outcome" role="status" aria-live="polite" aria-atomic="true">2 attempts. 1 saved record.</p>
-      <a class="text-link" href="#playground" data-investigation-scenario="duplicate">Investigate why <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href="#playground" data-investigation-scenario="duplicate" data-lab-open="true">Investigate why <span aria-hidden="true">↗</span></a>
       <p class="decision-caption">Illustrative example</p>
     </div></aside>
   </div></section>
@@ -204,6 +204,13 @@
         <h2 id="lab-title">Engineering Lab</h2>
         <p>Investigate a system, challenge an API contract or compare search strategies. Change a condition and inspect what follows.</p>
       </div>
+      <details class="lab-shell">
+        <summary class="lab-gateway">
+          <span class="lab-gateway-copy"><span class="eyebrow">Interactive · browser only</span><strong><span class="lab-open-label">Open the Lab</span><span class="lab-close-label">Close the Lab</span></strong><span>Requests · Contracts · Access · Search</span></span>
+          <svg class="lab-preview" viewBox="0 0 240 64" aria-hidden="true"><path class="lab-preview-grid" d="M0 16H240M0 32H240M0 48H240M24 0V64M72 0V64M120 0V64M168 0V64M216 0V64"/><path class="lab-preview-route" d="M24 32H216"/><circle cx="24" cy="32" r="8"/><circle cx="120" cy="32" r="8"/><circle cx="216" cy="32" r="8"/><circle class="lab-preview-packet" cx="24" cy="32" r="4"/></svg>
+          <span class="lab-gateway-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="lab-content">
       <div class="lab-switch" role="group" aria-label="Choose an Engineering Lab demo" hidden>
         <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API investigation</button>
         <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
@@ -218,6 +225,7 @@
         <div class="investigation-view" id="request-trace">
   <div class="trace-console card">
     <div class="trace-console-header"><span>POST /demo/tasks</span><span>Synthetic trace · isolated browser model</span></div>
+    <div class="demo-help" hidden><button type="button" aria-label="Trace help" aria-describedby="trace-help" aria-expanded="false"><span aria-hidden="true">?</span> Trace help</button><span class="demo-tooltip" id="trace-help" role="tooltip">Choose a condition, then run or step through the request. An idempotency key connects a retry to the same operation. Attempts count requests; records count saved effects. Simulated time is model time, not a measured benchmark. Select a timeline row to inspect its data.</span></div>
     <div class="trace-controls" hidden>
       <label>Condition<select class="trace-scenario" aria-label="Request investigation scenario">
         <option value="duplicate">Lost reply + retry</option><option value="valid">Healthy request</option>
@@ -257,6 +265,7 @@
     <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
       to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
       as strings, and ignores extra response fields.</p>
+    <div class="demo-help" hidden><button type="button" aria-label="Contract help" aria-describedby="contract-help" aria-expanded="false"><span aria-hidden="true">?</span> Contract help</button><span class="demo-tooltip" id="contract-help" role="tooltip">The client stays fixed while the API changes. PASS means its expectation still holds; FAIL means it breaks; NOT RUN means an earlier check stopped it. Apply compatible rollout to compare a migration that preserves this client. Highlighted JSON lines differ from the original response.</span></div>
     <div class="compat-controls" hidden><label>API change
       <select aria-label="API compatibility scenario">
         <option value="extra">Extra response field</option>
@@ -293,6 +302,7 @@
   <div class="card access-console">
     <div class="trace-console-header"><span>DECISION /demo/articles/draft-42</span><span>Fictional publishing workspace</span></div>
     <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Can this person act on this record? Change the context to inspect the decision.</p></div>
+    <div class="demo-help" hidden><button type="button" aria-label="Access help" aria-describedby="access-help" aria-expanded="false"><span aria-hidden="true">?</span> Access help</button><span class="demo-tooltip" id="access-help" role="tooltip">Change any selection to re-evaluate immediately. Workspace is the record’s location relative to the user’s assignment. Checks run in order: identity, workspace, permission, record state. STOP blocks the operation; NOT RUN marks later checks. Even an administrator is limited to the assigned workspace.</span></div>
     <p class="access-verdict" role="status" aria-live="polite" aria-atomic="true">BLOCK · 403 Forbidden. Reviewer and editor roles cannot publish in this example.</p>
     <div class="access-controls" hidden>
       <label>Role<select data-access-context="role"><option value="anonymous">Not signed in</option><option value="reviewer">Reviewer</option><option value="editor" selected>Editor</option><option value="admin">Administrator</option></select></label>
@@ -316,6 +326,7 @@
     <p>Same grid, different search strategy. Compare breadth-first search (BFS)
       with depth-first search (DFS).</p>
   </div>
+    <div class="demo-help" hidden><button type="button" aria-label="Search help" aria-describedby="search-help" aria-expanded="false"><span aria-hidden="true">?</span> Search help</button><span class="demo-tooltip" id="search-help" role="tooltip">BFS explores in layers using a queue; DFS follows a branch using a stack. Explored counts visited cells. Pending counts discovered cells awaiting exploration. Route moves counts steps in the resulting route, not all visited cells. Run animates the search; Next step inspects one visited cell.</span></div>
   <div class="search-lab">
     <div class="search-controls" hidden>
       <div class="search-selectors">
@@ -358,7 +369,7 @@ S..#..G
         <tr><th scope="row">DFS</th><td class="search-dfs-moves">12</td><td class="search-dfs-count">13</td></tr></tbody>
       </table>
       <pre class="search-trace">In the two-route example, the shortest route takes 8 moves through the lower passage. Following the upper branch takes 12 moves. A blocked goal has no route.</pre>
-    </details></div></section></section>
+    </details></div></section></div></details></section>
     <section class="page-section experience-section" id="experience" aria-labelledby="experience-title">
   <div class="section-heading">
     <h2 id="experience-title">Professional experience</h2>
@@ -452,6 +463,7 @@ S..#..G
   <script src="js/access.js?v=b57040219075" defer></script>
   <script src="js/investigation.js?v=a44c9bca08de" defer></script>
   <script src="js/engineering-decision.js?v=4f088132bb2c" defer></script>
-  <script src="js/lab.js?v=c35ca2f3fda5" defer></script>
+  <script src="js/lab.js?v=c9b88866b96f" defer></script>
+  <script src="js/demo-help.js?v=eeaff7d52401" defer></script>
 </body>
 </html>

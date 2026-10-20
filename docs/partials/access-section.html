@@ -2,6 +2,7 @@
   <div class="card access-console">
     <div class="trace-console-header"><span>DECISION /demo/articles/draft-42</span><span>Fictional publishing workspace</span></div>
     <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Can this person act on this record? Change the context to inspect the decision.</p></div>
+    <div class="demo-help" hidden><button type="button" aria-label="Access help" aria-describedby="access-help" aria-expanded="false"><span aria-hidden="true">?</span> Access help</button><span class="demo-tooltip" id="access-help" role="tooltip">Change any selection to re-evaluate immediately. Workspace is the record’s location relative to the user’s assignment. Checks run in order: identity, workspace, permission, record state. STOP blocks the operation; NOT RUN marks later checks. Even an administrator is limited to the assigned workspace.</span></div>
     <p class="access-verdict" role="status" aria-live="polite" aria-atomic="true">BLOCK · 403 Forbidden. Reviewer and editor roles cannot publish in this example.</p>
     <div class="access-controls" hidden>
       <label>Role<select data-access-context="role"><option value="anonymous">Not signed in</option><option value="reviewer">Reviewer</option><option value="editor" selected>Editor</option><option value="admin">Administrator</option></select></label>

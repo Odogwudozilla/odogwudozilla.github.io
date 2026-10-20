@@ -7,6 +7,7 @@
     <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
       to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
       as strings, and ignores extra response fields.</p>
+    <div class="demo-help" hidden><button type="button" aria-label="Contract help" aria-describedby="contract-help" aria-expanded="false"><span aria-hidden="true">?</span> Contract help</button><span class="demo-tooltip" id="contract-help" role="tooltip">The client stays fixed while the API changes. PASS means its expectation still holds; FAIL means it breaks; NOT RUN means an earlier check stopped it. Apply compatible rollout to compare a migration that preserves this client. Highlighted JSON lines differ from the original response.</span></div>
     <div class="compat-controls" hidden><label>API change
       <select aria-label="API compatibility scenario">
         <option value="extra">Extra response field</option>

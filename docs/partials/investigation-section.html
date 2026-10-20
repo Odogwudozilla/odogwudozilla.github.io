@@ -1,6 +1,7 @@
 <div class="investigation-view" id="request-trace">
   <div class="trace-console card">
     <div class="trace-console-header"><span>POST /demo/tasks</span><span>Synthetic trace · isolated browser model</span></div>
+    <div class="demo-help" hidden><button type="button" aria-label="Trace help" aria-describedby="trace-help" aria-expanded="false"><span aria-hidden="true">?</span> Trace help</button><span class="demo-tooltip" id="trace-help" role="tooltip">Choose a condition, then run or step through the request. An idempotency key connects a retry to the same operation. Attempts count requests; records count saved effects. Simulated time is model time, not a measured benchmark. Select a timeline row to inspect its data.</span></div>
     <div class="trace-controls" hidden>
       <label>Condition<select class="trace-scenario" aria-label="Request investigation scenario">
         <option value="duplicate">Lost reply + retry</option><option value="valid">Healthy request</option>
