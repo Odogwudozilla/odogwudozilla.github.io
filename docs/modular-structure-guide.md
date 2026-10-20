@@ -17,7 +17,9 @@ the former `skills` fragment is an alias at Work & Projects. Stable IDs preserve
 shared engineering toolkit. `docs/partials/project-case-studies.html` owns
 the full reviewed narratives, images and project links used by the four
 dedicated case-study pages. `scripts/case-studies.mjs` generates those pages
-with the shared head, navigation and footer. Keep detail in that narrative
+with shared metadata, navigation and footer, but only the seven core stylesheets.
+The six homepage/Lab stylesheets stay on the homepage and its aliases.
+Keep detail in that narrative
 partial; shortening a homepage card must not discard the full case study.
 
 Run `npm run build:static` after changing a partial or template. The build

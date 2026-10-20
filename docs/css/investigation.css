@@ -62,7 +62,7 @@
 @media (max-width: 760px) {
   .trace-controls, .trace-summary { padding: 12px; gap: 10px; }
   .trace-controls > label:first-child { width: 100%; justify-content: space-between; }
-  .trace-controls select { flex: 1; min-width: 0; }
+  .trace-controls select { flex: 1; min-width: min(100%, 10em); }
   .trace-controls { scroll-margin-top: 85px; }
   .trace-topology { gap: 10px; padding: 12px; }
   .trace-topology li { padding: 6px; }
