@@ -37,11 +37,11 @@ test('project focus highlights evidence without hiding projects or changing disc
   const f = fixture();
   assert.equal(f.explorer.hidden, false);
   f.buttons[3].click();
-  assert.deepEqual(f.projects.map(item => item.matched), [true, false, true, true]);
-  assert.match(f.status.textContent, /^3 projects/);
+  assert.deepEqual(f.projects.map(item => item.matched), [true, true, true, true]);
+  assert.match(f.status.textContent, /^4 projects/);
   assert.equal(f.buttons.filter(item => item.pressed === 'true').length, 1);
   f.buttons[3].click();
-  assert.equal(f.projects.filter(item => item.matched).length, 3);
+  assert.equal(f.projects.filter(item => item.matched).length, 4);
   f.buttons[1].click();
   assert.equal(f.projects.filter(item => item.matched).length, 3);
   f.buttons[0].click();

@@ -64,22 +64,21 @@ underlying applications end to end.
 
 ## Professional experience and editorial review
 
-The Keylane overview uses the author's supplied public-safe professional
-context, supported by existing background information and the author's
-own connected work messages. It describes mature Java policy-management
-systems, SOAP-to-REST modernisation, backwards-compatible contract evolution,
-legacy frontend retirement, regression testing, defect investigation,
-documentation, and exploratory AI-assisted developer tooling.
+The Keylane content was refreshed on 20 October 2026 from an owner-supplied
+sanitised capabilities brief. It now reflects Java and Angular delivery,
+ongoing SOAP-to-REST leadership, role-based authorisation, Liquibase migrations,
+query analysis, legacy screen migration and test modernisation. The owner
+confirmed that AI-assisted developer tooling may be described publicly as a
+contribution. No formal management title or measured performance gain is claimed.
 
-No source messages, quotations, internal links, ticket references,
-customer names, code, or operational data were copied into published content.
-The local drafting context is excluded from version control and from the
-public static folder; only the general professional descriptions are used.
-Claims of architectural ownership, measured business impact, formal
-mentoring, or specific company frameworks were not added without evidence.
-The supplied context confirms a current Senior Software Engineer role.
-The timeline retains the existing September 2019 start date and now says
-Present instead of the outdated September 2025 end date.
+The homepage stays concise; the dedicated case study and two-page CV carry
+the detailed responsibilities. The REST replacement is explicitly in development.
+The existing Senior Software Engineer title and September 2019 start date remain.
+
+No source messages, quotations, internal links, ticket references, customer
+names, code, exact security rules or operational data were copied into public
+content. The private evidence brief is outside the public static folder and
+excluded from this change's committed files.
 
 Public copy uses British English consistently and explains technical
 details in terms of their purpose. The Next.js scaffold's profile copy

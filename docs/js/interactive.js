@@ -13,7 +13,8 @@
     'insurance-case': {
       java: 'Java services for insurance policy management.',
       apis: 'SOAP-to-REST changes, OpenAPI contracts and integration compatibility.',
-      data: 'SQL and application data used in defect investigation.',
+      frontend: 'Angular screens and staged migration of legacy workflows.',
+      data: 'Liquibase schema and data migrations, SQL and query access-path analysis.',
     },
     'fusion-project': {
       java: 'Java 21 and a Spring Boot REST API.',
