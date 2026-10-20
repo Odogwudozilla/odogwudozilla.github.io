@@ -4,7 +4,7 @@
     <p>Same grid, different search strategy. Compare breadth-first search (BFS)
       with depth-first search (DFS).</p>
   </div>
-    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About route search" aria-describedby="search-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="search-help" role="tooltip">Choose an algorithm and an example grid. Use Run search to animate the route search or Next step to inspect one cell at a time. Explored counts visited cells; Pending counts cells waiting to be visited. Route moves shows the length of the route found. Reset starts the same search again.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About route search" aria-describedby="search-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="search-help" role="tooltip">Choose an algorithm and an example grid. Use Run search to animate the route search or Next step to inspect one cell at a time. Explored shows how many cells have been visited; Pending shows how many are waiting. Route moves shows the number of steps in the route found. Reset starts the same search again.</span></div>
   <div class="search-lab">
     <div class="search-controls" hidden>
       <div class="search-selectors">
@@ -37,7 +37,7 @@ S..#..G
           <div><dt>Route moves</dt><dd class="search-distance">—</dd></div>
         </dl>
         <p class="search-strategy">BFS uses a queue. With equally weighted moves, its first route to the goal is a shortest route. DFS uses a stack and can find a longer route.</p>
-        <p class="search-rules">Moves have equal cost: up, right, down or left. Walls cannot be crossed. This deterministic example runs entirely in your browser.</p>
+        <p class="search-rules">Moves have equal cost: up, right, down or left. Walls cannot be crossed. The same selections produce the same search. The example runs entirely in your browser.</p>
       </div>
     </div>
     <details class="search-notes">

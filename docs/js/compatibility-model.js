@@ -5,7 +5,7 @@
   const original = { id: 'task-42', title: request.title };
   const scenarios = {
     extra: { title: 'Extra response field', required: ['title'], response: { ...original, priority: 'normal' },
-      migration: 'Keep the added field optional for consumers; check stricter clients separately.',
+      migration: 'Keep the added field optional for existing clients; check stricter clients separately.',
       explanation: 'This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.' },
     rename: { title: 'Rename a response field', required: ['title'], response: { id: original.id, name: original.title },
       migration: 'Keep title alongside name while existing clients migrate.',
@@ -32,7 +32,7 @@
     if (!scenario) throw new Error('Unknown contract scenario');
     const explanation = {
       extra: 'The added response field remains optional for this client, which ignores it.',
-      rename: 'The API now returns both title and name. The existing client can still read title while consumers migrate.',
+      rename: 'The API now returns both title and name. The existing client can still read title while other clients migrate.',
       type: 'The existing contract keeps id as a string. A numeric representation would need a separate agreed contract.',
       required: 'The API accepts the old request and defaults missing priority to normal. The existing client ignores that extra response field.',
     }[key];

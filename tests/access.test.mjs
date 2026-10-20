@@ -45,12 +45,12 @@ test('changing context replaces a prior allow result and explains the blocked ef
   assert.match(verdict.textContent, /^ALLOW/); assert.match(effect.textContent, /Would publish/);
   controls[1].value = 'other'; controls[1].change();
   assert.match(verdict.textContent, /^BLOCK/); assert.equal(verdict.dataset.allowed, 'false');
-  assert.match(effect.textContent, /No read or write/);
+  assert.match(effect.textContent, /The record is neither read nor changed/);
   assert.deepEqual(checks.children.map(item => item.dataset.outcome), ['PASS', 'STOP', 'NOT RUN', 'NOT RUN']);
   controls[1].value = 'own'; controls[3].value = 'archived'; controls[3].change();
   assert.match(verdict.textContent, /409 Conflict/);
   controls[2].value = 'read'; controls[2].change();
-  assert.match(verdict.textContent, /^ALLOW/); assert.match(effect.textContent, /No write/);
+  assert.match(verdict.textContent, /^ALLOW/); assert.match(effect.textContent, /without changing it/);
 });
 
 
@@ -60,6 +60,6 @@ test('script-free access example agrees with the model and distinguishes illustr
   assert.ok(html.includes(`BLOCK · ${example.status}. ${example.reason}`));
   assert.deepEqual([...html.matchAll(/data-outcome="([^"]+)"/g)].map(match => match[1]), Array.from(example.checks, check => check.outcome));
   assert.match(html, /class="access-controls" hidden/);
-  assert.match(html, /no real accounts, requests or saved changes/);
-  assert.match(html, /on every request, on the server/);
+  assert.match(html, /no real accounts, network requests or saved changes/);
+  assert.match(html, /check permissions on the server for every request/);
 });
