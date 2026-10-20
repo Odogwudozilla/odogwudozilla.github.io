@@ -72,6 +72,12 @@
 .case-page .case-intro .chip-list { margin-bottom: 12px; }
 .case-page .case-intro > .project-code-link { margin-top: 8px; padding-block: 10px; border-top: 0; width: fit-content; }
 .case-page .engineering-themes p + p { margin-top: 10px; }
+.case-outline { border-block: 1px solid var(--line); font-size: .9375rem; }
+.case-outline summary { cursor: pointer; min-height: 44px; padding-block: 12px; font-weight: 600; }
+.case-outline summary span { margin-inline-start: 8px; color: var(--muted); font-size: .8125rem; font-weight: 400; }
+.case-outline ol { margin: 0; padding: 0 0 12px 24px; }
+.case-outline a { display: inline-block; padding-block: 10px; overflow-wrap: anywhere; }
+@media print { .case-outline { display: none; } }
 .case-page-actions { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 24px; }
 .case-pagination { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
 .case-adjacent-link { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 88px; padding: 16px; border: 1px solid var(--line); border-radius: var(--control-radius); }

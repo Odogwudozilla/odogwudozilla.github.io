@@ -77,19 +77,38 @@ test('four case-study pages have unique canonical identities and sharing preview
   assert.equal(images.size, 4);
 });
 
-test('case studies retain reviewed content and expose it without JavaScript or disclosures', async () => {
+test('case studies retain reviewed content outside the collapsed outline', async () => {
   for (const project of caseStudies) {
     const html = await readFile(new URL(project.file, root), 'utf8');
     const source = narratives.match(new RegExp(`<article[^>]*id="${project.id}"[\\s\\S]*?</article>`))[0];
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
-    assert.doesNotMatch(html, /<details|project-share|copy-project-link|<h[34]\b/);
-    for (const [, heading] of source.matchAll(/<h4>([^<]+)<\/h4>/g)) assert.ok(html.includes(`<h2>${heading}</h2>`));
+    const narrative = html.replace(/<details class="case-outline">[\s\S]*?<\/details>/, '');
+    assert.doesNotMatch(narrative, /<details|project-share|copy-project-link|<h[34]\b/);
+    assert.deepEqual([...narrative.matchAll(/<h2\b[^>]*>([^<]+)<\/h2>/g)].map(match => match[1]),
+      [...source.matchAll(/<h4>([^<]+)<\/h4>/g)].map(match => match[1]));
     assert.ok(html.includes(`href="/#${project.id}"`));
-    const normalized = html.replace(/\s+/g, ' ');
+    const normalized = narrative.replace(/\s+/g, ' ');
     for (const [, paragraph] of source.matchAll(/<p>([\s\S]*?)<\/p>/g)) {
       assert.ok(normalized.includes(paragraph.replace(/\s+/g, ' ').replaceAll('href="#', 'href="/#')), 'Retain the full narrative, not just its headings');
     }
     assert.ok(homepage.includes(`href="${project.file}" aria-label="Read case study: `));
+  }
+});
+
+test('native case outlines start closed and link to every focusable section in reading order', async () => {
+  for (const project of caseStudies) {
+    const html = await readFile(new URL(project.file, root), 'utf8');
+    const outlines = [...html.matchAll(/<details\b([^>]*)>([\s\S]*?)<\/details>/g)];
+    assert.equal(outlines.length, 1);
+    assert.equal(outlines[0][1], ' class="case-outline"');
+    const outline = outlines[0][2];
+    assert.match(outline, /<summary>On this page /);
+    assert.match(outline, /<nav aria-label="On this page"><ol>/);
+    const links = [...outline.matchAll(/<a class="text-link" href="#([^"]+)">([^<]+)<\/a>/g)].map(match => match.slice(1));
+    const headings = [...html.matchAll(/<h2 id="([^"]+)" tabindex="-1">([^<]+)<\/h2>/g)].map(match => match.slice(1));
+    assert.ok(headings.length >= 3);
+    assert.deepEqual(links, headings, 'Each link reaches its own heading, in narrative order');
+    assert.ok(html.indexOf('</details>') < html.indexOf('<div class="details-body">'));
   }
 });
 
