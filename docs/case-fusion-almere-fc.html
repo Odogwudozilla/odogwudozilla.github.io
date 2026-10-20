@@ -99,8 +99,13 @@
               <div class="visual-caption">Fusion Almere FC <span>Club administration</span></div>
               <div class="club-browser">
                 <picture>
-                  <source type="image/webp" srcset="assets/img/fusion-platform-preview.webp">
-                  <img src="assets/img/fusion-platform-preview.png" loading="lazy"
+                  <source type="image/webp"
+                    srcset="assets/img/fusion-platform-preview-440.webp 440w,
+                      assets/img/fusion-platform-preview-880.webp 880w,
+                      assets/img/fusion-platform-preview.webp 1265w"
+                    sizes="(max-width: 420px) calc(100vw - 34px),
+                      (max-width: 760px) min(440px, calc(100vw - 82px)), 350px">
+                  <img src="assets/img/fusion-platform-preview.png" loading="lazy" decoding="async"
                     width="1265" height="712" alt="The Fusion Almere FC test website,
                     showing its club introduction and mission.">
                 </picture>
