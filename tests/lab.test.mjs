@@ -18,7 +18,7 @@ function fixture(hash = '') {
       addEventListener: (name, callback) => events.set(name, callback) },
     document: { querySelector: () => ({ querySelectorAll: selector => selector === '.lab-panel' ? panels : buttons,
       querySelector: () => switcher }),
-      getElementById: id => panels.find(panel => panel.id === id) || (id === 'compatibility-lab' ? contract : null) || (id === 'search-title' ? { panelId: 'search-lab' } : null),
+      getElementById: id => panels.find(panel => panel.id === id) || (['compatibility-lab', 'access-lab', 'access-title'].includes(id) ? contract : null) || (id === 'search-title' ? { panelId: 'search-lab' } : null),
       addEventListener: (name, callback) => documentEvents.set(name, callback) },
   });
   return { contract, events, documentEvents, panels, buttons, switcher, location, history };
@@ -30,7 +30,9 @@ test('the Lab shows one demo and respects existing direct and nested fragments',
   for (const hash of ['#search-lab', '#search-title']) {
     assert.deepEqual(fixture(hash).panels.map(panel => panel.hidden), [true, false]);
   }
-  assert.deepEqual(fixture('#compatibility-lab').panels.map(panel => panel.hidden), [false, true]);
+  for (const hash of ['#compatibility-lab', '#access-lab', '#access-title']) {
+    assert.deepEqual(fixture(hash).panels.map(panel => panel.hidden), [false, true]);
+  }
 });
 
 test('direct demo links align after initial layout without overriding a later navigation', () => {

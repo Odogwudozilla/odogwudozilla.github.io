@@ -1,0 +1,33 @@
+/* Compact, static-first decision inspector in the existing palette. */
+.access-console { overflow: hidden; }
+.access-intro { padding: 16px 20px 10px; }
+.access-intro h4 { margin-bottom: 6px; }
+.access-intro p { font-size: .875rem; }
+.access-verdict { margin: 0 20px; padding: 12px; border: 1px dashed var(--action); background: var(--section-soft); color: var(--ink); font: .8125rem/1.6 var(--font-mono); }
+.access-verdict[data-allowed="true"] { border-style: solid; border-inline-start-width: 4px; }
+.access-controls { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; padding: 16px 20px; }
+.access-controls label { display: grid; gap: 4px; min-width: 0; color: var(--ink); font-size: .75rem; }
+.access-controls select { min-width: 0; width: 100%; min-height: 34px; padding: 5px 6px; border: 1px solid var(--line); border-radius: var(--control-radius); background: var(--surface); color: var(--ink); font: inherit; font-size: .8125rem; }
+.access-checks { list-style: none; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; margin: 0; padding: 16px 20px; }
+.access-checks li { display: grid; align-content: start; gap: 6px; padding: 12px; border: 1px solid var(--line); border-top: 3px solid var(--action); min-width: 0; }
+.access-checks strong { font: .75rem/1.5 var(--font-mono); color: var(--ink); }
+.access-checks span { font-size: .8125rem; color: var(--muted); }
+.access-checks [data-outcome="STOP"] { border: 2px dashed var(--action); background: var(--section-soft); }
+.access-checks [data-outcome="NOT RUN"] { border-top-style: dotted; }
+.access-effect { padding: 0 20px 14px; color: var(--ink); font: .8125rem/1.6 var(--font-mono); }
+.access-policy { padding: 0 20px 14px; font-size: .8125rem; }
+.access-policy summary { cursor: pointer; color: var(--ink); }
+.access-policy p { margin-top: 8px; }
+.access-footnote { padding: 14px 20px; border-top: 1px solid var(--line); font-size: .75rem; }
+@media (max-width: 760px) {
+  .access-intro, .access-controls, .access-checks, .access-footnote { padding: 12px; }
+  .access-verdict { margin-inline: 12px; }
+  .access-controls, .access-checks { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  .access-checks li { padding: 8px; }
+  .access-effect, .access-policy { padding-inline: 12px; }
+}
+@media print {
+  .access-controls { display: none !important; }
+  .access-checks { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .access-checks li { break-inside: avoid; }
+}

@@ -53,6 +53,7 @@
 <link rel="stylesheet" href="css/search.css?v=5cc84eb8b813">
 <link rel="stylesheet" href="css/lab.css?v=cb06fa998172">
 <link rel="stylesheet" href="css/compatibility.css?v=40dc2de390e8">
+<link rel="stylesheet" href="css/access.css?v=5b0e3671a3d2">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
 <meta name="robots" content="noindex">
 </head>
@@ -209,10 +210,11 @@
         <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
       </div>
       <section class="lab-panel investigation-section" id="playground" aria-labelledby="playground-title">
-        <div class="section-heading"><h3 id="playground-title">Beyond the status code</h3><p>Inspect the request, the saved effect and the contract the client depends on.</p></div>
+        <div class="section-heading"><h3 id="playground-title">Beyond the status code</h3><p>Inspect the request, the saved effect, client compatibility and access decisions.</p></div>
         <div class="investigation-switch" role="group" aria-label="API investigation view" hidden>
           <button type="button" data-investigation-view="request-trace" aria-controls="request-trace" aria-pressed="true">Request trace</button>
           <button type="button" data-investigation-view="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">Contract checks</button>
+          <button type="button" data-investigation-view="access-lab" aria-controls="access-lab" aria-pressed="false">Access decisions</button>
         </div>
         <div class="investigation-view" id="request-trace">
   <div class="trace-console card">
@@ -287,6 +289,27 @@
     </details>
     <p class="compat-footnote">Synthetic example · local simulation · no network requests or stored data.
       <a class="text-link" href="case-keylane.html">Read about my API work <span aria-hidden="true">↗</span></a></p>
+  </div></section>
+        <section class="investigation-view access-section" id="access-lab" aria-labelledby="access-title">
+  <div class="card access-console">
+    <div class="trace-console-header"><span>DECISION /demo/articles/draft-42</span><span>Fictional publishing workspace</span></div>
+    <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Can this person act on this record? Change the context to inspect the decision.</p></div>
+    <p class="access-verdict" role="status" aria-live="polite" aria-atomic="true">BLOCK · 403 Forbidden. Reviewer and editor roles cannot publish in this example.</p>
+    <div class="access-controls" hidden>
+      <label>Role<select data-access-context="role"><option value="anonymous">Not signed in</option><option value="reviewer">Reviewer</option><option value="editor" selected>Editor</option><option value="admin">Administrator</option></select></label>
+      <label>Workspace<select data-access-context="workspace"><option value="own">Assigned</option><option value="other">Other</option></select></label>
+      <label>Action<select data-access-context="action"><option value="read">Read record</option><option value="publish" selected>Publish record</option></select></label>
+      <label>Record state<select data-access-context="state"><option value="draft">Draft</option><option value="archived">Archived</option></select></label>
+    </div>
+    <ol class="access-checks" aria-label="Decision checks">
+      <li data-outcome="PASS"><strong>PASS · Identity</strong><span>A fictional signed-in identity is present.</span></li>
+      <li data-outcome="PASS"><strong>PASS · Workspace</strong><span>The record belongs to the assigned workspace.</span></li>
+      <li data-outcome="STOP"><strong>STOP · Permission</strong><span>Reviewer and editor roles cannot publish in this example.</span></li>
+      <li data-outcome="NOT RUN"><strong>NOT RUN · Record state</strong><span>An earlier check stopped the operation.</span></li>
+    </ol>
+    <p class="access-effect">Stopped before the operation. No read or write.</p>
+    <details class="access-policy"><summary>Read the fictional policy</summary><p>Signed-in reviewers, editors and administrators may read records in their assigned workspace. Only administrators may publish drafts there. No role can access another workspace or publish archived records. Missing or unknown context permits no operation.</p></details>
+    <p class="access-footnote">Illustrative browser model with no real accounts, requests or saved changes. The displayed checks explain this example; they are not an API response or real security enforcement. Real services must validate permissions on every request, on the server. <a class="text-link" href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP guidance<span class="sr-only"> (opens in a new tab)</span></a>.</p>
   </div></section></section>
       <section class="lab-panel search-section" id="search-lab" aria-labelledby="search-title">
   <div class="section-heading">
@@ -426,7 +449,9 @@ S..#..G
   <script src="js/search.js?v=7af8f53936ac" defer></script>
   <script src="js/compatibility-model.js?v=ee6961ace00d" defer></script>
   <script src="js/compatibility.js?v=9bd14280964a" defer></script>
-  <script src="js/investigation.js?v=2de57f214efb" defer></script>
+  <script src="js/access-model.js?v=0c751c1267ec" defer></script>
+  <script src="js/access.js?v=b57040219075" defer></script>
+  <script src="js/investigation.js?v=a44c9bca08de" defer></script>
   <script src="js/engineering-decision.js?v=4f088132bb2c" defer></script>
   <script src="js/lab.js?v=c35ca2f3fda5" defer></script>
 </body>

@@ -55,7 +55,7 @@ function fixture(hash = '#playground') {
   const nodes = Object.fromEntries(names.map(name => [`.trace-${name}`, node()]));
   nodes['.trace-scenario'].value = 'duplicate';
   nodes['.investigation-switch'] = node();
-  const views = ['request-trace', 'compatibility-lab'].map(id => ({ ...node(), id }));
+  const views = ['request-trace', 'compatibility-lab', 'access-lab'].map(id => ({ ...node(), id }));
   const buttons = views.map(view => ({ ...node(), dataset: { investigationView: view.id } }));
   const graph = ['client', 'api', 'service', 'store'].map(id => ({ ...node(), dataset: { traceNode: id }, querySelector: () => node() }));
   const panel = { ...node(), querySelector: selector => nodes[selector],
@@ -90,12 +90,12 @@ test('trace controls step, inspect and reset deterministic state; hidden views s
 });
 test('legacy contract links select the nested view, printing reveals both and restores without playback', () => {
   const f = fixture('#compatibility-lab');
-  assert.deepEqual(f.views.map(view => view.hidden), [true, false]);
+  assert.deepEqual(f.views.map(view => view.hidden), [true, false, true]);
   f.events.get('beforeprint')(); assert.ok(f.views.every(view => !view.hidden));
-  f.events.get('afterprint')(); assert.deepEqual(f.views.map(view => view.hidden), [true, false]);
+  f.events.get('afterprint')(); assert.deepEqual(f.views.map(view => view.hidden), [true, false, true]);
   f.documentEvents.get('click')({ button: 0, target: { closest: () => ({ hash: '#playground', dataset: { investigationScenario: 'slow' } }) } });
   assert.equal(f.nodes['.trace-scenario'].value, 'slow');
-  assert.deepEqual(f.views.map(view => view.hidden), [false, true]);
+  assert.deepEqual(f.views.map(view => view.hidden), [false, true, true]);
   assert.equal(f.timers.size, 0);
 });
 test('the server-rendered example includes the lost-reply explanation and complete trace without scripts', async () => {
@@ -104,4 +104,16 @@ test('the server-rendered example includes the lost-reply explanation and comple
   assert.match(html, /Store reuses the original result/);
   assert.match(html, /not a production benchmark/);
   assert.doesNotMatch(html, /local-clock|clock-time/);
+});
+
+
+test('access links select their nested view and stop trace playback', () => {
+  const f = fixture('#access-lab');
+  assert.deepEqual(f.views.map(view => view.hidden), [true, true, false]);
+  f.buttons[0].click(); f.nodes['.trace-run'].click();
+  f.documentEvents.get('click')({ button: 0, target: { closest: () => ({ hash: '#access-lab', dataset: {} }) } });
+  assert.equal(f.timers.size, 0);
+  assert.deepEqual(f.views.map(view => view.hidden), [true, true, false]);
+  f.events.get('beforeprint')(); assert.ok(f.views.every(view => !view.hidden));
+  f.events.get('afterprint')(); assert.deepEqual(f.views.map(view => view.hidden), [true, true, false]);
 });
