@@ -193,7 +193,7 @@
     <article class="project-card card" id="energy-project">
       <div class="case-intro">
         <h3>HomeWizard Energy Intelligence</h3>
-        <p>I’m building tools to collect smart-meter readings, explore energy history and compare load-shifting scenarios.</p>
+        <p>I’m building tools to collect smart-meter readings, explore energy history and compare when to use electricity.</p>
         <ul class="chip-list" aria-label="Energy application technologies">
           <li>Java</li><li>React</li><li>TypeScript</li><li>SQLite</li><li>Supabase</li>
         </ul>
@@ -235,8 +235,8 @@
         </div>
         <div class="investigation-view" id="request-trace">
   <div class="trace-console card">
-    <div class="trace-console-header"><span>POST /demo/tasks</span><span>Synthetic trace · isolated browser model</span></div>
-    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About request traces" aria-describedby="trace-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="trace-help" role="tooltip">Choose a condition, then use Run trace to play the request or Next step to inspect one event at a time. Select a timeline event to view its data. Reuse an idempotency key to prevent a retry from saving a second record. Attempts counts requests; Records saved counts stored results.</span></div>
+    <div class="trace-console-header"><span>POST /demo/tasks</span><span>Simulated trace · runs in your browser</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About request traces" aria-describedby="trace-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="trace-help" role="tooltip">Choose a condition, then use Run trace to play the request or Next step to inspect one event at a time. Select a timeline event to view its data. An idempotency key identifies the same operation across retries, preventing a second record from being saved. Attempts shows the request count; Records saved shows the number of saved records.</span></div>
     <div class="trace-controls" hidden>
       <label>Condition<select class="trace-scenario" aria-label="Request investigation scenario">
         <option value="duplicate">Lost reply + retry</option><option value="valid">Healthy request</option>
@@ -265,7 +265,7 @@
         <ol class="trace-events"><li>0–10 · Client sends the task request.</li><li>10–25 · API validates the request.</li><li>25–60 · Service prepares the task.</li><li>60–90 · Store commits one record.</li><li>90–120 · Reply is lost.</li><li>120–130 · Client retries with the same key.</li><li>130–145 · API validates the retry.</li><li>145–175 · Store reuses the original result.</li><li>175–190 · Client receives the result.</li></ol>
       </details></div>
     <p class="trace-lesson">The first write commits before its reply is lost. An idempotency key connects the retry to the same operation.</p>
-    <p class="trace-footnote">Illustrative model, not a production benchmark. Keys apply to the same request body; key expiry, concurrent requests and cancellation are outside this example. No network requests or stored data.</p>
+    <p class="trace-footnote">Simulated example; timings do not measure a real system. Keys apply to the same request body; key expiry, concurrent requests and cancellation are outside this example. No network requests or stored data.</p>
   </div></div>
         <section class="investigation-view compatibility-section" id="compatibility-lab" aria-labelledby="compatibility-title">
   <div class="section-heading">
@@ -273,10 +273,10 @@
     <p>Keep the client fixed and change the API. See why valid JSON alone does not guarantee compatibility.</p>
   </div>
   <div class="compat-workspace card">
-    <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
+    <p class="compat-contract"><strong>The existing client</strong> is the application calling this API. It sends <code>{ "title": "Review API contract" }</code>
       to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
       as strings, and ignores extra response fields.</p>
-    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About contract checks" aria-describedby="contract-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="contract-help" role="tooltip">Choose an API change to see whether the existing client still works. Turn on Apply compatible rollout to compare a change that preserves the client. PASS means a check succeeds; FAIL identifies a breaking change. Highlighted response fields show what changed.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About contract checks" aria-describedby="contract-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="contract-help" role="tooltip">Choose an API change to see whether the existing client still works. Turn on Apply compatible rollout to keep the existing client working while the API changes. PASS means a check succeeds; FAIL identifies a breaking change. Highlighted response fields show what changed.</span></div>
     <div class="compat-controls" hidden><label>API change
       <select aria-label="API compatibility scenario">
         <option value="extra">Extra response field</option>
@@ -285,9 +285,9 @@
         <option value="required">Require a new request field</option>
       </select>
     </label><label class="compat-rollout"><input type="checkbox"> Apply compatible rollout</label></div>
-    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Client decoding. Client reads task-42: Review API contract.</p>
+    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Reading the API response. Client reads task-42: Review API contract.</p>
     <p class="compat-explanation">This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.</p>
-    <ul class="compat-tests" aria-label="Existing consumer checks"><li>PASS · Old request accepted</li><li>PASS · id remains a string</li><li>PASS · title remains a string</li></ul>
+    <ul class="compat-tests" aria-label="Existing client checks"><li>PASS · Old request accepted</li><li>PASS · id remains a string</li><li>PASS · title remains a string</li></ul>
     <div class="compat-comparison">
       <div><h5>Original API</h5><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
   "id": "task-42",
@@ -298,7 +298,7 @@
   "title": "Review API contract",
   "priority": "normal"
 }</code></pre></div></div>
-    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for consumers; check stricter clients separately.</span></p>
+    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for existing clients; check stricter clients separately.</span></p>
     <details class="compat-notes"><summary>What makes the other changes break?</summary>
       <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
         <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>
@@ -306,13 +306,13 @@
       <p>These results apply to the client defined above. A stricter client could reject extra fields;
         other clients may tolerate different changes. Review actual consumers before changing a real API.</p>
     </details>
-    <p class="compat-footnote">Synthetic example · local simulation · no network requests or stored data.
+    <p class="compat-footnote">Simulated example · runs in your browser · no network requests or saved changes.
       <a class="text-link" href="case-keylane.html">Read about my API work <span aria-hidden="true">↗</span></a></p>
   </div></section>
         <section class="investigation-view access-section" id="access-lab" aria-labelledby="access-title">
   <div class="card access-console">
     <div class="trace-console-header"><span>DECISION /demo/articles/draft-42</span><span>Fictional publishing workspace</span></div>
-    <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Can this person act on this record? Change the context to inspect the decision.</p></div>
+    <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Can this person act on this record? Change the selections to see which actions are allowed.</p></div>
     <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About access decisions" aria-describedby="access-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="access-help" role="tooltip">Choose a role, workspace, action and record state to see whether the action is allowed. Each change updates the result. STOP identifies the rule that blocks the action; NOT RUN means an earlier rule stopped the check. Administrators can only act in their assigned workspace.</span></div>
     <p class="access-verdict" role="status" aria-live="polite" aria-atomic="true">BLOCK · 403 Forbidden. Reviewer and editor roles cannot publish in this example.</p>
     <div class="access-controls" hidden>
@@ -322,14 +322,14 @@
       <label>Record state<select data-access-context="state"><option value="draft">Draft</option><option value="archived">Archived</option></select></label>
     </div>
     <ol class="access-checks" aria-label="Decision checks">
-      <li data-outcome="PASS"><strong>PASS · Identity</strong><span>A fictional signed-in identity is present.</span></li>
+      <li data-outcome="PASS"><strong>PASS · Identity</strong><span>The user is signed in.</span></li>
       <li data-outcome="PASS"><strong>PASS · Workspace</strong><span>The record belongs to the assigned workspace.</span></li>
       <li data-outcome="STOP"><strong>STOP · Permission</strong><span>Reviewer and editor roles cannot publish in this example.</span></li>
       <li data-outcome="NOT RUN"><strong>NOT RUN · Record state</strong><span>An earlier check stopped the operation.</span></li>
     </ol>
-    <p class="access-effect">Stopped before the operation. No read or write.</p>
+    <p class="access-effect">Action blocked. The record is neither read nor changed.</p>
     <details class="access-policy"><summary>Read the fictional policy</summary><p>Signed-in reviewers, editors and administrators may read records in their assigned workspace. Only administrators may publish drafts there. No role can access another workspace or publish archived records. Missing or unknown context permits no operation.</p></details>
-    <p class="access-footnote">Illustrative browser model with no real accounts, requests or saved changes. The displayed checks explain this example; they are not an API response or real security enforcement. Real services must validate permissions on every request, on the server. <a class="text-link" href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP guidance<span class="sr-only"> (opens in a new tab)</span></a>.</p>
+    <p class="access-footnote">Fictional permissions demo with no real accounts, network requests or saved changes. Real services must check permissions on the server for every request. <a class="text-link" href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP guidance<span class="sr-only"> (opens in a new tab)</span></a>.</p>
   </div></section></section>
       <section class="lab-panel search-section" id="search-lab" aria-labelledby="search-title">
   <div class="section-heading">
@@ -337,7 +337,7 @@
     <p>Same grid, different search strategy. Compare breadth-first search (BFS)
       with depth-first search (DFS).</p>
   </div>
-    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About route search" aria-describedby="search-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="search-help" role="tooltip">Choose an algorithm and an example grid. Use Run search to animate the route search or Next step to inspect one cell at a time. Explored counts visited cells; Pending counts cells waiting to be visited. Route moves shows the length of the route found. Reset starts the same search again.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About route search" aria-describedby="search-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="search-help" role="tooltip">Choose an algorithm and an example grid. Use Run search to animate the route search or Next step to inspect one cell at a time. Explored shows how many cells have been visited; Pending shows how many are waiting. Route moves shows the number of steps in the route found. Reset starts the same search again.</span></div>
   <div class="search-lab">
     <div class="search-controls" hidden>
       <div class="search-selectors">
@@ -368,7 +368,7 @@ S..#..G
           <div><dt>Pending</dt><dd class="search-pending">1</dd></div>
           <div><dt>Route moves</dt><dd class="search-distance">—</dd></div></dl>
         <p class="search-strategy">BFS uses a queue. With equally weighted moves, its first route to the goal is a shortest route. DFS uses a stack and can find a longer route.</p>
-        <p class="search-rules">Moves have equal cost: up, right, down or left. Walls cannot be crossed. This deterministic example runs entirely in your browser.</p>
+        <p class="search-rules">Moves have equal cost: up, right, down or left. Walls cannot be crossed. The same selections produce the same search. The example runs entirely in your browser.</p>
       </div></div>
     <details class="search-notes">
       <summary>Read the search trace and comparison</summary>
@@ -465,13 +465,13 @@ S..#..G
     </div></footer>
   <script src="js/scripts.js?v=d7eabcada4a1" defer></script>
   <script src="js/interactive.js?v=a464b78c38d7" defer></script>
-  <script src="js/investigation-model.js?v=32c2d657b878" defer></script>
+  <script src="js/investigation-model.js?v=f05969498566" defer></script>
   <script src="js/search-model.js?v=4b3693d3b3d6" defer></script>
   <script src="js/search.js?v=7af8f53936ac" defer></script>
-  <script src="js/compatibility-model.js?v=ee6961ace00d" defer></script>
-  <script src="js/compatibility.js?v=9bd14280964a" defer></script>
-  <script src="js/access-model.js?v=0c751c1267ec" defer></script>
-  <script src="js/access.js?v=b57040219075" defer></script>
+  <script src="js/compatibility-model.js?v=a998067e835a" defer></script>
+  <script src="js/compatibility.js?v=fe41cee447ac" defer></script>
+  <script src="js/access-model.js?v=201dc77b1d51" defer></script>
+  <script src="js/access.js?v=1a890a583a51" defer></script>
   <script src="js/investigation.js?v=93d6cb5e6d03" defer></script>
   <script src="js/lab.js?v=a8dbac2ae049" defer></script>
   <script src="js/demo-help.js?v=6e715322d6ed" defer></script>

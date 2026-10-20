@@ -18,8 +18,8 @@
       item.append(name, detail); return item;
     }));
     panel.querySelector('.access-effect').textContent = result.allowed
-      ? input.action === 'publish' ? 'Would publish 1 draft.' : 'Would read 1 record. No write.'
-      : 'Stopped before the operation. No read or write.';
+      ? input.action === 'publish' ? 'Would publish one draft.' : 'Would read one record without changing it.'
+      : 'Action blocked. The record is neither read nor changed.';
   }
   controls.forEach(control => control.addEventListener('change', render));
   render(); panel.querySelector('.access-controls').hidden = false;

@@ -13,7 +13,7 @@
     if (!scenarios[kind]) throw new Error('Unknown investigation scenario');
     const events = [];
     const add = (node, start, end, title, detail, extra = {}) => events.push({ node, start, end, title, detail, ...extra });
-    add('client', 0, 10, 'Send request', 'POST /demo/tasks. A single logical operation starts.', { attempt: true,
+    add('client', 0, 10, 'Send request', 'POST /demo/tasks. The client asks the API to create a task.', { attempt: true,
       payload: { title: kind === 'invalid' ? '' : task.title, ...(kind === 'duplicate' && protectedRetry ? { idempotencyKey: 'op-42' } : {}) } });
     if (kind === 'invalid') {
       add('api', 10, 25, 'Reject blank title', 'Validation stops this request. No service or storage work runs.', { failed: true, payload: { field: 'title', error: 'Required' } });
@@ -26,18 +26,18 @@
       } else {
         const slow = kind === 'slow';
         if (slow) add('client', 25, 120, 'Client deadline expires', 'The client stops waiting. Work already in progress has not been cancelled.', { failed: true, status: 'Client timed out' });
-        add('service', 25, slow ? 325 : 60, slow ? 'Dependency finishes late' : 'Prepare task', 'The service prepares a task for persistence.');
+        add('service', 25, slow ? 325 : 60, slow ? 'Dependency finishes late' : 'Prepare task', 'The service prepares a task to save.');
         const end = slow ? 355 : 90;
-        add('store', slow ? 325 : 60, end, 'Commit task', 'A durable effect occurs here, independently of whether the client receives the reply.', { write: true, key: protectedRetry ? 'op-42' : null, payload: task });
+        add('store', slow ? 325 : 60, end, 'Commit task', 'The task is saved here, whether or not the client receives the reply.', { write: true, key: protectedRetry ? 'op-42' : null, payload: task });
         if (kind === 'duplicate') {
           const retryResult = protectedRetry ? task : { ...task, id: 'task-43' };
           add('client', 90, 120, 'Reply lost', 'The task exists, but the client never receives the success response.', { failed: true, status: 'Client timed out' });
           add('client', 120, 130, 'Retry same operation', protectedRetry ? 'Reuse op-42, the same key and the same request body.' : 'No key connects this request to the already committed operation.', { attempt: true });
           add('api', 130, 145, 'Validate retry', 'The repeated request is valid. Validation alone cannot prevent duplicate effects.');
           add('store', 145, 175, protectedRetry ? 'Resolve operation key' : 'Commit another task', protectedRetry ? 'Look up op-42 and reuse its saved result instead of creating another task.' : 'Without deduplication, another valid request creates another task.', { write: true, key: protectedRetry ? 'op-42' : null, payload: retryResult });
-          add('client', 175, 190, 'Receive retry result', 'The response decodes successfully. Inspect the record count to see the difference.', { status: '201 Created', payload: retryResult });
+          add('client', 175, 190, 'Receive retry result', 'The client can read the response. Inspect Records saved to see whether the retry created a duplicate.', { status: '201 Created', payload: retryResult });
         } else {
-          add('client', end, end + 15, slow ? 'Late reply ignored' : 'Decode response', slow ? 'The response is too late for the client, although storage has committed.' : 'The client reads string id and title fields.', { ...(slow ? {} : { status: '201 Created' }), payload: task });
+          add('client', end, end + 15, slow ? 'Late reply ignored' : 'Read response', slow ? 'The response is too late for the client, although storage has committed.' : 'The client reads string id and title fields.', { ...(slow ? {} : { status: '201 Created' }), payload: task });
         }
       }
     }

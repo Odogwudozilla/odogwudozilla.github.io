@@ -4,10 +4,10 @@
     <p>Keep the client fixed and change the API. See why valid JSON alone does not guarantee compatibility.</p>
   </div>
   <div class="compat-workspace card">
-    <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
+    <p class="compat-contract"><strong>The existing client</strong> is the application calling this API. It sends <code>{ "title": "Review API contract" }</code>
       to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
       as strings, and ignores extra response fields.</p>
-    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About contract checks" aria-describedby="contract-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="contract-help" role="tooltip">Choose an API change to see whether the existing client still works. Turn on Apply compatible rollout to compare a change that preserves the client. PASS means a check succeeds; FAIL identifies a breaking change. Highlighted response fields show what changed.</span></div>
+    <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About contract checks" aria-describedby="contract-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="contract-help" role="tooltip">Choose an API change to see whether the existing client still works. Turn on Apply compatible rollout to keep the existing client working while the API changes. PASS means a check succeeds; FAIL identifies a breaking change. Highlighted response fields show what changed.</span></div>
     <div class="compat-controls" hidden><label>API change
       <select aria-label="API compatibility scenario">
         <option value="extra">Extra response field</option>
@@ -16,9 +16,9 @@
         <option value="required">Require a new request field</option>
       </select>
     </label><label class="compat-rollout"><input type="checkbox"> Apply compatible rollout</label></div>
-    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Client decoding. Client reads task-42: Review API contract.</p>
+    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Reading the API response. Client reads task-42: Review API contract.</p>
     <p class="compat-explanation">This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.</p>
-    <ul class="compat-tests" aria-label="Existing consumer checks"><li>PASS · Old request accepted</li><li>PASS · id remains a string</li><li>PASS · title remains a string</li></ul>
+    <ul class="compat-tests" aria-label="Existing client checks"><li>PASS · Old request accepted</li><li>PASS · id remains a string</li><li>PASS · title remains a string</li></ul>
     <div class="compat-comparison">
       <div><h5>Original API</h5><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
   "id": "task-42",
@@ -30,7 +30,7 @@
   "priority": "normal"
 }</code></pre></div>
     </div>
-    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for consumers; check stricter clients separately.</span></p>
+    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for existing clients; check stricter clients separately.</span></p>
     <details class="compat-notes"><summary>What makes the other changes break?</summary>
       <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
         <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>
@@ -38,7 +38,7 @@
       <p>These results apply to the client defined above. A stricter client could reject extra fields;
         other clients may tolerate different changes. Review actual consumers before changing a real API.</p>
     </details>
-    <p class="compat-footnote">Synthetic example · local simulation · no network requests or stored data.
+    <p class="compat-footnote">Simulated example · runs in your browser · no network requests or saved changes.
       <a class="text-link" href="case-keylane.html">Read about my API work <span aria-hidden="true">↗</span></a></p>
   </div>
 </section>

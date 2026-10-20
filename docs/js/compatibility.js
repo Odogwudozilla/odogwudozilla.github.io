@@ -12,7 +12,8 @@
     if (!scenario) return;
     const active = rollout.checked ? model.rollout(picker.value) : scenario;
     const result = model.check(active);
-    verdict.textContent = `${result.compatible ? 'Compatible with this client' : 'Breaks this client'} · ${result.stage}. ${result.message}`;
+    const stage = result.stage === 'Client decoding' ? 'Reading the API response' : result.stage;
+    verdict.textContent = `${result.compatible ? 'Compatible with this client' : 'Breaks this client'} · ${stage}. ${result.message}`;
     verdict.dataset.compatible = String(result.compatible);
     panel.querySelector('.compat-explanation').textContent = active.explanation;
     panel.querySelector('.compat-migration span').textContent = scenario.migration;

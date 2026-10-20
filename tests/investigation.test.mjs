@@ -101,7 +101,7 @@ test('the server-rendered example includes the lost-reply explanation and comple
   const html = await readFile(new URL('../docs/index.html', import.meta.url), 'utf8');
   assert.match(html, /Trace complete · 2 attempts · 1 record · 201 Created/);
   assert.match(html, /Store reuses the original result/);
-  assert.match(html, /not a production benchmark/);
+  assert.match(html, /Simulated example; timings do not measure a real system/);
   assert.doesNotMatch(html, /local-clock|clock-time/);
 });
 
