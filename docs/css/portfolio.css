@@ -16,11 +16,10 @@
 .work-practice { padding: 16px 0 0; font-size: .875rem; }
 .work-practice p + p { margin-top: 4px; }
 .work-practice strong { color: var(--ink); font-weight: 600; }
-.fragment-alias { display: block; height: 0; scroll-margin-top: max(100px, 5rem); }
+.fragment-alias { display: block; height: 0; scroll-margin-top: 0; }
 @media (max-width: 760px) {
   .work-section .work-grid { grid-template-columns: minmax(0, 1fr); }
   .work-section .project-card { padding: 16px; }
-  .fragment-alias { scroll-margin-top: max(160px, 10rem); }
 }
 .work-section .enterprise-case { border-inline-start: 4px solid var(--teal); background: var(--section-soft); }
 .case-intro h3 { margin-bottom: 12px; }

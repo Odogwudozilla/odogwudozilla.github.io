@@ -6,6 +6,8 @@
 }
 @media (max-width: 760px) {
   html { scroll-padding-top: max(160px, 10rem); }
+  /* The enhanced menu closes before following a section link. */
+  html:has(.site-header.menu-enhanced) { scroll-padding-top: max(88px, 5.5rem); }
   .site-shell { width: calc(100% - 40px); }
   .header-inner { min-height: 72px; flex-wrap: wrap; gap: 0; padding-block: 12px; }
   .brand { min-height: 44px; }
@@ -24,7 +26,8 @@
   .hero-copy { order: 1; flex: 1 1 100%; min-width: 0; }
   .hero-role { font-size: 1.125rem; }
   .hero-description { font-size: 1rem; }
-  .hero-copy .button-group { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .hero-copy .button-group { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .hero-copy .button-group .button { min-height: 44px; padding: 8px; gap: 6px; font-size: .875rem; }
   .hero-portrait { flex: 0 0 6.5rem; width: 6.5rem; }
   .hero-portrait img { aspect-ratio: 1; }
   .hero-portrait figcaption { padding: 8px 0; line-height: 1.45; }
@@ -48,9 +51,13 @@
   .education-list { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; }
   .contact-grid { grid-template-columns: 1fr; gap: 24px; }
   .contact-grid h2 { font-size: 1.5rem; }
-  .footer-inner { flex-wrap: wrap; gap: 12px 24px; }
-  .site-footer p { order: 3; flex-basis: 100%; }
-  .footer-top { margin-left: auto; }
+  .footer-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; }
+  .footer-name { grid-column: 1 / -1; }
+  .site-footer p { font-size: .8125rem; }
+  .footer-top { justify-self: end; }
+}
+@media (min-width: 360px) and (max-width: 760px) {
+  .hero-copy .button-group { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
   .capability-grid { grid-template-columns: 1fr; }
@@ -64,7 +71,7 @@
   .hero-grid { gap: 20px 16px; }
   .hero-portrait { flex-basis: 5.5rem; width: 5.5rem; }
   .hero-identity h1 { font-size: 2rem; }
-  .hero-links { gap: 20px; }
+  .hero-links { gap: 8px 12px; }
   h3 { font-size: 1.25rem; }
   .project-card { padding: 16px; }
   .work-index a { width: 100%; }
