@@ -62,3 +62,37 @@ test('responsive image checks reject paths outside the public folder', async () 
   await assert.rejects(checkResponsiveImages('<img srcset="%2e%2e/private.webp 2x">', publicRoot, 'fixture.html'),
     /responsive image escapes public folder/);
 });
+
+test('portraits offer compact WebP and JPEG candidates without delaying the above-fold image', async () => {
+  const html = await readFile(path.join(publicRoot, 'index.html'), 'utf8');
+  const picture = html.match(/<picture>([\s\S]*?)<\/picture>/)[1];
+  const source = picture.match(/<source\b[^>]+>/)[0];
+  const img = picture.match(/<img\b[^>]+>/)[0];
+  assert.match(source, /type="image\/webp"/);
+  assert.match(img, /fetchpriority="high"/);
+  assert.doesNotMatch(img, /loading="lazy"/);
+  assert.match(img, /width="512" height="550"/);
+  assert.equal(source.match(/sizes="([^"]+)"/)[1], img.match(/sizes="([^"]+)"/)[1]);
+  for (const format of ['webp', 'jpg']) {
+    const element = format === 'webp' ? source : img;
+    for (const width of [128, 256, 512, 768]) assert.ok(element.includes(`profile-professional-${width}.${format} ${width}w`));
+    assert.ok((await stat(path.join(publicRoot, `assets/img/profile-professional-128.${format}`))).size < 6000);
+    const medium = await stat(path.join(publicRoot, `assets/img/profile-professional-256.${format}`));
+    const large = await stat(path.join(publicRoot, `assets/img/profile-professional-512.${format}`));
+    assert.ok(medium.size < large.size / 2, 'The mobile candidate should save at least half the full-size transfer');
+  }
+});
+
+test('the deferred club screenshot offers smaller candidates and keeps reserved dimensions', async () => {
+  const html = await readFile(path.join(publicRoot, 'case-fusion-almere-fc.html'), 'utf8');
+  const picture = html.match(/<picture>([\s\S]*?)<\/picture>/)[1];
+  assert.match(picture, /sizes="/);
+  assert.match(picture, /loading="lazy" decoding="async"/);
+  assert.match(picture, /width="1265" height="712"/);
+  const original = await stat(path.join(publicRoot, 'assets/img/fusion-platform-preview.webp'));
+  for (const width of [440, 880]) {
+    const name = `fusion-platform-preview-${width}.webp`;
+    assert.ok(picture.includes(`${name} ${width}w`));
+    assert.ok((await stat(path.join(publicRoot, `assets/img/${name}`))).size < original.size);
+  }
+});
