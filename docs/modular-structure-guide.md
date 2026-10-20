@@ -60,12 +60,24 @@ The menu supports Escape, outside clicks, and closing after selecting a
 link. Copy email is only offered when the Clipboard API exists; failures
 are announced inline while the normal email link remains available.
 
-The Engineering Lab keeps one demo visible through `lab.js`; its three
-panels retain direct fragment links and are all readable without scripts.
-`compatibility-model.js` defines the fixed synthetic request and client
-expectations, then validates the selected API change. `compatibility.js`
-updates the verdict and JSON in place without network calls, storage or
-timers. The API case study links directly to `#compatibility-lab`.
+The Engineering Lab keeps one of two panels visible through `lab.js`:
+API investigation or grid search. The API panel contains request-trace and
+contract-check views; `#playground`, `#compatibility-lab` and `#search-lab`
+remain valid. Both API views and search remain readable without scripts.
+
+`investigation-model.js` creates deterministic synthetic traces and derives
+attempts, committed records and client outcomes from each event prefix.
+`investigation.js` coordinates replay, operation inspection, the timeline
+and nested views. Playback pauses when its panel, view or browser page is
+hidden and before printing. Model milliseconds are illustrative inputs,
+not real service measurements or playback duration.
+
+`compatibility-model.js` checks the old consumer against changed contracts
+and compatible rollout variants. `compatibility.js` shows per-expectation
+checks and highlights changed JSON lines. `engineering-decision.js` uses
+these same models for the small card beneath the portrait, replacing the
+retired clock. No demo makes network requests, stores data or executes Java.
+All examples are separate from company implementations and private data.
 
 ## Validation
 

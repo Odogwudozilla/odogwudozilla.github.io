@@ -48,11 +48,11 @@
 <link rel="stylesheet" href="css/portfolio.css?v=977aef010ee5">
 <link rel="stylesheet" href="css/responsive.css?v=7888f391f9a9">
 <link rel="stylesheet" href="css/keylane-theme.css?v=1d2a004a202f">
-<link rel="stylesheet" href="css/interactive.css?v=c982523dbdd0">
-<link rel="stylesheet" href="css/playground.css?v=9ff11bb0976d">
+<link rel="stylesheet" href="css/interactive.css?v=7ce9fd33cbd7">
+<link rel="stylesheet" href="css/investigation.css?v=802e51ccb77e">
 <link rel="stylesheet" href="css/search.css?v=5cc84eb8b813">
 <link rel="stylesheet" href="css/lab.css?v=cb06fa998172">
-<link rel="stylesheet" href="css/compatibility.css?v=b9e78ef814c9">
+<link rel="stylesheet" href="css/compatibility.css?v=40dc2de390e8">
 <script src="js/theme.js?v=c3d3ef4741b8"></script>
 <meta name="robots" content="noindex">
 </head>
@@ -107,7 +107,7 @@
           rel="noopener noreferrer">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
         <li><a href="#engineering-lab">Engineering Lab <span aria-hidden="true">↗</span></a></li>
       </ul></div>
-    <aside class="hero-aside" aria-label="Portrait and local time">
+    <aside class="hero-aside" aria-label="Portrait and engineering decisions">
     <figure class="hero-portrait">
       <picture>
         <source type="image/webp"
@@ -122,15 +122,15 @@
       </picture>
       <figcaption>Based in the Netherlands</figcaption>
     </figure>
-    <div class="local-clock" hidden>
-      <svg class="clock-face" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor"/>
-        <path d="M32 7v4m25 21h-4M32 57v-4M7 32h4" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path class="clock-hour" d="M32 32V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        <path class="clock-minute" d="M32 32V11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="32" cy="32" r="3" fill="currentColor"/>
-      </svg>
-      <div><p class="eyebrow">My local time</p><time class="clock-time"></time><p class="clock-zone">Netherlands · Europe/Amsterdam</p></div></div></aside>
+    <div class="engineering-decision">
+      <p class="eyebrow">Engineering decisions</p>
+      <label hidden>Explore a condition<select aria-label="Engineering decision example"><option value="duplicate">Lost reply</option><option value="slow">Timeout</option><option value="rename">Contract change</option></select></label>
+      <p class="decision-question">The reply never arrived.</p>
+      <div class="decision-route" aria-hidden="true"><span>Request</span><span>Retry</span><span>Store</span></div>
+      <p class="decision-outcome" role="status" aria-live="polite" aria-atomic="true">2 attempts. 1 saved record.</p>
+      <a class="text-link" href="#playground" data-investigation-scenario="duplicate">Investigate why <span aria-hidden="true">↗</span></a>
+      <p class="decision-caption">Illustrative example</p>
+    </div></aside>
   </div></section>
     <section class="page-section work-section" id="portfolio" aria-labelledby="work-title">
   <span class="fragment-alias" id="skills" aria-hidden="true"></span>
@@ -202,76 +202,92 @@
       <div class="section-heading">
         <p class="eyebrow">Explore how things work</p>
         <h2 id="lab-title">Engineering Lab</h2>
-        <p>Small, browser-only demonstrations of APIs and algorithms. Choose one to explore.</p>
+        <p>Investigate a system, challenge an API contract or compare search strategies. Change a condition and inspect what follows.</p>
       </div>
       <div class="lab-switch" role="group" aria-label="Choose an Engineering Lab demo" hidden>
-        <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API flow</button>
+        <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API investigation</button>
         <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
-        <button type="button" data-lab-select="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">API changes</button>
       </div>
-      <section class="lab-panel playground-section" id="playground" aria-labelledby="playground-title">
-  <div class="section-heading">
-    <h3 id="playground-title">Follow a request</h3>
-    <p>What happens between sending a request and getting a response?
-      Explore validation, processing and failure handling in a small task API.</p>
-  </div>
-  <div class="api-playground">
-    <div class="flow-controls" hidden>
-      <label class="flow-scenario-picker">Scenario
-        <select aria-label="API request scenario">
-          <option value="valid">Valid request</option>
-          <option value="invalid">Invalid input</option>
-          <option value="unavailable">Temporary failure</option>
-        </select>
-      </label>
-      <div class="flow-scenarios" role="group" aria-label="API request scenario">
-        <button type="button" data-scenario="valid" aria-pressed="true">Valid request</button>
-        <button type="button" data-scenario="invalid" aria-pressed="false">Invalid input</button>
-        <button type="button" data-scenario="unavailable" aria-pressed="false">Temporary failure</button>
-      </div>
-      <div class="flow-actions" role="group" aria-label="Request playback">
-        <button class="button flow-run" type="button">Run flow <span aria-hidden="true">▶</span></button>
-        <button class="button flow-next" type="button">Next step</button>
-        <button class="flow-reset text-link" type="button">Reset</button>
-      </div></div>
-    <ol class="flow-diagram" aria-label="Request lifecycle">
-      <li data-flow-stage="0" data-state="complete"><span class="flow-number" aria-hidden="true">01</span><strong>Request</strong><span class="flow-state">Sent</span></li>
-      <li data-flow-stage="1" data-state="complete"><span class="flow-number" aria-hidden="true">02</span><strong>Validate</strong><span class="flow-state">Passed</span></li>
-      <li data-flow-stage="2" data-state="complete"><span class="flow-number" aria-hidden="true">03</span><strong>Service</strong><span class="flow-state">Created</span></li>
-      <li data-flow-stage="3" data-state="current" aria-current="step"><span class="flow-number" aria-hidden="true">04</span><strong>Reply</strong><span class="flow-state">201 Created</span></li>
+      <section class="lab-panel investigation-section" id="playground" aria-labelledby="playground-title">
+        <div class="section-heading"><h3 id="playground-title">Beyond the status code</h3><p>Inspect the request, the saved effect and the contract the client depends on.</p></div>
+        <div class="investigation-switch" role="group" aria-label="API investigation view" hidden>
+          <button type="button" data-investigation-view="request-trace" aria-controls="request-trace" aria-pressed="true">Request trace</button>
+          <button type="button" data-investigation-view="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">Contract checks</button>
+        </div>
+        <div class="investigation-view" id="request-trace">
+  <div class="trace-console card">
+    <div class="trace-console-header"><span>POST /demo/tasks</span><span>Synthetic trace · isolated browser model</span></div>
+    <div class="trace-controls" hidden>
+      <label>Condition<select class="trace-scenario" aria-label="Request investigation scenario">
+        <option value="duplicate">Lost reply + retry</option><option value="valid">Healthy request</option>
+        <option value="invalid">Invalid input</option><option value="unavailable">Service unavailable</option><option value="slow">Slow dependency</option>
+      </select></label>
+      <label class="trace-protection"><input type="checkbox" checked> Reuse an idempotency key</label>
+      <div class="trace-actions" role="group" aria-label="Trace playback"><button type="button" class="button trace-run">Run trace</button><button type="button" class="button trace-next">Next step</button><button type="button" class="text-link trace-reset">Reset</button></div></div>
+    <div class="trace-summary">
+      <p class="trace-status" role="status" aria-live="polite" aria-atomic="true">Trace complete · 2 attempts · 1 record · 201 Created</p>
+      <dl class="trace-metrics"><div><dt>Attempts</dt><dd class="trace-attempts">2</dd></div><div><dt>Records saved</dt><dd class="trace-records">1</dd></div><div><dt>Simulated time</dt><dd><span class="trace-elapsed">190</span> ms</dd></div></dl></div>
+    <ol class="trace-topology" aria-label="System components">
+      <li data-trace-node="client"><span class="trace-node-index">01</span><strong>Client</strong><span class="trace-node-state">Reply</span></li>
+      <li data-trace-node="api"><span class="trace-node-index">02</span><strong>API</strong><span class="trace-node-state">Validated</span></li>
+      <li data-trace-node="service"><span class="trace-node-index">03</span><strong>Service</strong><span class="trace-node-state">Prepared</span></li>
+      <li data-trace-node="store"><span class="trace-node-index">04</span><strong>Store</strong><span class="trace-node-state">1 record</span></li>
     </ol>
-    <div class="flow-narrative">
-      <p class="flow-progress eyebrow" role="status" aria-live="polite" aria-atomic="true">Step 4 of 4 · 201 Created</p>
-      <h4 class="flow-title">The task was created.</h4>
-      <p class="flow-explanation">The input passed validation and the service created a task. The response includes its identifier and a location for the new resource.</p>
-    </div>
-    <div class="flow-payload-tabs" role="group" aria-label="JSON example to display" hidden>
-      <button type="button" data-payload="request" aria-pressed="true">Request JSON</button>
-      <button type="button" data-payload="response" aria-pressed="false">Response JSON</button>
-    </div>
-    <div class="flow-payloads">
-      <div class="flow-payload"><p class="flow-payload-label">Request <span>JSON</span></p><pre><code class="flow-request">POST /demo/tasks
-Content-Type: application/json
-
-{
+    <svg class="trace-traffic" viewBox="0 0 1000 20" aria-hidden="true"><path d="M125 10H875M125 5v10M375 5v10M625 5v10M875 5v10"/><circle class="trace-packet" cy="10" r="5"/></svg>
+    <div class="trace-workspace">
+      <div class="trace-inspector"><p class="eyebrow">Operation inspector</p><h4 class="trace-operation">One operation, despite a retry.</h4><p class="trace-detail">The first task commits before its reply is lost. The repeated request reuses the same idempotency key and returns the original task.</p>
+        <p class="trace-payload-label">Selected operation data</p><pre tabindex="0" role="region" aria-label="Selected trace operation data"><code class="trace-payload">{
+  "id": "task-42",
+  "title": "Review API contract"
+}</code></pre>
+      </div>
+      <details class="trace-timeline" open><summary>Inspect event timeline <span>Simulated milliseconds</span></summary>
+        <ol class="trace-events"><li>0–10 · Client sends the task request.</li><li>10–25 · API validates the request.</li><li>25–60 · Service prepares the task.</li><li>60–90 · Store commits one record.</li><li>90–120 · Reply is lost.</li><li>120–130 · Client retries with the same key.</li><li>130–145 · API validates the retry.</li><li>145–175 · Store reuses the original result.</li><li>175–190 · Client receives the result.</li></ol>
+      </details></div>
+    <p class="trace-lesson">The first write commits before its reply is lost. An idempotency key connects the retry to the same operation.</p>
+    <p class="trace-footnote">Illustrative model, not a production benchmark. Keys apply to the same request body; key expiry, concurrent requests and cancellation are outside this example. No network requests or stored data.</p>
+  </div></div>
+        <section class="investigation-view compatibility-section" id="compatibility-lab" aria-labelledby="compatibility-title">
+  <div class="section-heading">
+    <h4 id="compatibility-title">Will this API change break a client?</h4>
+    <p>Keep the client fixed and change the API. See why valid JSON alone does not guarantee compatibility.</p>
+  </div>
+  <div class="compat-workspace card">
+    <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
+      to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
+      as strings, and ignores extra response fields.</p>
+    <div class="compat-controls" hidden><label>API change
+      <select aria-label="API compatibility scenario">
+        <option value="extra">Extra response field</option>
+        <option value="rename">Rename a response field</option>
+        <option value="type">Change a response type</option>
+        <option value="required">Require a new request field</option>
+      </select>
+    </label><label class="compat-rollout"><input type="checkbox"> Apply compatible rollout</label></div>
+    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Client decoding. Client reads task-42: Review API contract.</p>
+    <p class="compat-explanation">This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.</p>
+    <ul class="compat-tests" aria-label="Existing consumer checks"><li>PASS · Old request accepted</li><li>PASS · id remains a string</li><li>PASS · title remains a string</li></ul>
+    <div class="compat-comparison">
+      <div><h5>Original API</h5><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
+  "id": "task-42",
   "title": "Review API contract"
 }</code></pre></div>
-      <div class="flow-payload"><p class="flow-payload-label">Response <span class="flow-response-label">201 Created</span></p><pre><code class="flow-response">HTTP/1.1 201 Created
-Location: /demo/tasks/demo-1042
-Content-Type: application/json
-
-{
-  "id": "demo-1042",
-  "title": "Review API contract"
+      <div><h5>Changed API</h5><p>Required request fields: <span class="compat-required">title</span></p><p class="compat-response-label compat-status">201 Created</p><pre tabindex="0" role="region" aria-label="Changed API response"><code class="compat-payload">{
+  "id": "task-42",
+  "title": "Review API contract",
+  "priority": "normal"
 }</code></pre></div></div>
-    <p class="flow-disclaimer">Illustrative simulation · synthetic data · runs entirely in your browser.
-      No requests are sent and no tasks are stored.</p>
-    <details class="flow-notes">
-      <summary>Why these responses?</summary>
-      <dl>
-        <div><dt>201 · Created</dt><dd>A valid request creates a resource. Its identifier and location are returned.</dd></div>
-        <div><dt>400 · Bad Request</dt><dd>In this example, a blank title fails validation. Processing is skipped and a field-level error is returned.</dd></div>
-        <div><dt>503 · Service Unavailable</dt><dd>A temporary service failure creates nothing. A Retry-After header suggests waiting 30 seconds. A real client should consider idempotency before retrying a POST.</dd></div></dl></details></div></section>
+    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for consumers; check stricter clients separately.</span></p>
+    <details class="compat-notes"><summary>What makes the other changes break?</summary>
+      <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
+        <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>
+        <li><strong>Require priority in the request:</strong> the old request omits it, so validation returns 400 before the client can read a task.</li></ul>
+      <p>These results apply to the client defined above. A stricter client could reject extra fields;
+        other clients may tolerate different changes. Review actual consumers before changing a real API.</p>
+    </details>
+    <p class="compat-footnote">Synthetic example · local simulation · no network requests or stored data.
+      <a class="text-link" href="case-keylane.html">Read about my API work <span aria-hidden="true">↗</span></a></p>
+  </div></section></section>
       <section class="lab-panel search-section" id="search-lab" aria-labelledby="search-title">
   <div class="section-heading">
     <h3 id="search-title">Find a route</h3>
@@ -320,47 +336,7 @@ S..#..G
         <tr><th scope="row">DFS</th><td class="search-dfs-moves">12</td><td class="search-dfs-count">13</td></tr></tbody>
       </table>
       <pre class="search-trace">In the two-route example, the shortest route takes 8 moves through the lower passage. Following the upper branch takes 12 moves. A blocked goal has no route.</pre>
-    </details></div></section>
-      <section class="lab-panel compatibility-section" id="compatibility-lab" aria-labelledby="compatibility-title">
-  <div class="section-heading">
-    <h3 id="compatibility-title">Will this API change break a client?</h3>
-    <p>Keep the client fixed and change the API. See why valid JSON alone does not guarantee compatibility.</p>
-  </div>
-  <div class="compat-workspace card">
-    <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
-      to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
-      as strings, and ignores extra response fields.</p>
-    <label class="compat-controls" hidden>API change
-      <select aria-label="API compatibility scenario">
-        <option value="extra">Extra response field</option>
-        <option value="rename">Rename a response field</option>
-        <option value="type">Change a response type</option>
-        <option value="required">Require a new request field</option>
-      </select>
-    </label>
-    <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Client decoding. Client reads task-42: Review API contract.</p>
-    <p class="compat-explanation">This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.</p>
-    <div class="compat-comparison">
-      <div><h4>Original API</h4><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
-  "id": "task-42",
-  "title": "Review API contract"
-}</code></pre></div>
-      <div><h4>Changed API</h4><p>Required request fields: <span class="compat-required">title</span></p><p class="compat-response-label compat-status">201 Created</p><pre tabindex="0" role="region" aria-label="Changed API response"><code class="compat-payload">{
-  "id": "task-42",
-  "title": "Review API contract",
-  "priority": "normal"
-}</code></pre></div></div>
-    <p class="compat-migration"><strong>Safer rollout:</strong> <span>Keep the added field optional for consumers; check stricter clients separately.</span></p>
-    <details class="compat-notes"><summary>What makes the other changes break?</summary>
-      <ul><li><strong>Rename title to name:</strong> the client no longer finds the title it reads.</li>
-        <li><strong>Change id to a number:</strong> the client expects a string, so decoding fails.</li>
-        <li><strong>Require priority in the request:</strong> the old request omits it, so validation returns 400 before the client can read a task.</li></ul>
-      <p>These results apply to the client defined above. A stricter client could reject extra fields;
-        other clients may tolerate different changes. Review actual consumers before changing a real API.</p>
-    </details>
-    <p class="compat-footnote">Synthetic example · local simulation · no network requests or stored data.
-      <a class="text-link" href="case-keylane.html">Read about my API work <span aria-hidden="true">↗</span></a></p>
-  </div></section></section>
+    </details></div></section></section>
     <section class="page-section experience-section" id="experience" aria-labelledby="experience-title">
   <div class="section-heading">
     <h2 id="experience-title">Professional experience</h2>
@@ -443,12 +419,14 @@ S..#..G
     <p><a href="index.html">Return to the default palette</a></p><a class="footer-top" href="#home">Back to top <span aria-hidden="true">↑</span></a>
     </div></footer>
   <script src="js/scripts.js?v=d7eabcada4a1" defer></script>
-  <script src="js/interactive.js?v=d489c29ed03a" defer></script>
-  <script src="js/playground.js?v=77af87abae69" defer></script>
+  <script src="js/interactive.js?v=e04e65faca62" defer></script>
+  <script src="js/investigation-model.js?v=32c2d657b878" defer></script>
   <script src="js/search-model.js?v=4b3693d3b3d6" defer></script>
   <script src="js/search.js?v=7af8f53936ac" defer></script>
+  <script src="js/compatibility-model.js?v=ee6961ace00d" defer></script>
+  <script src="js/compatibility.js?v=9bd14280964a" defer></script>
+  <script src="js/investigation.js?v=2de57f214efb" defer></script>
+  <script src="js/engineering-decision.js?v=4f088132bb2c" defer></script>
   <script src="js/lab.js?v=c35ca2f3fda5" defer></script>
-  <script src="js/compatibility-model.js?v=a29c679cf68e" defer></script>
-  <script src="js/compatibility.js?v=a321ff34c184" defer></script>
 </body>
 </html>

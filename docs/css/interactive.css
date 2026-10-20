@@ -1,6 +1,6 @@
 /* A composed introduction and an evidence-led way into the project notes. */
 .hero { padding-top: 32px; }
-.hero-grid { grid-template-columns: minmax(0, 1fr) 256px; gap: 24px 40px; padding: 36px; border: 1px solid var(--line); border-radius: 20px; background: var(--section-soft); }
+.hero-grid { grid-template-columns: minmax(0, 1fr) 256px; grid-template-rows: max-content 1fr; align-items: start; gap: 24px 40px; padding: 36px; border: 1px solid var(--line); border-radius: 20px; background: var(--section-soft); }
 .hero-identity h1 { font-size: clamp(2rem, 4.5vw, 3.5rem); letter-spacing: -.045em; }
 .hero-role { font: 1.0625rem/1.5 var(--font-mono); }
 .hero-copy { min-width: 0; }
@@ -9,13 +9,6 @@
 .hero-portrait { border-bottom: 0; width: 100%; }
 .hero-portrait img { border-radius: 12px; }
 .hero-portrait figcaption { padding-block: 8px 16px; }
-.local-clock { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--line); padding-top: 16px; }
-.clock-face { flex: 0 0 52px; width: 52px; color: var(--teal); }
-.clock-hour, .clock-minute { transform-origin: 32px 32px; }
-.clock-hour { transform: rotate(var(--hour-angle, 0deg)); }
-.clock-minute { transform: rotate(var(--minute-angle, 0deg)); }
-.clock-time { display: block; font: 1.875rem/1.4 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); }
-.clock-zone { font-size: .75rem; }
 .hero-facts { gap: 16px; margin-top: 16px; border: 0; padding: 0; }
 .hero-facts > div { padding: 18px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
 .hero-facts dt { font: .75rem/1.5 var(--font-mono); margin-bottom: 6px; }
@@ -54,10 +47,6 @@
   .hero-portrait { grid-column: 2; grid-row: 1; }
   .hero-portrait img { aspect-ratio: 1; }
   .hero-portrait figcaption { font-size: .6875rem; padding: 8px 0 0; }
-  .local-clock { grid-column: 1 / -1; grid-row: 3; }
-  .clock-face { flex-basis: 40px; width: 40px; }
-  .clock-time { display: inline; font-size: 1.5rem; }
-  .clock-zone { display: inline; margin-left: 10px; }
   .hero-facts { gap: 8px; }
   .hero-facts > div { padding: 14px 18px; }
   .hero-facts dt { margin: 0; }
@@ -70,7 +59,6 @@
   .hero-grid { grid-template-columns: minmax(0, 1fr) 76px; padding: 18px; gap: 18px 12px; }
   .hero-identity h1 { font-size: 1.75rem; }
   .hero-portrait figcaption { display: none; }
-  .clock-zone { display: block; margin: 0; }
 }
 @media (forced-colors: active) {
   .explorer-options button[aria-pressed="true"] { border-style: double; border-width: 3px; padding: 4px 10px; }
@@ -84,6 +72,5 @@
   .hero-role { font-size: 12pt; }
   .hero-facts { display: block; }
   .hero-facts > div { padding: 6px 0; border: 0; }
-  .local-clock, .project-explorer, .project-match-note { display: none !important; }
   .work-section .project-card.explorer-match { border-color: var(--line); border-inline-start-width: 1px; }
 }

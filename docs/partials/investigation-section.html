@@ -1,0 +1,37 @@
+<div class="investigation-view" id="request-trace">
+  <div class="trace-console card">
+    <div class="trace-console-header"><span>POST /demo/tasks</span><span>Synthetic trace · isolated browser model</span></div>
+    <div class="trace-controls" hidden>
+      <label>Condition<select class="trace-scenario" aria-label="Request investigation scenario">
+        <option value="duplicate">Lost reply + retry</option><option value="valid">Healthy request</option>
+        <option value="invalid">Invalid input</option><option value="unavailable">Service unavailable</option><option value="slow">Slow dependency</option>
+      </select></label>
+      <label class="trace-protection"><input type="checkbox" checked> Reuse an idempotency key</label>
+      <div class="trace-actions" role="group" aria-label="Trace playback"><button type="button" class="button trace-run">Run trace</button><button type="button" class="button trace-next">Next step</button><button type="button" class="text-link trace-reset">Reset</button></div>
+    </div>
+    <div class="trace-summary">
+      <p class="trace-status" role="status" aria-live="polite" aria-atomic="true">Trace complete · 2 attempts · 1 record · 201 Created</p>
+      <dl class="trace-metrics"><div><dt>Attempts</dt><dd class="trace-attempts">2</dd></div><div><dt>Records saved</dt><dd class="trace-records">1</dd></div><div><dt>Simulated time</dt><dd><span class="trace-elapsed">190</span> ms</dd></div></dl>
+    </div>
+    <ol class="trace-topology" aria-label="System components">
+      <li data-trace-node="client"><span class="trace-node-index">01</span><strong>Client</strong><span class="trace-node-state">Reply</span></li>
+      <li data-trace-node="api"><span class="trace-node-index">02</span><strong>API</strong><span class="trace-node-state">Validated</span></li>
+      <li data-trace-node="service"><span class="trace-node-index">03</span><strong>Service</strong><span class="trace-node-state">Prepared</span></li>
+      <li data-trace-node="store"><span class="trace-node-index">04</span><strong>Store</strong><span class="trace-node-state">1 record</span></li>
+    </ol>
+    <svg class="trace-traffic" viewBox="0 0 1000 20" aria-hidden="true"><path d="M125 10H875M125 5v10M375 5v10M625 5v10M875 5v10"/><circle class="trace-packet" cy="10" r="5"/></svg>
+    <div class="trace-workspace">
+      <div class="trace-inspector"><p class="eyebrow">Operation inspector</p><h4 class="trace-operation">One operation, despite a retry.</h4><p class="trace-detail">The first task commits before its reply is lost. The repeated request reuses the same idempotency key and returns the original task.</p>
+        <p class="trace-payload-label">Selected operation data</p><pre tabindex="0" role="region" aria-label="Selected trace operation data"><code class="trace-payload">{
+  "id": "task-42",
+  "title": "Review API contract"
+}</code></pre>
+      </div>
+      <details class="trace-timeline" open><summary>Inspect event timeline <span>Simulated milliseconds</span></summary>
+        <ol class="trace-events"><li>0–10 · Client sends the task request.</li><li>10–25 · API validates the request.</li><li>25–60 · Service prepares the task.</li><li>60–90 · Store commits one record.</li><li>90–120 · Reply is lost.</li><li>120–130 · Client retries with the same key.</li><li>130–145 · API validates the retry.</li><li>145–175 · Store reuses the original result.</li><li>175–190 · Client receives the result.</li></ol>
+      </details>
+    </div>
+    <p class="trace-lesson">The first write commits before its reply is lost. An idempotency key connects the retry to the same operation.</p>
+    <p class="trace-footnote">Illustrative model, not a production benchmark. Keys apply to the same request body; key expiry, concurrent requests and cancellation are outside this example. No network requests or stored data.</p>
+  </div>
+</div>

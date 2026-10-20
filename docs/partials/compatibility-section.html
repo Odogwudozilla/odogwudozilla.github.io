@@ -1,28 +1,29 @@
-<section class="lab-panel compatibility-section" id="compatibility-lab" aria-labelledby="compatibility-title">
+<section class="investigation-view compatibility-section" id="compatibility-lab" aria-labelledby="compatibility-title">
   <div class="section-heading">
-    <h3 id="compatibility-title">Will this API change break a client?</h3>
+    <h4 id="compatibility-title">Will this API change break a client?</h4>
     <p>Keep the client fixed and change the API. See why valid JSON alone does not guarantee compatibility.</p>
   </div>
   <div class="compat-workspace card">
     <p class="compat-contract"><strong>The existing client</strong> sends <code>{ "title": "Review API contract" }</code>
       to <code>POST /demo/tasks</code>. It expects <code>201 Created</code>, reads <code>id</code> and <code>title</code>
       as strings, and ignores extra response fields.</p>
-    <label class="compat-controls" hidden>API change
+    <div class="compat-controls" hidden><label>API change
       <select aria-label="API compatibility scenario">
         <option value="extra">Extra response field</option>
         <option value="rename">Rename a response field</option>
         <option value="type">Change a response type</option>
         <option value="required">Require a new request field</option>
       </select>
-    </label>
+    </label><label class="compat-rollout"><input type="checkbox"> Apply compatible rollout</label></div>
     <p class="compat-verdict" role="status" aria-live="polite" aria-atomic="true" data-compatible="true">Compatible with this client · Client decoding. Client reads task-42: Review API contract.</p>
     <p class="compat-explanation">This client ignores fields it does not read, so adding priority leaves its existing behaviour intact.</p>
+    <ul class="compat-tests" aria-label="Existing consumer checks"><li>PASS · Old request accepted</li><li>PASS · id remains a string</li><li>PASS · title remains a string</li></ul>
     <div class="compat-comparison">
-      <div><h4>Original API</h4><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
+      <div><h5>Original API</h5><p>Required request fields: title</p><p class="compat-response-label">201 Created</p><pre tabindex="0" role="region" aria-label="Original API response"><code>{
   "id": "task-42",
   "title": "Review API contract"
 }</code></pre></div>
-      <div><h4>Changed API</h4><p>Required request fields: <span class="compat-required">title</span></p><p class="compat-response-label compat-status">201 Created</p><pre tabindex="0" role="region" aria-label="Changed API response"><code class="compat-payload">{
+      <div><h5>Changed API</h5><p>Required request fields: <span class="compat-required">title</span></p><p class="compat-response-label compat-status">201 Created</p><pre tabindex="0" role="region" aria-label="Changed API response"><code class="compat-payload">{
   "id": "task-42",
   "title": "Review API contract",
   "priority": "normal"

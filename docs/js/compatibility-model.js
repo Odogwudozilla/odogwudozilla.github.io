@@ -27,5 +27,25 @@
     return { compatible: true, stage: 'Client decoding', status: '201 Created', payload: response,
       message: `Client reads ${response.id}: ${response.title}.` };
   }
-  scope.PortfolioCompatibility = { request, original, scenarios, check };
+  function rollout(key) {
+    const scenario = scenarios[key];
+    if (!scenario) throw new Error('Unknown contract scenario');
+    const explanation = {
+      extra: 'The added response field remains optional for this client, which ignores it.',
+      rename: 'The API now returns both title and name. The existing client can still read title while consumers migrate.',
+      type: 'The existing contract keeps id as a string. A numeric representation would need a separate agreed contract.',
+      required: 'The API accepts the old request and defaults missing priority to normal. The existing client ignores that extra response field.',
+    }[key];
+    return { ...scenario, explanation, required: ['title'], response: { ...scenario.response,
+      ...(key === 'rename' ? { title: original.title } : {}), ...(key === 'type' ? { id: original.id } : {}),
+      ...(key === 'required' ? { priority: 'normal' } : {}) } };
+  }
+  function checks(scenario) {
+    const result = check(scenario);
+    return [
+      { label: 'Old request accepted', outcome: result.status.startsWith('201') ? 'PASS' : 'FAIL' },
+      ...['id', 'title'].map(key => ({ label: `${key} remains a string`, outcome: !result.status.startsWith('201') ? 'NOT RUN' : typeof scenario.response[key] === 'string' ? 'PASS' : 'FAIL' })),
+    ];
+  }
+  scope.PortfolioCompatibility = { request, original, scenarios, check, rollout, checks };
 })(typeof window === 'undefined' ? globalThis : window);

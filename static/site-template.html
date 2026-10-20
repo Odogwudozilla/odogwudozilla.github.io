@@ -14,16 +14,22 @@
       <div class="section-heading">
         <p class="eyebrow">Explore how things work</p>
         <h2 id="lab-title">Engineering Lab</h2>
-        <p>Small, browser-only demonstrations of APIs and algorithms. Choose one to explore.</p>
+        <p>Investigate a system, challenge an API contract or compare search strategies. Change a condition and inspect what follows.</p>
       </div>
       <div class="lab-switch" role="group" aria-label="Choose an Engineering Lab demo" hidden>
-        <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API flow</button>
+        <button type="button" data-lab-select="playground" aria-controls="playground" aria-pressed="true">API investigation</button>
         <button type="button" data-lab-select="search-lab" aria-controls="search-lab" aria-pressed="false">Grid search</button>
-        <button type="button" data-lab-select="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">API changes</button>
       </div>
-      {{playground-section}}
+      <section class="lab-panel investigation-section" id="playground" aria-labelledby="playground-title">
+        <div class="section-heading"><h3 id="playground-title">Beyond the status code</h3><p>Inspect the request, the saved effect and the contract the client depends on.</p></div>
+        <div class="investigation-switch" role="group" aria-label="API investigation view" hidden>
+          <button type="button" data-investigation-view="request-trace" aria-controls="request-trace" aria-pressed="true">Request trace</button>
+          <button type="button" data-investigation-view="compatibility-lab" aria-controls="compatibility-lab" aria-pressed="false">Contract checks</button>
+        </div>
+        {{investigation-section}}
+        {{compatibility-section}}
+      </section>
       {{search-section}}
-      {{compatibility-section}}
     </section>
     {{experience-section}}
     {{education-section}}
@@ -37,11 +43,13 @@
   </footer>
   <script src="js/scripts.js" defer></script>
   <script src="js/interactive.js" defer></script>
-  <script src="js/playground.js" defer></script>
+  <script src="js/investigation-model.js" defer></script>
   <script src="js/search-model.js" defer></script>
   <script src="js/search.js" defer></script>
-  <script src="js/lab.js" defer></script>
   <script src="js/compatibility-model.js" defer></script>
   <script src="js/compatibility.js" defer></script>
+  <script src="js/investigation.js" defer></script>
+  <script src="js/engineering-decision.js" defer></script>
+  <script src="js/lab.js" defer></script>
 </body>
 </html>
