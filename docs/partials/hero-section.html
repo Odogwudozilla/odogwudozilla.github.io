@@ -26,7 +26,7 @@
         <li><a href="#engineering-lab">Engineering Lab <span aria-hidden="true">↗</span></a></li>
       </ul>
     </div>
-    <aside class="hero-aside" aria-label="Portrait and local time">
+    <aside class="hero-aside" aria-label="Portrait and engineering decisions">
     <figure class="hero-portrait">
       <picture>
         <source type="image/webp"
@@ -41,15 +41,14 @@
       </picture>
       <figcaption>Based in the Netherlands</figcaption>
     </figure>
-    <div class="local-clock" hidden>
-      <svg class="clock-face" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor"/>
-        <path d="M32 7v4m25 21h-4M32 57v-4M7 32h4" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path class="clock-hour" d="M32 32V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        <path class="clock-minute" d="M32 32V11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="32" cy="32" r="3" fill="currentColor"/>
-      </svg>
-      <div><p class="eyebrow">My local time</p><time class="clock-time"></time><p class="clock-zone">Netherlands · Europe/Amsterdam</p></div>
+    <div class="engineering-decision">
+      <p class="eyebrow">Engineering decisions</p>
+      <label hidden>Explore a condition<select aria-label="Engineering decision example"><option value="duplicate">Lost reply</option><option value="slow">Timeout</option><option value="rename">Contract change</option></select></label>
+      <p class="decision-question">The reply never arrived.</p>
+      <div class="decision-route" aria-hidden="true"><span>Request</span><span>Retry</span><span>Store</span></div>
+      <p class="decision-outcome" role="status" aria-live="polite" aria-atomic="true">2 attempts. 1 saved record.</p>
+      <a class="text-link" href="#playground" data-investigation-scenario="duplicate">Investigate why <span aria-hidden="true">↗</span></a>
+      <p class="decision-caption">Illustrative example</p>
     </div>
     </aside>
   </div>

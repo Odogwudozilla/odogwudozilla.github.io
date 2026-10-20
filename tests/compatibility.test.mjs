@@ -30,11 +30,12 @@ test('compatibility is checked against the old request and the exact fields the 
 
 test('scenario selection updates the visible verdict and payload without moving focus or starting playback', () => {
   let onChange;
-  const elements = Object.fromEntries(['.compat-controls', '.compat-verdict', '.compat-explanation', '.compat-status', '.compat-payload', '.compat-required', '.compat-migration span']
-    .map(key => [key, { textContent: '', hidden: true, dataset: {} }]));
+  const makeNode = () => ({ textContent: '', hidden: true, dataset: {}, replaceChildren(...nodes) { this.textContent = nodes.map(node => node.textContent).join(''); this.children = nodes; } });
+  const elements = Object.fromEntries(['.compat-controls', '.compat-verdict', '.compat-explanation', '.compat-status', '.compat-payload', '.compat-required', '.compat-migration span', '.compat-tests'].map(key => [key, makeNode()]));
+  const rollout = { checked: false, addEventListener(_, fn) { this.change = fn; } };
   const picker = { value: 'extra', addEventListener(name, fn) { assert.equal(name, 'change'); onChange = fn; } };
-  const panel = { querySelector(selector) { return selector === 'select' ? picker : elements[selector]; } };
-  runInNewContext(controller, { window: { PortfolioCompatibility: model }, document: { querySelector: () => panel } });
+  const panel = { querySelector(selector) { return selector === 'select' ? picker : selector === '.compat-rollout input' ? rollout : elements[selector]; } };
+  runInNewContext(controller, { window: { PortfolioCompatibility: model }, document: { querySelector: () => panel, createElement: makeNode } });
   assert.equal(elements['.compat-controls'].hidden, false);
   for (const [key, compatible] of [['rename', false], ['required', false], ['extra', true], ['type', false]]) {
     picker.value = key; onChange();
@@ -44,6 +45,9 @@ test('scenario selection updates the visible verdict and payload without moving 
     assert.equal(elements['.compat-payload'].textContent, JSON.stringify(expected.payload, null, 2));
     assert.ok(elements['.compat-verdict'].textContent.includes(expected.message));
     assert.equal(elements['.compat-migration span'].textContent, model.scenarios[key].migration);
+    rollout.checked = true; rollout.change();
+    assert.equal(elements['.compat-verdict'].dataset.compatible, 'true');
+    assert.ok(elements['.compat-tests'].children.every(item => item.dataset.outcome === 'PASS'));
   }
   picker.value = 'unknown'; onChange(); // Ignore an unrecognised value without corrupting the current result.
   assert.equal(elements['.compat-status'].textContent, '201 Created');
@@ -51,7 +55,7 @@ test('scenario selection updates the visible verdict and payload without moving 
 
 test('the static example explains its client assumptions and remains useful without scripts', async () => {
   const html = await readFile(new URL('../docs/index.html', import.meta.url), 'utf8');
-  const section = html.match(/<section class="lab-panel compatibility-section"[\s\S]*?<\/section>/)[0];
+  const section = html.match(/<section class="investigation-view compatibility-section"[\s\S]*?<\/section>/)[0];
   assert.match(section, /class="compat-controls" hidden/);
   assert.match(section, /role="status" aria-live="polite" aria-atomic="true"/);
   assert.match(section, /ignores extra response fields/);
@@ -59,4 +63,16 @@ test('the static example explains its client assumptions and remains useful with
   assert.match(section, /validation returns 400/);
   assert.match(section, /"priority": "normal"/);
   assert.match(section, /href="case-keylane.html"/);
+});
+
+test('compatible rollouts preserve the original consumer contract and distinguish skipped checks', () => {
+  for (const key of Object.keys(model.scenarios)) {
+    assert.equal(model.check(model.rollout(key)).compatible, true);
+    assert.ok(model.checks(model.rollout(key)).every(check => check.outcome === 'PASS'));
+  }
+  assert.equal(model.rollout('rename').response.title, model.original.title);
+  assert.equal(model.rollout('rename').response.name, model.original.title);
+  assert.equal(model.rollout('required').response.priority, 'normal');
+  assert.equal(model.checks(model.scenarios.required)[1].outcome, 'NOT RUN');
+  assert.equal(model.checks(model.scenarios.type)[1].outcome, 'FAIL');
 });

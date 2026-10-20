@@ -2,39 +2,6 @@
 (() => {
   'use strict';
 
-  const clock = document.querySelector('.local-clock');
-  if (clock) {
-    let formatter;
-    try {
-      formatter = new Intl.DateTimeFormat('en-GB', {
-        timeZone: 'Europe/Amsterdam', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
-      });
-    } catch { /* Keep the location caption if time-zone support is unavailable. */ }
-    if (formatter) {
-      const update = () => {
-        const now = new Date();
-        const parts = Object.fromEntries(formatter.formatToParts(now).map(p => [p.type, p.value]));
-        const hour = Number(parts.hour), minute = Number(parts.minute);
-        const time = clock.querySelector('time');
-        time.textContent = `${parts.hour}:${parts.minute}`;
-        time.dateTime = now.toISOString();
-        clock.style.setProperty('--hour-angle', `${(hour % 12) * 30 + minute / 2}deg`);
-        clock.style.setProperty('--minute-angle', `${minute * 6}deg`);
-        clock.hidden = false;
-      };
-      update();
-      // No frame loop or announcements: refresh only while the page is visible.
-      let timer;
-      const sync = () => {
-        clearInterval(timer);
-        timer = undefined;
-        if (!document.hidden) { update(); timer = setInterval(update, 30000); }
-      };
-      document.addEventListener('visibilitychange', sync);
-      sync();
-    }
-  }
-
   const explorer = document.querySelector('.project-explorer');
   if (!explorer) return;
   const evidence = {
