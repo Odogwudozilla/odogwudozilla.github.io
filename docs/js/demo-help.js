@@ -2,12 +2,11 @@
 (() => {
   'use strict';
   document.querySelectorAll('.demo-help').forEach(help => {
-    const button = help.querySelector('button');
+    const icon = help.querySelector('.demo-help-icon');
     let hovered = false, focused = false, pinned = false, suppressed = false;
     function render() {
       const open = !suppressed && (hovered || focused || pinned);
       help.classList.toggle('is-open', open);
-      button.setAttribute('aria-expanded', String(open));
     }
     function dismiss() { pinned = false; suppressed = true; render(); }
     help.addEventListener('pointerenter', event => {
@@ -20,7 +19,7 @@
       if (help.contains(event.relatedTarget)) return;
       focused = false; pinned = false; render();
     });
-    button.addEventListener('click', () => {
+    icon.addEventListener('click', () => {
       pinned = !pinned; suppressed = !pinned; render();
     });
     document.addEventListener('keydown', event => { if (event.key === 'Escape') dismiss(); });

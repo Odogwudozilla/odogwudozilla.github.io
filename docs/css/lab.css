@@ -19,8 +19,9 @@
 .lab-preview .lab-preview-packet { fill: var(--action); stroke: var(--surface); }
 .lab-shell[open] .lab-preview { display: none; }
 .demo-help { position: relative; width: max-content; max-width: 100%; margin: 10px 20px; }
-.demo-help button { display: inline-flex; gap: 6px; align-items: center; min-height: 30px; padding: 3px 6px; border: 1px solid var(--line); border-radius: var(--control-radius); font: .75rem/1.5 var(--font-sans); color: var(--action); background: var(--surface); }
-.demo-help button > span { font-family: var(--font-mono); font-weight: bold; }
+.demo-help-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; color: var(--action); cursor: help; border-radius: 50%; }
+.demo-help-icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+.demo-help-icon .info-dot { fill: currentColor; stroke: none; }
 .demo-tooltip { display: none; position: absolute; z-index: 5; left: 0; top: calc(100% - 1px); width: min(270px, calc(100vw - 100px)); padding: 12px; border: 1px solid var(--action); border-radius: var(--control-radius); color: var(--ink); background: var(--surface); box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 15%, transparent); font-size: .8125rem; line-height: 1.6; }
 .demo-help.is-open .demo-tooltip { display: block; }
 @media (prefers-reduced-motion: no-preference) {
