@@ -1,18 +1,30 @@
 # Portfolio direction and design history
 
-Current scope, 18 October 2026: **retain static** under ADR 015. The owner
+## Current planning outlook — 22 October 2026
+
+The owner requested resuming dynamic-site work on 20 October and a reconciled
+roadmap/backlog on 22 October. Dynamic planning is reopened; application
+implementation remains gated by the unresolved decisions below. The static site
+remains production and the visual/content reference. This records the request;
+it does not accept proposed technical mechanisms or authorise cutover.
+
+Start with the [current roadmap](../docs/roadmap.md),
+[story backlog](../docs/story-backlog.md) and `npm run outlook`.
+The [2025 roadmap](history/roadmap-2025.md) is archived background.
+
+Production baseline, 18 October 2026: **retain static** under ADR 015. The owner
 approved a bounded scope/tooling/verification slice in this repository.
 See [static maintenance](static-maintenance.md) for the plan, runtime and
 verification evidence. The template/partials → Node assembly → generated HTML
 workflow remains primary. Angular/blog/CMS/private-editor/services are deferred
 without permanent cancellation or a restart date; Next remains dormant.
-Re-entry requires a new explicit owner request and affected revalidation.
+The new request reopens planning; affected revalidation and technical acceptance are still required before implementation.
 
 The sections below retain the earlier dynamic design and its acceptance
 limits. Its unresolved provider/session/publication decisions are deferred
 requirements, not prerequisites for static maintenance. No dynamic gate is opened.
 
-## Deferred dynamic design
+## Dynamic design awaiting implementation acceptance
 
 Status: **Partially accepted; implementation gate closed**. Updated on
 13 October 2026 against static baseline 21c2a69 and current official sources.

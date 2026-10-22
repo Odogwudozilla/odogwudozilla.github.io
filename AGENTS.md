@@ -42,6 +42,13 @@ never commit the local Keylane context or private work/source records.
 
 ## Static maintenance and shared checks
 
+For the current work outlook, read `docs/roadmap.md` and `docs/story-backlog.md`.
+After each approved work bundle, reconcile statuses, dependencies and evidence
+in `design/backlog.json`, then run `npm run outlook:update` and
+`npm run outlook:check`. Keep proposed decisions distinct from owner acceptance;
+the backlog does not open the dynamic implementation gate. Record local,
+merged and published evidence accurately rather than assuming they coincide.
+
 Build coherent changes and run checks appropriate to their behaviour. Keep
 modules below 500 lines. Do not disable checks or update baselines merely to
 hide failures. Report planned safeguards separately from active enforcement.

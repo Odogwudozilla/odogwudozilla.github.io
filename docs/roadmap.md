@@ -1,297 +1,86 @@
-# Project Roadmap - Portfolio Migration & Enhancement
+# Portfolio roadmap
 
-> Historical 2025 roadmap. Use [the current implementation gates](../design/implementation-plan.md)
-> for the proposed sequence. The timelines, expanded features and service
-> promises below are not current commitments or implementation authorisation.
+Last reconciled: **22 October 2026**. Reviewed baseline: `5504bbf` (PR 62).
 
-*Last Updated: September 13, 2025*
+## Where we are
 
-## Migration Overview
+The public static portfolio is shipped and remains the production reference and fallback.
+The owner requested a return to dynamic-site work on 20 October, then requested
+this reconciled roadmap and story backlog on 22 October. Dynamic planning has
+reopened; provider, runtime/session and concrete design acceptance still block
+application implementation. No Angular installation, cloud provisioning or domain
+cutover is authorised by this planning update.
 
-### Current State Assessment
-- **Technology**: Static HTML/Bootstrap site on GitHub Pages
-- **Content**: Professional summary, experience, skills, basic portfolio
-- **Limitations**: No dynamic features, limited interactivity, difficult content management
-- **Performance**: Good for static content, but lacks modern optimizations
+Use the [story backlog](story-backlog.md) for individual work items and current
+statuses. Its source of truth is [design/backlog.json](../design/backlog.json).
+The [implementation gates](../design/implementation-plan.md) define technical
+exit criteria; [accepted decisions](../design/decisions.md) govern authority.
 
-### Target State Vision
-- **Technology**: Modern Next.js application with full-stack capabilities
-- **Hosting**: Vercel with global CDN and serverless functions
-- **Features**: Dynamic blog, portfolio management, contact forms, newsletter
-- **Performance**: Sub-2 second load times, excellent Core Web Vitals
-- **Maintenance**: Easy content updates through admin interface
+## Delivery outlook
 
-## Phase 1: Foundation Migration (Weeks 1-3)
+| Milestone | Intended outcome | Stories | Current position |
+| --- | --- | --- | --- |
+| Static baseline | Professional portfolio, case studies, Lab, CV, mobile journey and delivery checks | BASE-01–06 | Shipped; maintenance as needed, no further cosmetic queue |
+| Decisions and feasibility | Agree a feasible backend, first-release boundary, runtime/session and content/release contracts | DEC-01–05 | Planning; backend choice awaits owner input |
+| Foundation and public parity | Independent Angular workspace, active checks and the reviewed public experience | FND-01–02, PUB-01–02 | Planned; implementation gate closed |
+| First useful editor workflow | Owner signs in, edits one project, saves a draft, previews and explicitly publishes a verified release | DATA-01, AUTH-01–02, EDIT-01–03, REL-01–02 | Proposed first milestone; not yet owner-accepted as a release boundary |
+| First dynamic production release | Restore rehearsal, security/accessibility/performance evidence and authorised cutover | OPS-01, QA-01, CUT-01 | Planned; static production stays in place until authorised cutover |
+| Later capabilities | Structured blog authoring/reading, managed media, protected contact form and operations | BLOG-01–02, MEDIA-01, CONTACT-01, OPS-02 | Planned sequencing; subject to release-boundary acceptance |
+| Optional expansion | AI assistance and unaccepted features from the old wish list | OPT-01–02 | Deferred; separate scope acceptance needed |
 
-### Week 1: Project Setup & Core Infrastructure
-**Goal**: Establish modern development environment and deployment pipeline
+### Next work
 
-#### Tasks
-- [ ] Initialize Next.js 14 project with TypeScript
-- [ ] Configure Tailwind CSS and ShadCN UI components
-- [ ] Set up Vercel deployment with preview environments
-- [ ] Configure ESLint, Prettier, and development tooling
-- [ ] Create basic project structure following atomic design
+1. **DEC-01:** resolve backend direction. The authenticated check on 20 October
+   found the selected Supabase organisation unable to create a free project
+   because the account's two active free slots were occupied. The owner has not
+   yet answered the choice between comparing free alternatives, identifying
+   capacity to free, or assessing a paid option. This is dated evidence, not a
+   fresh account check on 22 October. No existing project should be changed from
+   this backlog alone.
+2. **DEC-02 and DEC-04:** review the first-release boundary and prepare current
+   version/installation-isolation evidence. This planning can proceed without
+   choosing a provider or installing packages.
+3. **DEC-03 and DEC-05:** complete and obtain acceptance for the affected concrete
+   designs. Reconcile the contract and gate state using actual owner evidence
+   before FND-01 begins.
 
-#### Deliverables
-- Working Next.js application deployed to Vercel
-- Development environment with hot reloading
-- CI/CD pipeline for automated deployments
-- Base component library (Button, Input, Card, Typography)
+Do not read all later stories as prerequisites for a small first editor release.
+DEC-02 decides that boundary. Blog, new media management and contact submission
+are proposed follow-on capabilities; core draft privacy, publication consistency,
+access, recovery and release checks remain required for the first release.
 
-#### Success Criteria
-- Lighthouse performance score > 90
-- TypeScript compilation with zero errors
-- Successful deployment to Vercel preview URL
+## What changed from the old roadmap
 
-### Week 2: Design System Implementation
-**Goal**: Create comprehensive, reusable component library
+- Angular supersedes Next.js; the incomplete Next scaffold remains dormant until
+  its migration/removal is authorised. Start original Angular code using public
+  packages and isolated configuration.
+- The current static visual/content baseline replaces the old Bootstrap-era
+  description. Existing case studies, project focus, discovery metadata, sharing
+  images, CV and Engineering Lab are shipped work to preserve, not new features
+  still waiting to be built.
+- Public pages remain prerendered; the private editor is dynamic. Saving a draft
+  is separate from publishing and deployment.
+- The old nine-week estimate, uptime/traffic/ranking promises and blanket coverage
+  targets are not commitments. Estimate implementation after feasibility and
+  release scope are accepted; story counts do not measure delivery percentage.
+- Newsletter, visitor accounts, comments, payments, chatbot, dark mode, analytics
+  and live GitHub data are not part of the first delivery plan. AI remains optional.
+- Historical material is preserved in the [2025 roadmap archive](../design/history/roadmap-2025.md).
+  This reconciliation does not accept any unapproved provider, cost, security or
+  schema decision.
 
-#### Tasks
-- [ ] Implement all base UI components (atoms)
-- [ ] Create layout components (header, footer, container)
-- [ ] Establish color palette and typography system
-- [ ] Configure dark mode support
-- [ ] Add responsive design patterns
+## Get a periodic outlook
 
-#### Deliverables
-- Complete UI component library with documentation
-- Storybook setup for component development
-- Design tokens and CSS custom properties
-- Mobile-responsive layout system
+Run `npm run outlook` for counts, actionable planning and owner decisions.
+Run `npm run outlook:check` to validate story records, evidence paths, dependency
+cycles and the generated backlog. After updating the JSON, run
+`npm run outlook:update`. No package installation is required.
 
-#### Success Criteria
-- All components pass accessibility tests
-- Consistent visual design across all elements
-- Mobile-first responsive design working correctly
+Ask: **“Give me the current roadmap outlook: what shipped, what is next, what is
+blocked, which decisions I owe, and what changed since the last review.”**
 
-### Week 3: Content Migration & Basic Pages
-**Goal**: Migrate existing content to new structure
-
-#### Tasks
-- [ ] Create homepage with hero section and professional summary
-- [ ] Implement experience/timeline section
-- [ ] Add skills showcase with interactive elements
-- [ ] Create basic portfolio grid layout
-- [ ] Implement navigation and routing
-
-#### Deliverables
-- Functional homepage with all core sections
-- Responsive navigation system
-- SEO-optimized page structure
-- Basic portfolio project display
-
-#### Success Criteria
-- Content parity with existing site
-- Improved visual hierarchy and readability
-- Fast page load times (< 2 seconds)
-
-## Phase 2: Enhanced Features (Weeks 4-6)
-
-### Week 4: Contact System & Forms
-**Goal**: Implement interactive contact and communication features
-
-#### Tasks
-- [ ] Create contact form with validation
-- [ ] Set up Resend for email handling
-- [ ] Implement newsletter subscription
-- [ ] Add form submission feedback and error handling
-- [ ] Configure spam protection and rate limiting
-
-#### Deliverables
-- Working contact form with email delivery
-- Newsletter subscription with confirmation
-- Form validation and error handling
-- Admin notification system
-
-#### Success Criteria
-- Forms submit successfully and send emails
-- Proper validation prevents spam and errors
-- Good user feedback for all form states
-
-### Week 5: Blog Foundation
-**Goal**: Create content management system for technical writing
-
-#### Tasks
-- [ ] Set up blog architecture with MDX support
-- [ ] Create blog listing and individual post pages
-- [ ] Implement blog post metadata and categories
-- [ ] Add search and filtering functionality
-- [ ] Configure RSS feed generation
-
-#### Deliverables
-- Blog listing page with pagination
-- Individual blog post template
-- Search and category filtering
-- RSS feed for subscriptions
-
-#### Success Criteria
-- Blog posts render correctly with syntax highlighting
-- Fast navigation between posts
-- SEO-optimized blog URLs and metadata
-
-### Week 6: Portfolio Enhancement
-**Goal**: Create detailed project showcase system
-
-#### Tasks
-- [ ] Design detailed project case study template
-- [ ] Implement project gallery with image optimization
-- [ ] Add technology tags and filtering
-- [ ] Create project search functionality
-- [ ] Integrate GitHub API for live repository data
-
-#### Deliverables
-- Enhanced portfolio section with detailed projects
-- Project filtering and search capabilities
-- Integration with GitHub for live data
-- Responsive image galleries
-
-#### Success Criteria
-- Projects showcase technical depth effectively
-- Fast image loading with optimization
-- Accurate GitHub integration without rate limits
-
-## Phase 3: Advanced Features (Weeks 7-9)
-
-### Week 7: Authentication & Admin Interface
-**Goal**: Enable content management and user features
-
-#### Tasks
-- [ ] Implement Supabase authentication
-- [ ] Create admin dashboard for content management
-- [ ] Add blog post creation and editing interface
-- [ ] Implement portfolio project management
-- [ ] Configure role-based access control
-
-#### Deliverables
-- Working authentication system
-- Admin dashboard for content management
-- WYSIWYG editor for blog posts
-- Portfolio project management interface
-
-#### Success Criteria
-- Secure authentication with proper session management
-- Intuitive admin interface for content updates
-- No security vulnerabilities in admin areas
-
-### Week 8: Performance & SEO Optimization
-**Goal**: Optimize for search engines and user experience
-
-#### Tasks
-- [ ] Implement advanced SEO with structured data
-- [ ] Add sitemap generation and robots.txt
-- [ ] Configure analytics and performance monitoring
-- [ ] Optimize images and implement lazy loading
-- [ ] Add social media sharing capabilities
-
-#### Deliverables
-- Comprehensive SEO implementation
-- Performance monitoring dashboard
-- Social media integration
-- Advanced image optimization
-
-#### Success Criteria
-- Google PageSpeed Insights score > 95
-- Proper social media previews
-- Analytics tracking all key user interactions
-
-### Week 9: Testing & Quality Assurance
-**Goal**: Ensure reliability and maintain code quality
-
-#### Tasks
-- [ ] Implement comprehensive test suite
-- [ ] Add E2E testing for critical user journeys
-- [ ] Configure automated testing in CI/CD
-- [ ] Perform security audit and penetration testing
-- [ ] Optimize bundle size and loading performance
-
-#### Deliverables
-- Complete test suite with high coverage
-- Automated testing pipeline
-- Security audit report
-- Performance optimization report
-
-#### Success Criteria
-- Test coverage > 90% for critical components
-- All security vulnerabilities addressed
-- Bundle size under performance budget
-
-## Phase 4: Future Enhancements (Weeks 10+)
-
-### Advanced AI Features
-- **Intelligent Content Recommendations**: AI-powered related posts and projects
-- **Interactive Chatbot**: Answer visitor questions about experience and skills
-- **Content Generation Assistance**: AI help for blog post ideation and editing
-- **Resume Optimization**: AI-powered resume tailoring for specific roles
-
-### Community & Engagement Features
-- **Comment System**: Allow discussions on blog posts
-- **Guest Post Submissions**: Accept contributed content from peers
-- **Developer Resources**: Curated list of tools and learning materials
-- **Mentorship Program**: Connect with junior developers
-
-### Monetization Opportunities
-- **Premium Content**: Advanced tutorials and courses
-- **Consulting Services**: Professional development services booking
-- **Digital Products**: Templates, tools, and resources for developers
-- **Affiliate Marketing**: Recommended tools and services
-
-### Technical Enhancements
-- **Progressive Web App**: Offline functionality and mobile app experience
-- **Advanced Analytics**: Custom dashboards and user behavior insights
-- **API Development**: Public API for accessing portfolio data
-- **Multi-language Support**: Internationalization for global audience
-
-## Success Metrics & KPIs
-
-### Technical Metrics
-- **Performance**: Lighthouse score consistently > 95
-- **Uptime**: 99.9% availability target
-- **Security**: Zero critical vulnerabilities
-- **Code Quality**: Maintainability index > 85
-
-### Business Metrics
-- **Traffic Growth**: 20% month-over-month increase in organic traffic
-- **Engagement**: Average session duration > 3 minutes
-- **Conversion**: Contact form submissions or job inquiries
-- **Reach**: Social media shares and backlinks from tech sites
-
-### Quality Metrics
-- **Accessibility**: WCAG 2.1 AA compliance
-- **SEO**: First page ranking for target keywords
-- **User Experience**: Low bounce rate and high return visitor percentage
-- **Content Quality**: Regular blog posting schedule maintained
-
-## Risk Management
-
-### Technical Risks & Mitigation
-- **Migration Complexity**: Phased approach with rollback capability
-- **Performance Degradation**: Continuous monitoring and optimization
-- **Security Vulnerabilities**: Regular audits and dependency updates
-- **Browser Compatibility**: Progressive enhancement strategy
-
-### Business Risks & Mitigation
-- **Content Maintenance**: Editorial calendar and content pipeline
-- **SEO Competition**: Focus on unique value proposition and niche expertise
-- **Technology Changes**: Modular architecture for easy updates
-- **Time Management**: Realistic timeline with buffer for unexpected issues
-
-## Resource Requirements
-
-### Development Resources
-- **Time Investment**: ~40 hours over 9 weeks (4-5 hours per week)
-- **AI Assistant**: GitHub Copilot for development acceleration
-- **External Services**: Vercel, Supabase, Resend (mostly free tiers)
-- **Domain & SSL**: Custom domain registration and management
-
-### Maintenance Requirements
-- **Content Updates**: 2-3 hours per week for blog posts and portfolio updates
-- **Technical Maintenance**: 1-2 hours per month for dependency updates
-- **Performance Monitoring**: Weekly review of analytics and performance metrics
-- **Security Updates**: Monthly security review and updates
-
-## Conclusion
-
-This roadmap provides a structured approach to migrating from a static portfolio to a modern, feature-rich platform that serves both immediate job hunting needs and long-term personal branding goals. The phased approach ensures steady progress while maintaining a working site throughout the transition.
-
-The emphasis on modularity and AI-assisted development will enable rapid feature development and easy maintenance, while the focus on performance and user experience will ensure the portfolio stands out in a competitive landscape.
+After each completed bundle, reconcile the backlog with merged work, add evidence,
+and update its review date. Record unverified or stale evidence explicitly.
+A generated report does not refresh that review date or establish provider access.
+These commands are local tooling, not a required CI check. No recurring schedule
+or notification automation has been created.

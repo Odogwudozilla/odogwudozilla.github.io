@@ -8,7 +8,13 @@
     "implementationAuthority": "owner approved bounded scope/tooling/local verification proposal in target chat",
     "activeGraph": "repository_template_partials_node_assembly_generated_html_local_assets_progressive_enhancement",
     "contentOwnership": "repository",
-    "deferred": ["angular", "blog", "cms", "private_editor", "application_services"],
+    "deferred": [
+      "angular",
+      "blog",
+      "cms",
+      "private_editor",
+      "application_services"
+    ],
     "permanentCancellation": false,
     "restartDate": null,
     "reentry": "new_explicit_owner_scope_request_current_evidence_and_relevant_technical_acceptance",
@@ -267,5 +273,18 @@
     "currentDashboardAccess": "authenticated",
     "pausedProjectsCountAgainstActiveLimit": false,
     "newProjectCreated": false
+  },
+  "planningReview": {
+    "reviewedOn": "2026-10-22",
+    "dynamicPlanningRequestedOn": "2026-10-20",
+    "authority": "owner explicitly requested resuming dynamic-site work, then roadmap/backlog reconciliation in this chat",
+    "state": "planning_reopened_implementation_gate_unchanged",
+    "roadmap": "docs/roadmap.md",
+    "backlogSource": "design/backlog.json",
+    "backlogView": "docs/story-backlog.md",
+    "providerEvidenceLastCheckedOn": "2026-10-20",
+    "ownerBackendChoice": "unanswered",
+    "technicalAcceptanceGranted": false,
+    "productionCutoverAuthorised": false
   }
 }
