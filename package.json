@@ -6,6 +6,9 @@
   "author": "Chidozie Nnachor",
   "packageManager": "npm@11.19.1",
   "scripts": {
+    "outlook": "node scripts/backlog-outlook.mjs",
+    "outlook:update": "node scripts/backlog-outlook.mjs --write",
+    "outlook:check": "node scripts/backlog-outlook.mjs --check",
     "build:static": "node scripts/build-static.mjs",
     "preview:static": "node scripts/serve-static.mjs",
     "check:static": "node scripts/build-static.mjs --check && node tests/static-site.test.mjs",

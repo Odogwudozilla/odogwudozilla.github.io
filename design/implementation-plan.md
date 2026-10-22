@@ -1,8 +1,9 @@
 # Dynamic implementation gates
 
-Deferred under ADR 015. This plan is retained history for a future explicit
-scope reopening; it is not the current static-maintenance backlog. See
-[static maintenance](static-maintenance.md). No dynamic gate is opened.
+The owner requested resuming dynamic planning on 20 October 2026. These gates
+remain the technical exit criteria, paired with the [current roadmap](../docs/roadmap.md)
+and [story backlog](../docs/story-backlog.md). Production remains the retained
+static site under ADR 015. No implementation gate is opened by the planning request.
 
 Status: Proposed. Begin application work only after the owner accepts the
 relevant technical decisions. Use coherent increments with testable outcomes.
