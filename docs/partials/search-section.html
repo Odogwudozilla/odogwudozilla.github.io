@@ -1,8 +1,8 @@
 <section class="lab-panel search-section" id="search-lab" aria-labelledby="search-title">
   <div class="section-heading">
     <h3 id="search-title">Find a route</h3>
-    <p>Same grid, different search strategy. Compare breadth-first search (BFS)
-      with depth-first search (DFS).</p>
+    <p>Compare breadth-first search (BFS) and depth-first search (DFS) on the same grid.
+      Follow the search to see how the strategy affects the route it finds.</p>
   </div>
     <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About route search" aria-describedby="search-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="search-help" role="tooltip">Choose an algorithm and an example grid. Use Run search to animate the route search or Next step to inspect one cell at a time. Explored shows how many cells have been visited; Pending shows how many are waiting. Route moves shows the number of steps in the route found. Reset starts the same search again.</span></div>
   <div class="search-lab">
@@ -42,7 +42,7 @@ S..#..G
     </div>
     <details class="search-notes">
       <summary>Read the search trace and comparison</summary>
-      <p>BFS takes the oldest pending cell; DFS takes the newest. Neighbours are considered up, right, down, left. The choice changes both the route and how much of the board is explored. Neither algorithm is always faster on every board.</p>
+      <p>BFS takes the oldest pending cell; DFS takes the newest. Neighbours are considered up, right, down, left. The choice changes both the route and how much of the board is explored. Neither algorithm is faster on every board.</p>
       <table class="search-comparison">
         <caption>Same board · completed searches</caption>
         <thead><tr><th scope="col">Search</th><th scope="col">Moves</th><th scope="col">Explored</th></tr></thead>

@@ -16,7 +16,7 @@
         yes: 'The record belongs to the assigned workspace.', no: 'This record belongs to another workspace, even for an administrator.' },
       { name: 'Permission', pass: action === 'read' || role === 'admin', status: '403 Forbidden',
         yes: action === 'read' ? 'Signed-in roles may read within their workspace.' : 'The administrator role may publish within its workspace.',
-        no: 'Reviewer and editor roles cannot publish in this example.' },
+        no: 'Reviewer and editor roles do not allow publishing in this example.' },
       { name: 'Record state', pass: action === 'read' || state === 'draft', status: '409 Conflict',
         yes: action === 'read' ? 'Draft and archived records are both readable.' : 'A draft is eligible for publication.',
         no: 'The role permits publishing, but archived records cannot be published.' },

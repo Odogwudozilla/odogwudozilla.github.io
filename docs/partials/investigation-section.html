@@ -22,7 +22,7 @@
     </ol>
     <svg class="trace-traffic" viewBox="0 0 1000 20" aria-hidden="true"><path d="M125 10H875M125 5v10M375 5v10M625 5v10M875 5v10"/><circle class="trace-packet" cy="10" r="5"/></svg>
     <div class="trace-workspace">
-      <div class="trace-inspector"><p class="eyebrow">Operation inspector</p><h4 class="trace-operation">One operation, despite a retry.</h4><p class="trace-detail">The first task commits before its reply is lost. The repeated request reuses the same idempotency key and returns the original task.</p>
+      <div class="trace-inspector"><p class="eyebrow">Operation inspector</p><h4 class="trace-operation">One operation, despite a retry.</h4><p class="trace-detail">The task is saved before the reply is lost. When the client retries with the same idempotency key, it gets the saved result instead of creating another task.</p>
         <p class="trace-payload-label">Selected operation data</p><pre tabindex="0" role="region" aria-label="Selected trace operation data"><code class="trace-payload">{
   "id": "task-42",
   "title": "Review API contract"
@@ -32,7 +32,7 @@
         <ol class="trace-events"><li>0–10 · Client sends the task request.</li><li>10–25 · API validates the request.</li><li>25–60 · Service prepares the task.</li><li>60–90 · Store commits one record.</li><li>90–120 · Reply is lost.</li><li>120–130 · Client retries with the same key.</li><li>130–145 · API validates the retry.</li><li>145–175 · Store reuses the original result.</li><li>175–190 · Client receives the result.</li></ol>
       </details>
     </div>
-    <p class="trace-lesson">The first write commits before its reply is lost. An idempotency key connects the retry to the same operation.</p>
+    <p class="trace-lesson">The task is saved before the reply is lost. An idempotency key lets the retry return the saved result instead of creating another task.</p>
     <p class="trace-footnote">Simulated example; timings do not measure a real system. Keys apply to the same request body; key expiry, concurrent requests and cancellation are outside this example. No network requests or stored data.</p>
   </div>
 </div>

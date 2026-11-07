@@ -2,7 +2,7 @@
 
 <!-- Generated from design/backlog.json by npm run outlook:update. Edit the JSON, not this file. -->
 
-Last reconciled: **2026-10-22**. Baseline: `5504bbf`.
+Last reconciled: **2026-11-08**. Baseline: `466cd76`.
 
 The static site is shipped. Dynamic planning has reopened at the owner’s request; application implementation remains gated. These stories describe intended work, not approval of proposed mechanisms.
 
@@ -10,7 +10,7 @@ First useful milestone: **Proposed: owner sign-in → edit one project → priva
 
 | State | Stories | Meaning |
 | --- | ---: | --- |
-| done | 7 | Delivered with recorded evidence; grouped baseline items are not equal-sized units. |
+| done | 8 | Delivered with recorded evidence; grouped baseline items are not equal-sized units. |
 | ready | 2 | Planning work can begin; no application install or provisioning is authorised. |
 | waiting_owner | 1 | A specific owner decision is needed. |
 | blocked | 2 | Direct dependencies or decisions prevent starting. |
@@ -98,6 +98,18 @@ Provide canonical pages, sharing metadata and compact images.
 - Responsive image variants and the static asset checks pass.
 
 Evidence: [tests/static-site.test.mjs](../tests/static-site.test.mjs), [tests/responsive-images.test.mjs](../tests/responsive-images.test.mjs)
+
+#### BASE-07 — Recruiter-focused voice and matching CV
+
+**done · P1** | Depends on: BASE-02, BASE-03, BASE-05
+
+Use the owner-approved professional voice consistently across the portfolio and CV.
+
+- Approved wording covers the homepage, case studies, Lab explanations and supporting metadata while retaining facts, technical terms and project-status qualifications.
+- The matching two-page CV is rendered and visually reviewed; its existing public links are preserved.
+- Local static checks pass. Merge and publication evidence are recorded separately from local completion.
+
+Evidence: [docs/partials/hero-section.html](../docs/partials/hero-section.html), [docs/partials/project-case-studies.html](../docs/partials/project-case-studies.html), [docs/assets/cv/chidozie-nnachor-cv.pdf](../docs/assets/cv/chidozie-nnachor-cv.pdf), [tests/static-site.test.mjs](../tests/static-site.test.mjs)
 
 ### Planning and decisions
 

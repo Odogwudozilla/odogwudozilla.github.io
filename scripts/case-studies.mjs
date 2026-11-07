@@ -32,13 +32,13 @@ export function renderCaseStudies(homepage, canonical, narratives) {
     const description = article.match(/<p>([\s\S]*?)<\/p>/)[1].replace(/\s+/g, ' ').trim();
     const url = new URL(project.file, canonical).href;
     const image = new URL('assets/img/' + project.image, canonical).href;
-    let head = originalHead.replace(/<title>[\s\S]*?<\/title>/, `<title>${title} — Chidozie Nnachor</title>`)
+    let head = originalHead.replace(/<title>[\s\S]*?<\/title>/, `<title>${title} | Chidozie Nnachor</title>`)
       .replace(/<link rel="canonical" href="[^"]+">/, `<link rel="canonical" href="${url}">`);
     const values = {
-      description, 'og:title': `${title} — Chidozie Nnachor`, 'og:description': description,
+      description, 'og:title': `${title} | Chidozie Nnachor`, 'og:description': description,
       'og:url': url, 'og:image': image, 'twitter:image': image,
-      'og:image:alt': `${title} — Chidozie Nnachor’s portfolio`,
-      'twitter:image:alt': `${title} — Chidozie Nnachor’s portfolio`,
+      'og:image:alt': `${title} | Chidozie Nnachor’s portfolio`,
+      'twitter:image:alt': `${title} | Chidozie Nnachor’s portfolio`,
     };
     for (const [key, value] of Object.entries(values)) {
       head = head.replace(new RegExp(`(<meta (?:name|property)="${key}" content=")[^"]*(">)`),
