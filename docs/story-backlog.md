@@ -2,7 +2,7 @@
 
 <!-- Generated from design/backlog.json by npm run outlook:update. Edit the JSON, not this file. -->
 
-Last reconciled: **2026-11-08**. Baseline: `466cd76`.
+Last reconciled: **2026-11-08**. Baseline: `b929570`.
 
 The static site is shipped. Dynamic planning has reopened at the owner’s request; application implementation remains gated. These stories describe intended work, not approval of proposed mechanisms.
 
@@ -107,9 +107,9 @@ Use the owner-approved professional voice consistently across the portfolio and 
 
 - Approved wording covers the homepage, case studies, Lab explanations and supporting metadata while retaining facts, technical terms and project-status qualifications.
 - The matching two-page CV is rendered and visually reviewed; its existing public links are preserved.
-- Local static checks pass. Merge and publication evidence are recorded separately from local completion.
+- All 76 static tests and outlook validation pass. PR 64 is merged; read-only HTTP checks on 8 November confirm all eight public HTML entry points, three changed scripts and the CV match release b929570 byte for byte.
 
-Evidence: [docs/partials/hero-section.html](../docs/partials/hero-section.html), [docs/partials/project-case-studies.html](../docs/partials/project-case-studies.html), [docs/assets/cv/chidozie-nnachor-cv.pdf](../docs/assets/cv/chidozie-nnachor-cv.pdf), [tests/static-site.test.mjs](../tests/static-site.test.mjs)
+Evidence: [docs/partials/hero-section.html](../docs/partials/hero-section.html), [docs/partials/project-case-studies.html](../docs/partials/project-case-studies.html), [docs/assets/cv/chidozie-nnachor-cv.pdf](../docs/assets/cv/chidozie-nnachor-cv.pdf), [tests/static-site.test.mjs](../tests/static-site.test.mjs), [https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/64](https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/64)
 
 ### Planning and decisions
 

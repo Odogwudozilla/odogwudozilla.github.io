@@ -1,6 +1,6 @@
 # Portfolio roadmap
 
-Last reconciled: **8 November 2026**. Reviewed baseline: `466cd76` (PR 63).
+Last reconciled: **8 November 2026**. Reviewed baseline: `b929570` (PR 64).
 
 ## Where we are
 
@@ -16,8 +16,12 @@ statuses. Its source of truth is [design/backlog.json](../design/backlog.json).
 The [implementation gates](../design/implementation-plan.md) define technical
 exit criteria; [accepted decisions](../design/decisions.md) govern authority.
 
-The approved recruiter-focused wording and matching two-page CV have been completed
-and checked locally (BASE-07). Merge and publication are separate release evidence.
+The approved recruiter-focused wording and matching two-page CV are published
+(BASE-07, [PR 64](https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/64)).
+All 76 static tests passed. On 8 November, read-only HTTP checks confirmed that
+all eight public HTML entry points, three changed scripts and the PDF matched
+merged release `b929570` byte for byte. The two-page PDF was rendered and reviewed,
+and its six existing links were preserved.
 The provider evidence below remains dated 20 October; this copy update did not
 refresh account access or reopen the dynamic implementation gate.
 
