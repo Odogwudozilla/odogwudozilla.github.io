@@ -1,9 +1,9 @@
 <section class="investigation-view access-section" id="access-lab" aria-labelledby="access-title">
   <div class="card access-console">
     <div class="trace-console-header"><span>DECISION /demo/articles/draft-42</span><span>Fictional publishing workspace</span></div>
-    <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Can this person act on this record? Change the selections to see which actions are allowed.</p></div>
+    <div class="access-intro"><h4 id="access-title">Signed in does not mean allowed.</h4><p>Change the role, workspace or record details to see what this person is allowed to do.</p></div>
     <div class="demo-help" hidden><span class="demo-help-icon" tabindex="0" role="img" aria-label="About access decisions" aria-describedby="access-help"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 10v7"/><circle class="info-dot" cx="12" cy="7" r="1"/></svg></span><span class="demo-tooltip" id="access-help" role="tooltip">Choose a role, workspace, action and record state to see whether the action is allowed. Each change updates the result. STOP identifies the rule that blocks the action; NOT RUN means an earlier rule stopped the check. Administrators can only act in their assigned workspace.</span></div>
-    <p class="access-verdict" role="status" aria-live="polite" aria-atomic="true">BLOCK · 403 Forbidden. Reviewer and editor roles cannot publish in this example.</p>
+    <p class="access-verdict" role="status" aria-live="polite" aria-atomic="true">BLOCK · 403 Forbidden. Reviewer and editor roles do not allow publishing in this example.</p>
     <div class="access-controls" hidden>
       <label>Role<select data-access-context="role"><option value="anonymous">Not signed in</option><option value="reviewer">Reviewer</option><option value="editor" selected>Editor</option><option value="admin">Administrator</option></select></label>
       <label>Workspace<select data-access-context="workspace"><option value="own">Assigned</option><option value="other">Other</option></select></label>
@@ -13,7 +13,7 @@
     <ol class="access-checks" aria-label="Decision checks">
       <li data-outcome="PASS"><strong>PASS · Identity</strong><span>The user is signed in.</span></li>
       <li data-outcome="PASS"><strong>PASS · Workspace</strong><span>The record belongs to the assigned workspace.</span></li>
-      <li data-outcome="STOP"><strong>STOP · Permission</strong><span>Reviewer and editor roles cannot publish in this example.</span></li>
+      <li data-outcome="STOP"><strong>STOP · Permission</strong><span>Reviewer and editor roles do not allow publishing in this example.</span></li>
       <li data-outcome="NOT RUN"><strong>NOT RUN · Record state</strong><span>An earlier check stopped the operation.</span></li>
     </ol>
     <p class="access-effect">Action blocked. The record is neither read nor changed.</p>

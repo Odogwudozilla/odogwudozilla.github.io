@@ -5,8 +5,8 @@
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#274263">
-<title>HomeWizard Energy Intelligence — Chidozie Nnachor</title>
-<meta name="description" content="I’m building an application to collect smart-meter readings, review energy history, and compare load-shifting scenarios: moving electricity use to a different time.">
+<title>HomeWizard Energy Intelligence | Chidozie Nnachor</title>
+<meta name="description" content="I’m building an application to collect smart-meter readings and review energy history. It also supports load-shifting scenarios: moving electricity use to a different time.">
 <meta name="author" content="Chidozie Nnachor">
 <link rel="canonical" href="https://odogwudozilla.com/case-homewizard-energy.html">
 <script type="application/ld+json">
@@ -24,18 +24,18 @@
 }
 </script>
 <meta property="og:type" content="website">
-<meta property="og:title" content="HomeWizard Energy Intelligence — Chidozie Nnachor">
-<meta property="og:description" content="I’m building an application to collect smart-meter readings, review energy history, and compare load-shifting scenarios: moving electricity use to a different time.">
+<meta property="og:title" content="HomeWizard Energy Intelligence | Chidozie Nnachor">
+<meta property="og:description" content="I’m building an application to collect smart-meter readings and review energy history. It also supports load-shifting scenarios: moving electricity use to a different time.">
 <meta property="og:url" content="https://odogwudozilla.com/case-homewizard-energy.html">
 <meta property="og:site_name" content="Chidozie Nnachor">
 <meta property="og:image" content="https://odogwudozilla.com/assets/img/case-homewizard-energy.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="HomeWizard Energy Intelligence — Chidozie Nnachor’s portfolio">
+<meta property="og:image:alt" content="HomeWizard Energy Intelligence | Chidozie Nnachor’s portfolio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://odogwudozilla.com/assets/img/case-homewizard-energy.jpg">
-<meta name="twitter:image:alt" content="HomeWizard Energy Intelligence — Chidozie Nnachor’s portfolio">
+<meta name="twitter:image:alt" content="HomeWizard Energy Intelligence | Chidozie Nnachor’s portfolio">
 <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="favicon.svg" sizes="any">
@@ -80,8 +80,8 @@
       <div class="case-intro">
         <h1>HomeWizard Energy Intelligence</h1>
         <dl class="case-brief">
-          <div><dt>Purpose</dt><dd><p>I’m building an application to collect smart-meter readings, review energy history, and compare load-shifting scenarios: moving electricity use to a different time.</p></dd></div>
-          <div><dt>Approach</dt><dd><p>Save readings locally, retry failed uploads and show where readings are missing from the history.</p></dd></div>
+          <div><dt>Purpose</dt><dd><p>I’m building an application to collect smart-meter readings and review energy history. It also supports load-shifting scenarios: moving electricity use to a different time.</p></dd></div>
+          <div><dt>Approach</dt><dd><p>I save readings locally before upload, support retries and make missing readings visible in the history.</p></dd></div>
           <div><dt>Status</dt><dd><p>Personal project · Private hosted application. Tariff, solar, battery and cost comparisons are in development.</p></dd></div>
         </dl>
         <ul class="chip-list" aria-label="Energy application technologies">
@@ -109,16 +109,16 @@
               </ul>
               <h2 id="energy-project-collection-and-recovery" tabindex="-1">Collection and recovery</h2>
               <p>The Java collector reads the HomeWizard API and saves readings
-                in SQLite before uploading them. Failed uploads can be replayed,
-                and ingestion prevents duplicate records.</p>
+                in SQLite before uploading them to Supabase. Failed uploads can be replayed
+                without creating duplicate records.</p>
               <h2 id="energy-project-energy-history" tabindex="-1">Energy history</h2>
-              <p>The authenticated React and TypeScript interface uses Supabase
-                data. It shows reading history, coverage, and freshness so
-                missing data is visible when reviewing energy use.</p>
+              <p>The React and TypeScript interface requires sign-in and uses Supabase data.
+                It shows the reading history, where data is missing and how recent the readings are.
+                That way, gaps remain visible when reviewing energy use.</p>
               <h2 id="energy-project-development-status" tabindex="-1">Development status</h2>
-              <p>The private hosted application supports historical exploration
-                and load-shifting scenarios. Tariff, solar, battery, and cost
-                comparisons are still being developed.</p>
+              <p>The application is hosted privately and supports energy-history exploration
+                and load-shifting scenarios. Tariff, solar, battery and cost
+                comparisons are still in development.</p>
               <a class="project-code-link text-link" href="/#contact">Ask about this project
                 <span aria-hidden="true">↗</span></a>
             </div>

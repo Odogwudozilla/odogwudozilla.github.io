@@ -1,6 +1,6 @@
 # Portfolio roadmap
 
-Last reconciled: **22 October 2026**. Reviewed baseline: `5504bbf` (PR 62).
+Last reconciled: **8 November 2026**. Reviewed baseline: `466cd76` (PR 63).
 
 ## Where we are
 
@@ -16,11 +16,16 @@ statuses. Its source of truth is [design/backlog.json](../design/backlog.json).
 The [implementation gates](../design/implementation-plan.md) define technical
 exit criteria; [accepted decisions](../design/decisions.md) govern authority.
 
+The approved recruiter-focused wording and matching two-page CV have been completed
+and checked locally (BASE-07). Merge and publication are separate release evidence.
+The provider evidence below remains dated 20 October; this copy update did not
+refresh account access or reopen the dynamic implementation gate.
+
 ## Delivery outlook
 
 | Milestone | Intended outcome | Stories | Current position |
 | --- | --- | --- | --- |
-| Static baseline | Professional portfolio, case studies, Lab, CV, mobile journey and delivery checks | BASE-01–06 | Shipped; maintenance as needed, no further cosmetic queue |
+| Static baseline | Professional portfolio, case studies, Lab, CV, mobile journey and delivery checks | BASE-01–07 | Shipped; maintenance as needed, no further cosmetic queue |
 | Decisions and feasibility | Agree a feasible backend, first-release boundary, runtime/session and content/release contracts | DEC-01–05 | Planning; backend choice awaits owner input |
 | Foundation and public parity | Independent Angular workspace, active checks and the reviewed public experience | FND-01–02, PUB-01–02 | Planned; implementation gate closed |
 | First useful editor workflow | Owner signs in, edits one project, saves a draft, previews and explicitly publishes a verified release | DATA-01, AUTH-01–02, EDIT-01–03, REL-01–02 | Proposed first milestone; not yet owner-accepted as a release boundary |
@@ -35,7 +40,7 @@ exit criteria; [accepted decisions](../design/decisions.md) govern authority.
    because the account's two active free slots were occupied. The owner has not
    yet answered the choice between comparing free alternatives, identifying
    capacity to free, or assessing a paid option. This is dated evidence, not a
-   fresh account check on 22 October. No existing project should be changed from
+   fresh account check on 8 November. No existing project should be changed from
    this backlog alone.
 2. **DEC-02 and DEC-04:** review the first-release boundary and prepare current
    version/installation-isolation evidence. This planning can proceed without

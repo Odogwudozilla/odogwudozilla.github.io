@@ -12,9 +12,9 @@
     },
     'insurance-case': {
       java: 'Java services for insurance policy management.',
-      apis: 'SOAP-to-REST changes, OpenAPI contracts and integration compatibility.',
+      apis: 'SOAP-to-REST migration, OpenAPI contracts and compatibility with existing integrations.',
       frontend: 'Angular screens and staged migration of legacy workflows.',
-      data: 'Liquibase schema and data migrations, SQL and query access-path analysis.',
+      data: 'Database migrations with Liquibase, SQL and analysis of how queries retrieve data.',
     },
     'fusion-project': {
       java: 'Java 21 and a Spring Boot REST API.',
@@ -55,7 +55,7 @@
       }
     }
     status.textContent = focus === 'all' ? 'All four projects are shown.'
-      : `${count} projects connect to ${button.textContent}. All projects remain available below.`;
+      : `${count} projects include ${button.textContent}. All projects remain available below.`;
   }));
   explorer.hidden = false;
 })();
