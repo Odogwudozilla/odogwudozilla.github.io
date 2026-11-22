@@ -1,6 +1,6 @@
 # Portfolio roadmap
 
-Last reconciled: **8 November 2026**. Reviewed baseline: `b929570` (PR 64).
+Last reconciled: **22 November 2026**. Reviewed baseline: `3f6d3de` (PR 65).
 
 ## Where we are
 
@@ -25,11 +25,16 @@ and its six existing links were preserved.
 The provider evidence below remains dated 20 October; this copy update did not
 refresh account access or reopen the dynamic implementation gate.
 
+HomeWizard app actions now use the owner-supplied custom hostname
+`https://stroomintel.odogwudozilla.com/`, labelled as requiring sign-in (BASE-08).
+This changes portfolio links only; application access and DNS settings remain
+owned by the HomeWizard project. Merge and live verification are separate release evidence.
+
 ## Delivery outlook
 
 | Milestone | Intended outcome | Stories | Current position |
 | --- | --- | --- | --- |
-| Static baseline | Professional portfolio, case studies, Lab, CV, mobile journey and delivery checks | BASE-01–07 | Shipped; maintenance as needed, no further cosmetic queue |
+| Static baseline | Professional portfolio, case studies, Lab, CV, mobile journey and delivery checks | BASE-01–08 | Shipped; maintenance as needed, no further cosmetic queue |
 | Decisions and feasibility | Agree a feasible backend, first-release boundary, runtime/session and content/release contracts | DEC-01–05 | Planning; backend choice awaits owner input |
 | Foundation and public parity | Independent Angular workspace, active checks and the reviewed public experience | FND-01–02, PUB-01–02 | Planned; implementation gate closed |
 | First useful editor workflow | Owner signs in, edits one project, saves a draft, previews and explicitly publishes a verified release | DATA-01, AUTH-01–02, EDIT-01–03, REL-01–02 | Proposed first milestone; not yet owner-accepted as a release boundary |

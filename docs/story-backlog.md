@@ -2,7 +2,7 @@
 
 <!-- Generated from design/backlog.json by npm run outlook:update. Edit the JSON, not this file. -->
 
-Last reconciled: **2026-11-08**. Baseline: `b929570`.
+Last reconciled: **2026-11-22**. Baseline: `3f6d3de`.
 
 The static site is shipped. Dynamic planning has reopened at the owner’s request; application implementation remains gated. These stories describe intended work, not approval of proposed mechanisms.
 
@@ -10,7 +10,7 @@ First useful milestone: **Proposed: owner sign-in → edit one project → priva
 
 | State | Stories | Meaning |
 | --- | ---: | --- |
-| done | 8 | Delivered with recorded evidence; grouped baseline items are not equal-sized units. |
+| done | 9 | Delivered with recorded evidence; grouped baseline items are not equal-sized units. |
 | ready | 2 | Planning work can begin; no application install or provisioning is authorised. |
 | waiting_owner | 1 | A specific owner decision is needed. |
 | blocked | 2 | Direct dependencies or decisions prevent starting. |
@@ -110,6 +110,17 @@ Use the owner-approved professional voice consistently across the portfolio and 
 - All 76 static tests and outlook validation pass. PR 64 is merged; read-only HTTP checks on 8 November confirm all eight public HTML entry points, three changed scripts and the CV match release b929570 byte for byte.
 
 Evidence: [docs/partials/hero-section.html](../docs/partials/hero-section.html), [docs/partials/project-case-studies.html](../docs/partials/project-case-studies.html), [docs/assets/cv/chidozie-nnachor-cv.pdf](../docs/assets/cv/chidozie-nnachor-cv.pdf), [tests/static-site.test.mjs](../tests/static-site.test.mjs), [https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/64](https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/64)
+
+#### BASE-08 — HomeWizard app at its custom hostname
+
+**done · P1** | Depends on: BASE-02
+
+Let visitors reach the existing private energy application from its portfolio overview and case study.
+
+- The HomeWizard overview and case-study app links use https://stroomintel.odogwudozilla.com/ and state that sign-in is required.
+- Static build/checks validate generated entry points; the case-study URL and private-access description are preserved.
+
+Evidence: [docs/partials/portfolio-section.html](../docs/partials/portfolio-section.html), [docs/partials/project-case-studies.html](../docs/partials/project-case-studies.html), [docs/case-homewizard-energy.html](../docs/case-homewizard-energy.html)
 
 ### Planning and decisions
 
