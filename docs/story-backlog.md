@@ -2,7 +2,7 @@
 
 <!-- Generated from design/backlog.json by npm run outlook:update. Edit the JSON, not this file. -->
 
-Last reconciled: **2026-11-22**. Baseline: `2417c53`.
+Last reconciled: **2026-11-22**. Baseline: `0433216`.
 
 The static site is shipped. Dynamic planning has reopened at the owner’s request; application implementation remains gated. These stories describe intended work, not approval of proposed mechanisms.
 
@@ -31,7 +31,7 @@ Backend evidence last checked **2026-10-20**: Authenticated Supabase new-project
 
 ## Stories
 
-### Locally completed static maintenance
+### Shipped static baseline
 
 #### STATIC-01 — Defined panels for Navy and Teal
 
@@ -40,11 +40,9 @@ Backend evidence last checked **2026-10-20**: Authenticated Supabase new-project
 Sharpen colour separation using the owner-approved samples while preserving the existing layout.
 
 - Both palettes match the approved Defined panels colours; geometry, typography and theme preference behaviour are preserved.
-- All 78 static tests pass, including control-border contrast checks; bounded desktop/mobile browser review is complete. Implementation is local only; commit, merge and publication remain pending.
+- All 78 static tests pass, including control-border contrast checks. PR 67 is merged and Pages deployment succeeded; nine live HTML entry points and four changed assets match the release after newline normalisation. Both live themes, preference persistence and a narrow viewport were checked.
 
-Evidence: [design/decisions.md](../design/decisions.md), [design/static-palette-review.md](../design/static-palette-review.md), [docs/css/base.css](../docs/css/base.css), [docs/css/keylane-theme.css](../docs/css/keylane-theme.css), [tests/palette-contrast.test.mjs](../tests/palette-contrast.test.mjs)
-
-### Shipped static baseline
+Evidence: [design/decisions.md](../design/decisions.md), [design/static-palette-review.md](../design/static-palette-review.md), [docs/css/base.css](../docs/css/base.css), [docs/css/keylane-theme.css](../docs/css/keylane-theme.css), [tests/palette-contrast.test.mjs](../tests/palette-contrast.test.mjs), [https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/67](https://github.com/Odogwudozilla/odogwudozilla.github.io/pull/67), [https://github.com/Odogwudozilla/odogwudozilla.github.io/actions/runs/44969254988](https://github.com/Odogwudozilla/odogwudozilla.github.io/actions/runs/44969254988)
 
 #### BASE-01 — Verified static delivery
 

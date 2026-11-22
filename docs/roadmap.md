@@ -1,6 +1,6 @@
 # Portfolio roadmap
 
-Last reconciled: **22 November 2026**. Reviewed baseline: `2417c53` (PR 66).
+Last reconciled: **22 November 2026**. Reviewed baseline: `0433216` (PR 67).
 
 ## Where we are
 
@@ -30,11 +30,13 @@ HomeWizard app actions now use the owner-supplied custom hostname
 This changes portfolio links only; application access and DNS settings remain
 owned by the HomeWizard project. Merge and live verification are separate release evidence.
 
-The owner-approved Defined panels colours are implemented locally for Navy and
+The owner-approved Defined panels colours are published for Navy and
 Teal, preserving the existing layout (STATIC-01, ADR 017). All 78 static tests
 pass; desktop and narrow browser checks are recorded in the
-[palette review](../design/static-palette-review.md). This bundle is not yet
-committed, merged or published; release verification is the next step.
+[palette review](../design/static-palette-review.md). PR 67 is merged and Pages
+deployment succeeded. All nine live HTML entry points and four changed theme
+assets match the release after newline normalisation; both live themes were
+reviewed, including saved preference and a narrow viewport.
 
 ## Delivery outlook
 
