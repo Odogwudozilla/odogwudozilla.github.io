@@ -42,7 +42,7 @@ try {
   const originalHtml = await renderPage();
   const html = originalHtml
     .replace('<html lang="en">', '<html lang="en" class="theme-keylane">')
-    .replace('<meta name="theme-color" content="#153f38">', '<meta name="theme-color" content="#274263">');
+    .replace('<meta name="theme-color" content="#005b4b">', '<meta name="theme-color" content="#12365c">');
   const originalComparison = originalHtml
     .replace('</head>', '<meta name="robots" content="noindex">\n</head>')
     .replace('<p>Software engineering portfolio</p>', '<p><a href="index.html">Return to the default palette</a></p>');

@@ -5,6 +5,31 @@ Current rehabilitation scope is static retention under ADR 015 below. ADRs
 deferred without permanent cancellation. Their original acceptance evidence
 and remaining technical gates are retained.
 
+## ADR 017 — Sharpen both static palettes with Defined panels
+
+Accepted 22 November 2026. The owner reviewed colour-only comparisons of the
+existing site and explicitly instructed: “Proceed with Defined panels for both
+Navy and Teal. Keep the existing layout.” This accepts the sampled palette
+refinement, preserving Navy default, Teal alternative and saved preference.
+
+Use cool pale page backgrounds, white surfaces, stronger blue/green panels,
+darker text and firmer borders. Navy retains orange accents; Teal replaces the
+cream/olive cast with a clearer green palette. Keep typography, spacing,
+component geometry, content, animation and interaction unchanged. Align chooser
+swatches and browser theme colours with the palette. This supersedes the colour
+values preserved by ADR 015 for this bounded change only.
+
+Alternatives reviewed: existing palettes and Crisp white. Defined panels gives
+stronger surface separation without a redesign. No provider, privacy, security,
+dependency or recurring-cost changes result. Text, control and focus contrast
+must remain readable; bounded checks are not full accessibility certification.
+
+Migration: update shared static colour tokens and matching theme metadata,
+rebuild generated HTML, run static/contrast checks and review both themes at
+desktop and narrow widths. Rollback restores these colour sources and regenerates
+the HTML, retaining unrelated work. Commit, merge and publication are separate
+release steps; this record alone does not authorise them.
+
 ## ADR 016 — Require static verification on the publication branch
 
 Accepted bounded continuation, 18 October 2026. Human evidence in the target

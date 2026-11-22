@@ -2,7 +2,7 @@
 
 <!-- Generated from design/backlog.json by npm run outlook:update. Edit the JSON, not this file. -->
 
-Last reconciled: **2026-11-22**. Baseline: `3f6d3de`.
+Last reconciled: **2026-11-22**. Baseline: `2417c53`.
 
 The static site is shipped. Dynamic planning has reopened at the owner’s request; application implementation remains gated. These stories describe intended work, not approval of proposed mechanisms.
 
@@ -10,7 +10,7 @@ First useful milestone: **Proposed: owner sign-in → edit one project → priva
 
 | State | Stories | Meaning |
 | --- | ---: | --- |
-| done | 9 | Delivered with recorded evidence; grouped baseline items are not equal-sized units. |
+| done | 10 | Delivered with recorded evidence; grouped baseline items are not equal-sized units. |
 | ready | 2 | Planning work can begin; no application install or provisioning is authorised. |
 | waiting_owner | 1 | A specific owner decision is needed. |
 | blocked | 2 | Direct dependencies or decisions prevent starting. |
@@ -30,6 +30,19 @@ Counts are inventory, not percentage complete or effort estimates. Baseline stor
 Backend evidence last checked **2026-10-20**: Authenticated Supabase new-project page blocked at the two-active-free-project limit. Owner direction remains unanswered; no service was changed.
 
 ## Stories
+
+### Locally completed static maintenance
+
+#### STATIC-01 — Defined panels for Navy and Teal
+
+**done · P1** | Depends on: BASE-04
+
+Sharpen colour separation using the owner-approved samples while preserving the existing layout.
+
+- Both palettes match the approved Defined panels colours; geometry, typography and theme preference behaviour are preserved.
+- All 78 static tests pass, including control-border contrast checks; bounded desktop/mobile browser review is complete. Implementation is local only; commit, merge and publication remain pending.
+
+Evidence: [design/decisions.md](../design/decisions.md), [design/static-palette-review.md](../design/static-palette-review.md), [docs/css/base.css](../docs/css/base.css), [docs/css/keylane-theme.css](../docs/css/keylane-theme.css), [tests/palette-contrast.test.mjs](../tests/palette-contrast.test.mjs)
 
 ### Shipped static baseline
 

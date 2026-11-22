@@ -1,6 +1,6 @@
 # Portfolio roadmap
 
-Last reconciled: **22 November 2026**. Reviewed baseline: `3f6d3de` (PR 65).
+Last reconciled: **22 November 2026**. Reviewed baseline: `2417c53` (PR 66).
 
 ## Where we are
 
@@ -29,6 +29,12 @@ HomeWizard app actions now use the owner-supplied custom hostname
 `https://stroomintel.odogwudozilla.com/`, labelled as requiring sign-in (BASE-08).
 This changes portfolio links only; application access and DNS settings remain
 owned by the HomeWizard project. Merge and live verification are separate release evidence.
+
+The owner-approved Defined panels colours are implemented locally for Navy and
+Teal, preserving the existing layout (STATIC-01, ADR 017). All 78 static tests
+pass; desktop and narrow browser checks are recorded in the
+[palette review](../design/static-palette-review.md). This bundle is not yet
+committed, merged or published; release verification is the next step.
 
 ## Delivery outlook
 

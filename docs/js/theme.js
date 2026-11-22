@@ -15,7 +15,7 @@
     theme = choice;
     root.classList.toggle('theme-keylane', choice === 'navy');
     document.querySelector('meta[name="theme-color"]')?.setAttribute(
-      'content', choice === 'navy' ? '#274263' : '#153f38',
+      'content', choice === 'navy' ? '#12365c' : '#005b4b',
     );
     document.querySelectorAll('[data-colour-theme]').forEach(button => {
       button.setAttribute('aria-pressed', String(button.dataset.colourTheme === choice));

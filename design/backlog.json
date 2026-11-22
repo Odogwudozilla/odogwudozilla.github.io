@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reviewedOn": "2026-11-22",
-  "baselineCommit": "3f6d3de",
+  "baselineCommit": "2417c53",
   "implementationGate": "closed",
   "firstMilestone": "Proposed: owner sign-in → edit one project → private preview → explicit publish → verify live",
   "providerEvidence": {
@@ -9,6 +9,7 @@
     "state": "Authenticated Supabase new-project page blocked at the two-active-free-project limit. Owner direction remains unanswered; no service was changed."
   },
   "stories": [
+    {"id":"STATIC-01","phase":"Locally completed static maintenance","status":"done","priority":"P1","title":"Defined panels for Navy and Teal","goal":"Sharpen colour separation using the owner-approved samples while preserving the existing layout.","dependsOn":["BASE-04"],"acceptance":["Both palettes match the approved Defined panels colours; geometry, typography and theme preference behaviour are preserved.","All 78 static tests pass, including control-border contrast checks; bounded desktop/mobile browser review is complete. Implementation is local only; commit, merge and publication remain pending."],"evidence":["design/decisions.md","design/static-palette-review.md","docs/css/base.css","docs/css/keylane-theme.css","tests/palette-contrast.test.mjs"]},
     {"id": "BASE-01", "phase": "Shipped static baseline", "status": "done", "priority": "P0", "title": "Verified static delivery", "goal": "Keep a working public site and required merge checks.", "dependsOn": [], "acceptance": ["Static build and verification are repeatable.", "Required PR checks protect master; recovery rehearsal and limits are documented."], "evidence": ["design/static-verification.md", "design/static-recovery.md"]},
     {"id": "BASE-02", "phase": "Shipped static baseline", "status": "done", "priority": "P1", "title": "Portfolio content and case studies", "goal": "Present current professional work and personal projects clearly.", "dependsOn": [], "acceptance": ["Four project overviews link to full case studies.", "Product Watch leads; retired puzzle-project references are absent."], "evidence": ["docs/partials/portfolio-section.html", "docs/partials/project-case-studies.html"]},
     {"id": "BASE-03", "phase": "Shipped static baseline", "status": "done", "priority": "P1", "title": "Interactive Engineering Lab", "goal": "Let visitors explore requests, API compatibility, access and search.", "dependsOn": [], "acceptance": ["Lab starts collapsed and opens manually.", "Demo help uses information icons, functional descriptions and keyboard/tap access."], "evidence": ["docs/js/lab.js", "docs/js/demo-help.js", "docs/partials/access-section.html"]},

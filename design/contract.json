@@ -209,6 +209,8 @@
     "reference": "approved_static_portfolio",
     "defaultPalette": "navy",
     "alternatePalette": "teal",
+    "staticColourDirection": "defined_panels",
+    "staticColourDecision": "ADR 017; owner approved Defined panels for both Navy and Teal on 2026-11-22; existing layout retained",
     "preferenceStorageKey": "portfolio-colour-theme",
     "tokenSourceToCreate": "src/styles/tokens.css",
     "rawComponentColours": "reviewed_asset_exceptions_only",
