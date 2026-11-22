@@ -38,4 +38,10 @@ for (const [theme, palette] of Object.entries(themes)) {
     }
     assert.ok(contrast(palette['on-dark'], palette.teal) >= 3);
   });
+  test(`${theme} control edges remain distinct on each light surface`, () => {
+    for (const background of ['paper', 'surface', 'section-soft']) {
+      const ratio = contrast(palette.line, palette[background]);
+      assert.ok(ratio >= 3, `${theme} line/${background}: ${ratio.toFixed(2)}:1`);
+    }
+  });
 }

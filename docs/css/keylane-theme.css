@@ -1,23 +1,23 @@
 /* Approved navy/orange palette. Company branding assets are not used. */
 :root.theme-keylane {
-  --paper: #ffffff;
+  --paper: #eaf0f6;
   --surface: #ffffff;
-  --section-soft: #f0f5f8;
-  --ink: #253756;
-  --muted: #43536a;
-  --teal: #274263;
-  --teal-light: #cbe7ec;
-  --lime: #ff8000;
-  --line: #a0b0c0;
+  --section-soft: #d8e5f3;
+  --ink: #101d32;
+  --muted: #2e4058;
+  --teal: #12365c;
+  --teal-light: #d8e5f3;
+  --lime: #e87500;
+  --line: #627993;
   --on-dark: #ffffff;
-  --muted-dark: #cbe7ec;
-  --action: #274263;
+  --muted-dark: #e1eaf4;
+  --action: #12365c;
   --action-ink: #ffffff;
-  --action-hover: #172e49;
-  --accent: #ff8000;
-  --hover-bg: #274263;
+  --action-hover: #09243f;
+  --accent: #c85b00;
+  --hover-bg: #12365c;
   --hover-ink: #ffffff;
 }
-.theme-keylane ::selection { background: #ff8000; color: #482304; }
-.theme-keylane .portfolio-label { border-color: #ff8000; }
-.theme-keylane .hero-portrait { border-color: #274263; }
+.theme-keylane ::selection { background: var(--lime); color: var(--ink); }
+.theme-keylane .portfolio-label { border-color: var(--accent); }
+.theme-keylane .hero-portrait { border-color: var(--teal); }

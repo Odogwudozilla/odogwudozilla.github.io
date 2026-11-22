@@ -20,5 +20,5 @@
 .colour-switch button[aria-pressed="true"] { border-color: var(--teal); color: var(--teal); font-weight: 650; }
 .colour-switch button:hover, .colour-switch button:focus-visible { background: var(--action); border-color: var(--action); color: var(--action-ink); }
 .colour-swatch { width: 11px; height: 11px; flex-shrink: 0; }
-.swatch-navy { background: #274263; box-shadow: inset -4px 0 #ff8000; }
-.swatch-teal { background: #153f38; box-shadow: inset -4px 0 #d6ee9e; }
+.swatch-navy { background: #12365c; box-shadow: inset -4px 0 #e87500; }
+.swatch-teal { background: #005b4b; box-shadow: inset -4px 0 #9fe0c8; }
